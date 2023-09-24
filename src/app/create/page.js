@@ -36,13 +36,16 @@ function CreatePage() {
   // 배열요소예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const [items, setItems] = useState([]);
 
-  const addItemToItems = (formType, title, options) => {
-    const newItems = { formType, title, options };
-    setItems([...items, newItems]);
+  const changeValue = (index, updatedValues) => {
+    const newValues = [...items];
+    newValues[index] = updatedValues;
+    setItems(newValues);
   };
 
   const addComponentHandler = useCallback(
     event => {
+      setItems([...items, { formType: '', title: '', options: { text: '' } }]);
+
       const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
 
       switch (formType) {
@@ -67,7 +70,17 @@ function CreatePage() {
             ...formComponents,
             {
               id: componentId.current,
-              component: <MultipleChoiceTextType addItem={addItemToItems} />,
+              component: (
+                <MultipleChoiceTextType
+                  index={idx}
+                  //에러창에서 idx is not defined라고 뜸. 이유는 idx는 return문 안의 반복문에 있기 때문..
+                  //해결책은? id와 컴포넌트가 있는 formComponents와
+                  //formType,title,options가 있는 items의 데이터를 합쳐 해결해야 함.
+                  //-> { id: 1, component: <컴포넌트/>, items: { formType: '', title: '', options: {text: ''} } }
+                  value={items[idx]}
+                  onChange={changeValue}
+                />
+              ),
             },
           ]);
           componentId.current++;
@@ -124,7 +137,7 @@ function CreatePage() {
       </div>
 
       <div className="formBackground">
-        {formComponents.map(formComponent => (
+        {formComponents.map((formComponent, idx) => (
           <Fragment key={formComponent.id}>{formComponent.component}</Fragment>
         ))}
       </div>

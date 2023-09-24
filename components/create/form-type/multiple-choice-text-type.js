@@ -34,7 +34,7 @@ const Article = styled.article`
 
 // CODE
 function MultipleChoiceTextType(props) {
-  const [titleInput, setTitleInput] = useState('');
+  //const [titleInput, setTitleInput] = useState('');
 
   let optionId = useRef(2); //필수옵션 두개에 이미 id 0,1을 부여했으므로 새로추가되는 옵션은 id: 2부터 시작.
 
@@ -45,14 +45,21 @@ function MultipleChoiceTextType(props) {
   ]);
 
   // ***객관식옵션의 value들을 배열로 저장하여 부모컴포넌트로 데이터를 넘김***
-  const optionValues = options.map(option => ({ text: option.value }));
+  //const optionValues = options.map(option => ({ text: option.value }));
+  //props.addItem('multipleChoiceTextType', titleInput, optionValues);
 
-  // props.addItem({
-  //   formType: 'multipleChoiceTextType',
-  //   title: titleInput,
-  //   options: optionValues,
-  // });
-  props.addItem('multipleChoiceTextType', titleInput, optionValues);
+  const changeTitleHandler = event => {
+    const newValue = event.target.value;
+    props.onChange(props.index, { ...props.value, title: newValue });
+  };
+
+  const changeOptionsHandler = event => {
+    const newValue = event.target.value;
+    props.onChange(props.index, {
+      ...props.value,
+      options: { text: newValue },
+    });
+  };
 
   // ***객관식옵션 추가***
   const addOptionHandler = useCallback(() => {
@@ -86,10 +93,7 @@ function MultipleChoiceTextType(props) {
 
   return (
     <Article>
-      <TitleInput
-        value={titleInput}
-        onChange={e => setTitleInput(e.target.value)}
-      />
+      <TitleInput value={props.value.title} onChange={changeTitleHandler} />
 
       <div className="options">
         {options.map((option, idx) => (
@@ -101,8 +105,8 @@ function MultipleChoiceTextType(props) {
               // {함수명(option.id)} 이런 식으로 바로 호출하면 클릭했을 때 실행되는 게 아니라 즉시 실행하려고 함. 오류발생.
             )}
             <MultipleChoiceInput
-              value={option.value}
-              onChange={e => changeOptionInputs(option.id, e.target.value)}
+              value={props.value.options.text}
+              onChange={changeOptionsHandler}
             />
           </div>
         ))}
