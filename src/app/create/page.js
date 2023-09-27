@@ -29,82 +29,36 @@ const Section = styled.section`
 
 // CODE
 function CreatePage() {
-  const [formComponents, setFormComponents] = useState([]); //폼 type 컴포넌트가 배열로 순서대로 쌓임.
   const componentId = useRef(0);
 
-  // 추가한 각 form컴포넌트의 정보를 모아놓은 객체(formType, title, options키값이 존재)
-  // 배열요소예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
-  const [items, setItems] = useState([]);
+  const [components, setComponents] = useState([]); //components는 배열.
 
-  const changeValue = (index, updatedValues) => {
-    const newValues = [...items];
-    newValues[index] = updatedValues;
-    setItems(newValues);
+  // 배열요소예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
+  //props로 자식컴포넌트에 넘겨줄 value를 바꿔 components에 저장하는 함수.
+  const changeValueHandler = (index, updatedValues) => {
+    const newComponents = [...components];
+    newComponents[index] = updatedValues;
+    setComponents(newComponents);
   };
 
+  //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등등)
   const addComponentHandler = useCallback(
     event => {
-      setItems([...items, { formType: '', title: '', options: { text: '' } }]);
-
       const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
-
-      switch (formType) {
-        case 'shortAnswerType':
-          setFormComponents([
-            ...formComponents,
-            { id: componentId.current, component: <ShortAnswerType /> },
-          ]);
-          componentId.current++;
-          break;
-
-        case 'longAnswerType':
-          setFormComponents([
-            ...formComponents,
-            { id: componentId.current, component: <LongAnswerType /> },
-          ]);
-          componentId.current++;
-          break;
-
-        case 'multipleChoiceTextType':
-          setFormComponents([
-            ...formComponents,
-            {
-              id: componentId.current,
-              component: (
-                <MultipleChoiceTextType
-                  index={idx}
-                  //에러창에서 idx is not defined라고 뜸. 이유는 idx는 return문 안의 반복문에 있기 때문..
-                  //해결책은? id와 컴포넌트가 있는 formComponents와
-                  //formType,title,options가 있는 items의 데이터를 합쳐 해결해야 함.
-                  //-> { id: 1, component: <컴포넌트/>, items: { formType: '', title: '', options: {text: ''} } }
-                  value={items[idx]}
-                  onChange={changeValue}
-                />
-              ),
-            },
-          ]);
-          componentId.current++;
-          break;
-
-        case 'multipleChoiceImageType':
-          setFormComponents([
-            ...formComponents,
-            { id: componentId.current, component: <MultipleChoiceImageType /> },
-          ]);
-          componentId.current++;
-          break;
-
-        case 'ratingType':
-          setFormComponents([
-            ...formComponents,
-            { id: componentId.current, component: <RatingType /> },
-          ]);
-          componentId.current++;
-          break;
-      }
+      setComponents([
+        ...components,
+        //배열 안의 객체 요소.
+        {
+          id: componentId.current,
+          formType: formType,
+          title: '',
+        },
+      ]);
+      componentId.current++;
     },
-    [formComponents]
+    [components]
   );
+  console.log(components);
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
@@ -113,8 +67,6 @@ function CreatePage() {
       saveDate: new Date().toISOString(),
     };
   };
-
-  console.log(items);
 
   return (
     <Section>
@@ -137,8 +89,42 @@ function CreatePage() {
       </div>
 
       <div className="formBackground">
-        {formComponents.map((formComponent, idx) => (
-          <Fragment key={formComponent.id}>{formComponent.component}</Fragment>
+        {components.map((component, idx) => (
+          <Fragment key={component.id}>
+            {
+              component.formType === 'shortAnswerType' ? (
+                <ShortAnswerType
+                  id={component.id}
+                  value={components[idx]}
+                  onChange={changeValueHandler}
+                />
+              ) : component.formType === 'longAnswerType' ? (
+                <LongAnswerType
+                  id={component.id}
+                  value={components[idx]}
+                  onChange={changeValueHandler}
+                />
+              ) : component.formType === 'multipleChoiceImageType' ? (
+                <MultipleChoiceImageType
+                  id={component.id}
+                  value={components[idx]}
+                  onChange={changeValueHandler}
+                />
+              ) : component.formType === 'multipleChoiceTextType' ? (
+                <MultipleChoiceTextType
+                  index={idx}
+                  value={components[idx]}
+                  onChange={changeValueHandler}
+                />
+              ) : component.formType === 'ratingType' ? (
+                <RatingType
+                  id={component.id}
+                  value={components[idx]}
+                  onChange={changeValueHandler}
+                />
+              ) : null // 기본값이나 오류 처리를 위한 값 설정
+            }
+          </Fragment>
         ))}
       </div>
 
