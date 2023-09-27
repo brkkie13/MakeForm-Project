@@ -39,6 +39,11 @@ function CreatePage() {
     const newComponents = [...components];
     newComponents[index] = updatedValues;
     setComponents(newComponents);
+    // setComponents(prevState =>
+    //   prevState.map(component =>
+    //     component === components[index] ? updatedValues : component
+    //   )
+    // );
   };
 
   //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등등)
@@ -58,14 +63,16 @@ function CreatePage() {
     },
     [components]
   );
-  console.log(components);
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
     // data변수에 최종 저장해야할 값들 정리해보기.
     const data = {
       saveDate: new Date().toISOString(),
+      items: components,
     };
+
+    console.log(data);
   };
 
   return (
@@ -94,31 +101,31 @@ function CreatePage() {
             {
               component.formType === 'shortAnswerType' ? (
                 <ShortAnswerType
-                  id={component.id}
+                  index={idx}
                   value={components[idx]}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'longAnswerType' ? (
                 <LongAnswerType
-                  id={component.id}
+                  index={idx}
                   value={components[idx]}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'multipleChoiceImageType' ? (
                 <MultipleChoiceImageType
-                  id={component.id}
+                  index={idx}
                   value={components[idx]}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'multipleChoiceTextType' ? (
                 <MultipleChoiceTextType
                   index={idx}
-                  value={components[idx]}
+                  value={component}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'ratingType' ? (
                 <RatingType
-                  id={component.id}
+                  index={idx}
                   value={components[idx]}
                   onChange={changeValueHandler}
                 />

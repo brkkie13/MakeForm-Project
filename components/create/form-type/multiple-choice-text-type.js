@@ -42,20 +42,17 @@ function MultipleChoiceTextType({ index, value, onChange }) {
 
   // ***객관식옵션 추가***
   let optionId = useRef(2); //필수옵션 두개에 이미 id 0,1을 부여했으므로 새로추가되는 옵션은 id:2부터 시작.
-  const addOptionHandler = useCallback(() => {
+  const addOptionHandler = () => {
     // '+옵션추가' 누를때마다 객관식 옵션이 추가된 후 (optionId: 2)
     setOptions([...options, { id: optionId.current, text: '' }]);
     optionId.current++; // optionId 1씩 증가 (optionId: 3)
-  }, [options]);
+  };
 
   // ***객관식옵션 삭제***
-  const removeOptionHandler = useCallback(
-    id => {
-      const updatedOptions = options.filter(option => option.id !== id);
-      setOptions(updatedOptions);
-    },
-    [options]
-  );
+  const removeOptionHandler = id => {
+    const updatedOptions = options.filter(option => option.id !== id);
+    setOptions(updatedOptions);
+  };
 
   //***부모컴포넌트로 변경된 title value를 넘겨줌***
   const changeTitleHandler = event => {
@@ -67,19 +64,24 @@ function MultipleChoiceTextType({ index, value, onChange }) {
   };
 
   // ***객관식옵션의 input값 수정 -> 부모컴포넌트로 변경된 option value를 넘겨줌***
-  const changeOptionHandler = useCallback(
-    (id, newValue) => {
-      const updatedOptions = options.map(option =>
-        option.id === id ? { ...option, text: newValue } : option
-      );
-      setOptions(updatedOptions);
-      onChange(index, {
-        ...value,
-        options: options,
-      });
-    },
-    [options]
-  );
+  const changeOptionHandler = (id, newValue) => {
+    const updatedOptions = options.map(option =>
+      option.id === id ? { ...option, text: newValue } : option
+    );
+
+    setOptions(updatedOptions);
+    // setOptions(prev =>
+    //   prev.map(el => (el.id === id ? { ...el, text: newValue } : el))
+    // );
+
+    onChange(index, {
+      ...value,
+      options: options,
+    });
+
+    console.log(updatedOptions);
+    console.log(options);
+  };
 
   return (
     <Article>
@@ -93,7 +95,7 @@ function MultipleChoiceTextType({ index, value, onChange }) {
               <RemoveBadge onClick={() => removeOptionHandler(option.id)} />
             )}
             <MultipleChoiceInput
-              value={option.value}
+              value={option.text}
               onChange={e => changeOptionHandler(option.id, e.target.value)}
             />
           </div>
