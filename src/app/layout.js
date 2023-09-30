@@ -5,6 +5,8 @@ import StyledComponentsRegistry from '../../lib/registry';
 import GlobalStyle from '@/\bstyles/GlobalStyles';
 import theme from '@/\bstyles/Theme';
 import { ThemeProvider } from 'styled-components';
+import store from '@/redux/store';
+import { Provider } from 'react-redux';
 
 // export const metadata = {
 //   title: 'Create Next App',
@@ -19,7 +21,7 @@ export default function RootLayout({ children }) {
         <html lang="ko">
           <body>
             <MainNavigation />
-            {children}
+            <Provider store={store}>{children}</Provider>
           </body>
         </html>
       </ThemeProvider>

@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { Fragment, useCallback, useState, useRef, useMemo } from 'react';
+import { Fragment, useCallback, useState, useRef } from 'react';
 
 // components
 import Button from '../../../components/ui/button';
@@ -9,6 +9,9 @@ import LongAnswerType from '../../../components/create/form-type/long-answer-typ
 import MultipleChoiceImageType from '../../../components/create/form-type/multiple-choice-image-type';
 import MultipleChoiceTextType from '../../../components/create/form-type/multiple-choice-text-type';
 import RatingType from '../../../components/create/form-type/rating-type';
+
+import { sendFormData } from '@/redux/actions';
+import { useDispatch } from 'react-redux';
 
 // CSS
 const Section = styled.section`
@@ -29,8 +32,9 @@ const Section = styled.section`
 
 // CODE
 function CreatePage() {
-  const componentId = useRef(0);
+  const dispatch = useDispatch();
 
+  const componentId = useRef(0);
   const [components, setComponents] = useState([]); //components는 배열.
 
   // 배열요소예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
@@ -39,14 +43,9 @@ function CreatePage() {
     const newComponents = [...components];
     newComponents[index] = updatedValues;
     setComponents(newComponents);
-    // setComponents(prevState =>
-    //   prevState.map(component =>
-    //     component === components[index] ? updatedValues : component
-    //   )
-    // );
   };
 
-  //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등등)
+  //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등의 버튼)
   const addComponentHandler = useCallback(
     event => {
       const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
@@ -71,8 +70,7 @@ function CreatePage() {
       saveDate: new Date().toISOString(),
       items: components,
     };
-
-    console.log(data);
+    dispatch(sendFormData(data));
   };
 
   return (
@@ -102,19 +100,19 @@ function CreatePage() {
               component.formType === 'shortAnswerType' ? (
                 <ShortAnswerType
                   index={idx}
-                  value={components[idx]}
+                  value={component}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'longAnswerType' ? (
                 <LongAnswerType
                   index={idx}
-                  value={components[idx]}
+                  value={component}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'multipleChoiceImageType' ? (
                 <MultipleChoiceImageType
                   index={idx}
-                  value={components[idx]}
+                  value={component}
                   onChange={changeValueHandler}
                 />
               ) : component.formType === 'multipleChoiceTextType' ? (
@@ -126,7 +124,7 @@ function CreatePage() {
               ) : component.formType === 'ratingType' ? (
                 <RatingType
                   index={idx}
-                  value={components[idx]}
+                  value={component}
                   onChange={changeValueHandler}
                 />
               ) : null // 기본값이나 오류 처리를 위한 값 설정

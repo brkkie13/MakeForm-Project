@@ -73,14 +73,10 @@ function MultipleChoiceTextType({ index, value, onChange }) {
     // setOptions(prev =>
     //   prev.map(el => (el.id === id ? { ...el, text: newValue } : el))
     // );
-
     onChange(index, {
       ...value,
       options: options,
     });
-
-    console.log(updatedOptions);
-    console.log(options);
   };
 
   return (
