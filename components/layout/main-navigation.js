@@ -9,14 +9,22 @@ import Button from '../ui/button';
 import DarkModeIcon from '../icons/dark-mode-icon';
 import LightModeIcon from '../icons/light-mode-icon';
 import ArrowDownIcon from '../icons/arrow-down-icon';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '@/redux/features/ui-slice';
 
 // CSS (styled-components)
 const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
   height: 65px;
-  background-color: #f6f6f6;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: ${props => props.theme.colors.background};
+  border-bottom: 1px solid ${props => props.theme.colors.border};
 
   ul {
     display: flex;
@@ -34,11 +42,11 @@ const Header = styled.header`
   }
 
   li:hover {
-    background: #efefef;
+    background: ${props => props.theme.colors.hoverMenu};
   }
 
   li.active {
-    background: #e3e3e3;
+    background: ${props => props.theme.colors.activeMenu};
   }
 
   .controls {
@@ -56,9 +64,20 @@ const Header = styled.header`
 // 컴포넌트
 function MainNavigation() {
   const pathname = usePathname();
-  const loginHandler = () => {
-    //클릭하면 로그인 팝업이 뜨고, 구글/카카오/이메일 로그인이 가능하도록.
+
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector(state => state.ui.isDarkMode);
+
+  const toggleDarkModeHandler = () => {
+    dispatch(uiActions.toggleDarkMode());
+    if (isDarkMode) {
+      document.body.setAttribute('data-theme', 'dark');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+    }
   };
+
+  const loginHandler = () => {};
 
   return (
     <Header>
@@ -91,8 +110,9 @@ function MainNavigation() {
 
       <div className="controls">
         <div className="control">
-          {/* <DarkModeIcon /> */}
-          <LightModeIcon />
+          <div onClick={toggleDarkModeHandler}>
+            {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+          </div>
         </div>
         <div className="control">
           <Button onClick={loginHandler}>로그인</Button>

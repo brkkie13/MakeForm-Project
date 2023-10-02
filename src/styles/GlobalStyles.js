@@ -24,8 +24,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   
-  section {
-    margin : 0 30px;
+  body > section {
+    padding-top: 65px;
+    background: #f6f6f6;
+    height: 100vh;
   }
 
   ul {

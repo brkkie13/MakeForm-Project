@@ -7,7 +7,7 @@ import CheckboxIcon from '../../icons/checkbox-icon';
 
 // CSS
 const Label = styled.label`
-  background: white;
+  background: ${props => props.theme.colors.input};
   padding: 12px 20px;
   gap: 10px;
   border-radius: 5px;

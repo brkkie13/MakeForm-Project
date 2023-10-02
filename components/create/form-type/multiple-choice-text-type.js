@@ -1,12 +1,15 @@
 'use client';
 import styled from 'styled-components';
-import { useCallback, useState, useRef } from 'react';
 
 // COMPONENTS
 import Button from '../../ui/button';
 import MultipleChoiceInput from '../ui/multiple-choice-input';
 import RemoveBadge from '../../ui/remove-badge';
 import TitleInput from '../ui/title-input';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { formActions } from '@/redux/features/form-slice';
 
 // CSS
 const Article = styled.article`
@@ -33,55 +36,36 @@ const Article = styled.article`
 `;
 
 // CODE
-function MultipleChoiceTextType({ index, value, onChange }) {
-  // 객관식옵션 2개는 무조건 있어야 함.
-  const [options, setOptions] = useState([
-    { id: 0, text: '' },
-    { id: 1, text: '' },
-  ]);
+function MultipleChoiceTextType({ index, value }) {
+  const dispatch = useDispatch();
+  const components = useSelector(state => state.form.components);
+  const options = useSelector(state => state.form.options);
 
-  // ***객관식옵션 추가***
-  let optionId = useRef(2); //필수옵션 두개에 이미 id 0,1을 부여했으므로 새로추가되는 옵션은 id:2부터 시작.
   const addOptionHandler = () => {
-    // '+옵션추가' 누를때마다 객관식 옵션이 추가된 후 (optionId: 2)
-    setOptions([...options, { id: optionId.current, text: '' }]);
-    optionId.current++; // optionId 1씩 증가 (optionId: 3)
+    dispatch(formActions.addOption());
   };
 
-  // ***객관식옵션 삭제***
   const removeOptionHandler = id => {
-    const updatedOptions = options.filter(option => option.id !== id);
-    setOptions(updatedOptions);
+    dispatch(formActions.removeOption(id));
   };
 
-  //***부모컴포넌트로 변경된 title value를 넘겨줌***
   const changeTitleHandler = event => {
     const newValue = event.target.value;
-    onChange(index, {
-      ...value,
-      title: newValue,
-    });
+    dispatch(formActions.changeTitleValue({ index, newValue }));
   };
 
-  // ***객관식옵션의 input값 수정 -> 부모컴포넌트로 변경된 option value를 넘겨줌***
-  const changeOptionHandler = (id, newValue) => {
-    const updatedOptions = options.map(option =>
-      option.id === id ? { ...option, text: newValue } : option
-    );
-
-    setOptions(updatedOptions);
-    // setOptions(prev =>
-    //   prev.map(el => (el.id === id ? { ...el, text: newValue } : el))
-    // );
-    onChange(index, {
-      ...value,
-      options: options,
-    });
+  const changeOptionHandler = (optionId, event) => {
+    const newValue = event.target.value;
+    dispatch(formActions.changeOptionValue({ index, optionId, newValue }));
   };
 
   return (
     <Article>
-      <TitleInput value={value.title} onChange={changeTitleHandler} />
+      <TitleInput
+        name="title"
+        value={components[index].title}
+        onChange={changeTitleHandler}
+      />
 
       <div className="options">
         {options.map((option, idx) => (
@@ -91,8 +75,9 @@ function MultipleChoiceTextType({ index, value, onChange }) {
               <RemoveBadge onClick={() => removeOptionHandler(option.id)} />
             )}
             <MultipleChoiceInput
+              name="text"
               value={option.text}
-              onChange={e => changeOptionHandler(option.id, e.target.value)}
+              onChange={event => changeOptionHandler(option.id, event)}
             />
           </div>
         ))}

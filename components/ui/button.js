@@ -4,12 +4,11 @@ import styled, { css } from 'styled-components';
 // CSS
 const StyledButton = styled.button`
   padding: 6px 12px;
-  border: 1px solid #404040;
+  border: 1px solid #b3b3b3;
   border-radius: 7px;
   line-height: 1.5;
 
-  color: ${props => props.color || '#404040'};
-  background: ${props => props.background || 'transparent'};
+  background: ${props => props.background || '#fff'};
 
   ${props =>
     props.primary &&

@@ -10,20 +10,31 @@ import MultipleChoiceImageType from '../../../components/create/form-type/multip
 import MultipleChoiceTextType from '../../../components/create/form-type/multiple-choice-text-type';
 import RatingType from '../../../components/create/form-type/rating-type';
 
+// redux
 import { sendFormData } from '@/redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { formActions } from '@/redux/features/form-slice';
 
 // CSS
 const Section = styled.section`
+  margin: 0;
+  background: ${props => props.theme.colors.background2};
+
   .controls {
     display: flex;
     justify-content: center;
     gap: 10px;
   }
+  .controls__form-type {
+    background: ${props => props.theme.colors.background};
+    padding: 13px 0;
+    position: fixed;
+    width: 100vw;
+    z-index: 90;
+  }
 
   .formBackground {
-    background: #dee1ff;
-    padding: 20px;
+    padding-top: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,34 +45,31 @@ const Section = styled.section`
 function CreatePage() {
   const dispatch = useDispatch();
 
-  const componentId = useRef(0);
-  const [components, setComponents] = useState([]); //components는 배열.
-
-  // 배열요소예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
-  //props로 자식컴포넌트에 넘겨줄 value를 바꿔 components에 저장하는 함수.
-  const changeValueHandler = (index, updatedValues) => {
-    const newComponents = [...components];
-    newComponents[index] = updatedValues;
-    setComponents(newComponents);
-  };
+  // component예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
+  const components = useSelector(state => state.form.components);
 
   //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등의 버튼)
-  const addComponentHandler = useCallback(
-    event => {
-      const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
-      setComponents([
-        ...components,
-        //배열 안의 객체 요소.
-        {
-          id: componentId.current,
-          formType: formType,
-          title: '',
-        },
-      ]);
-      componentId.current++;
-    },
-    [components]
-  );
+  // const addComponentHandler = useCallback(
+  //   event => {
+  //     const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
+  //     setComponents([
+  //       ...components,
+  //       //배열 안의 객체 요소.
+  //       {
+  //         id: componentId.current,
+  //         formType: formType,
+  //         title: '',
+  //       },
+  //     ]);
+  //     componentId.current++;
+  //   },
+  //   [components]
+  // );
+  // 리덕스툴킷으로 변경된 후
+  const addComponentHandler = event => {
+    const formType = event.target.value;
+    dispatch(formActions.addComponent(formType));
+  };
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
@@ -70,12 +78,14 @@ function CreatePage() {
       saveDate: new Date().toISOString(),
       items: components,
     };
+    console.log(data);
+    console.log(components);
     dispatch(sendFormData(data));
   };
 
   return (
     <Section>
-      <div className="controls">
+      <div className="controls controls__form-type">
         <Button onClick={addComponentHandler} value="shortAnswerType">
           단답형
         </Button>
@@ -98,42 +108,22 @@ function CreatePage() {
           <Fragment key={component.id}>
             {
               component.formType === 'shortAnswerType' ? (
-                <ShortAnswerType
-                  index={idx}
-                  value={component}
-                  onChange={changeValueHandler}
-                />
+                <ShortAnswerType index={idx} value={component} />
               ) : component.formType === 'longAnswerType' ? (
-                <LongAnswerType
-                  index={idx}
-                  value={component}
-                  onChange={changeValueHandler}
-                />
+                <LongAnswerType index={idx} value={component} />
               ) : component.formType === 'multipleChoiceImageType' ? (
-                <MultipleChoiceImageType
-                  index={idx}
-                  value={component}
-                  onChange={changeValueHandler}
-                />
+                <MultipleChoiceImageType index={idx} value={component} />
               ) : component.formType === 'multipleChoiceTextType' ? (
-                <MultipleChoiceTextType
-                  index={idx}
-                  value={component}
-                  onChange={changeValueHandler}
-                />
+                <MultipleChoiceTextType index={idx} value={component} />
               ) : component.formType === 'ratingType' ? (
-                <RatingType
-                  index={idx}
-                  value={component}
-                  onChange={changeValueHandler}
-                />
+                <RatingType index={idx} value={component} />
               ) : null // 기본값이나 오류 처리를 위한 값 설정
             }
           </Fragment>
         ))}
       </div>
 
-      <div className="controls">
+      <div className="controls controls__submit">
         <Button onClick={saveFormHandler}>저장</Button>
       </div>
     </Section>
