@@ -1,24 +1,35 @@
 'use client';
 import styled from 'styled-components';
+
+// components
 import TitleInput from '../ui/title-input';
 import StarIcon from '../../icons/star-icon';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { formActions } from '@/redux/features/form-slice';
+
+// css
 const Article = styled.article`
   padding: 20px 0;
 `;
 
-function RatingType({ index, value, onChange }) {
-  //부모컴포넌트로 title값을 넘겨줌
+// code
+function RatingType({ index }) {
+  const dispatch = useDispatch();
+  const components = useSelector(state => state.form.components);
+
   const changeTitleHandler = event => {
     const newValue = event.target.value;
-    onChange(index, {
-      ...value,
-      title: newValue,
-    });
+    dispatch(formActions.changeTitleValue({ index, newValue }));
   };
+
   return (
     <Article>
-      <TitleInput value={value.title} onChange={changeTitleHandler} />
+      <TitleInput
+        value={components[index].title}
+        onChange={changeTitleHandler}
+      />
       <div className="stars">
         <StarIcon />
         <StarIcon />

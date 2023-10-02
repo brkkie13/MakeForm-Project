@@ -1,7 +1,7 @@
 'use client';
 import styled from 'styled-components';
 
-// COMPONENTS
+// components
 import Button from '../../ui/button';
 import MultipleChoiceInput from '../ui/multiple-choice-input';
 import RemoveBadge from '../../ui/remove-badge';
@@ -11,7 +11,7 @@ import TitleInput from '../ui/title-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@/redux/features/form-slice';
 
-// CSS
+// css
 const Article = styled.article`
   padding: 20px 0;
 
@@ -35,18 +35,18 @@ const Article = styled.article`
   }
 `;
 
-// CODE
-function MultipleChoiceTextType({ index, value }) {
+// code
+function MultipleChoiceTextType({ index }) {
   const dispatch = useDispatch();
   const components = useSelector(state => state.form.components);
-  const options = useSelector(state => state.form.options);
+  const options = components[index].options;
 
   const addOptionHandler = () => {
-    dispatch(formActions.addOption());
+    dispatch(formActions.addOption(index));
   };
 
   const removeOptionHandler = id => {
-    dispatch(formActions.removeOption(id));
+    dispatch(formActions.removeOption({ index, id }));
   };
 
   const changeTitleHandler = event => {

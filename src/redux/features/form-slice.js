@@ -3,10 +3,6 @@ import { createSlice, current } from '@reduxjs/toolkit';
 let initialState = {
   components: [],
   componentId: 0,
-  options: [
-    { id: 0, text: '' },
-    { id: 1, text: '' },
-  ],
   optionId: 2,
 };
 
@@ -16,17 +12,36 @@ export const formSlice = createSlice({
 
   reducers: {
     addComponent(state, action) {
-      state.components.push({
-        id: state.componentId,
-        formType: action.payload,
-        title: '',
-      });
+      const formType = action.payload;
+      if (formType === 'multipleChoiceTextType') {
+        state.components.push({
+          id: state.componentId,
+          formType,
+          title: '',
+          options: [
+            { id: 0, text: '' },
+            { id: 1, text: '' },
+          ],
+        });
+      } else {
+        state.components.push({
+          id: state.componentId,
+          formType,
+          title: '',
+        });
+      }
       state.componentId++;
     },
 
-    addOption(state) {
+    resetComponents(state) {
+      state.components = [];
+    },
+
+    addOption(state, action) {
+      const index = action.payload;
+      const options = state.components[index].options;
       // '옵션추가' 누를 때마다 객관식 옵션 추가 (optionId: 2)
-      state.options.push({
+      options.push({
         id: state.optionId,
         text: '',
       }),
@@ -34,33 +49,26 @@ export const formSlice = createSlice({
     },
 
     removeOption(state, action) {
-      const id = action.payload;
-      state.options.filter(option => option.id !== id);
+      const { index, id } = action.payload;
+      const options = state.components[index].options;
+      const filteredOptions = options.filter(option => option.id !== id);
+      state.components[index].options = filteredOptions;
     },
 
     changeTitleValue(state, action) {
       const { index, newValue } = action.payload;
-      const components = current(state.components);
-      //state.components를 깊은복사하여 배열값을 통째로 덮어씌움 (배열의 특정인덱스만 값을 바꿀 수 없음)
-      const copiedComponents = JSON.parse(JSON.stringify(components));
-      // copiedComponents[index][fieldName] = newValue;
-      copiedComponents[index].title = newValue;
-      state.components = copiedComponents;
+      state.components[index].title = newValue;
     },
 
     changeOptionValue(state, action) {
       const { index, optionId, newValue } = action.payload;
+      const options = state.components[index].options;
       // option value가 바뀌면 먼저 options를 업데이트.
-      state.options.map(option => {
+      options.forEach(option => {
         if (option.id === optionId) {
           option.text = newValue;
         }
       });
-      // components 배열도 업데이트
-      const components = current(state.components);
-      const copiedComponents = JSON.parse(JSON.stringify(components));
-      copiedComponents[index].options = state.options;
-      state.components = copiedComponents;
     },
   },
 });

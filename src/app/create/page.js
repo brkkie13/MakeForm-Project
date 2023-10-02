@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { Fragment, useCallback, useState, useRef } from 'react';
+import { Fragment } from 'react';
 
 // components
 import Button from '../../../components/ui/button';
@@ -15,7 +15,7 @@ import { sendFormData } from '@/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@/redux/features/form-slice';
 
-// CSS
+// css
 const Section = styled.section`
   margin: 0;
   background: ${props => props.theme.colors.background2};
@@ -41,31 +41,14 @@ const Section = styled.section`
   }
 `;
 
-// CODE
+// code
 function CreatePage() {
   const dispatch = useDispatch();
 
-  // component예시: { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
+  // component 예시:
+  // { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
 
-  //form추가버튼을 클릭했을 때 (단답형, 장문형, 객관식 등의 버튼)
-  // const addComponentHandler = useCallback(
-  //   event => {
-  //     const formType = event.target.value; //버튼 눌렀을 때 그 버튼이 가진 value속성의 값.
-  //     setComponents([
-  //       ...components,
-  //       //배열 안의 객체 요소.
-  //       {
-  //         id: componentId.current,
-  //         formType: formType,
-  //         title: '',
-  //       },
-  //     ]);
-  //     componentId.current++;
-  //   },
-  //   [components]
-  // );
-  // 리덕스툴킷으로 변경된 후
   const addComponentHandler = event => {
     const formType = event.target.value;
     dispatch(formActions.addComponent(formType));
@@ -73,14 +56,13 @@ function CreatePage() {
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
-    // data변수에 최종 저장해야할 값들 정리해보기.
     const data = {
       saveDate: new Date().toISOString(),
       items: components,
     };
     console.log(data);
-    console.log(components);
     dispatch(sendFormData(data));
+    dispatch(formActions.resetComponents());
   };
 
   return (
@@ -108,15 +90,15 @@ function CreatePage() {
           <Fragment key={component.id}>
             {
               component.formType === 'shortAnswerType' ? (
-                <ShortAnswerType index={idx} value={component} />
+                <ShortAnswerType index={idx} />
               ) : component.formType === 'longAnswerType' ? (
-                <LongAnswerType index={idx} value={component} />
+                <LongAnswerType index={idx} />
               ) : component.formType === 'multipleChoiceImageType' ? (
-                <MultipleChoiceImageType index={idx} value={component} />
+                <MultipleChoiceImageType index={idx} />
               ) : component.formType === 'multipleChoiceTextType' ? (
-                <MultipleChoiceTextType index={idx} value={component} />
+                <MultipleChoiceTextType index={idx} />
               ) : component.formType === 'ratingType' ? (
-                <RatingType index={idx} value={component} />
+                <RatingType index={idx} />
               ) : null // 기본값이나 오류 처리를 위한 값 설정
             }
           </Fragment>

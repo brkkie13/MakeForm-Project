@@ -1,24 +1,34 @@
 'use client';
 import styled from 'styled-components';
+
+// components
 import TitleInput from '../ui/title-input';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { formActions } from '@/redux/features/form-slice';
+
+// css
 const Article = styled.article`
   padding: 20px 0;
 `;
 
-function ShortAnswerType({ index, value, onChange }) {
-  //부모컴포넌트로 title값을 보내줌.
+// code
+function ShortAnswerType({ index }) {
+  const dispatch = useDispatch();
+  const components = useSelector(state => state.form.components);
+
   const changeTitleHandler = event => {
     const newValue = event.target.value;
-    onChange(index, {
-      ...value,
-      title: newValue,
-    });
+    dispatch(formActions.changeTitleValue({ index, newValue }));
   };
 
   return (
     <Article>
-      <TitleInput value={value.title} onChange={changeTitleHandler} />
+      <TitleInput
+        value={components[index].title}
+        onChange={changeTitleHandler}
+      />
       <div>단답 답변</div>
     </Article>
   );
