@@ -1,4 +1,4 @@
-import { formActions } from './features/form-slice';
+import { myFormActions } from './features/my-form-slice';
 
 // actions creator (비동기 함수 로직)
 export const sendFormData = newForm => {
@@ -42,7 +42,8 @@ export const fetchFormData = () => {
     };
 
     try {
-      await fetchData();
+      const formData = await fetchData();
+      dispatch(myFormActions.replaceFormList(formData));
     } catch (error) {
       console.log(error);
     }

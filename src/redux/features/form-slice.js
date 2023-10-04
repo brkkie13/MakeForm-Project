@@ -4,6 +4,7 @@ let initialState = {
   components: [],
   componentId: 0,
   optionId: 2,
+  headerValue: '',
 };
 
 export const formSlice = createSlice({
@@ -23,6 +24,12 @@ export const formSlice = createSlice({
             { id: 1, text: '' },
           ],
         });
+      } else if (formType === 'descriptionType') {
+        state.components.push({
+          id: state.componentId,
+          formType,
+          description: '',
+        });
       } else {
         state.components.push({
           id: state.componentId,
@@ -31,10 +38,6 @@ export const formSlice = createSlice({
         });
       }
       state.componentId++;
-    },
-
-    resetComponents(state) {
-      state.components = [];
     },
 
     addOption(state, action) {
@@ -69,6 +72,25 @@ export const formSlice = createSlice({
           option.text = newValue;
         }
       });
+    },
+
+    changeHeaderValue(state, action) {
+      const newValue = action.payload;
+      state.headerValue = newValue;
+    },
+
+    // changeTitleValue함수와 똑같은 형태
+    changeDescriptionValue(state, action) {
+      const { index, newValue } = action.payload;
+      state.components[index].description = newValue;
+    },
+
+    // 저장버튼을 누르면 입력했던 모든 내용이 초기화됨.
+    resetAllValue(state) {
+      state.components = [];
+      state.componentId = 0;
+      state.optionId = 2;
+      state.headerValue = '';
     },
   },
 });

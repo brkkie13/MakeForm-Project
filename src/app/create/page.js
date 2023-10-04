@@ -9,6 +9,8 @@ import LongAnswerType from '../../../components/create/form-type/long-answer-typ
 import MultipleChoiceImageType from '../../../components/create/form-type/multiple-choice-image-type';
 import MultipleChoiceTextType from '../../../components/create/form-type/multiple-choice-text-type';
 import RatingType from '../../../components/create/form-type/rating-type';
+import HeaderType from '../../../components/create/form-type/header-type';
+import DescriptionType from '../../../components/create/form-type/description-type';
 
 // redux
 import { sendFormData } from '@/redux/actions';
@@ -48,6 +50,7 @@ function CreatePage() {
   // component 예시:
   // { formType: 'multipleChoiceType', title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
+  const headerValue = useSelector(state => state.form.headerValue);
 
   const addComponentHandler = event => {
     const formType = event.target.value;
@@ -57,12 +60,13 @@ function CreatePage() {
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
     const data = {
-      saveDate: new Date().toISOString(),
+      creationDate: new Date().toISOString(),
+      header: headerValue,
       items: components,
     };
     console.log(data);
     dispatch(sendFormData(data));
-    dispatch(formActions.resetComponents());
+    dispatch(formActions.resetAllValue());
   };
 
   return (
@@ -83,9 +87,19 @@ function CreatePage() {
         <Button onClick={addComponentHandler} value="ratingType">
           평점
         </Button>
+        <Button
+          onClick={addComponentHandler}
+          value="descriptionType"
+          primary="true"
+        >
+          + 설명 추가
+        </Button>
       </div>
 
       <div className="formBackground">
+        <header>
+          <HeaderType />
+        </header>
         {components.map((component, idx) => (
           <Fragment key={component.id}>
             {
@@ -99,6 +113,8 @@ function CreatePage() {
                 <MultipleChoiceTextType index={idx} />
               ) : component.formType === 'ratingType' ? (
                 <RatingType index={idx} />
+              ) : component.formType === 'descriptionType' ? (
+                <DescriptionType index={idx} />
               ) : null // 기본값이나 오류 처리를 위한 값 설정
             }
           </Fragment>
