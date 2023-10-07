@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 // components
@@ -9,7 +9,9 @@ import TrashIcon from '../../../components/icons/trash-icon';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '@/redux/actions';
+import { fetchFormData, removeFormData } from '@/redux/actions';
+import { myFormActions } from '@/redux/features/my-form-slice';
+import { utilsActions } from '@/redux/features/utils-slice';
 
 // css
 const Section = styled.section`
@@ -101,22 +103,39 @@ function MyFormPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const formList = useSelector(state => state.myForm.formList);
+  const formattedDate = useSelector(state => state.utils.formattedDate);
 
   // 클라이언트 사이드 렌더링 (user의 개인적인 데이터이기 때문)
+  // 두번 실행되는 문제 해결(next.config.js에 `reactStrictMode: false` 설정)
   useEffect(() => {
     dispatch(fetchFormData());
-  }, [dispatch]);
+    //페이지가 렌더링될 때마다 계속 formList배열에 같은 데이터가 push되므로 reset해줌.
+    dispatch(myFormActions.resetFormList());
+  }, []);
 
-  const showDetailHandler = dataId => {
+  const showDetailHandler = useCallback(dataId => {
     router.push('/my-form/' + dataId);
-  };
+  });
 
-  const formatDateHandler = creationDate => {
-    const year = new Date(creationDate).getFullYear();
-    const month = new Date(creationDate).getMonth();
-    const date = new Date(creationDate).getDate();
-    return `${year}년 ${month}월 ${date}일`;
-  };
+  const changeDateFormatHandler = useCallback(
+    creationDate => {
+      dispatch(utilsActions.changeDateFormat(creationDate));
+      return formattedDate;
+    },
+    [formList]
+  );
+
+  const removeFormHandler = useCallback(
+    (event, formId) => {
+      if (window.confirm('삭제하시겠습니까?')) {
+        dispatch(removeFormData(formId));
+        router.push('/my-form');
+        // 삭제버튼의 상위태그 tr의 onClick함수가 실행되는 이벤트버블링을 막음.
+        event.stopPropagation();
+      }
+    },
+    [formList]
+  );
 
   return (
     <Section>
@@ -132,12 +151,12 @@ function MyFormPage() {
           {formList.map(data => (
             <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
               <td>{data.header}</td>
-              <td>{formatDateHandler(data.creationDate)}</td>
+              <td>{changeDateFormatHandler(data.creationDate)}</td>
               <td className="controls">
                 <span>
                   <LinkIcon />
                 </span>
-                <span>
+                <span onClick={event => removeFormHandler(event, data.id)}>
                   <TrashIcon />
                 </span>
               </td>

@@ -17,6 +17,10 @@ export const myFormSlice = createSlice({
         });
       }
     },
+
+    resetFormList(state) {
+      state.formList = [];
+    },
   },
 });
 
