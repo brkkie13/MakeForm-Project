@@ -87,11 +87,7 @@ function CreatePage() {
         <Button onClick={addComponentHandler} value="ratingType">
           평점
         </Button>
-        <Button
-          onClick={addComponentHandler}
-          value="descriptionType"
-          primary="true"
-        >
+        <Button onClick={addComponentHandler} value="descriptionType">
           + 설명 추가
         </Button>
       </div>

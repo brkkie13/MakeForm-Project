@@ -116,7 +116,7 @@ function MainNavigation() {
         </div>
         <div className="control">
           <Button onClick={loginHandler}>로그인</Button>
-          <Button primary="true">가입</Button>
+          <Button>가입</Button>
         </div>
       </div>
     </Header>

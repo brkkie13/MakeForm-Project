@@ -7,16 +7,6 @@ const StyledButton = styled.button`
   border: 1px solid #b3b3b3;
   border-radius: 7px;
   line-height: 1.5;
-
-  background: ${props => props.background || '#fff'};
-
-  ${props =>
-    props.primary &&
-    css`
-      color: white;
-      background: navy;
-      border-color: navy;
-    `}
 `;
 
 function Button({ children, ...props }) {

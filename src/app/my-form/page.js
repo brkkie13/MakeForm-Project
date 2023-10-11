@@ -111,19 +111,11 @@ function MyFormPage() {
     dispatch(fetchFormData());
     //페이지가 렌더링될 때마다 계속 formList배열에 같은 데이터가 push되므로 reset해줌.
     dispatch(myFormActions.resetFormList());
-  }, []);
+  }, [dispatch]);
 
   const showDetailHandler = useCallback(dataId => {
     router.push('/my-form/' + dataId);
-  });
-
-  const changeDateFormatHandler = useCallback(
-    creationDate => {
-      dispatch(utilsActions.changeDateFormat(creationDate));
-      return formattedDate;
-    },
-    [formList]
-  );
+  }, []);
 
   const removeFormHandler = useCallback(
     (event, formId) => {
@@ -133,6 +125,15 @@ function MyFormPage() {
         // 삭제버튼의 상위태그 tr의 onClick함수가 실행되는 이벤트버블링을 막음.
         event.stopPropagation();
       }
+    },
+    [formList]
+  );
+
+  // 날짜형식 바꿔주는 함수 (컴포넌트 렌더링시 바로 함수호출되면 에러 발생)
+  const changeDateFormatHandler = useCallback(
+    creationDate => {
+      dispatch(utilsActions.changeDateFormat(creationDate));
+      return formattedDate;
     },
     [formList]
   );
@@ -151,7 +152,7 @@ function MyFormPage() {
           {formList.map(data => (
             <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
               <td>{data.header}</td>
-              <td>{changeDateFormatHandler(data.creationDate)}</td>
+              <td>{data.creationDate}</td>
               <td className="controls">
                 <span>
                   <LinkIcon />
