@@ -152,7 +152,7 @@ function MyFormPage() {
           {formList.map(data => (
             <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
               <td>{data.header}</td>
-              <td>{data.creationDate}</td>
+              <td>{new Date(data.creationDate).toLocaleString()}</td>
               <td className="controls">
                 <span>
                   <LinkIcon />

@@ -1,8 +1,8 @@
 'use client';
 import styled from 'styled-components';
-import { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { useParams } from 'next/navigation';
+
+import { useEffect, useState, useCallback, Fragment } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 
 // components
 import DescriptionType from '../../../../components/create/form-type/description-type';
@@ -15,29 +15,30 @@ import { fetchFormData } from '@/redux/actions';
 import { removeFormData } from '@/redux/actions';
 import { myFormActions } from '@/redux/features/my-form-slice';
 
-const Section = styled.section``;
+const Section = styled.section`
+  h1 {
+    font-size: 30px;
+  }
+`;
 
 function FormDetailPage() {
-  // 현재 페이지가 수정모드인지 아닌지.
-  // const [isEdit, setIsEdit] = useState(false);
-  const isEdit = useSelector(state => state.myForm.isEdit);
-
   const router = useRouter();
   const params = useParams();
+  const formId = params.formId;
   const dispatch = useDispatch();
   const formList = useSelector(state => state.myForm.formList);
-  const formId = params.formId;
 
   useEffect(() => {
     dispatch(fetchFormData());
-  }, [dispatch]);
+  }, []);
 
   const targetedForm = formList.find(form => form.id === formId);
-  console.log(targetedForm);
+  console.log('targetedForm =>', targetedForm);
 
   const onEditHandler = useCallback(() => {
-    dispatch(myFormActions.toggleEditMode());
-  }, [dispatch]);
+    const editPagePath = `/my-form/${formId}/edit`;
+    router.push(editPagePath);
+  }, []);
 
   const removeFormHandler = useCallback(() => {
     if (window.confirm('삭제하시겠습니까?')) {
@@ -46,25 +47,33 @@ function FormDetailPage() {
     }
   }, [formList]);
 
-  const saveEditHandler = useCallback(() => {
-    dispatch(myFormActions.toggleEditMode());
-  }, [dispatch]);
-
   return (
-    <section>
-      <h1>{targetedForm.header}</h1>
+    <Section>
+      {/* CSR시 targetedForm이 일시적으로 비어있는 상태에 생기는 에러를 해결 */}
+      {!targetedForm ? (
+        <div>로딩중입니다</div>
+      ) : (
+        <section>
+          <h1>{targetedForm.header}</h1>
+          <div>
+            {targetedForm.items.map(item => (
+              <Fragment key={item.id}>
+                <h2>{item.title}</h2>
+                <div>
+                  {item.options?.map(option => (
+                    <div key={option.id}>{option.text}</div>
+                  ))}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        </section>
+      )}
       <div className="controls">
-        {!isEdit ? (
-          <>
-            <Button onClick={onEditHandler}>수정</Button>
-            <Button onClick={removeFormHandler}>삭제</Button>
-          </>
-        ) : (
-          <Button onClick={saveEditHandler}>수정 완료</Button>
-        )}
+        <Button onClick={onEditHandler}>수정</Button>
+        <Button onClick={removeFormHandler}>삭제</Button>
       </div>
-      {/* 모드를 두가지(읽는모드/수정모드)로 나눠서 section 렌더링 */}
-    </section>
+    </Section>
   );
 }
 

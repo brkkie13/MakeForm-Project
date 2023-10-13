@@ -43,7 +43,6 @@ export const fetchFormData = () => {
 
     try {
       const formData = await fetchData();
-
       // replaceFormList : 폼리스트의 형식을 변환해 상수에 저장.
       dispatch(myFormActions.replaceFormList(formData));
     } catch (error) {

@@ -11,6 +11,7 @@ export const utilsSlice = createSlice({
     toggleDarkMode(state) {
       state.isDarkMode = !state.isDarkMode;
     },
+
     changeDateFormat(state, action) {
       const creationDate = action.payload;
       const year = new Date(creationDate).getFullYear();

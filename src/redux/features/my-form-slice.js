@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   formList: [],
-  isEdit: false,
 };
 
 export const myFormSlice = createSlice({
@@ -21,10 +20,6 @@ export const myFormSlice = createSlice({
 
     resetFormList(state) {
       state.formList = [];
-    },
-
-    toggleEditMode(state) {
-      state.isEdit = !state.isEdit;
     },
   },
 });
