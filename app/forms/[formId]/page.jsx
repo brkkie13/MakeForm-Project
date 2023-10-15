@@ -33,7 +33,6 @@ function FormDetailPage() {
   }, [dispatch]);
 
   const targetedForm = formList.find(form => form.id === formId);
-  // console.log('targetedForm =>', targetedForm);
 
   const onEditHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;

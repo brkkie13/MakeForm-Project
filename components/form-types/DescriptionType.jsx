@@ -24,7 +24,7 @@ function DescriptionType({ index }) {
 
   const changeDescriptionHandler = event => {
     const newValue = event.target.value;
-    dispatch(formActions.changeDescriptionValue({ index, newValue }));
+    dispatch(formActions.changeDescription({ index, newValue }));
   };
 
   return (

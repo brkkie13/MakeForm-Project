@@ -21,7 +21,7 @@ function RatingType({ index }) {
 
   const changeTitleHandler = event => {
     const newValue = event.target.value;
-    dispatch(formActions.changeTitleValue({ index, newValue }));
+    dispatch(formActions.changeTitle({ index, newValue }));
   };
 
   return (

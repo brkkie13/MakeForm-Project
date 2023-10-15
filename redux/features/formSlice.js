@@ -4,7 +4,7 @@ let initialState = {
   components: [],
   componentId: 0,
   optionId: 2,
-  headerValue: '',
+  header: '',
 };
 
 export const formSlice = createSlice({
@@ -58,12 +58,12 @@ export const formSlice = createSlice({
       state.components[index].options = filteredOptions;
     },
 
-    changeTitleValue(state, action) {
+    changeTitle(state, action) {
       const { index, newValue } = action.payload;
       state.components[index].title = newValue;
     },
 
-    changeOptionValue(state, action) {
+    changeOption(state, action) {
       const { index, optionId, newValue } = action.payload;
       const options = state.components[index].options;
       // option value가 바뀌면 먼저 options를 업데이트.
@@ -74,13 +74,13 @@ export const formSlice = createSlice({
       });
     },
 
-    changeHeaderValue(state, action) {
+    changeHeader(state, action) {
       const newValue = action.payload;
-      state.headerValue = newValue;
+      state.header = newValue;
     },
 
     // changeTitleValue함수와 똑같은 형태
-    changeDescriptionValue(state, action) {
+    changeDescription(state, action) {
       const { index, newValue } = action.payload;
       state.components[index].description = newValue;
     },
@@ -90,7 +90,7 @@ export const formSlice = createSlice({
       state.components = [];
       state.componentId = 0;
       state.optionId = 2;
-      state.headerValue = '';
+      state.header = '';
     },
   },
 });

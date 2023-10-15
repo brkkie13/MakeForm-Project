@@ -50,7 +50,7 @@ function CreatePage() {
   // component 예시:
   // { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
-  const headerValue = useSelector(state => state.form.headerValue);
+  const header = useSelector(state => state.form.header);
 
   const addComponentHandler = event => {
     const formType = event.target.value;
@@ -61,7 +61,7 @@ function CreatePage() {
   const saveFormHandler = () => {
     const data = {
       creationDate: new Date().toISOString(),
-      header: headerValue,
+      header: header,
       items: components,
     };
     console.log(data);
