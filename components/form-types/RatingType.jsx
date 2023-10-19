@@ -1,18 +1,13 @@
 'use client';
-import styled from 'styled-components';
 
 // components
+import FormTypeCard from '../ui/FormTypeCard';
 import TitleInput from '../ui/TitleInput';
 import StarIcon from '../icons/StarIcon';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
-
-// css
-const Article = styled.article`
-  padding: 20px 0;
-`;
 
 // code
 function RatingType({ index }) {
@@ -25,7 +20,7 @@ function RatingType({ index }) {
   };
 
   return (
-    <Article>
+    <FormTypeCard>
       <TitleInput
         value={components[index].title}
         onChange={changeTitleHandler}
@@ -37,7 +32,7 @@ function RatingType({ index }) {
         <StarIcon />
         <StarIcon />
       </div>
-    </Article>
+    </FormTypeCard>
   );
 }
 

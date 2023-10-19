@@ -1,67 +1,24 @@
 'use client';
+
+// react, next
 import Link from 'next/link';
-import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
-// imported components
+// css
+import Button, { FancyButton } from '../ui/Button';
+import { Header } from './MainNavigation.styles';
+
+// components
 import Logo from '../icons/Logo';
-import Button from '../ui/Button';
 import DarkModeIcon from '../icons/DarkModeIcon';
 import LightModeIcon from '../icons/LightModeIcon';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
+
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
 
-// CSS (styled-components)
-const Header = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  height: 65px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${props => props.theme.colors.background};
-  border-bottom: 1px solid ${props => props.theme.colors.border};
-
-  ul {
-    display: flex;
-    gap: 30px;
-  }
-
-  li {
-    background: transparent;
-    padding: 8px 14px;
-    border-radius: 5px;
-  }
-
-  li span {
-    margin-right: 5px;
-  }
-
-  li:hover {
-    background: ${props => props.theme.colors.hoverMenu};
-  }
-
-  li.active {
-    background: ${props => props.theme.colors.activeMenu};
-  }
-
-  .controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .control {
-    display: flex;
-    gap: 7px;
-  }
-`;
-
-// 컴포넌트
+// code
 function MainNavigation() {
   const pathname = usePathname();
 
@@ -116,7 +73,7 @@ function MainNavigation() {
         </div>
         <div className="control">
           <Button onClick={loginHandler}>로그인</Button>
-          <Button>가입</Button>
+          <Button primary="outline">가입</Button>
         </div>
       </div>
     </Header>

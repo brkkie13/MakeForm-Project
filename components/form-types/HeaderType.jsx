@@ -1,22 +1,13 @@
 'use client';
-import styled from 'styled-components';
 import { useState } from 'react';
 
-// components
+// css
+import { Input } from './HeaderType.styles';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 import { myFormActions } from '../../redux/features/myFormSlice';
-
-// css
-const Article = styled.article`
-  input {
-    width: 400px;
-    background: white;
-    font-size: 20px;
-  }
-`;
 
 // code
 function HeaderType({ isEdit }) {
@@ -32,13 +23,13 @@ function HeaderType({ isEdit }) {
     };
 
     return (
-      <Article>
-        <input
+      <article>
+        <Input
           value={editHeader}
           onChange={changeHeaderHandler}
           placeholder="폼 주제를 입력하세요 (ex: 고객 만족도 조사)"
         />
-      </Article>
+      </article>
     );
   }
 
@@ -51,13 +42,13 @@ function HeaderType({ isEdit }) {
   };
 
   return (
-    <Article>
-      <input
+    <article>
+      <Input
         value={header}
         onChange={changeHeaderHandler}
         placeholder="폼 주제를 입력하세요 (ex: 고객 만족도 조사)"
       />
-    </Article>
+    </article>
   );
 }
 

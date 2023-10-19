@@ -11,6 +11,7 @@ const Label = styled.label`
   padding: 12px 20px;
   gap: 10px;
   border-radius: 5px;
+  border: 1px solid lightgray;
   display: flex;
   align-items: center;
 `;

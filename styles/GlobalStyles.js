@@ -2,6 +2,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  body {
+    background: ${props => props.theme.colors.background2};
+  }
+  
   html,body,ul,h1,h2,h3,h4,h5,h6,p,span,svg {
     margin: 0;
     padding: 0;

@@ -12,6 +12,7 @@ import MultipleChoiceImageType from '../../../../components/form-types/MultipleC
 import MultipleChoiceTextType from '../../../../components/form-types/MultipleChoiceTextType';
 import RatingType from '../../../../components/form-types/RatingType';
 import DescriptionType from '../../../../components/form-types/DescriptionType';
+import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,9 +22,6 @@ import { sendEditedFormData } from '../../../../redux/actions';
 
 // css
 const Section = styled.section`
-  margin: 0;
-  background: ${props => props.theme.colors.background2};
-
   .controls {
     display: flex;
     justify-content: center;
@@ -77,6 +75,7 @@ function EditPage() {
 
   return (
     <Section>
+      <FormTypesToolbar />
       <div className="formBackground">
         <HeaderType
           // editHeader={targetedForm.header}

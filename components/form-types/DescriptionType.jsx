@@ -1,21 +1,14 @@
 'use client';
-import styled from 'styled-components';
+
+// css
+import { Textarea } from './DescriptionType.styles';
 
 // components
-import TitleInput from '../ui/TitleInput';
+import FormTypeCard from '../ui/FormTypeCard';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
-
-// css
-const Article = styled.article`
-  textarea {
-    width: 400px;
-    background: white;
-    font-size: 20px;
-  }
-`;
 
 // code
 function DescriptionType({ index }) {
@@ -27,14 +20,16 @@ function DescriptionType({ index }) {
     dispatch(formActions.changeDescription({ index, newValue }));
   };
 
+  const removeFormTypeHandler = () => {};
+
   return (
-    <Article>
-      <textarea
+    <FormTypeCard>
+      <Textarea
         value={components[index].description}
         onChange={changeDescriptionHandler}
         placeholder="설명을 입력하세요"
       />
-    </Article>
+    </FormTypeCard>
   );
 }
 

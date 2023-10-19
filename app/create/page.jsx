@@ -11,6 +11,7 @@ import MultipleChoiceTextType from '../../components/form-types/MultipleChoiceTe
 import RatingType from '../../components/form-types/RatingType';
 import HeaderType from '../../components/form-types/HeaderType';
 import DescriptionType from '../../components/form-types/DescriptionType';
+import FormTypesToolbar from '../../components/form-types/FormTypesToolbar';
 
 // redux
 import { sendFormData } from '../../redux/actions';
@@ -18,29 +19,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 
 // css
-const Section = styled.section`
-  margin: 0;
-  background: ${props => props.theme.colors.background2};
-
-  .controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .controls__form-type {
-    background: ${props => props.theme.colors.background};
-    padding: 13px 0;
-    position: fixed;
-    width: 100vw;
-    z-index: 90;
-  }
-
-  .formBackground {
-    padding-top: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+const FormContents = styled.div`
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 // code
@@ -51,11 +34,6 @@ function CreatePage() {
   // { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
   const header = useSelector(state => state.form.header);
-
-  const addComponentHandler = event => {
-    const formType = event.target.value;
-    dispatch(formActions.addComponent(formType));
-  };
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
@@ -70,32 +48,10 @@ function CreatePage() {
   };
 
   return (
-    <Section>
-      <div className="controls controls__form-type">
-        <Button onClick={addComponentHandler} value="shortAnswerType">
-          단답형
-        </Button>
-        <Button onClick={addComponentHandler} value="longAnswerType">
-          장문형
-        </Button>
-        <Button onClick={addComponentHandler} value="multipleChoiceTextType">
-          객관식(텍스트형)
-        </Button>
-        <Button onClick={addComponentHandler} value="multipleChoiceImageType">
-          객관식(이미지형)
-        </Button>
-        <Button onClick={addComponentHandler} value="ratingType">
-          평점
-        </Button>
-        <Button onClick={addComponentHandler} value="descriptionType">
-          + 설명 추가
-        </Button>
-      </div>
-
-      <div className="formBackground">
-        <header>
-          <HeaderType />
-        </header>
+    <section>
+      <FormTypesToolbar />
+      <FormContents>
+        <HeaderType />
         {components.map((component, idx) => (
           <Fragment key={component.id}>
             {
@@ -115,12 +71,9 @@ function CreatePage() {
             }
           </Fragment>
         ))}
-      </div>
-
-      <div className="controls controls__submit">
-        <Button onClick={saveFormHandler}>저장</Button>
-      </div>
-    </Section>
+      </FormContents>
+      <Button onClick={saveFormHandler}>저장</Button>
+    </section>
   );
 }
 

@@ -13,7 +13,6 @@ export default function Home() {
   return (
     <>
       <Section>
-        {/* 하드코딩된 countNum 숫자부분 수정하기 */}
         <div className="cards">
           <FormSummaryCard title="새로 접수된 폼" badge="미확인" countNum="1" />
           <FormSummaryCard title="오늘 접수된 폼" badge="09.21" countNum="23" />
@@ -29,8 +28,6 @@ export default function Home() {
           />
         </div>
       </Section>
-
-      <Section>{/* 하드코딩된 countNum 숫자부분 수정하기 */}</Section>
     </>
   );
 }

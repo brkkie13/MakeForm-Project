@@ -1,12 +1,10 @@
 'use client';
-import styled from 'styled-components';
 
 import { useEffect, useState, useCallback, Fragment } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Link from 'next/link';
 
 // components
-import DescriptionType from '../../../components/form-types/DescriptionType';
-import HeaderType from '../../../components/form-types/HeaderType';
 import Button from '../../../components/ui/Button';
 
 // redux
@@ -15,12 +13,7 @@ import { fetchFormData } from '../../../redux/actions';
 import { removeFormData } from '../../../redux/actions';
 import { myFormActions } from '../../../redux/features/myFormSlice';
 
-const Section = styled.section`
-  h1 {
-    font-size: 30px;
-  }
-`;
-
+// code
 function FormDetailPage() {
   const router = useRouter();
   const params = useParams();
@@ -42,14 +35,14 @@ function FormDetailPage() {
   const removeFormHandler = useCallback(() => {
     if (window.confirm('삭제하시겠습니까?')) {
       dispatch(removeFormData(formId));
-      router.push('/forms');
+      // router.push('/forms');
     }
   }, [formList]);
 
   console.log('formDetail페이지 formList =>', formList);
 
   return (
-    <Section>
+    <section>
       {/* CSR시 targetedForm이 일시적으로 비어있는 상태에 생기는 에러를 해결 */}
       {!targetedForm ? (
         <div>로딩중입니다</div>
@@ -72,9 +65,11 @@ function FormDetailPage() {
       )}
       <div className="controls">
         <Button onClick={onEditHandler}>수정</Button>
-        <Button onClick={removeFormHandler}>삭제</Button>
+        <Link href="/forms">
+          <Button onClick={removeFormHandler}>삭제</Button>
+        </Link>
       </div>
-    </Section>
+    </section>
   );
 }
 

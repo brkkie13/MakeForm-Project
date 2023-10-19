@@ -1,7 +1,7 @@
 'use client';
-import styled from 'styled-components';
-import { useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+
+// css
+import { OptionsWrapper } from './MultipleChoiceTextType.styles';
 
 // components
 import Button from '../ui/Button';
@@ -13,30 +13,7 @@ import TitleInput from '../ui/TitleInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 import { myFormActions } from '../../redux/features/myFormSlice';
-
-// css
-const Article = styled.article`
-  padding: 20px 0;
-
-  .titleInput {
-    border-bottom: 3px solid #535fca;
-    width: 98%;
-    margin-bottom: 20px;
-    font-size: 20px;
-    padding: 5px;
-  }
-
-  .options {
-    display: grid;
-    grid: '. .';
-    gap: 18px;
-    margin-bottom: 15px;
-  }
-
-  .option {
-    position: relative;
-  }
-`;
+import FormTypeCard from '../ui/FormTypeCard';
 
 // code
 function MultipleChoiceTextType({ index, editItem }) {
@@ -72,14 +49,14 @@ function MultipleChoiceTextType({ index, editItem }) {
     console.log('multipleChoiceTextType =>', options);
 
     return (
-      <Article>
+      <FormTypeCard>
         <TitleInput
           name="title"
           value={editItems[itemIndex].title}
           onChange={changeTitleHandler}
         />
 
-        <div className="options">
+        <OptionsWrapper>
           {options.map((option, idx) => (
             <div className="option" key={option.id}>
               {/* 처음 두개옵션은 x표시 안뜨게 함. index가 2인 옵션부터 x표시 렌더링 */}
@@ -93,9 +70,9 @@ function MultipleChoiceTextType({ index, editItem }) {
               />
             </div>
           ))}
-        </div>
+        </OptionsWrapper>
         <Button onClick={addOptionHandler}>+ 옵션 추가</Button>
-      </Article>
+      </FormTypeCard>
     );
   }
 
@@ -123,14 +100,14 @@ function MultipleChoiceTextType({ index, editItem }) {
   };
 
   return (
-    <Article>
+    <FormTypeCard>
       <TitleInput
         name="title"
         value={components[index].title}
         onChange={changeTitleHandler}
       />
 
-      <div className="options">
+      <OptionsWrapper>
         {options.map((option, idx) => (
           <div className="option" key={option.id}>
             {/* 처음 두개옵션은 x표시 안뜨게 함. index가 2인 옵션부터 x표시 렌더링 */}
@@ -144,9 +121,9 @@ function MultipleChoiceTextType({ index, editItem }) {
             />
           </div>
         ))}
-      </div>
+      </OptionsWrapper>
       <Button onClick={addOptionHandler}>+ 옵션 추가</Button>
-    </Article>
+    </FormTypeCard>
   );
 }
 
