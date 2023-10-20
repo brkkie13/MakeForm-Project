@@ -19,11 +19,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 
 // css
-const FormContents = styled.div`
-  padding-top: 70px;
+const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const FormContents = styled.div`
+  padding-top: 110px;
 `;
 
 // code
@@ -48,7 +51,7 @@ function CreatePage() {
   };
 
   return (
-    <section>
+    <Section>
       <FormTypesToolbar />
       <FormContents>
         <HeaderType />
@@ -73,7 +76,7 @@ function CreatePage() {
         ))}
       </FormContents>
       <Button onClick={saveFormHandler}>저장</Button>
-    </section>
+    </Section>
   );
 }
 

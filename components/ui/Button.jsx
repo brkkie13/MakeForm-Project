@@ -1,5 +1,4 @@
 'use client';
-import { Button, FancyButton } from './Button.styles';
+import { Button } from './Button.styles';
 
 export default Button;
-export { FancyButton };

@@ -1,7 +1,8 @@
 'use client';
 
 const colors = {
-  white: '#fff',
+  white: 'white',
+  black: 'black',
   lightgray: '#f6f6f6',
   lightgray2: '#efefef',
   lightgray3: '#e4e4e4',
@@ -9,27 +10,35 @@ const colors = {
 
   darkBlack: '#111315',
   darkBlack2: '#1F2124',
+
+  skyblue: '#0099EF',
 };
 
 export const lightTheme = {
   colors: {
+    font: colors.black,
     background: colors.white,
     background2: colors.lightgray,
 
     hoverMenu: colors.lightgray2,
     activeMenu: colors.lightgray3,
-
     input: colors.white,
-
     border: colors.lightgray3,
-  },
 
-  pointColors: {},
+    pointSkyblue: colors.skyblue,
+  },
 };
 
 export const darkTheme = {
   colors: {
+    font: 'white',
     background: colors.darkBlack,
     background2: colors.darkBlack2,
+
+    hoverMenu: colors.darkBlack2,
+    activeMenu: colors.darkBlack2,
+    input: colors.darkBlack2,
+
+    pointSkyblue: colors.skyblue,
   },
 };

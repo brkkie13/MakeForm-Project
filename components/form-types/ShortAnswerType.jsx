@@ -27,7 +27,7 @@ function ShortAnswerType({ index }) {
         value={components[index].title}
         onChange={changeTitleHandler}
       />
-      <div>단답 답변</div>
+      <p>단답 답변</p>
     </FormTypeCard>
   );
 }

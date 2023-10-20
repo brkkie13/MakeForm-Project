@@ -1,16 +1,29 @@
 'use client';
 import styled from 'styled-components';
 
-const StyledTitleInput = styled.input`
-  border-bottom: 3px solid #535fca;
-  width: 98%;
-  margin-bottom: 20px;
-  font-size: 20px;
-  padding: 5px;
+const Textarea = styled.textarea`
+  /* background-color: #f1fbff; */
+  width: 100%;
+  font-size: 18px;
+  resize: none;
+  line-height: 1.5;
 `;
 
 function TitleInput(props) {
-  return <StyledTitleInput {...props} placeholder="제목없는 질문" />;
+  const resizeHeightHandler = event => {
+    const target = event.target;
+    const DEFAULT_HEIGHT = 18; // 기본높이는 폰트사이즈와 같다.
+    target.style.height = 0;
+    target.style.height = DEFAULT_HEIGHT + target.scrollHeight + 'px';
+  };
+
+  return (
+    <Textarea
+      {...props}
+      onInput={resizeHeightHandler}
+      placeholder="질문 제목"
+    ></Textarea>
+  );
 }
 
 export default TitleInput;

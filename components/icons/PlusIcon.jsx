@@ -12,7 +12,7 @@ function PlusIcon() {
         y1="37.0669"
         x2="0.0668974"
         y2="37.0669"
-        stroke="black"
+        stroke="currentColor"
         stroke-width="7"
       />
       <line
@@ -20,7 +20,7 @@ function PlusIcon() {
         y1="70.1023"
         x2="33.1026"
         y2="4.10233"
-        stroke="black"
+        stroke="currentColor"
         stroke-width="7"
       />
     </svg>

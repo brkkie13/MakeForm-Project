@@ -16,24 +16,24 @@ function FormTypesToolbar() {
 
   return (
     <Toolbar>
-      <Button onClick={addComponentHandler} value="shortAnswerType">
+      <button onClick={addComponentHandler} value="shortAnswerType">
         단답형
-      </Button>
-      <Button onClick={addComponentHandler} value="longAnswerType">
+      </button>
+      <button onClick={addComponentHandler} value="longAnswerType">
         장문형
-      </Button>
-      <Button onClick={addComponentHandler} value="multipleChoiceTextType">
+      </button>
+      <button onClick={addComponentHandler} value="multipleChoiceTextType">
         객관식(텍스트형)
-      </Button>
-      <Button onClick={addComponentHandler} value="multipleChoiceImageType">
+      </button>
+      <button onClick={addComponentHandler} value="multipleChoiceImageType">
         객관식(이미지형)
-      </Button>
-      <Button onClick={addComponentHandler} value="ratingType">
+      </button>
+      <button onClick={addComponentHandler} value="ratingType">
         평점
-      </Button>
-      <Button onClick={addComponentHandler} value="descriptionType">
+      </button>
+      <button onClick={addComponentHandler} value="descriptionType">
         + 설명 추가
-      </Button>
+      </button>
     </Toolbar>
   );
 }

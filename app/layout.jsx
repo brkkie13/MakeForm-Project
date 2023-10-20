@@ -1,6 +1,6 @@
 import StyledComponentsRegistry from '../lib/registry';
 import GlobalProvider from './GlobalProvider';
-import MainNavigation from '../components/layout/MainNavigation';
+import MainNavbar from '../components/layout/MainNavbar';
 
 export const metadata = {
   title: 'make form - 손쉬운 설문 관리',
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
       <html lang="ko">
         <body>
           <GlobalProvider>
-            <MainNavigation />
+            <MainNavbar />
             <section>{children}</section>
           </GlobalProvider>
         </body>

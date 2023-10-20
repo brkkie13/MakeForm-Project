@@ -12,7 +12,7 @@ function ArrowDownIcon() {
         y1="2.82843"
         x2="49.4975"
         y2="49.4975"
-        stroke="black"
+        stroke="currentColor"
         strokeWidth="12"
       />
       <line
@@ -20,7 +20,7 @@ function ArrowDownIcon() {
         y1="2.82843"
         x2="43.8405"
         y2="49.4975"
-        stroke="black"
+        stroke="currentColor"
         strokeWidth="12"
       />
     </svg>

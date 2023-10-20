@@ -13,6 +13,10 @@ export const Header = styled.header`
   background-color: ${props => props.theme.colors.background};
   border-bottom: 1px solid ${props => props.theme.colors.border};
 
+  .logo svg {
+    width: 180px;
+  }
+
   ul {
     display: flex;
     gap: 30px;
@@ -45,5 +49,10 @@ export const Header = styled.header`
   .control {
     display: flex;
     gap: 7px;
+  }
+
+  .theme-icon {
+    width: 30px;
+    height: 30px;
   }
 `;

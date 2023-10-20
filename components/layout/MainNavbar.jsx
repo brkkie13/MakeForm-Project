@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 // css
-import Button, { FancyButton } from '../ui/Button';
-import { Header } from './MainNavigation.styles';
+import Button from '../ui/Button';
+import { Header } from './MainNavbar.styles';
 
 // components
 import Logo from '../icons/Logo';
@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
 
 // code
-function MainNavigation() {
+function MainNavbar() {
   const pathname = usePathname();
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function MainNavigation() {
 
   return (
     <Header>
-      <Link href="/">
+      <Link href="/" className="logo">
         <Logo />
       </Link>
 
@@ -67,7 +67,7 @@ function MainNavigation() {
 
       <div className="controls">
         <div className="control">
-          <div onClick={toggleDarkModeHandler}>
+          <div className="theme-icon" onClick={toggleDarkModeHandler}>
             {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
           </div>
         </div>
@@ -80,4 +80,4 @@ function MainNavigation() {
   );
 }
 
-export default MainNavigation;
+export default MainNavbar;

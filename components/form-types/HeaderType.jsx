@@ -8,6 +8,7 @@ import { Input } from './HeaderType.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 import { myFormActions } from '../../redux/features/myFormSlice';
+import FormTypeCard from '../ui/FormTypeCard';
 
 // code
 function HeaderType({ isEdit }) {
@@ -23,13 +24,13 @@ function HeaderType({ isEdit }) {
     };
 
     return (
-      <article>
+      <FormTypeCard>
         <Input
           value={editHeader}
           onChange={changeHeaderHandler}
-          placeholder="폼 주제를 입력하세요 (ex: 고객 만족도 조사)"
+          placeholder="폼 주제"
         />
-      </article>
+      </FormTypeCard>
     );
   }
 
@@ -42,13 +43,13 @@ function HeaderType({ isEdit }) {
   };
 
   return (
-    <article>
+    <FormTypeCard>
       <Input
         value={header}
         onChange={changeHeaderHandler}
-        placeholder="폼 주제를 입력하세요 (ex: 고객 만족도 조사)"
+        placeholder="폼 주제"
       />
-    </article>
+    </FormTypeCard>
   );
 }
 

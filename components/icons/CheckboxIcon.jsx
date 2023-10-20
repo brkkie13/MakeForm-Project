@@ -13,7 +13,7 @@ function CheckboxIcon() {
         width="61"
         height="61"
         rx="6"
-        stroke="black"
+        stroke="currentColor"
         strokeWidth="7"
       />
     </svg>
