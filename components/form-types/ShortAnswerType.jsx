@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 // components
 import FormTypeCard from '../ui/FormTypeCard';
-import TitleInput from '../ui/TitleInput';
+import { TitleInputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,11 +23,12 @@ function ShortAnswerType({ index }) {
 
   return (
     <FormTypeCard>
-      <TitleInput
+      <TitleInputArea
         value={components[index].title}
         onChange={changeTitleHandler}
+        placeholder="질문 제목을 입력하세요"
       />
-      <p>단답 답변</p>
+      <p>단답 텍스트 답변</p>
     </FormTypeCard>
   );
 }

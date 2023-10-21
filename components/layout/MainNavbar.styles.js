@@ -5,8 +5,9 @@ export const Header = styled.header`
   top: 0;
   left: 0;
   width: 100%;
+  padding: 0 30px;
   z-index: 100;
-  height: 65px;
+  height: 75px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +15,7 @@ export const Header = styled.header`
   border-bottom: 1px solid ${props => props.theme.colors.border};
 
   .logo svg {
-    width: 180px;
+    width: 150px;
   }
 
   ul {

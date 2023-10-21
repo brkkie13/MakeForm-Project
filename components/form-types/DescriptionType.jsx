@@ -1,10 +1,8 @@
 'use client';
 
-// css
-import { Textarea } from './DescriptionType.styles';
-
 // components
 import FormTypeCard from '../ui/FormTypeCard';
+import { InputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +22,7 @@ function DescriptionType({ index }) {
 
   return (
     <FormTypeCard>
-      <Textarea
+      <InputArea
         value={components[index].description}
         onChange={changeDescriptionHandler}
         placeholder="설명을 입력하세요"

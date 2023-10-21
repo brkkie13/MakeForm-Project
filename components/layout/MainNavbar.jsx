@@ -72,8 +72,10 @@ function MainNavbar() {
           </div>
         </div>
         <div className="control">
-          <Button onClick={loginHandler}>로그인</Button>
-          <Button primary="outline">가입</Button>
+          <Button onClick={loginHandler} primary="non-outline">
+            로그인
+          </Button>
+          <Button primary="highlight">가입</Button>
         </div>
       </div>
     </Header>

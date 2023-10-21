@@ -10,8 +10,10 @@ const colors = {
 
   darkBlack: '#111315',
   darkBlack2: '#1F2124',
+  darkBlack3: '#292B2F',
 
   skyblue: '#0099EF',
+  skyblue2: '#0062d3',
 };
 
 export const lightTheme = {
@@ -19,6 +21,7 @@ export const lightTheme = {
     font: colors.black,
     background: colors.white,
     background2: colors.lightgray,
+    block: colors.white,
 
     hoverMenu: colors.lightgray2,
     activeMenu: colors.lightgray3,
@@ -26,6 +29,7 @@ export const lightTheme = {
     border: colors.lightgray3,
 
     pointSkyblue: colors.skyblue,
+    pointSkyblue2: colors.skyblue2,
   },
 };
 
@@ -34,11 +38,14 @@ export const darkTheme = {
     font: 'white',
     background: colors.darkBlack,
     background2: colors.darkBlack2,
+    block: colors.darkBlack3,
 
     hoverMenu: colors.darkBlack2,
     activeMenu: colors.darkBlack2,
     input: colors.darkBlack2,
+    border: 'none',
 
     pointSkyblue: colors.skyblue,
+    pointSkyblue2: colors.skyblue2,
   },
 };

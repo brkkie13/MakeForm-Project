@@ -4,10 +4,10 @@
 import { OptionsWrapper } from './MultipleChoiceTextType.styles';
 
 // components
-import Button from '../ui/Button';
+import Button, { SmallButton } from '../ui/Button';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
 import RemoveBadge from '../ui/RemoveBadge';
-import TitleInput from '../ui/TitleInput';
+import { TitleInputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,10 +50,11 @@ function MultipleChoiceTextType({ index, editItem }) {
 
     return (
       <FormTypeCard>
-        <TitleInput
+        <TitleInputArea
           name="title"
           value={editItems[itemIndex].title}
           onChange={changeTitleHandler}
+          placeholder="질문 제목을 입력하세요"
         />
 
         <OptionsWrapper>
@@ -71,7 +72,7 @@ function MultipleChoiceTextType({ index, editItem }) {
             </div>
           ))}
         </OptionsWrapper>
-        <Button onClick={addOptionHandler}>+ 옵션 추가</Button>
+        <SmallButton onClick={addOptionHandler}>+ 옵션 추가</SmallButton>
       </FormTypeCard>
     );
   }
@@ -101,10 +102,11 @@ function MultipleChoiceTextType({ index, editItem }) {
 
   return (
     <FormTypeCard>
-      <TitleInput
+      <TitleInputArea
         name="title"
         value={components[index].title}
         onChange={changeTitleHandler}
+        placeholder="질문 제목을 입력하세요"
       />
 
       <OptionsWrapper>
@@ -122,7 +124,7 @@ function MultipleChoiceTextType({ index, editItem }) {
           </div>
         ))}
       </OptionsWrapper>
-      <Button onClick={addOptionHandler}>+ 옵션 추가</Button>
+      <SmallButton onClick={addOptionHandler}>+ 옵션 추가</SmallButton>
     </FormTypeCard>
   );
 }

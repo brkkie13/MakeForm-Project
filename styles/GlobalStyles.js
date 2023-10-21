@@ -14,38 +14,26 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.colors.background2};
     width: 100vw;
     height: 100vh;
-    margin: 0;
-    padding: 0;
   }
 
-  html,body,ul,h1,h2,h3,h4,h5,h6,p,span,svg {
-    margin: 0;
-    padding: 0;
+  body > section {
+    margin-top: 75px; // MainNavbar 높이에 맞게 수정.
+    background: ${props => props.theme.colors.background2};
   }
 
   ul,button,svg :hover {
     cursor: pointer;
   }
 
-  html {
-    font-size: 13px;
+  // reset CSS
+  html,body,ul,h1,h2,h3,h4,h5,h6,p,span,svg,input,textarea,button,select {
     margin: 0;
     padding: 0;
   }
 
-
-  
-  body > section {
-    padding-top: 65px;
-    background: #f6f6f6;
-    height: 100vh;
+  h1 {
+    font-size: 28px;
   }
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
 
   li {
     list-style: none;
@@ -60,15 +48,15 @@ const GlobalStyle = createGlobalStyle`
     background: none;
     border: none;
     outline: none;
-    margin: 0;
-    padding: 0;
+    vertical-align: bottom; // textarea border 밖의 아래에 있는 미세한 여백 없앰.
+    resize: none; // textarea 사이즈 조절 없애기
   }
 
   button {
     background: none;
     border: none;
-    padding: 0;
   }
+
 `;
 
 export default GlobalStyle;

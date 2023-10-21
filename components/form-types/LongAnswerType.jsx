@@ -2,7 +2,7 @@
 
 // components
 import FormTypeCard from '../ui/FormTypeCard';
-import TitleInput from '../ui/TitleInput';
+import { TitleInputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,9 +20,10 @@ function LongAnswerType({ index }) {
 
   return (
     <FormTypeCard>
-      <TitleInput
+      <TitleInputArea
         value={components[index].title}
         onChange={changeTitleHandler}
+        placeholder="질문 제목을 입력하세요"
       />
       <div>장문 텍스트 답변</div>
     </FormTypeCard>

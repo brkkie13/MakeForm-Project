@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Toolbar = styled.nav`
+  margin: 0 auto;
   margin-top: 20px;
   background: ${props => props.theme.colors.background};
   border-radius: 30px;

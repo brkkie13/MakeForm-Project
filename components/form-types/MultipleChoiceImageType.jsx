@@ -3,7 +3,7 @@
 // css
 
 // components
-import TitleInput from '../ui/TitleInput';
+import { TitleInputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,11 +21,12 @@ function MultipleChoiceImageType({ index }) {
 
   return (
     <FormTypeCard>
-      <TitleInput
+      <TitleInputArea
         value={components[index].title}
         onChange={changeTitleHandler}
+        placeholder="질문 제목을 입력하세요"
       />
-      <div>이미지형 객관식</div>
+      <p>이미지형 객관식</p>
     </FormTypeCard>
   );
 }

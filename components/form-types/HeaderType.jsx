@@ -1,14 +1,13 @@
 'use client';
-import { useState } from 'react';
-
-// css
-import { Input } from './HeaderType.styles';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 import { myFormActions } from '../../redux/features/myFormSlice';
+
+// components
 import FormTypeCard from '../ui/FormTypeCard';
+import { HeaderInputArea } from '../ui/InputArea';
 
 // code
 function HeaderType({ isEdit }) {
@@ -25,7 +24,7 @@ function HeaderType({ isEdit }) {
 
     return (
       <FormTypeCard>
-        <Input
+        <InputArea
           value={editHeader}
           onChange={changeHeaderHandler}
           placeholder="폼 주제"
@@ -44,10 +43,10 @@ function HeaderType({ isEdit }) {
 
   return (
     <FormTypeCard>
-      <Input
+      <HeaderInputArea
         value={header}
         onChange={changeHeaderHandler}
-        placeholder="폼 주제"
+        placeholder="폼 주제를 입력하세요"
       />
     </FormTypeCard>
   );

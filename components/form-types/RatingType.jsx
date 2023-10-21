@@ -2,8 +2,8 @@
 
 // components
 import FormTypeCard from '../ui/FormTypeCard';
-import TitleInput from '../ui/TitleInput';
-import StarIcon from '../icons/StarIcon';
+import StarRating from '../../helpers/StarRating';
+import { TitleInputArea } from '../ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,17 +21,12 @@ function RatingType({ index }) {
 
   return (
     <FormTypeCard>
-      <TitleInput
+      <TitleInputArea
         value={components[index].title}
         onChange={changeTitleHandler}
+        placeholder="질문 제목을 입력하세요"
       />
-      <div className="stars">
-        <StarIcon />
-        <StarIcon />
-        <StarIcon />
-        <StarIcon />
-        <StarIcon />
-      </div>
+      <StarRating />
     </FormTypeCard>
   );
 }

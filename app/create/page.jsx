@@ -75,7 +75,9 @@ function CreatePage() {
           </Fragment>
         ))}
       </FormContents>
-      <Button onClick={saveFormHandler}>저장</Button>
+      <Button primary="highlight" onClick={saveFormHandler}>
+        저장
+      </Button>
     </Section>
   );
 }
