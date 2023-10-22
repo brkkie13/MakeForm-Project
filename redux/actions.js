@@ -1,4 +1,3 @@
-import { myFormActions } from './features/myFormSlice';
 import { db } from '../firebase.config';
 import {
   collection,
@@ -8,6 +7,7 @@ import {
   deleteDoc,
   doc,
 } from 'firebase/firestore';
+import { formActions } from './features/formSlice';
 
 export const sendFormData = newForm => {
   return async () => {
@@ -40,7 +40,7 @@ export const fetchFormData = () => {
 
     try {
       const formData = await getData();
-      dispatch(myFormActions.replaceFormList(formData));
+      dispatch(formActions.replaceFormList(formData)); // formList변수에 데이터 저장.
     } catch (error) {
       console.error(error);
     }

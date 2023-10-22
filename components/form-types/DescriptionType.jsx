@@ -9,21 +9,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 
 // code
-function DescriptionType({ index }) {
+function DescriptionType({ index, editItem }) {
   const dispatch = useDispatch();
   const components = useSelector(state => state.form.components);
 
+  // edit
+  const editItems = useSelector(state => state.form.editItems);
+  let editItemIndex;
+  if (editItems.length > 0) {
+    editItemIndex = editItems.findIndex(item => item.id === editItem.id);
+  }
+
   const changeDescriptionHandler = event => {
     const newValue = event.target.value;
-    dispatch(formActions.changeDescription({ index, newValue }));
+    dispatch(
+      formActions.changeDescription(
+        editItem
+          ? { editItemIndex, newValue, isEdit: true }
+          : { index, newValue, isEdit: false }
+      )
+    );
   };
-
-  const removeFormTypeHandler = () => {};
 
   return (
     <FormTypeCard>
       <InputArea
-        value={components[index].description}
+        value={
+          editItem
+            ? editItems[editItemIndex].description
+            : components[index].description
+        }
         onChange={changeDescriptionHandler}
         placeholder="설명을 입력하세요"
       />

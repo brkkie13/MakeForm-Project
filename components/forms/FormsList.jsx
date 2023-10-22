@@ -18,7 +18,7 @@ import { fetchFormData, removeFormData } from '../../redux/actions';
 function FormsList() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const formList = useSelector(state => state.myForm.formList);
+  const formList = useSelector(state => state.form.formList);
 
   // useEffect로 CSR (user의 개인적인 데이터이기 때문)
   // 두번 실행되는 문제 해결(next.config.js에 `reactStrictMode: false` 설정)

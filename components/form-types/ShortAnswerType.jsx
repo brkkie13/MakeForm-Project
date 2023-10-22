@@ -12,19 +12,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 
 // code
-function ShortAnswerType({ index }) {
+function ShortAnswerType({ index, editItem }) {
   const dispatch = useDispatch();
   const components = useSelector(state => state.form.components);
 
+  // edit
+  const editItems = useSelector(state => state.form.editItems);
+  let editItemIndex;
+  if (editItems.length > 0) {
+    editItemIndex = editItems.findIndex(item => item.id === editItem.id);
+  }
+
   const changeTitleHandler = event => {
     const newValue = event.target.value;
-    dispatch(formActions.changeTitle({ index, newValue }));
+    dispatch(
+      formActions.changeTitle(
+        editItem
+          ? { editItemIndex, newValue, isEdit: true }
+          : { index, newValue, isEdit: false }
+      )
+    );
   };
 
   return (
     <FormTypeCard>
       <TitleInputArea
-        value={components[index].title}
+        value={
+          editItem ? editItems[editItemIndex].title : components[index].title
+        }
         onChange={changeTitleHandler}
         placeholder="질문 제목을 입력하세요"
       />

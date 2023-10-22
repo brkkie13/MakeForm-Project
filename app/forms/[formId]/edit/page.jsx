@@ -17,7 +17,7 @@ import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../../redux/actions';
-import { myFormActions } from '../../../../redux/features/myFormSlice';
+import { formActions } from '../../../../redux/features/formSlice';
 import { updateFormData } from '../../../../redux/actions';
 
 // css
@@ -43,16 +43,15 @@ function EditPage() {
   const formId = params.formId;
   const dispatch = useDispatch();
 
-  const formList = useSelector(state => state.myForm.formList);
-  const targetedForm = useSelector(state => state.myForm.targetedForm);
-
-  const editHeader = useSelector(state => state.myForm.editHeader);
-  const editItems = useSelector(state => state.myForm.editItems);
+  const formList = useSelector(state => state.form.formList);
+  const targetedForm = useSelector(state => state.form.targetedForm);
+  const editHeader = useSelector(state => state.form.editHeader);
+  const editItems = useSelector(state => state.form.editItems);
 
   useEffect(() => {
-    dispatch(fetchFormData());
-    dispatch(myFormActions.findTargetedForm(formId));
-    dispatch(myFormActions.setInitialEditValue());
+    dispatch(fetchFormData()); // 데이터 가져오기
+    dispatch(formActions.findTargetedForm(formId)); // id와 일치하는 데이터 찾기
+    dispatch(formActions.setInitialEditValue()); // 수정해야 할 값을 세팅
   }, []);
 
   console.log('edit페이지 formList =>', formList);
@@ -76,41 +75,34 @@ function EditPage() {
   return (
     <Section>
       <FormTypesToolbar />
-      <div className="formBackground">
-        <HeaderType
-          // editHeader={targetedForm.header}
-          isEdit={true}
-        />
 
-        {/* {targetedForm.items?.map(item => (
-          <Fragment key={item.id}>
-            {item.formType === 'shortAnswerType' ? (
-              <ShortAnswerType />
-            ) : item.formType === 'longAnswerType' ? (
-              <LongAnswerType />
-            ) : item.formType === 'multipleChoiceImageType' ? (
-              <MultipleChoiceImageType />
-            ) : item.formType === 'multipleChoiceTextType' ? (
-              <MultipleChoiceTextType />
-            ) : item.formType === 'ratingType' ? (
-              <RatingType />
-            ) : item.formType === 'descriptionType' ? (
-              <DescriptionType />
-            ) : null}
-          </Fragment>
-        ))} */}
+      <div className="formBackground">
+        <HeaderType isEdit={true} />
 
         {targetedForm?.items?.map(item => (
           <Fragment key={item.id}>
-            {item.formType === 'multipleChoiceTextType' ? (
-              <MultipleChoiceTextType editItem={item} isEdit={true} />
+            {item.formType === 'shortAnswerType' ? (
+              <ShortAnswerType editItem={item} />
+            ) : item.formType === 'longAnswerType' ? (
+              <LongAnswerType editItem={item} />
+            ) : item.formType === 'multipleChoiceImageType' ? (
+              <MultipleChoiceImageType editItem={item} />
+            ) : item.formType === 'multipleChoiceTextType' ? (
+              <MultipleChoiceTextType editItem={item} />
+            ) : item.formType === 'ratingType' ? (
+              <RatingType editItem={item} />
+            ) : item.formType === 'descriptionType' ? (
+              <DescriptionType editItem={item} />
             ) : null}
           </Fragment>
         ))}
       </div>
+
       <div className="controls">
         <Button onClick={onCancelHandler}>취소</Button>
-        <Button onClick={saveFormHandler}>등록</Button>
+        <Button onClick={saveFormHandler} primary="highlight">
+          등록
+        </Button>
       </div>
     </Section>
   );

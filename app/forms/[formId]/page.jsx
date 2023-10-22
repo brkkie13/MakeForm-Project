@@ -11,7 +11,6 @@ import Button from '../../../components/ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../redux/actions';
 import { removeFormData } from '../../../redux/actions';
-import { myFormActions } from '../../../redux/features/myFormSlice';
 
 // code
 function FormDetailPage() {
@@ -19,7 +18,7 @@ function FormDetailPage() {
   const params = useParams();
   const formId = params.formId;
   const dispatch = useDispatch();
-  const formList = useSelector(state => state.myForm.formList);
+  const formList = useSelector(state => state.form.formList);
 
   useEffect(() => {
     dispatch(fetchFormData());
@@ -53,6 +52,7 @@ function FormDetailPage() {
             {targetedForm.items?.map(item => (
               <Fragment key={item.id}>
                 <h2>{item.title}</h2>
+                <div>{item?.description}</div>
                 <div>
                   {item.options?.map(option => (
                     <div key={option.id}>{option.text}</div>
