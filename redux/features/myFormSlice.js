@@ -11,16 +11,9 @@ export const myFormSlice = createSlice({
   name: 'my-form',
   initialState,
   reducers: {
-    // db에 저장된 폼 데이터들의 형식을 가공해 변수에 저장.
     replaceFormList(state, action) {
-      state.formList = []; // 페이지가 렌더링될 때마다 계속 push되어 배열 요소가 늘어나므로, 함수 실행하자마자 빈배열로 초기화 후 push 진행.
       const formData = action.payload;
-      for (const key in formData) {
-        state.formList.push({
-          id: key,
-          ...formData[key],
-        });
-      }
+      state.formList = formData;
     },
 
     // edit페이지에서 어떤 폼을 수정할건지 formList에서 찾기.

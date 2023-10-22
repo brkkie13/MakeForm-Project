@@ -1,109 +1,78 @@
-// actions creator (비동기 함수 로직)
-
 import { myFormActions } from './features/myFormSlice';
+import { db } from '../firebase.config';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from 'firebase/firestore';
 
 export const sendFormData = newForm => {
-  return async dispatch => {
-    const sendPostRequest = async () => {
-      const response = await fetch(
-        'https://make-form-8c00e-default-rtdb.firebaseio.com/new-form.json',
-        {
-          method: 'POST',
-          body: JSON.stringify(newForm),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+  return async () => {
+    const formsCollectionRef = collection(db, 'forms');
 
-      if (!response.ok) {
-        throw new Error('새로운 폼 저장 실패');
-      }
+    const postData = async () => {
+      await addDoc(formsCollectionRef, newForm);
     };
 
     try {
-      await sendPostRequest();
+      await postData();
     } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const sendEditedFormData = (formId, editedData) => {
-  return async dispatch => {
-    const sendPatchRequest = async () => {
-      const response = await fetch(
-        `https://make-form-8c00e-default-rtdb.firebaseio.com/new-form/${formId}.json`,
-        {
-          cache: 'no-cache',
-          method: 'PATCH',
-          body: JSON.stringify(editedData),
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('새로운 폼 저장 실패');
-      }
-    };
-
-    try {
-      await sendPatchRequest();
-    } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };
 
 export const fetchFormData = () => {
   return async dispatch => {
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://make-form-8c00e-default-rtdb.firebaseio.com/new-form.json',
-        {
-          cache: 'no-cache',
-        }
-      );
-      if (!response.ok) {
-        throw new Error('데이터를 불러올 수 없음');
-      }
-      const data = await response.json();
-      return data;
+    const formsCollectionRef = collection(db, 'forms');
+
+    const getData = async () => {
+      const data = await getDocs(formsCollectionRef);
+      const formattedData = data.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      return formattedData;
     };
 
     try {
-      const formData = await fetchData();
-      // replaceFormList 함수: db에 저장된 폼 데이터들의 형식을 가공해 변수에 저장.
+      const formData = await getData();
       dispatch(myFormActions.replaceFormList(formData));
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  };
+};
+
+export const updateFormData = (formId, editedData) => {
+  return async () => {
+    const patchData = async () => {
+      const formDoc = doc(db, 'forms', formId);
+      await updateDoc(formDoc, editedData);
+    };
+
+    try {
+      await patchData();
+    } catch (error) {
+      console.error(error);
     }
   };
 };
 
 export const removeFormData = formId => {
-  return async dispatch => {
-    const sendRequest = async () => {
-      const response = await fetch(
-        `https://make-form-8c00e-default-rtdb.firebaseio.com/new-form/${formId}.json`,
-        {
-          cache: 'no-cache',
-          method: 'DELETE',
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('새로운 폼 삭제 실패');
-      }
+  return async () => {
+    const deleteData = async () => {
+      const formDoc = doc(db, 'forms', formId);
+      await deleteDoc(formDoc);
     };
 
     try {
-      await sendRequest();
+      await deleteData();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

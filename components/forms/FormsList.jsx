@@ -1,6 +1,7 @@
 'use client';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 // css
 import { Table } from './FormsList.styles';
@@ -45,6 +46,7 @@ function FormsList() {
     },
     [formList]
   );
+
   return (
     <Table>
       <thead>
@@ -55,6 +57,7 @@ function FormsList() {
       </thead>
       <tbody>
         {formList.map(data => (
+          // <Link href={`/forms/${data.id}`}>
           <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
             <td>{data.header}</td>
             <td>{new Date(data.creationDate).toLocaleString()}</td>
@@ -67,6 +70,7 @@ function FormsList() {
               </span>
             </td>
           </tr>
+          // </Link>
         ))}
       </tbody>
     </Table>

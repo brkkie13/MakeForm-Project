@@ -24,7 +24,7 @@ function HeaderType({ isEdit }) {
 
     return (
       <FormTypeCard>
-        <InputArea
+        <HeaderInputArea
           value={editHeader}
           onChange={changeHeaderHandler}
           placeholder="폼 주제"

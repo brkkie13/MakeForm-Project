@@ -18,7 +18,7 @@ import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../../redux/actions';
 import { myFormActions } from '../../../../redux/features/myFormSlice';
-import { sendEditedFormData } from '../../../../redux/actions';
+import { updateFormData } from '../../../../redux/actions';
 
 // css
 const Section = styled.section`
@@ -69,7 +69,7 @@ function EditPage() {
       items: editItems,
     };
     console.log(editedData);
-    dispatch(sendEditedFormData(formId, editedData));
+    dispatch(updateFormData(formId, editedData));
     router.push(`/forms/${formId}`);
   };
 
