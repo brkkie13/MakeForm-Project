@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const FormTypeWrapper = styled.article`
   background: ${props => props.theme.colors.block};
@@ -24,7 +24,6 @@ export const FormTypeWrapper = styled.article`
 
   svg {
     height: 20px;
-    color: salmon;
   }
 
   svg:hover {

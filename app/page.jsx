@@ -1,6 +1,7 @@
 'use client';
 import styled from 'styled-components';
 import FormSummaryCard from '../components/ui/FormSummaryCard';
+import Notification from '../components/ui/Notification';
 
 const Section = styled.section`
   .cards {
@@ -27,6 +28,7 @@ export default function Home() {
             countNum="427"
           />
         </div>
+        <Notification />
       </Section>
     </>
   );

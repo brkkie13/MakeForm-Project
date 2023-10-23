@@ -14,6 +14,8 @@ const colors = {
 
   skyblue: '#0099EF',
   skyblue2: '#0062d3',
+
+  red: '#F44336',
 };
 
 export const lightTheme = {
@@ -30,6 +32,7 @@ export const lightTheme = {
 
     pointSkyblue: colors.skyblue,
     pointSkyblue2: colors.skyblue2,
+    pointRed: colors.red,
   },
 };
 
@@ -47,5 +50,6 @@ export const darkTheme = {
 
     pointSkyblue: colors.skyblue,
     pointSkyblue2: colors.skyblue2,
+    pointRed: colors.red,
   },
 };

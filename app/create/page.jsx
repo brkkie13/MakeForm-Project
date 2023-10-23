@@ -12,11 +12,13 @@ import RatingType from '../../components/form-types/RatingType';
 import HeaderType from '../../components/form-types/HeaderType';
 import DescriptionType from '../../components/form-types/DescriptionType';
 import FormTypesToolbar from '../../components/form-types/FormTypesToolbar';
+import Notification from '../../components/ui/Notification';
 
 // redux
 import { sendFormData } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
+import { uiActions } from '../../redux/features/uiSlice';
 
 // css
 const Section = styled.div`
@@ -37,6 +39,7 @@ function CreatePage() {
   // { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
   const header = useSelector(state => state.form.header);
+  const notification = useSelector(state => state.ui.notification);
 
   // 최종으로 '저장'버튼을 눌렀을 때 실행 (db에 저장됨)
   const saveFormHandler = () => {
@@ -47,38 +50,45 @@ function CreatePage() {
     };
     console.log(data);
     dispatch(sendFormData(data));
-    dispatch(formActions.resetAllValue());
   };
 
   return (
-    <Section>
-      <FormTypesToolbar />
-      <FormContents>
-        <HeaderType />
-        {components.map((component, idx) => (
-          <Fragment key={component.id}>
-            {
-              component.formType === 'shortAnswerType' ? (
-                <ShortAnswerType index={idx} />
-              ) : component.formType === 'longAnswerType' ? (
-                <LongAnswerType index={idx} />
-              ) : component.formType === 'multipleChoiceImageType' ? (
-                <MultipleChoiceImageType index={idx} />
-              ) : component.formType === 'multipleChoiceTextType' ? (
-                <MultipleChoiceTextType index={idx} />
-              ) : component.formType === 'ratingType' ? (
-                <RatingType index={idx} />
-              ) : component.formType === 'descriptionType' ? (
-                <DescriptionType index={idx} />
-              ) : null // 기본값이나 오류 처리를 위한 값 설정
-            }
-          </Fragment>
-        ))}
-      </FormContents>
-      <Button primary="highlight" onClick={saveFormHandler}>
-        저장
-      </Button>
-    </Section>
+    <>
+      {notification && (
+        <Notification
+          status={notification.status}
+          message={notification.message}
+        />
+      )}
+      <Section>
+        <FormTypesToolbar />
+        <FormContents>
+          <HeaderType />
+          {components.map((component, idx) => (
+            <Fragment key={component.id}>
+              {
+                component.formType === 'shortAnswerType' ? (
+                  <ShortAnswerType index={idx} />
+                ) : component.formType === 'longAnswerType' ? (
+                  <LongAnswerType index={idx} />
+                ) : component.formType === 'multipleChoiceImageType' ? (
+                  <MultipleChoiceImageType index={idx} />
+                ) : component.formType === 'multipleChoiceTextType' ? (
+                  <MultipleChoiceTextType index={idx} />
+                ) : component.formType === 'ratingType' ? (
+                  <RatingType index={idx} />
+                ) : component.formType === 'descriptionType' ? (
+                  <DescriptionType index={idx} />
+                ) : null // 기본값이나 오류 처리를 위한 값 설정
+              }
+            </Fragment>
+          ))}
+        </FormContents>
+        <Button primary="highlight" onClick={saveFormHandler}>
+          저장
+        </Button>
+      </Section>
+    </>
   );
 }
 

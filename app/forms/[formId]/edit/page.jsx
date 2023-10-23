@@ -13,11 +13,13 @@ import MultipleChoiceTextType from '../../../../components/form-types/MultipleCh
 import RatingType from '../../../../components/form-types/RatingType';
 import DescriptionType from '../../../../components/form-types/DescriptionType';
 import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
+import Notification from '../../../../components/ui/Notification';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../../redux/actions';
 import { formActions } from '../../../../redux/features/formSlice';
+import { uiActions } from '../../../../redux/features/uiSlice';
 import { updateFormData } from '../../../../redux/actions';
 
 // css
@@ -47,6 +49,7 @@ function EditPage() {
   const targetedForm = useSelector(state => state.form.targetedForm);
   const editHeader = useSelector(state => state.form.editHeader);
   const editItems = useSelector(state => state.form.editItems);
+  const notification = useSelector(state => state.ui.notification);
 
   useEffect(() => {
     dispatch(fetchFormData()); // 데이터 가져오기

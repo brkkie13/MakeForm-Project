@@ -1,5 +1,5 @@
 import { RemoveBadgeWrapper } from './RemoveBadge.styles';
-import XIcon from '../icons/XIcon';
+import XIcon from './XIcon';
 
 function RemoveBadge(props) {
   return (
