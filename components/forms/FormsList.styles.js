@@ -1,6 +1,24 @@
-'use client';
-
 import styled from 'styled-components';
+
+export const Label = styled.label`
+  background-color: white;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 23px;
+    fill: lightgray;
+    margin-right: 5px;
+  }
+
+  input {
+    width: 100%;
+  }
+`;
 
 export const Table = styled.table`
   width: 80%;

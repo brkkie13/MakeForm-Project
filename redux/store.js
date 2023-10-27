@@ -9,6 +9,13 @@ const store = configureStore({
     form: formReducer,
     utils: utilsReducer,
   },
+
+  // 에러 해결: (If your state or actions are very large, you may want to disable the middleware as it might cause too much of a slowdown in development mode.)
+  // serializableCheck를 사용하지 않도록 middleware를 설정
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

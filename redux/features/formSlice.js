@@ -1,13 +1,15 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
+  // '/create'
   components: [],
   componentId: 0,
   optionId: 2, // 옵션2개는 필수값이기 때문에 이미 id가 0,1인 옵션 존재. 2부터 시작
   header: '',
 
-  // '/edit'페이지일 때
   formList: [], // db에 저장된 전체 폼 데이터를 배열로 저장한 변수.
+
+  // '/edit'
   targetedForm: {}, // edit페이지에서 수정하려고 하는 특정 폼 객체.
   editHeader: '', // edit페이지에서 수정할 header값
   editItems: [], // [{formType, id, title, options}, {}, {}, ...]
@@ -118,7 +120,15 @@ export const formSlice = createSlice({
 
     // db에 저장된 formList를 받아와 배열로 변수에 저장.
     replaceFormList(state, action) {
+      // fetchFormData함수에서 db의 데이터 받아옴.
       const formData = action.payload;
+
+      // 내림차순(최신순)으로 정렬
+      const compareDates = (a, b) => {
+        return new Date(b.creationDate) - new Date(a.creationDate);
+      };
+      formData.sort(compareDates);
+
       state.formList = formData;
     },
 

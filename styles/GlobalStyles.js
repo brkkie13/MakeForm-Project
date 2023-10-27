@@ -52,6 +52,10 @@ const GlobalStyle = createGlobalStyle`
     resize: none; // textarea 사이즈 조절 없애기
   }
 
+  input:focus, textarea:focus {
+    outline: none;
+  }
+
   button {
     background: none;
     border: none;

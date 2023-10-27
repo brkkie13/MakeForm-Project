@@ -12,7 +12,7 @@ import { Header } from './MainNavbar.styles';
 import Logo from '../icons/Logo';
 import DarkModeIcon from '../icons/DarkModeIcon';
 import LightModeIcon from '../icons/LightModeIcon';
-import ArrowDownIcon from '../icons/ArrowDownIcon';
+import ArrowDownIcon from '../icons/ArrowIcon';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';

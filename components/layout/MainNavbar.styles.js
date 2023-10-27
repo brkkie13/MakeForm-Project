@@ -27,10 +27,17 @@ export const Header = styled.header`
     background: transparent;
     padding: 8px 14px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
   }
 
   li span {
     margin-right: 5px;
+  }
+
+  li svg {
+    width: 15px;
+    width: 15px;
   }
 
   li:hover {

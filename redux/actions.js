@@ -12,10 +12,21 @@ import { uiActions } from './features/uiSlice';
 
 export const sendFormData = newForm => {
   return async dispatch => {
-    const formsCollectionRef = collection(db, 'forms');
+    // const formsCollectionRef = collection(db, 'forms');
 
+    // const postData = async () => {
+    //   await addDoc(formsCollectionRef, newForm);
+    // };
+
+    // 가짜api연결(json-server)
     const postData = async () => {
-      await addDoc(formsCollectionRef, newForm);
+      await fetch('http://localhost:4000/forms', {
+        method: 'POST',
+        body: JSON.stringify(newForm),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     };
 
     try {
@@ -44,15 +55,22 @@ export const sendFormData = newForm => {
 
 export const fetchFormData = () => {
   return async dispatch => {
-    const formsCollectionRef = collection(db, 'forms');
+    // const formsCollectionRef = collection(db, 'forms');
 
+    // const getData = async () => {
+    //   const data = await getDocs(formsCollectionRef);
+    //   const formattedData = data.docs.map(doc => ({
+    //     ...doc.data(),
+    //     id: doc.id,
+    //   }));
+    //   return formattedData;
+    // };
+
+    // 가짜api연결(json-server)
     const getData = async () => {
-      const data = await getDocs(formsCollectionRef);
-      const formattedData = data.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      return formattedData;
+      const response = await fetch('http://localhost:4000/forms');
+      const data = await response.json();
+      return data;
     };
 
     try {
@@ -66,9 +84,20 @@ export const fetchFormData = () => {
 
 export const updateFormData = (formId, editedData) => {
   return async dispatch => {
+    // const patchData = async () => {
+    //   const formDoc = doc(db, 'forms', formId);
+    //   await updateDoc(formDoc, editedData);
+    // };
+
+    // 가짜api연결(json-server)
     const patchData = async () => {
-      const formDoc = doc(db, 'forms', formId);
-      await updateDoc(formDoc, editedData);
+      await fetch(`http://localhost:4000/forms/${formId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(editedData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     };
 
     try {
@@ -91,9 +120,19 @@ export const updateFormData = (formId, editedData) => {
 
 export const removeFormData = formId => {
   return async dispatch => {
+    // const deleteData = async () => {
+    //   const formDoc = doc(db, 'forms', formId);
+    //   await deleteDoc(formDoc);
+    // };
+
+    // 가짜api연결(json-server)
     const deleteData = async () => {
-      const formDoc = doc(db, 'forms', formId);
-      await deleteDoc(formDoc);
+      await fetch(`http://localhost:4000/forms/${formId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     };
 
     try {
