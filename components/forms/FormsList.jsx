@@ -1,6 +1,8 @@
 'use client';
 import { useCallback, useState, useEffect, Suspense } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+
+import Link from 'next/link';
 
 // css
 import { FilterNav, PaginationNav } from './FormsList.styles';
@@ -16,15 +18,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeFormData } from '../../redux/actions';
 import { fetchFormData } from '../../redux/actions';
 
+// 쿼리스트링 예시
+// http://localhost:3000/forms?page=1&year=2023&month=10&search=hi
+
 // code
 function FormsList() {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
+
   const formList = useSelector(state => state.form.formList);
   const [filteredFormList, setFilteredFormList] = useState(formList);
   const [yearOption, setYearOption] = useState('all-year');
   const [monthOption, setMonthOption] = useState('all-month');
   const [searchWord, setSearchWord] = useState('');
+
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [postsPerPage, setPostsPerPage] = useState(8); // 한 페이지 당 포스트 개수
@@ -66,6 +75,7 @@ function FormsList() {
     setFilteredFormList(formList); // 새로고침해도 전체 리스트가 뜨도록.
   }, [formList]);
 
+  // 필터링이 바뀔 때마다 실행
   useEffect(() => {
     if (
       yearOption !== 'all-year' ||
@@ -128,6 +138,29 @@ function FormsList() {
     setFilteredFormList(copiedList);
   }
 
+  // 쿼리스트링
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      // if (value !== 'all-year') {
+      if (value) {
+        params.set(name, value);
+      }
+      if (name === 'year' && value === 'all-year') {
+        params.delete(name);
+      }
+      if (name === 'month' && value === 'all-month') {
+        params.delete(name);
+      }
+      if (name === 'search' && value === '') {
+        params.delete(name);
+      }
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const showDetailHandler = useCallback(
     dataId => {
       router.push('/forms/' + dataId);
@@ -159,7 +192,12 @@ function FormsList() {
       <FilterNav>
         <select
           value={yearOption}
-          onChange={e => setYearOption(e.target.value)}
+          onChange={e => {
+            setYearOption(e.target.value);
+            router.push(
+              pathname + '?' + createQueryString('year', e.target.value)
+            );
+          }}
         >
           {yearOptionList.map(item => (
             <option key={item} value={item}>
@@ -170,7 +208,12 @@ function FormsList() {
 
         <select
           value={monthOption}
-          onChange={e => setMonthOption(e.target.value)}
+          onChange={e => {
+            setMonthOption(e.target.value);
+            router.push(
+              pathname + '?' + createQueryString('month', e.target.value)
+            );
+          }}
         >
           {monthOptionList.map(item => (
             <option key={item} value={item}>
@@ -185,7 +228,12 @@ function FormsList() {
             type="text"
             placeholder="제목으로 검색"
             value={searchWord}
-            onChange={e => setSearchWord(e.target.value)}
+            onChange={e => {
+              setSearchWord(e.target.value);
+              router.push(
+                pathname + '?' + createQueryString('search', e.target.value)
+              );
+            }}
           />
         </label>
       </FilterNav>
@@ -221,8 +269,11 @@ function FormsList() {
           {pageNumbers.map(number => (
             <li
               key={number}
-              onClick={() => setCurrentPage(number)}
-              className={currentPage === number && 'active'}
+              onClick={() => {
+                setCurrentPage(number);
+                router.push(`${pathname}?${createQueryString('page', number)}`);
+              }}
+              className={currentPage === number ? 'active' : ''}
             >
               {number}
             </li>
