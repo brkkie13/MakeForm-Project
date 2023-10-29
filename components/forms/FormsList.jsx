@@ -3,7 +3,7 @@ import { useCallback, useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 
 // css
-import { Nav } from './FormsList.styles';
+import { FilterNav, PaginationNav } from './FormsList.styles';
 import { Table } from './FormsList.styles';
 
 // components
@@ -21,10 +21,24 @@ function FormsList() {
   const router = useRouter();
   const dispatch = useDispatch();
   const formList = useSelector(state => state.form.formList);
-  const [filteredFormList, setFilteredFormList] = useState([]);
+  const [filteredFormList, setFilteredFormList] = useState(formList);
   const [yearOption, setYearOption] = useState('all-year');
   const [monthOption, setMonthOption] = useState('all-month');
   const [searchWord, setSearchWord] = useState('');
+  // 페이지네이션
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [postsPerPage, setPostsPerPage] = useState(8); // 한 페이지 당 포스트 개수
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredFormList.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+  const pageNumbers = [];
+  const totalPosts = filteredFormList.length;
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   // 게시글의 모든 연도를 배열로 반환
   const yearOptionList = [
@@ -142,7 +156,7 @@ function FormsList() {
 
   return (
     <>
-      <Nav>
+      <FilterNav>
         <select
           value={yearOption}
           onChange={e => setYearOption(e.target.value)}
@@ -174,7 +188,7 @@ function FormsList() {
             onChange={e => setSearchWord(e.target.value)}
           />
         </label>
-      </Nav>
+      </FilterNav>
 
       <Table>
         <thead>
@@ -184,7 +198,8 @@ function FormsList() {
           </tr>
         </thead>
         <tbody>
-          {filteredFormList.map(data => (
+          {/* {filteredFormList.map(data => ( */}
+          {currentPosts.map(data => (
             <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
               <td>{data.header}</td>
               <td>{new Date(data.creationDate).toLocaleString()}</td>
@@ -200,6 +215,20 @@ function FormsList() {
           ))}
         </tbody>
       </Table>
+
+      <PaginationNav>
+        <ul>
+          {pageNumbers.map(number => (
+            <li
+              key={number}
+              onClick={() => setCurrentPage(number)}
+              className={currentPage === number && 'active'}
+            >
+              {number}
+            </li>
+          ))}
+        </ul>
+      </PaginationNav>
     </>
   );
 }
