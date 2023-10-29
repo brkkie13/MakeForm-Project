@@ -1,11 +1,9 @@
 'use client';
 import { useCallback, useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import Loading from '../../app/forms/loading';
-import Link from 'next/link';
 
 // css
-import { Label } from './FormsList.styles';
+import { Nav } from './FormsList.styles';
 import { Table } from './FormsList.styles';
 
 // components
@@ -24,8 +22,28 @@ function FormsList() {
   const dispatch = useDispatch();
   const formList = useSelector(state => state.form.formList);
   const [filteredFormList, setFilteredFormList] = useState([]);
+  const [yearOption, setYearOption] = useState('all-year');
+  const [monthOption, setMonthOption] = useState('all-month');
+  const [searchWord, setSearchWord] = useState('');
 
-  //
+  // 게시글의 모든 연도를 배열로 반환
+  const yearOptionList = [
+    'all-year',
+    ...formList.reduce((accumulator, form) => {
+      const yearOption = new Date(form.creationDate).getFullYear();
+      if (!accumulator.includes(yearOption)) {
+        accumulator.push(yearOption);
+      }
+      return accumulator;
+    }, []),
+  ];
+
+  // 전체 월을 배열로 반환
+  const monthOptionList = [
+    'all-month',
+    ...new Array(12).fill().map((_, index) => index + 1),
+  ];
+
   useEffect(() => {
     dispatch(fetchFormData());
   }, []);
@@ -34,45 +52,130 @@ function FormsList() {
     setFilteredFormList(formList); // 새로고침해도 전체 리스트가 뜨도록.
   }, [formList]);
 
-  const onChange = useCallback(
-    event => {
-      const searchWord = event.target.value;
-      const filteredList = formList.filter(form =>
-        form.header.toLowerCase().includes(searchWord.toLowerCase())
-      );
-      setFilteredFormList(searchWord === '' ? formList : filteredList);
+  useEffect(() => {
+    if (
+      yearOption !== 'all-year' ||
+      monthOption !== 'all-month' ||
+      searchWord !== ''
+    ) {
+      getProcessedFormList();
+    }
+
+    if (
+      yearOption === 'all-year' &&
+      monthOption === 'all-month' &&
+      searchWord === ''
+    ) {
+      setFilteredFormList(formList);
+    }
+  }, [yearOption, monthOption, searchWord]);
+
+  function getProcessedFormList() {
+    const yearFilter = item => {
+      if (yearOption !== 'all-year') {
+        const formYear = new Date(item.creationDate).getFullYear();
+        return formYear === parseInt(yearOption);
+      } else {
+        return item;
+      }
+    };
+
+    const monthFilter = item => {
+      if (monthOption !== 'all-month') {
+        const formMonth = new Date(item.creationDate).getMonth() + 1;
+        return formMonth === parseInt(monthOption);
+      } else {
+        return item;
+      }
+    };
+
+    const searchFilter = item => {
+      if (searchWord !== '') {
+        return item.header.toLowerCase().includes(searchWord.toLowerCase());
+      } else {
+        return item;
+      }
+    };
+
+    let copiedList = JSON.parse(JSON.stringify(formList));
+
+    if (yearOption !== 'all-year') {
+      copiedList = copiedList.filter(item => yearFilter(item));
+    }
+
+    if (yearOption !== 'all-month') {
+      copiedList = copiedList.filter(item => monthFilter(item));
+    }
+
+    if (searchWord !== '') {
+      copiedList = copiedList.filter(item => searchFilter(item));
+    }
+
+    setFilteredFormList(copiedList);
+  }
+
+  const showDetailHandler = useCallback(
+    dataId => {
+      router.push('/forms/' + dataId);
     },
-    [formList, setFilteredFormList]
+    [router]
   );
 
-  const showDetailHandler = useCallback(dataId => {
-    router.push('/forms/' + dataId);
-  }, []);
-
-  const removeFormHandler = useCallback((event, formId) => {
-    if (window.confirm('삭제하시겠습니까?')) {
-      dispatch(removeFormData(formId));
-      router.push('/forms');
-
-      // 삭제버튼의 상위태그 tr의 onClick함수가 실행되는 이벤트버블링을 막음.
-      event.stopPropagation();
-
-      // redux에서 가져온 formList 요소가 삭제되면, 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
-      setTimeout(() => {
-        dispatch(fetchFormData());
-      }, 0);
-    } else {
-      // confirm창의 취소버튼을 눌렀을 때도 이벤트버블링을 막아 현재페이지에 머물기.
-      event.stopPropagation();
-    }
-  }, []);
+  const removeFormHandler = useCallback(
+    (event, formId) => {
+      if (window.confirm('삭제하시겠습니까?')) {
+        dispatch(removeFormData(formId));
+        router.push('/forms');
+        // 삭제버튼의 상위태그 tr의 onClick함수가 실행되는 이벤트버블링을 막음.
+        event.stopPropagation();
+        // redux에서 가져온 formList 요소가 삭제되면, 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
+        setTimeout(() => {
+          dispatch(fetchFormData());
+        }, 0);
+      } else {
+        // confirm창의 취소버튼을 눌렀을 때도 이벤트버블링을 막아 현재페이지에 머물기.
+        event.stopPropagation();
+      }
+    },
+    [dispatch, router]
+  );
 
   return (
     <>
-      <Label>
-        <SearchIcon />
-        <input type="text" placeholder="제목으로 검색" onChange={onChange} />
-      </Label>
+      <Nav>
+        <select
+          value={yearOption}
+          onChange={e => setYearOption(e.target.value)}
+        >
+          {yearOptionList.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={monthOption}
+          onChange={e => setMonthOption(e.target.value)}
+        >
+          {monthOptionList.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <label>
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="제목으로 검색"
+            value={searchWord}
+            onChange={e => setSearchWord(e.target.value)}
+          />
+        </label>
+      </Nav>
+
       <Table>
         <thead>
           <tr>

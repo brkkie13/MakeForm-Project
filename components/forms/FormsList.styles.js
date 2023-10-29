@@ -1,22 +1,27 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
-  background-color: white;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid lightgray;
-  padding: 0 10px;
+export const Nav = styled.nav`
+  margin: 20px 0;
+  width: 80%;
   display: flex;
+  justify-content: end;
   align-items: center;
+  gap: 15px;
+
+  select,
+  label {
+    display: flex;
+    background: ${props => props.theme.colors.block};
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+    padding: 0 10px;
+  }
 
   svg {
     width: 23px;
     fill: lightgray;
     margin-right: 5px;
-  }
-
-  input {
-    width: 100%;
   }
 `;
 
@@ -34,7 +39,6 @@ export const Table = styled.table`
   }
 
   thead tr th {
-    color: black;
     text-align: left;
     padding: 6px 0;
   }

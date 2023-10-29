@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   color: ${props => props.theme.colors.font};
   }
-  
+
   body {
     background: ${props => props.theme.colors.background2};
     width: 100vw;
