@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+const BUTTON_TYPE = {
+  NON_OUTLINE: 'non-outline',
+  HIGHLIGHT: 'highlight',
+};
+
 export const Button = styled.button`
   padding: 6px 12px;
   border-radius: 5px;
@@ -7,19 +12,23 @@ export const Button = styled.button`
   transition: 0.2s all ease-out;
 
   border: 1px solid ${props => props.theme.colors.pointSkyblue};
-  border: ${props => props.primary === 'non-outline' && 'none'};
+  border: ${props => props.primary === BUTTON_TYPE.NON_OUTLINE && 'none'};
 
   color: ${props =>
-    props.primary === 'highlight' ? '#fff' : props.theme.colors.pointSkyblue};
+    props.primary === BUTTON_TYPE.HIGHLIGHT
+      ? '#fff'
+      : props.theme.colors.pointSkyblue};
 
   background-color: ${props =>
-    props.primary === 'highlight' && props.theme.colors.pointSkyblue};
+    props.primary === BUTTON_TYPE.HIGHLIGHT && props.theme.colors.pointSkyblue};
 
   &:hover {
     background: ${props =>
-      props.primary === 'highlight' && props.theme.colors.pointSkyblue2};
+      props.primary === BUTTON_TYPE.HIGHLIGHT &&
+      props.theme.colors.pointSkyblue2};
     border-color: ${props =>
-      props.primary === 'highlight' && props.theme.colors.pointSkyblue2};
+      props.primary === BUTTON_TYPE.HIGHLIGHT &&
+      props.theme.colors.pointSkyblue2};
   }
 `;
 

@@ -24,6 +24,7 @@ function MainNavbar() {
 
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
+  // const isModalOpen = useSelector(state => state.ui.isModalOpen);
 
   const toggleDarkModeHandler = () => {
     dispatch(uiActions.toggleDarkMode());
@@ -32,6 +33,11 @@ function MainNavbar() {
     } else {
       document.body.setAttribute('data-theme', 'light');
     }
+  };
+
+  const toggleModalHandler = () => {
+    dispatch(uiActions.toggleModal());
+    // console.log(isModalOpen);
   };
 
   const loginHandler = () => {};
@@ -72,10 +78,9 @@ function MainNavbar() {
           </div>
         </div>
         <div className="control">
-          <Button onClick={loginHandler} primary="non-outline">
-            로그인
+          <Button primary="highlight" onClick={toggleModalHandler}>
+            로그인 / 회원가입
           </Button>
-          <Button primary="highlight">가입</Button>
         </div>
       </div>
     </Header>

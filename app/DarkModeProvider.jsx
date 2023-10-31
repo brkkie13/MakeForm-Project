@@ -3,15 +3,22 @@
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/GlobalStyles';
 import { darkTheme, lightTheme } from '../styles/Theme';
-import { useSelector } from 'react-redux';
+
+// components
 import Notification from '../components/ui/Notification';
+import Modal from '../components/ui/Modal';
+
+// redux
+import { useSelector } from 'react-redux';
 
 export default function DarkModeProvider({ children }) {
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
   const notification = useSelector(state => state.ui.notification);
+  const isModalOpen = useSelector(state => state.ui.isModalOpen);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      {isModalOpen && <Modal />}
       {notification && (
         <Notification
           status={notification.status}

@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 let initialState = {
   isDarkMode: false,
   notification: null,
+  isModalOpen: false,
+  isLoginMode: true,
 };
 
 export const uiSlice = createSlice({
@@ -23,6 +25,14 @@ export const uiSlice = createSlice({
 
     clearNotification(state) {
       state.notification = null;
+    },
+
+    toggleModal(state) {
+      state.isModalOpen = !state.isModalOpen;
+    },
+
+    toggleLoginMode(state) {
+      state.isLoginMode = !state.isLoginMode;
     },
   },
 });
