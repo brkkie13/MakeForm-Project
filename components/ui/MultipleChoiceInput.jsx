@@ -1,11 +1,10 @@
-// components
-import CheckboxIcon from '../icons/CheckboxIcon';
 import { Label } from './MultipleChoiceInput.styles';
+import { EmptyCheckboxIcon } from '../../\bstyles/Icons';
 
 function MultipleChoiceInput(props) {
   return (
     <Label>
-      <CheckboxIcon />
+      <EmptyCheckboxIcon />
       <input {...props} placeholder="입력" />
     </Label>
   );

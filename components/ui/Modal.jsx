@@ -1,8 +1,10 @@
 // css
 import { ModalBackground, ModalContainer } from './Modal.styles';
 
+// icons
+import { CloseIcon } from '../../\bstyles/Icons';
+
 // components
-import XIcon from '../icons/XIcon';
 import AuthForm from '../auth/AuthForm';
 
 // redux
@@ -24,7 +26,7 @@ function Modal() {
         <ModalBackground>
           <ModalContainer>
             <div className="header" onClick={closeModalHandler}>
-              <XIcon />
+              <CloseIcon />
             </div>
             <div className="body">
               <AuthForm />

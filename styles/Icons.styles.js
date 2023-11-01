@@ -1,4 +1,3 @@
-'use client';
 import styled from 'styled-components';
 
 export const RemoveBadgeWrapper = styled.span`
@@ -16,4 +15,8 @@ export const RemoveBadgeWrapper = styled.span`
   top: -5px;
 
   cursor: pointer;
+
+  svg {
+    fill: white;
+  }
 `;

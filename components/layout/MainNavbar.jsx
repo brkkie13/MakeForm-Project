@@ -8,11 +8,15 @@ import { usePathname } from 'next/navigation';
 import Button from '../ui/Button';
 import { Header } from './MainNavbar.styles';
 
-// components
-import Logo from '../icons/Logo';
-import DarkModeIcon from '../icons/DarkModeIcon';
-import LightModeIcon from '../icons/LightModeIcon';
-import ArrowDownIcon from '../icons/ArrowIcon';
+// icons
+import {
+  LightModeIcon,
+  DarkModeIcon,
+  CreateIcon,
+  FormIcon,
+  ChartIcon,
+} from '../../\bstyles/Icons';
+import { Logo } from '../../\bstyles/Logo';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +28,6 @@ function MainNavbar() {
 
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
-  // const isModalOpen = useSelector(state => state.ui.isModalOpen);
 
   const toggleDarkModeHandler = () => {
     dispatch(uiActions.toggleDarkMode());
@@ -37,7 +40,6 @@ function MainNavbar() {
 
   const toggleModalHandler = () => {
     dispatch(uiActions.toggleModal());
-    // console.log(isModalOpen);
   };
 
   const loginHandler = () => {};
@@ -53,19 +55,19 @@ function MainNavbar() {
           <Link href={'/create'}>
             <li className={pathname === '/create' ? 'active' : ''}>
               <span>폼 만들기</span>
-              <ArrowDownIcon />
+              <CreateIcon />
             </li>
           </Link>
           <Link href="/forms">
             <li className={pathname === '/forms' ? 'active' : ''}>
               <span>나의 폼</span>
-              <ArrowDownIcon />
+              <FormIcon />
             </li>
           </Link>
           <Link href="/analysis">
             <li className={pathname === '/analysis' ? 'active' : ''}>
               <span>통계</span>
-              <ArrowDownIcon />
+              <ChartIcon />
             </li>
           </Link>
         </ul>

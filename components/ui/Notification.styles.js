@@ -42,7 +42,6 @@ export const NotificationBox = styled.div`
         : props.theme.colors.pointRed};
 
   svg {
-    width: 30px;
     fill: ${props =>
       props.status === 'success'
         ? props.theme.colors.pointSkyblue

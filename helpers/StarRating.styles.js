@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const StarsWrapper = styled.div`
   svg {
+    margin-right: 4px;
     fill: lightgray;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
     transition: 0.2s ease-in-out;
   }
 

@@ -6,7 +6,7 @@ import { OptionsWrapper } from './MultipleChoiceTextType.styles';
 // components
 import Button, { SmallButton } from '../ui/Button';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
-import RemoveBadge from '../icons/RemoveBadge';
+import { RemoveBadge } from '../../\bstyles/Icons';
 import { TitleInputArea } from '../ui/InputArea';
 
 // redux

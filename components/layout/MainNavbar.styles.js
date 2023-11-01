@@ -20,7 +20,7 @@ export const Header = styled.header`
 
   ul {
     display: flex;
-    gap: 30px;
+    gap: 35px;
   }
 
   li {
@@ -28,16 +28,10 @@ export const Header = styled.header`
     padding: 8px 14px;
     border-radius: 5px;
     display: flex;
-    align-items: center;
   }
 
   li span {
-    margin-right: 5px;
-  }
-
-  li svg {
-    width: 15px;
-    width: 15px;
+    margin-right: 7px;
   }
 
   li:hover {
@@ -51,16 +45,11 @@ export const Header = styled.header`
   .controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
   }
 
   .control {
     display: flex;
     gap: 7px;
-  }
-
-  .theme-icon {
-    width: 30px;
-    height: 30px;
   }
 `;

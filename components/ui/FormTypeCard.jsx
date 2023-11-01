@@ -1,6 +1,7 @@
 import { FormTypeWrapper } from './FormTypeCard.styles';
-import DragIcon from '../icons/DragIcon';
-import TrashIcon from '../icons/TrashIcon';
+
+// icons
+import { DragIcon, TrashIcon } from '../../\bstyles/Icons';
 
 const FormTypeCard = props => {
   return (

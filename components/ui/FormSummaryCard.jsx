@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import ReloadIcon from '../icons/ReloadIcon';
+import { ReloadIcon } from '../../\bstyles/Icons';
 
 const Article = styled.article`
   width: 200px;

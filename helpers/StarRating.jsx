@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import StarIcon from '../components/icons/StarIcon';
 import { StarsWrapper } from './StarRating.styles';
+import { StarIcon } from '../\bstyles/Icons';
 
 // code
 function StarRating() {

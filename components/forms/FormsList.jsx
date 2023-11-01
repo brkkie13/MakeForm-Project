@@ -1,17 +1,13 @@
 'use client';
-import { useCallback, useState, useEffect, Suspense } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-
-import Link from 'next/link';
 
 // css
 import { FilterNav, PaginationNav } from './FormsList.styles';
 import { Table } from './FormsList.styles';
 
-// components
-import LinkIcon from '../icons/LinkIcon';
-import TrashIcon from '../icons/TrashIcon';
-import SearchIcon from '../icons/SearchIcon';
+// icons
+import { LinkIcon, TrashIcon, SearchIcon } from '../../\bstyles/Icons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';

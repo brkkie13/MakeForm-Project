@@ -11,6 +11,7 @@ export const FilterNav = styled.nav`
   select,
   label {
     display: flex;
+    align-items: center;
     background: ${props => props.theme.colors.block};
     height: 40px;
     border-radius: 8px;
@@ -19,7 +20,6 @@ export const FilterNav = styled.nav`
   }
 
   svg {
-    width: 23px;
     fill: lightgray;
     margin-right: 5px;
   }
@@ -71,10 +71,6 @@ export const Table = styled.table`
     gap: 20px;
     align-items: center;
     justify-content: flex-end;
-  }
-
-  .controls span svg {
-    width: 18px;
   }
 
   .controls span {

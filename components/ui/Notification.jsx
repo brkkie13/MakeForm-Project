@@ -1,9 +1,7 @@
-import SuccessBadge from '../icons/SuccessBadge';
-import ErrorBadge from '../icons/ErrorBadge';
 import { NotificationBox } from './Notification.styles';
-import { useSelector, useDispatch } from 'react-redux';
-import { uiActions } from '../../redux/features/uiSlice';
+import { ErrorBadge, SuccessBadge } from '../../\bstyles/Icons';
 
+// code
 function Notification({ status, message }) {
   return (
     <NotificationBox status={status}>

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const FormTypeWrapper = styled.article`
   background: ${props => props.theme.colors.block};
@@ -20,14 +20,5 @@ export const FormTypeWrapper = styled.article`
   & > div:nth-child(3) {
     flex: 1; // 첫번째와 세번째 자식 div가 각각 5%의 너비를 차지
     text-align: center;
-  }
-
-  svg {
-    height: 20px;
-  }
-
-  svg:hover {
-    cursor: pointer;
-    color: #f44336;
   }
 `;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Label = styled.label`
-  padding: 10px 18px;
-  gap: 10px;
+  padding: 7px 15px;
+  gap: 8px;
   border-radius: 5px;
   border: 1px solid lightgray;
   display: flex;
@@ -10,5 +10,9 @@ export const Label = styled.label`
 
   input {
     width: 100%;
+  }
+
+  svg {
+    fill: darkgray;
   }
 `;
