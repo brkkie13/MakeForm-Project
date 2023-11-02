@@ -1,21 +1,13 @@
 'use client';
-
-// react, next
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-// css
 import Button from '../ui/Button';
 import { Header } from './MainNavbar.styles';
+import ToggleSwitch from '../../helpers/ToggleSwitch';
 
 // icons
-import {
-  LightModeIcon,
-  DarkModeIcon,
-  CreateIcon,
-  FormIcon,
-  ChartIcon,
-} from '../../\bstyles/Icons';
+import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
 
 // redux
@@ -75,9 +67,10 @@ function MainNavbar() {
 
       <div className="controls">
         <div className="control">
-          <div className="theme-icon" onClick={toggleDarkModeHandler}>
-            {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
-          </div>
+          <ToggleSwitch
+            isToggled={!isDarkMode}
+            onToggle={toggleDarkModeHandler}
+          />
         </div>
         <div className="control">
           <Button primary="highlight" onClick={toggleModalHandler}>

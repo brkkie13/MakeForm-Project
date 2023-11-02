@@ -23,11 +23,11 @@ export function CloseIcon(props) {
 }
 
 export function LightModeIcon(props) {
-  return <FiSun size="25" {...props} />;
+  return <FiSun size="19" {...props} />;
 }
 
 export function DarkModeIcon(props) {
-  return <FiMoon size="25" {...props} />;
+  return <FiMoon size="20" {...props} />;
 }
 
 export function CreateIcon(props) {
