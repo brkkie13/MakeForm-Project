@@ -1,5 +1,5 @@
 import StyledComponentsRegistry from '../lib/registry';
-import GlobalProvider from './GlobalProvider';
+import GlobalProvider from './providers/GlobalProvider';
 import MainNavbar from '../components/layout/MainNavbar';
 import MainFooter from '../components/layout/MainFooter';
 
@@ -10,16 +10,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <StyledComponentsRegistry>
-      <html lang="ko">
-        <body>
+    <html lang="ko">
+      <body>
+        <StyledComponentsRegistry>
           <GlobalProvider>
             <MainNavbar />
             <section>{children}</section>
             <MainFooter />
           </GlobalProvider>
-        </body>
-      </html>
-    </StyledComponentsRegistry>
+        </StyledComponentsRegistry>
+      </body>
+    </html>
   );
 }

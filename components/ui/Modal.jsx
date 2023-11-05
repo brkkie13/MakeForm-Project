@@ -11,7 +11,7 @@ import AuthForm from '../auth/AuthForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
 
-function Modal() {
+function Modal({ children }) {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(state => state.ui.isModalOpen);
 
@@ -30,6 +30,7 @@ function Modal() {
             </div>
             <div className="body">
               <AuthForm />
+              {children}
             </div>
             <div className="footer"></div>
           </ModalContainer>
