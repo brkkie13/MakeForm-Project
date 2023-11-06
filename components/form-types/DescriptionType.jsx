@@ -32,7 +32,7 @@ function DescriptionType({ index, editItem }) {
   };
 
   return (
-    <FormTypeCard>
+    <>
       <InputArea
         value={
           editItem
@@ -42,7 +42,7 @@ function DescriptionType({ index, editItem }) {
         onChange={changeDescriptionHandler}
         placeholder="설명을 입력하세요"
       />
-    </FormTypeCard>
+    </>
   );
 }
 

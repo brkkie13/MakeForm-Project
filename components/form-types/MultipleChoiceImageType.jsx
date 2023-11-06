@@ -33,7 +33,7 @@ function MultipleChoiceImageType({ index, editItem }) {
   };
 
   return (
-    <FormTypeCard>
+    <>
       <TitleInputArea
         value={
           editItem ? editItems[editItemIndex].title : components[index].title
@@ -42,7 +42,7 @@ function MultipleChoiceImageType({ index, editItem }) {
         placeholder="질문 제목을 입력하세요"
       />
       <p>이미지형 객관식</p>
-    </FormTypeCard>
+    </>
   );
 }
 

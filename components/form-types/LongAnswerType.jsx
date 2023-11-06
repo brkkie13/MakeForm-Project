@@ -32,7 +32,7 @@ function LongAnswerType({ index, editItem }) {
   };
 
   return (
-    <FormTypeCard>
+    <>
       <TitleInputArea
         value={
           editItem ? editItems[editItemIndex].title : components[index].title
@@ -41,7 +41,7 @@ function LongAnswerType({ index, editItem }) {
         placeholder="질문 제목을 입력하세요"
       />
       <div>장문 텍스트 답변</div>
-    </FormTypeCard>
+    </>
   );
 }
 

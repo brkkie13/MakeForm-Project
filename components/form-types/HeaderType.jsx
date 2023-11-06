@@ -24,13 +24,13 @@ function HeaderType({ isEdit }) {
   };
 
   return (
-    <FormTypeCard>
+    <>
       <HeaderInputArea
         value={isEdit ? editHeader : header}
         onChange={changeHeaderHandler}
         placeholder="폼 주제를 입력하세요"
       />
-    </FormTypeCard>
+    </>
   );
 }
 

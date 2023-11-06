@@ -19,6 +19,7 @@ import { sendFormData } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 import { uiActions } from '../../redux/features/uiSlice';
+import FormTypeCard from '../../components/ui/FormTypeCard';
 
 // css
 const Section = styled.div`
@@ -52,6 +53,10 @@ function CreatePage() {
     dispatch(sendFormData(data));
   };
 
+  const removeFormTypeHandler = idx => {
+    dispatch(formActions.removeComponent(idx));
+  };
+
   return (
     <>
       {notification && (
@@ -63,23 +68,28 @@ function CreatePage() {
       <Section>
         <FormTypesToolbar />
         <FormContents>
-          <HeaderType />
+          <FormTypeCard content={<HeaderType />} isHeader={true} />
           {components.map((component, idx) => (
             <Fragment key={component.id}>
               {
-                component.formType === 'shortAnswerType' ? (
-                  <ShortAnswerType index={idx} />
-                ) : component.formType === 'longAnswerType' ? (
-                  <LongAnswerType index={idx} />
-                ) : component.formType === 'multipleChoiceImageType' ? (
-                  <MultipleChoiceImageType index={idx} />
-                ) : component.formType === 'multipleChoiceTextType' ? (
-                  <MultipleChoiceTextType index={idx} />
-                ) : component.formType === 'ratingType' ? (
-                  <RatingType index={idx} />
-                ) : component.formType === 'descriptionType' ? (
-                  <DescriptionType index={idx} />
-                ) : null // 기본값이나 오류 처리를 위한 값 설정
+                <FormTypeCard
+                  onRemoveFormType={() => removeFormTypeHandler(idx)}
+                  content={
+                    component.formType === 'shortAnswerType' ? (
+                      <ShortAnswerType index={idx} />
+                    ) : component.formType === 'longAnswerType' ? (
+                      <LongAnswerType index={idx} />
+                    ) : component.formType === 'multipleChoiceImageType' ? (
+                      <MultipleChoiceImageType index={idx} />
+                    ) : component.formType === 'multipleChoiceTextType' ? (
+                      <MultipleChoiceTextType index={idx} />
+                    ) : component.formType === 'ratingType' ? (
+                      <RatingType index={idx} />
+                    ) : component.formType === 'descriptionType' ? (
+                      <DescriptionType index={idx} />
+                    ) : null
+                  }
+                />
               }
             </Fragment>
           ))}

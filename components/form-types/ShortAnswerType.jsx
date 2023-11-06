@@ -35,7 +35,7 @@ function ShortAnswerType({ index, editItem }) {
   };
 
   return (
-    <FormTypeCard>
+    <>
       <TitleInputArea
         value={
           editItem ? editItems[editItemIndex].title : components[index].title
@@ -44,7 +44,7 @@ function ShortAnswerType({ index, editItem }) {
         placeholder="질문 제목을 입력하세요"
       />
       <p>단답 텍스트 답변</p>
-    </FormTypeCard>
+    </>
   );
 }
 

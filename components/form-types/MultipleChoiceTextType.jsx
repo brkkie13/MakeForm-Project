@@ -81,7 +81,7 @@ function MultipleChoiceTextType({ index, editItem }) {
   const optionsToRender = editItem ? editItemOptions : options;
 
   return (
-    <FormTypeCard>
+    <>
       <TitleInputArea
         name="title"
         value={
@@ -107,7 +107,7 @@ function MultipleChoiceTextType({ index, editItem }) {
         ))}
       </OptionsWrapper>
       <SmallButton onClick={addOptionHandler}>+ 옵션 추가</SmallButton>
-    </FormTypeCard>
+    </>
   );
 }
 
