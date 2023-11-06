@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 // components
 import FormsList from '../../components/forms/FormsList';
+import Modal from '../../components/Modals/Modal';
+import { useSelector } from 'react-redux';
 
 // css
 const Section = styled.section`
@@ -17,11 +19,15 @@ const Section = styled.section`
 
 // code
 function FormsPage() {
+  // const isModalOpen = useSelector(state => state.ui.isModalOpen);
   return (
-    <Section>
-      <h1>최근 폼</h1>
-      <FormsList />
-    </Section>
+    <>
+      {/* {isModalOpen && <Modal />} */}
+      <Section>
+        <h1>최근 폼</h1>
+        <FormsList />
+      </Section>
+    </>
   );
 }
 

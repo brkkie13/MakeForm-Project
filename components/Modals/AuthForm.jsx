@@ -3,10 +3,9 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
 
 // css
-import { UserInputForm } from './AuthForm.styles';
+import { AuthFormStyled } from './AuthForm.styles';
 import { Button } from '../ui/Button.styles';
 
 // redux
@@ -57,27 +56,28 @@ function AuthForm() {
     }
   };
 
-  const showRegisterModeHandler = () => {
+  const switchAuthModeHandler = () => {
     dispatch(uiActions.toggleLoginMode());
+    emailRef.current.value = '';
+    passwordRef.current.value = '';
   };
 
   return (
-    <>
-      <UserInputForm onSubmit={submitHandler}>
-        <h1>{isLoginMode ? '로그인' : '회원가입'}</h1>
-        <input type="email" placeholder="이메일" ref={emailRef} />
-        <input type="password" placeholder="비밀번호" ref={passwordRef} />
-        <Button type="submit">{isLoginMode ? '로그인' : '회원가입'}</Button>
-        {isLoginMode && <Link href="/">비밀번호를 잊으셨나요?</Link>}
-        <Button
-          type="button"
-          primary="highlight"
-          onClick={showRegisterModeHandler}
-        >
+    <AuthFormStyled onSubmit={submitHandler}>
+      <h1>{isLoginMode ? '로그인' : '회원가입'}</h1>
+      <input type="email" placeholder="이메일" ref={emailRef} />
+      <input type="password" placeholder="비밀번호" ref={passwordRef} />
+      <Button type="submit" primary="highlight">
+        {isLoginMode ? '로그인' : '회원가입'}
+      </Button>
+      {isLoginMode && <span className="underline">비밀번호를 잊으셨나요?</span>}
+      <div onClick={switchAuthModeHandler}>
+        <span>{isLoginMode ? '회원이 아니신가요?' : '이미 회원이신가요?'}</span>
+        <span className="underline">
           {isLoginMode ? '회원가입' : '로그인하러 가기'}
-        </Button>
-      </UserInputForm>
-    </>
+        </span>
+      </div>
+    </AuthFormStyled>
   );
 }
 

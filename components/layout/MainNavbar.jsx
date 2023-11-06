@@ -13,6 +13,7 @@ import { Logo } from '../../\bstyles/Logo';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
+import AuthForm from '../Modals/AuthForm';
 
 // code
 function MainNavbar() {
@@ -30,8 +31,8 @@ function MainNavbar() {
     }
   };
 
-  const toggleModalHandler = () => {
-    dispatch(uiActions.toggleModal());
+  const openAuthModalHandler = () => {
+    dispatch(uiActions.openModal(<AuthForm />));
   };
 
   const loginHandler = () => {};
@@ -73,7 +74,7 @@ function MainNavbar() {
           />
         </div>
         <div className="control">
-          <Button primary="highlight" onClick={toggleModalHandler}>
+          <Button primary="highlight" onClick={openAuthModalHandler}>
             로그인 / 회원가입
           </Button>
         </div>

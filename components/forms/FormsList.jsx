@@ -9,10 +9,13 @@ import { Table } from './FormsList.styles';
 // icons
 import { LinkIcon, TrashIcon, SearchIcon } from '../../\bstyles/Icons';
 
+import Confirm from '../Modals/Confirm';
+
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFormData } from '../../redux/actions';
 import { fetchFormData } from '../../redux/actions';
+import { uiActions } from '../../redux/features/uiSlice';
 
 // 쿼리스트링 예시
 // http://localhost:3000/forms?page=1&year=2023&month=10&search=hi
@@ -166,21 +169,27 @@ function FormsList() {
 
   const removeFormHandler = useCallback(
     (event, formId) => {
-      if (window.confirm('삭제하시겠습니까?')) {
+      const clickConfirmHandler = () => {
+        dispatch(uiActions.closeModal());
         dispatch(removeFormData(formId));
-        router.push('/forms');
-        // 삭제버튼의 상위태그 tr의 onClick함수가 실행되는 이벤트버블링을 막음.
-        event.stopPropagation();
-        // redux에서 가져온 formList 요소가 삭제되면, 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
+        // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
         setTimeout(() => {
           dispatch(fetchFormData());
         }, 0);
-      } else {
-        // confirm창의 취소버튼을 눌렀을 때도 이벤트버블링을 막아 현재페이지에 머물기.
-        event.stopPropagation();
-      }
+      };
+
+      dispatch(
+        uiActions.openModal(
+          <Confirm
+            text="폼을 삭제하시겠습니까?"
+            onclickConfirm={clickConfirmHandler}
+          />
+        )
+      );
+      // 이벤트버블링 막기
+      event.stopPropagation();
     },
-    [dispatch, router]
+    [dispatch]
   );
 
   return (
