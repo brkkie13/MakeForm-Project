@@ -1,31 +1,6 @@
 import styled from 'styled-components';
 
-export const FilterNav = styled.nav`
-  margin: 20px 0;
-  width: 80%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 15px;
-
-  select,
-  label {
-    display: flex;
-    align-items: center;
-    background: ${props => props.theme.colors.block};
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid lightgray;
-    padding: 0 10px;
-  }
-
-  svg {
-    fill: lightgray;
-    margin-right: 5px;
-  }
-`;
-
-export const Table = styled.table`
+export const FormListStyled = styled.table`
   width: 80%;
   border-collapse: collapse; //테두리 겹치기 해제
   border-spacing: 0; // 셀 사이의 간격 없애기
@@ -84,29 +59,6 @@ export const Table = styled.table`
 
   .controls span:hover {
     background-color: gray;
-    color: white;
-  }
-`;
-
-export const PaginationNav = styled.nav`
-  margin-top: 30px;
-
-  ul {
-    display: flex;
-    gap: 10px;
-  }
-
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;
-  }
-
-  li.active {
-    background-color: ${props => props.theme.colors.pointSkyblue};
     color: white;
   }
 `;
