@@ -60,7 +60,7 @@ export function SearchIcon(props) {
 
 export function RemoveBadge(props) {
   return (
-    <RemoveBadgeWrapper>
+    <RemoveBadgeWrapper {...props}>
       <IoClose />
     </RemoveBadgeWrapper>
   );

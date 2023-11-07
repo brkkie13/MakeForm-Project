@@ -53,6 +53,12 @@ export const formSlice = createSlice({
       state.components.splice(index, 1);
     },
 
+    reorderComponent(state, action) {
+      const { sourceIndex, destinationIndex } = action.payload;
+      const [removedComponent] = state.components.splice(sourceIndex, 1);
+      state.components.splice(destinationIndex, 0, removedComponent);
+    },
+
     addOption(state, action) {
       const { index, editItemIndex, lastOptionId, isEdit } = action.payload;
 

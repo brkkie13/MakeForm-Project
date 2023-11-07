@@ -1,37 +1,40 @@
 'use client';
 import { Toolbar } from './FormTypesToolbar.styles';
-import { Button } from '../ui/Button.styles';
 
-// redux
-import { formActions } from '../../redux/features/formSlice';
-import { useDispatch } from 'react-redux';
-
-function FormTypesToolbar() {
-  const dispatch = useDispatch();
-
-  const addComponentHandler = event => {
-    const formType = event.target.value;
-    dispatch(formActions.addComponent(formType));
-  };
-
+function FormTypesToolbar({ onAddFormType }) {
   return (
     <Toolbar>
-      <button onClick={addComponentHandler} value="shortAnswerType">
+      <button
+        onClick={e => onAddFormType(e.target.value)}
+        value="shortAnswerType"
+      >
         단답형
       </button>
-      <button onClick={addComponentHandler} value="longAnswerType">
+      <button
+        onClick={e => onAddFormType(e.target.value)}
+        value="longAnswerType"
+      >
         장문형
       </button>
-      <button onClick={addComponentHandler} value="multipleChoiceTextType">
+      <button
+        onClick={e => onAddFormType(e.target.value)}
+        value="multipleChoiceTextType"
+      >
         객관식(텍스트형)
       </button>
-      <button onClick={addComponentHandler} value="multipleChoiceImageType">
+      <button
+        onClick={e => onAddFormType(e.target.value)}
+        value="multipleChoiceImageType"
+      >
         객관식(이미지형)
       </button>
-      <button onClick={addComponentHandler} value="ratingType">
+      <button onClick={e => onAddFormType(e.target.value)} value="ratingType">
         평점
       </button>
-      <button onClick={addComponentHandler} value="descriptionType">
+      <button
+        onClick={e => onAddFormType(e.target.value)}
+        value="descriptionType"
+      >
         + 설명 추가
       </button>
     </Toolbar>
