@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback, Fragment } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import Link from 'next/link';
 
 // components
 import Button from '../../../components/ui/Button';
@@ -10,8 +9,6 @@ import Button from '../../../components/ui/Button';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../redux/actions';
-import { removeFormData } from '../../../redux/actions';
-import { formActions } from '../../../redux/features/formSlice';
 
 // code
 function FormDetailPage() {
@@ -20,35 +17,35 @@ function FormDetailPage() {
   const params = useParams();
   const formId = params.formId;
 
-  // const formList = useSelector(state => state.form.formList);
-  const targetedForm = useSelector(state => state.form.targetedForm);
+  const formList = useSelector(state => state.form.formList);
+  const [form, setForm] = useState({});
 
   useEffect(() => {
-    // dispatch(fetchFormData());
-    dispatch(formActions.findTargetedForm(formId));
+    dispatch(fetchFormData());
   }, []);
 
-  console.log(targetedForm);
+  useEffect(() => {
+    if (formList.length > 0) {
+      const targetedForm = formList.find(form => form.id === formId);
+      targetedForm ? setForm(targetedForm) : router.push('/forms');
+    }
+  }, [formList]);
 
   const onEditHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;
     router.push(editPagePath);
   }, []);
 
-  const removeFormHandler = useCallback(() => {
-    if (window.confirm('삭제하시겠습니까?')) {
-      dispatch(removeFormData(formId));
-      router.push('/forms');
-    }
-  }, []);
+  // console.log('formId', formId);
+  // console.log('formList', formList);
+  // console.log('form', form);
 
   return (
     <section>
-      {/* CSR시 targetedForm이 일시적으로 비어있는 상태에 생기는 에러를 해결 */}
       <section>
-        <h1>{targetedForm.header}</h1>
+        <h1>{form.header}</h1>
         <div>
-          {targetedForm.items?.map(item => (
+          {form.items?.map(item => (
             <Fragment key={item.id}>
               <h2>{item.title}</h2>
               <div>{item?.description}</div>
@@ -63,9 +60,7 @@ function FormDetailPage() {
       </section>
       <div className="controls">
         <Button onClick={onEditHandler}>수정</Button>
-        <Link href="/forms">
-          <Button onClick={removeFormHandler}>삭제</Button>
-        </Link>
+        <Button>삭제</Button>
       </div>
     </section>
   );

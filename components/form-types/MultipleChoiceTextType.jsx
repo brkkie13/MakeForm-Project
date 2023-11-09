@@ -26,7 +26,7 @@ function MultipleChoiceTextType({ index, editItem }) {
   let editItemOptions;
   let lastOptionId;
 
-  if (editItems.length > 0) {
+  if (editItem && editItems.length > 0) {
     editItemIndex = editItems.findIndex(item => item.id === editItem.id);
     editItemOptions = editItems[editItemIndex].options;
     // options배열에서 마지막 옵션 id를 추출해 옵션추가시 +1씩 증가시켜 옵션 id를 설정.

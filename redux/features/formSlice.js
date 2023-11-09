@@ -10,7 +10,7 @@ let initialState = {
   formList: [], // db에 저장된 전체 폼 데이터를 배열로 저장한 변수.
 
   // '/edit'
-  targetedForm: {}, // edit페이지에서 수정하려고 하는 특정 폼 객체.
+  // clickedForm: {}, // edit페이지에서 수정하려고 하는 특정 폼 객체.
   editHeader: '', // edit페이지에서 수정할 header값
   editItems: [], // [{formType, id, title, options}, {}, {}, ...]
 };
@@ -143,20 +143,45 @@ export const formSlice = createSlice({
       state.formList = formData;
     },
 
-    // edit페이지에서 어떤 form을 수정할건지 formList에서 찾기.
-    findTargetedForm(state, action) {
-      const targetedFormId = action.payload;
-      const targetedForm = state.formList.find(
-        form => form.id === targetedFormId
-      );
-      state.targetedForm = targetedForm;
+    // '/edit'페이지일 때 수정해야 할 값을 세팅
+    setInitialEditValue(state, action) {
+      const targetedForm = action.payload;
+      state.editHeader = targetedForm.header;
+      state.editItems = targetedForm?.items;
     },
 
-    // '/edit'페이지일 때 수정해야 할 값을 세팅
-    setInitialEditValue(state) {
-      state.editHeader = state.targetedForm?.header;
-      state.editItems = state.targetedForm?.items;
-    },
+    // addEditItem(state, action) {
+    //   const formType = action.payload;
+    //   if (formType === 'multipleChoiceTextType') {
+    //     state.editItems.push({
+    //       // id: ,
+    //       formType,
+    //       title: '',
+    //       options: [
+    //         { id: 0, text: '' },
+    //         { id: 1, text: '' },
+    //       ],
+    //     });
+    //   } else if (formType === 'descriptionType') {
+    //     state.editItems.push({
+    //       // id: ,
+    //       formType,
+    //       description: '',
+    //     });
+    //   } else {
+    //     state.editItems.push({
+    //       // id: ,
+    //       formType,
+    //       title: '',
+    //     });
+    //   }
+    //   // state.componentId++;
+    // },
+
+    // removeEditItem(state, action) {
+    //   const index = action.payload;
+    //   state.editItems.splice(index, 1);
+    // },
   },
 });
 

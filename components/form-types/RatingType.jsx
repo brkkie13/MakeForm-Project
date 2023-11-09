@@ -17,7 +17,7 @@ function RatingType({ index, editItem }) {
   // edit
   const editItems = useSelector(state => state.form.editItems);
   let editItemIndex;
-  if (editItems.length > 0) {
+  if (editItem && editItems.length > 0) {
     editItemIndex = editItems.findIndex(item => item.id === editItem.id);
   }
 

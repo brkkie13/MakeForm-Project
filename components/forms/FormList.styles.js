@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FormListStyled = styled.table`
   width: 80%;
-  border-collapse: collapse; //테두리 겹치기 해제
+  border-collapse: collapse; // 테두리 겹치기 해제
   border-spacing: 0; // 셀 사이의 간격 없애기
 
   td:nth-child(1) {
