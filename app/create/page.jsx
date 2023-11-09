@@ -56,7 +56,7 @@ function CreatePage() {
       <Section>
         <FormTypesToolbar onAddFormType={addFormTypeHandler} />
         <FormTypes
-          components={components}
+          items={components}
           onRemoveFormType={removeFormTypeHandler}
         />
         <Button primary="highlight" onClick={saveFormHandler}>

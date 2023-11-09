@@ -1,5 +1,4 @@
 import { FormTypesStyled } from './FormTypes.styles';
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 // components
@@ -11,11 +10,13 @@ import MultipleChoiceImageType from './MultipleChoiceImageType';
 import MultipleChoiceTextType from './MultipleChoiceTextType';
 import RatingType from './RatingType';
 import DescriptionType from './DescriptionType';
+
+// redux
 import { useDispatch } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 
 // code
-function FormTypes({ components, onRemoveFormType }) {
+function FormTypes({ items, onRemoveFormType, isEdit }) {
   const dispatch = useDispatch();
 
   const dragDropHandler = results => {
@@ -30,59 +31,74 @@ function FormTypes({ components, onRemoveFormType }) {
       return;
 
     if (type === 'group') {
-      dispatch(
-        formActions.reorderComponent({
-          sourceIndex: source.index,
-          destinationIndex: destination.index,
-        })
-      );
+      if (isEdit) {
+        dispatch(
+          formActions.reorderEditItems({
+            sourceIndex: source.index,
+            destinationIndex: destination.index,
+          })
+        );
+      } else {
+        dispatch(
+          formActions.reorderComponents({
+            sourceIndex: source.index,
+            destinationIndex: destination.index,
+          })
+        );
+      }
     }
   };
 
   return (
     <FormTypesStyled>
-      <FormTypeCard content={<HeaderType />} isHeader={true} />
+      <FormTypeCard content={<HeaderType isEdit={isEdit} />} isHeader={true} />
       <DragDropContext onDragEnd={dragDropHandler}>
         <Droppable droppableId="ROOT" type="group">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {components.map((component, idx) => (
-                <Draggable
-                  // draggableId는 반드시 문자열이어야 한다.
-                  draggableId={String(component.id)}
-                  key={component.id}
-                  index={idx}
-                >
-                  {provided => (
-                    <div
-                      {...provided.dragHandleProps}
-                      {...provided.draggableProps}
-                      ref={provided.innerRef}
-                    >
-                      <FormTypeCard
-                        onRemoveFormType={() => onRemoveFormType(idx)}
-                        content={
-                          component.formType === 'shortAnswerType' ? (
-                            <ShortAnswerType index={idx} />
-                          ) : component.formType === 'longAnswerType' ? (
-                            <LongAnswerType index={idx} />
-                          ) : component.formType ===
-                            'multipleChoiceImageType' ? (
-                            <MultipleChoiceImageType index={idx} />
-                          ) : component.formType ===
-                            'multipleChoiceTextType' ? (
-                            <MultipleChoiceTextType index={idx} />
-                          ) : component.formType === 'ratingType' ? (
-                            <RatingType index={idx} />
-                          ) : component.formType === 'descriptionType' ? (
-                            <DescriptionType index={idx} />
-                          ) : null
-                        }
-                      />
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+              {items &&
+                items.length > 0 &&
+                items.map((item, idx) => (
+                  <Draggable
+                    // draggableId는 반드시 문자열이어야 한다.
+                    draggableId={String(item.id)}
+                    key={item.id}
+                    index={idx}
+                  >
+                    {provided => (
+                      <div
+                        {...provided.dragHandleProps}
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                      >
+                        <FormTypeCard
+                          onRemoveFormType={() => onRemoveFormType(idx)}
+                          content={
+                            item.formType === 'shortAnswerType' ? (
+                              <ShortAnswerType index={idx} isEdit={isEdit} />
+                            ) : item.formType === 'longAnswerType' ? (
+                              <LongAnswerType index={idx} isEdit={isEdit} />
+                            ) : item.formType === 'multipleChoiceImageType' ? (
+                              <MultipleChoiceImageType
+                                index={idx}
+                                isEdit={isEdit}
+                              />
+                            ) : item.formType === 'multipleChoiceTextType' ? (
+                              <MultipleChoiceTextType
+                                index={idx}
+                                isEdit={isEdit}
+                              />
+                            ) : item.formType === 'ratingType' ? (
+                              <RatingType index={idx} isEdit={isEdit} />
+                            ) : item.formType === 'descriptionType' ? (
+                              <DescriptionType index={idx} isEdit={isEdit} />
+                            ) : null
+                          }
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
               {provided.placeholder}
             </div>
           )}

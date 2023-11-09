@@ -14,6 +14,7 @@ import RatingType from '../../../../components/form-types/RatingType';
 import DescriptionType from '../../../../components/form-types/DescriptionType';
 import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
 import FormTypeCard from '../../../../components/ui/FormTypeCard';
+import FormTypes from '../../../../components/form-types/FormTypes';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +47,6 @@ function EditPage() {
   const dispatch = useDispatch();
 
   const formList = useSelector(state => state.form.formList);
-  const [form, setForm] = useState({});
   const editHeader = useSelector(state => state.form.editHeader);
   const editItems = useSelector(state => state.form.editItems);
 
@@ -58,7 +58,6 @@ function EditPage() {
     if (formList.length > 0) {
       const targetedForm = formList.find(form => form.id === formId);
       if (targetedForm) {
-        setForm(targetedForm);
         // edit페이지의 초기 input값을 세팅.
         dispatch(formActions.setInitialEditValue(targetedForm));
       } else {
@@ -68,11 +67,11 @@ function EditPage() {
   }, [formList]);
 
   const addFormTypeHandler = formType => {
-    // dispatch(formActions.addEditItem(formType));
+    dispatch(formActions.addEditItem(formType));
   };
 
   const removeFormTypeHandler = idx => {
-    // dispatch(formActions.removeEditItem(idx));
+    dispatch(formActions.removeEditItem(idx));
   };
 
   const onCancelHandler = useCallback(() => {
@@ -93,31 +92,11 @@ function EditPage() {
     <Section>
       <FormTypesToolbar onAddFormType={addFormTypeHandler} />
 
-      <div className="formBackground">
-        <FormTypeCard content={<HeaderType isEdit={true} />} isHeader={true} />
-
-        {form?.items?.map((item, idx) => (
-          <FormTypeCard
-            key={item.id}
-            onRemoveFormType={() => removeFormTypeHandler(idx)}
-            content={
-              item.formType === 'shortAnswerType' ? (
-                <ShortAnswerType editItem={item} />
-              ) : item.formType === 'longAnswerType' ? (
-                <LongAnswerType editItem={item} />
-              ) : item.formType === 'multipleChoiceImageType' ? (
-                <MultipleChoiceImageType editItem={item} />
-              ) : item.formType === 'multipleChoiceTextType' ? (
-                <MultipleChoiceTextType editItem={item} />
-              ) : item.formType === 'ratingType' ? (
-                <RatingType editItem={item} />
-              ) : item.formType === 'descriptionType' ? (
-                <DescriptionType editItem={item} />
-              ) : null
-            }
-          />
-        ))}
-      </div>
+      <FormTypes
+        items={editItems}
+        onRemoveFormType={removeFormTypeHandler}
+        isEdit={true}
+      />
 
       <div className="controls">
         <Button onClick={onCancelHandler}>취소</Button>

@@ -53,17 +53,17 @@ export const formSlice = createSlice({
       state.components.splice(index, 1);
     },
 
-    reorderComponent(state, action) {
+    reorderComponents(state, action) {
       const { sourceIndex, destinationIndex } = action.payload;
       const [removedComponent] = state.components.splice(sourceIndex, 1);
       state.components.splice(destinationIndex, 0, removedComponent);
     },
 
     addOption(state, action) {
-      const { index, editItemIndex, lastOptionId, isEdit } = action.payload;
+      const { index, lastOptionId, isEdit } = action.payload;
 
       const options = isEdit
-        ? state.editItems[editItemIndex].options
+        ? state.editItems[index].options
         : state.components[index].options;
 
       options.push(
@@ -76,32 +76,31 @@ export const formSlice = createSlice({
     },
 
     removeOption(state, action) {
-      const { index, editItemIndex, optionId, isEdit } = action.payload;
+      const { index, optionId, isEdit } = action.payload;
 
       const options = isEdit
-        ? state.editItems[editItemIndex].options
+        ? state.editItems[index].options
         : state.components[index].options;
 
       const filteredOptions = options.filter(option => option.id !== optionId);
 
       isEdit
-        ? (state.editItems[editItemIndex].options = filteredOptions)
+        ? (state.editItems[index].options = filteredOptions)
         : (state.components[index].options = filteredOptions);
     },
 
     changeTitle(state, action) {
-      const { index, editItemIndex, newValue, isEdit } = action.payload;
+      const { index, newValue, isEdit } = action.payload;
       isEdit
-        ? (state.editItems[editItemIndex].title = newValue)
+        ? (state.editItems[index].title = newValue)
         : (state.components[index].title = newValue);
     },
 
     changeOption(state, action) {
-      const { index, editItemIndex, optionId, newValue, isEdit } =
-        action.payload;
+      const { index, optionId, newValue, isEdit } = action.payload;
 
       const options = isEdit
-        ? state.editItems[editItemIndex].options
+        ? state.editItems[index].options
         : state.components[index].options;
 
       options.forEach(option => {
@@ -115,9 +114,9 @@ export const formSlice = createSlice({
     },
 
     changeDescription(state, action) {
-      const { index, editItemIndex, newValue, isEdit } = action.payload;
+      const { index, newValue, isEdit } = action.payload;
       isEdit
-        ? (state.editItems[editItemIndex].description = newValue)
+        ? (state.editItems[index].description = newValue)
         : (state.components[index].description = newValue);
     },
 
@@ -150,38 +149,50 @@ export const formSlice = createSlice({
       state.editItems = targetedForm?.items;
     },
 
-    // addEditItem(state, action) {
-    //   const formType = action.payload;
-    //   if (formType === 'multipleChoiceTextType') {
-    //     state.editItems.push({
-    //       // id: ,
-    //       formType,
-    //       title: '',
-    //       options: [
-    //         { id: 0, text: '' },
-    //         { id: 1, text: '' },
-    //       ],
-    //     });
-    //   } else if (formType === 'descriptionType') {
-    //     state.editItems.push({
-    //       // id: ,
-    //       formType,
-    //       description: '',
-    //     });
-    //   } else {
-    //     state.editItems.push({
-    //       // id: ,
-    //       formType,
-    //       title: '',
-    //     });
-    //   }
-    //   // state.componentId++;
-    // },
+    addEditItem(state, action) {
+      const formType = action.payload;
+      // editItems에 존재하는 id 중 가장 큰 숫자를 가진 id를 구함.
+      let editItemId = state.editItems.reduce(
+        (maxId, item) => (item.id > maxId ? item.id : maxId),
+        0
+      );
+      editItemId++; // +1해서 추가하는 form type의 id로 할당.
 
-    // removeEditItem(state, action) {
-    //   const index = action.payload;
-    //   state.editItems.splice(index, 1);
-    // },
+      if (formType === 'multipleChoiceTextType') {
+        state.editItems.push({
+          id: editItemId,
+          formType,
+          title: '',
+          options: [
+            { id: 0, text: '' },
+            { id: 1, text: '' },
+          ],
+        });
+      } else if (formType === 'descriptionType') {
+        state.editItems.push({
+          id: editItemId,
+          formType,
+          description: '',
+        });
+      } else {
+        state.editItems.push({
+          id: editItemId,
+          formType,
+          title: '',
+        });
+      }
+    },
+
+    removeEditItem(state, action) {
+      const index = action.payload;
+      state.editItems.splice(index, 1);
+    },
+
+    reorderEditItems(state, action) {
+      const { sourceIndex, destinationIndex } = action.payload;
+      const [removedEditItem] = state.editItems.splice(sourceIndex, 1);
+      state.editItems.splice(destinationIndex, 0, removedEditItem);
+    },
   },
 });
 
