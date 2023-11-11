@@ -1,7 +1,8 @@
 'use client';
 import { FormListStyled } from './FormList.styles';
 import { LinkIcon, TrashIcon } from '../../\bstyles/Icons';
-import { IconButton } from '../ui/Button.styles';
+import { IconButtonStyled } from '../ui/Button.styles';
+import Tooltip from '../ui/Tooltip';
 
 // code
 function FormList({ currentPosts, onShow, onRemove }) {
@@ -17,15 +18,21 @@ function FormList({ currentPosts, onShow, onRemove }) {
         {currentPosts.map(data => (
           <tr key={data.id} onClick={() => onShow(data.id)}>
             <td>{data.header}</td>
+
             <td>{new Date(data.creationDate).toLocaleString()}</td>
 
             <td className="controls">
-              <IconButton>
-                <LinkIcon />
-              </IconButton>
-              <IconButton onClick={event => onRemove(event, data.id)}>
-                <TrashIcon />
-              </IconButton>
+              <Tooltip text="링크 복사">
+                <IconButtonStyled>
+                  <LinkIcon />
+                </IconButtonStyled>
+              </Tooltip>
+
+              <Tooltip text="삭제">
+                <IconButtonStyled onClick={event => onRemove(event, data.id)}>
+                  <TrashIcon />
+                </IconButtonStyled>
+              </Tooltip>
             </td>
           </tr>
         ))}

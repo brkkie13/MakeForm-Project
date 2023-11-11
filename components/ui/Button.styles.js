@@ -38,15 +38,16 @@ export const SmallButton = styled(Button)`
   border-radius: 30px;
 `;
 
-export const IconButton = styled.button`
+export const IconButtonStyled = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   &:hover {
-    background-color: lightgray;
+    background-color: ${props => props.theme.colors.hoverMenu};
   }
 `;

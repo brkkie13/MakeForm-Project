@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback, useState } from 'react';
 import {
   FormDetailStyled,
   FormItemStyled,
@@ -11,21 +11,30 @@ import {
   LinkIcon,
   TrashIcon,
 } from '../../\bstyles/Icons';
-import { IconButton } from '../ui/Button.styles';
+import Tooltip from '../ui/Tooltip';
+import { IconButtonStyled } from '../ui/Button';
 
 function FormDetail({ form, onEdit, onRemove }) {
   return (
     <FormDetailStyled>
       <div className="controls">
-        <IconButton>
-          <LinkIcon />
-        </IconButton>
-        <IconButton onClick={onEdit}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={onRemove}>
-          <TrashIcon />
-        </IconButton>
+        <Tooltip text="링크 복사">
+          <IconButtonStyled>
+            <LinkIcon />
+          </IconButtonStyled>
+        </Tooltip>
+
+        <Tooltip text="편집">
+          <IconButtonStyled onClick={onEdit}>
+            <EditIcon />
+          </IconButtonStyled>
+        </Tooltip>
+
+        <Tooltip text="삭제">
+          <IconButtonStyled onClick={onRemove}>
+            <TrashIcon />
+          </IconButtonStyled>
+        </Tooltip>
       </div>
 
       <h1>{form.header}</h1>

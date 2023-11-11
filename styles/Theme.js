@@ -21,9 +21,13 @@ const colors = {
 export const lightTheme = {
   colors: {
     font: colors.black,
+    fontReverse: colors.white,
+
     background: colors.white,
     background2: colors.lightgray,
+
     block: colors.white,
+    tooltip: colors.darkBlack3,
 
     hoverMenu: colors.lightgray2,
     activeMenu: colors.lightgray3,
@@ -38,10 +42,14 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
-    font: 'white',
+    font: colors.white,
+    fontReverse: colors.black,
+
     background: colors.darkBlack,
     background2: colors.darkBlack2,
+
     block: colors.darkBlack3,
+    tooltip: colors.white,
 
     hoverMenu: colors.darkBlack2,
     activeMenu: colors.darkBlack2,
