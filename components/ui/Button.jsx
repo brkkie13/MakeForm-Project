@@ -1,5 +1,5 @@
 'use client';
-import { Button, SmallButton } from './Button.styles';
+import { Button, SmallButton, IconButton } from './Button.styles';
 
 export default Button;
-export { SmallButton };
+export { SmallButton, IconButton };

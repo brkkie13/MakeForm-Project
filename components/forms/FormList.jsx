@@ -1,11 +1,10 @@
 'use client';
 import { FormListStyled } from './FormList.styles';
-
-// icons
 import { LinkIcon, TrashIcon } from '../../\bstyles/Icons';
+import { IconButton } from '../ui/Button.styles';
 
 // code
-function FormList({ currentPosts, showDetailHandler, removeFormHandler }) {
+function FormList({ currentPosts, onShow, onRemove }) {
   return (
     <FormListStyled>
       <thead>
@@ -16,16 +15,17 @@ function FormList({ currentPosts, showDetailHandler, removeFormHandler }) {
       </thead>
       <tbody>
         {currentPosts.map(data => (
-          <tr key={data.id} onClick={() => showDetailHandler(data.id)}>
+          <tr key={data.id} onClick={() => onShow(data.id)}>
             <td>{data.header}</td>
             <td>{new Date(data.creationDate).toLocaleString()}</td>
+
             <td className="controls">
-              <span>
+              <IconButton>
                 <LinkIcon />
-              </span>
-              <span onClick={event => removeFormHandler(event, data.id)}>
+              </IconButton>
+              <IconButton onClick={event => onRemove(event, data.id)}>
                 <TrashIcon />
-              </span>
+              </IconButton>
             </td>
           </tr>
         ))}

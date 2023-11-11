@@ -47,18 +47,4 @@ export const FormListStyled = styled.table`
     align-items: center;
     justify-content: flex-end;
   }
-
-  .controls span {
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .controls span:hover {
-    background-color: gray;
-    color: white;
-  }
 `;

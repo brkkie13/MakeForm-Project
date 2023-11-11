@@ -36,6 +36,17 @@ export const SmallButton = styled(Button)`
   font-size: 13px;
   padding: 4px 12px;
   border-radius: 30px;
-  /* color: white;
-  background-color: ${props => props.theme.colors.pointSkyblue}; */
+`;
+
+export const IconButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: lightgray;
+  }
 `;

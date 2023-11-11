@@ -1,6 +1,6 @@
 // react-icons library
 import { IoClose } from 'react-icons/io5';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiEdit } from 'react-icons/fi';
 import { HiOutlineChartBar } from 'react-icons/hi';
 import {
   HiOutlineTrash,
@@ -52,6 +52,10 @@ export function DragIcon(props) {
 
 export function LinkIcon(props) {
   return <AiOutlineLink size="21" {...props} />;
+}
+
+export function EditIcon(props) {
+  return <FiEdit size="18" {...props} />;
 }
 
 export function SearchIcon(props) {

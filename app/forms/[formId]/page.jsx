@@ -1,14 +1,21 @@
 'use client';
+import styled from 'styled-components';
 
 import { useEffect, useState, useCallback, Fragment } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
-import Button from '../../../components/ui/Button';
+import FormDetail from '../../../components/forms/FormDetail';
+import Confirm from '../../../components/Modals/Confirm';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '../../../redux/actions';
+import { fetchFormData, removeFormData } from '../../../redux/actions';
+import { uiActions } from '../../../redux/features/uiSlice';
+
+const Section = styled.section`
+  padding-top: 70px;
+`;
 
 // code
 function FormDetailPage() {
@@ -31,38 +38,37 @@ function FormDetailPage() {
     }
   }, [formList]);
 
-  const onEditHandler = useCallback(() => {
+  const editFormHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;
     router.push(editPagePath);
-  }, []);
+  }, [router]);
 
-  // console.log('formId', formId);
-  // console.log('formList', formList);
-  // console.log('form', form);
+  const removeFormHandler = useCallback(() => {
+    const clickConfirmHandler = () => {
+      dispatch(uiActions.closeModal());
+      dispatch(removeFormData(formId));
+      // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
+      dispatch(fetchFormData());
+    };
+
+    dispatch(
+      uiActions.openModal(
+        <Confirm
+          text="폼을 삭제하시겠습니까?"
+          onclickConfirm={clickConfirmHandler}
+        />
+      )
+    );
+  }, [dispatch]);
 
   return (
-    <section>
-      <section>
-        <h1>{form.header}</h1>
-        <div>
-          {form.items?.map(item => (
-            <Fragment key={item.id}>
-              <h2>{item.title}</h2>
-              <div>{item?.description}</div>
-              <div>
-                {item.options?.map(option => (
-                  <div key={option.id}>{option.text}</div>
-                ))}
-              </div>
-            </Fragment>
-          ))}
-        </div>
-      </section>
-      <div className="controls">
-        <Button onClick={onEditHandler}>수정</Button>
-        <Button>삭제</Button>
-      </div>
-    </section>
+    <Section>
+      <FormDetail
+        form={form}
+        onEdit={editFormHandler}
+        onRemove={removeFormHandler}
+      />
+    </Section>
   );
 }
 

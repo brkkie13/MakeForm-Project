@@ -20,6 +20,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   h1 {
     margin-top: 70px;
     margin-bottom: 20px;
@@ -200,13 +201,13 @@ function FormsPage() {
 
   const removeFormHandler = useCallback(
     (event, formId) => {
+      event.stopPropagation(); // 부모태그 클릭 막기
+
       const clickConfirmHandler = () => {
         dispatch(uiActions.closeModal());
         dispatch(removeFormData(formId));
         // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
-        setTimeout(() => {
-          dispatch(fetchFormData());
-        }, 0);
+        dispatch(fetchFormData());
       };
 
       dispatch(
@@ -217,81 +218,78 @@ function FormsPage() {
           />
         )
       );
-      // 이벤트버블링 막기
-      event.stopPropagation();
     },
     [dispatch]
   );
+
   return (
-    <>
-      <Section>
-        <h1>최근 폼</h1>
+    <Section>
+      <h1>최근 폼</h1>
 
-        <FilterStyled>
-          <select
-            value={yearOption}
-            onChange={e => {
-              setYearOption(e.target.value);
-              const newQueryString = createQueryString('year', e.target.value);
-              router.push(pathname + '?' + newQueryString);
-            }}
-          >
-            {yearOptionList.map(item => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={monthOption}
-            onChange={e => {
-              setMonthOption(e.target.value);
-              const newQueryString = createQueryString('month', e.target.value);
-              router.push(pathname + '?' + newQueryString);
-            }}
-          >
-            {monthOptionList.map(item => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-
-          <label>
-            <SearchIcon />
-            <input
-              type="text"
-              placeholder="제목으로 검색"
-              value={searchWord}
-              onChange={e => {
-                setSearchWord(e.target.value);
-                const newQueryString = createQueryString(
-                  'search',
-                  e.target.value
-                );
-                router.push(pathname + '?' + newQueryString);
-              }}
-            />
-          </label>
-        </FilterStyled>
-
-        <FormList
-          currentPosts={currentPosts}
-          showDetailHandler={showDetailHandler}
-          removeFormHandler={removeFormHandler}
-        />
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil(totalPosts / postsPerPage)}
-          onPageChange={page => {
-            setCurrentPage(page);
-            router.push(`${pathname}?${createQueryString('page', page)}`);
+      <FilterStyled>
+        <select
+          value={yearOption}
+          onChange={e => {
+            setYearOption(e.target.value);
+            const newQueryString = createQueryString('year', e.target.value);
+            router.push(pathname + '?' + newQueryString);
           }}
-        />
-      </Section>
-    </>
+        >
+          {yearOptionList.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={monthOption}
+          onChange={e => {
+            setMonthOption(e.target.value);
+            const newQueryString = createQueryString('month', e.target.value);
+            router.push(pathname + '?' + newQueryString);
+          }}
+        >
+          {monthOptionList.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <label>
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="제목으로 검색"
+            value={searchWord}
+            onChange={e => {
+              setSearchWord(e.target.value);
+              const newQueryString = createQueryString(
+                'search',
+                e.target.value
+              );
+              router.push(pathname + '?' + newQueryString);
+            }}
+          />
+        </label>
+      </FilterStyled>
+
+      <FormList
+        currentPosts={currentPosts}
+        onShow={showDetailHandler}
+        onRemove={removeFormHandler}
+      />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(totalPosts / postsPerPage)}
+        onPageChange={page => {
+          setCurrentPage(page);
+          router.push(`${pathname}?${createQueryString('page', page)}`);
+        }}
+      />
+    </Section>
   );
 }
 

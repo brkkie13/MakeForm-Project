@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { startAfter } from 'firebase/firestore';
 
 let initialState = {
   isDarkMode: localStorage.getItem('theme') === 'dark', // 로컬스토리지에서 가져온 값을 초기상태로 설정
