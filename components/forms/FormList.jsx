@@ -1,11 +1,11 @@
 'use client';
 import { FormListStyled } from './FormList.styles';
-import { LinkIcon, TrashIcon } from '../../\bstyles/Icons';
+import { LinkIcon, CopyIcon } from '../../\bstyles/Icons';
 import { IconButtonStyled } from '../ui/Button.styles';
 import Tooltip from '../ui/Tooltip';
 
 // code
-function FormList({ currentPosts, onShow, onRemove }) {
+function FormList({ currentPosts, onShow, onCopy }) {
   return (
     <FormListStyled>
       <thead>
@@ -28,9 +28,9 @@ function FormList({ currentPosts, onShow, onRemove }) {
                 </IconButtonStyled>
               </Tooltip>
 
-              <Tooltip text="삭제">
-                <IconButtonStyled onClick={event => onRemove(event, data.id)}>
-                  <TrashIcon />
+              <Tooltip text="폼 복제">
+                <IconButtonStyled onClick={event => onCopy(event, data.id)}>
+                  <CopyIcon />
                 </IconButtonStyled>
               </Tooltip>
             </td>

@@ -1,16 +1,11 @@
-import React, { Fragment, useCallback, useState } from 'react';
+import React from 'react';
 import {
   FormDetailStyled,
   FormItemStyled,
   OptionsStyled,
 } from './FormDetail.styles';
 import StarRating from '../../helpers/StarRating';
-import {
-  EditIcon,
-  EmptyCheckboxIcon,
-  LinkIcon,
-  TrashIcon,
-} from '../../\bstyles/Icons';
+import { EmptyCheckboxIcon, EditIcon, TrashIcon } from '../../\bstyles/Icons';
 import Tooltip from '../ui/Tooltip';
 import { IconButtonStyled } from '../ui/Button';
 
@@ -18,12 +13,6 @@ function FormDetail({ form, onEdit, onRemove }) {
   return (
     <FormDetailStyled>
       <div className="controls">
-        <Tooltip text="링크 복사">
-          <IconButtonStyled>
-            <LinkIcon />
-          </IconButtonStyled>
-        </Tooltip>
-
         <Tooltip text="편집">
           <IconButtonStyled onClick={onEdit}>
             <EditIcon />

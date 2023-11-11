@@ -49,6 +49,7 @@ function FormDetailPage() {
       dispatch(removeFormData(formId));
       // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
       dispatch(fetchFormData());
+      router.push('/forms');
     };
 
     dispatch(

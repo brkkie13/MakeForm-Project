@@ -13,6 +13,7 @@ import { GrDrag } from 'react-icons/gr';
 import { AiOutlineLink } from 'react-icons/ai';
 import { TbReload } from 'react-icons/tb';
 import { FaStar } from 'react-icons/fa';
+import { PiCopy } from 'react-icons/pi';
 
 // css
 import { RemoveBadgeWrapper } from './Icons.styles';
@@ -56,6 +57,10 @@ export function LinkIcon(props) {
 
 export function EditIcon(props) {
   return <FiEdit size="18" {...props} />;
+}
+
+export function CopyIcon(props) {
+  return <PiCopy size="20" {...props} />;
 }
 
 export function SearchIcon(props) {

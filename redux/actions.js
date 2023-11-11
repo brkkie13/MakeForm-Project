@@ -35,7 +35,7 @@ export const sendFormData = newForm => {
       dispatch(
         uiActions.showNotification({
           status: 'success',
-          message: '저장 성공!',
+          message: '생성되었습니다',
         })
       );
     } catch (error) {

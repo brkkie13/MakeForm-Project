@@ -4,16 +4,13 @@ import { useCallback, useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 // components
-import Confirm from '../../components/Modals/Confirm';
 import FormList from '../../components/forms/FormList';
 import Pagination from '../../components/forms/Pagination';
 import { SearchIcon } from '../../\bstyles/Icons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFormData } from '../../redux/actions';
-import { fetchFormData } from '../../redux/actions';
-import { uiActions } from '../../redux/features/uiSlice';
+import { sendFormData, fetchFormData } from '../../redux/actions';
 
 // css
 const Section = styled.section`
@@ -199,27 +196,22 @@ function FormsPage() {
     [router]
   );
 
-  const removeFormHandler = useCallback(
-    (event, formId) => {
+  const copyFormHandler = useCallback(
+    async (event, formId) => {
       event.stopPropagation(); // 부모태그 클릭 막기
 
-      const clickConfirmHandler = () => {
-        dispatch(uiActions.closeModal());
-        dispatch(removeFormData(formId));
-        // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
-        dispatch(fetchFormData());
+      const targetedForm = formList.find(form => form.id === formId);
+
+      const data = {
+        creationDate: new Date().toISOString(),
+        header: `${targetedForm.header} - 복사`,
+        items: targetedForm.items,
       };
 
-      dispatch(
-        uiActions.openModal(
-          <Confirm
-            text="폼을 삭제하시겠습니까?"
-            onclickConfirm={clickConfirmHandler}
-          />
-        )
-      );
+      await dispatch(sendFormData(data));
+      dispatch(fetchFormData());
     },
-    [dispatch]
+    [dispatch, formList]
   );
 
   return (
@@ -278,7 +270,7 @@ function FormsPage() {
       <FormList
         currentPosts={currentPosts}
         onShow={showDetailHandler}
-        onRemove={removeFormHandler}
+        onCopy={copyFormHandler}
       />
 
       <Pagination
