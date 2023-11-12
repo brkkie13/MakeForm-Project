@@ -1,9 +1,8 @@
+'use client';
+import { LoadingSpinner } from '../../\bstyles/Icons';
+
 const Loading = () => {
-  return (
-    <>
-      <p>loading중...</p>
-    </>
-  );
+  return <LoadingSpinner />;
 };
 
 export default Loading;

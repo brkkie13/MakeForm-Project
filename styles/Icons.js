@@ -16,7 +16,7 @@ import { FaStar } from 'react-icons/fa';
 import { PiCopy } from 'react-icons/pi';
 
 // css
-import { RemoveBadgeWrapper } from './Icons.styles';
+import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
 
 // components
 export function CloseIcon(props) {
@@ -69,9 +69,9 @@ export function SearchIcon(props) {
 
 export function RemoveBadge(props) {
   return (
-    <RemoveBadgeWrapper {...props}>
+    <RemoveBadgeStyled {...props}>
       <IoClose />
-    </RemoveBadgeWrapper>
+    </RemoveBadgeStyled>
   );
 }
 
@@ -94,6 +94,15 @@ export function EmptyCheckboxIcon(props) {
 export function StarIcon(props) {
   return <FaStar size="25" {...props} />;
 }
+
+export function LoadingSpinner(props) {
+  return (
+    <LoadingSpinnerStyled>
+      <span {...props} className="loading-spinner"></span>
+    </LoadingSpinnerStyled>
+  );
+}
+
 // export function Icon(props) {
 //   return < {...props} />;
 // }
