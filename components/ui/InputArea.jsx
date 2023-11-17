@@ -1,6 +1,12 @@
 'use client';
-
-import { Textarea, HeaderTextarea, TitleTextarea } from './InputArea.styles';
+import React, { forwardRef } from 'react';
+import {
+  Textarea,
+  HeaderTextarea,
+  TitleTextarea,
+  AuthInputStyled,
+} from './InputArea.styles';
+import { CorrectMark, WrongMark, InfoIcon } from '../../\bstyles/Icons';
 
 // textarea에 입력된 글 길이에 따라 높이가 자동 조절되는 함수.
 const resizeHeightHandler = event => {
@@ -29,3 +35,43 @@ export function TitleInputArea(props) {
     <TitleTextarea {...props} onInput={resizeHeightHandler}></TitleTextarea>
   );
 }
+
+// 아이디, 비밀번호 input
+export const AuthInput = forwardRef((props, ref) => {
+  const { type, placeholder, onChange, onBlur, userInput, cautionContent } =
+    props;
+
+  return (
+    <AuthInputStyled>
+      <div className="input-container">
+        <input
+          className={!userInput.isValid && userInput.isTouched ? 'invalid' : ''}
+          autoComplete="off"
+          ref={ref}
+          required
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        <div className="validation-icon">
+          <CorrectMark className={userInput.isValid ? 'valid' : 'hide'} />
+          <WrongMark
+            className={
+              !userInput.isValid && userInput.isTouched ? 'invalid' : 'hide'
+            }
+          />
+        </div>
+      </div>
+
+      <p
+        className={
+          !userInput.isValid && userInput.isTouched ? 'caution' : 'hide'
+        }
+      >
+        <InfoIcon />
+        {cautionContent}
+      </p>
+    </AuthInputStyled>
+  );
+});

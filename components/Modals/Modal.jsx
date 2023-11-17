@@ -4,9 +4,6 @@ import { ModalStyled } from './Modal.styles';
 // icons
 import { CloseIcon } from '../../\bstyles/Icons';
 
-// components
-import AuthForm from './AuthForm';
-
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';

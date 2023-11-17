@@ -6,8 +6,7 @@ import { darkTheme, lightTheme } from '../../styles/Theme';
 
 // components
 import Notification from '../../components/ui/Notification';
-import Modal from '../../components/Modals/Modal';
-import AuthForm from '../../components/Modals/AuthForm';
+import Modal from '../../components/modals/Modal';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -20,7 +19,6 @@ export default function AppThemeProvider({ children }) {
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      {/* AuthForm 모달은 어디서든지 열 수 있도록 전역으로 설정 */}
       {isModalOpen && <Modal />}
       {notification && (
         <Notification

@@ -5,7 +5,6 @@ let initialState = {
   notification: null,
   isModalOpen: false,
   modalContent: null,
-  isConfirmed: false,
   isLoginMode: true,
 };
 
@@ -45,10 +44,6 @@ export const uiSlice = createSlice({
 
     toggleLoginMode(state) {
       state.isLoginMode = !state.isLoginMode;
-    },
-
-    clickConfirm(state) {
-      state.isConfirmed = true;
     },
   },
 });

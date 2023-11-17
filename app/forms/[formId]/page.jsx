@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 
 // components
 import FormDetail from '../../../components/forms/FormDetail';
-import Confirm from '../../../components/Modals/Confirm';
+import Confirm from '../../../components/modals/Confirm';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';

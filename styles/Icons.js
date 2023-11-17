@@ -13,7 +13,10 @@ import { GrDrag } from 'react-icons/gr';
 import { AiOutlineLink } from 'react-icons/ai';
 import { TbReload } from 'react-icons/tb';
 import { FaStar } from 'react-icons/fa';
+import { FaCheck, FaExclamation } from 'react-icons/fa6';
 import { PiCopy } from 'react-icons/pi';
+import { RiInformationLine } from 'react-icons/ri';
+import { BsFillExclamationCircleFill } from 'react-icons/bs';
 
 // css
 import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
@@ -101,6 +104,22 @@ export function LoadingSpinner(props) {
       <span {...props} className="loading-spinner"></span>
     </LoadingSpinnerStyled>
   );
+}
+
+export function InfoIcon(props) {
+  return <RiInformationLine {...props} />;
+}
+
+export function CorrectMark(props) {
+  return <FaCheck {...props} />;
+}
+
+export function WrongMark(props) {
+  return <FaExclamation {...props} />;
+}
+
+export function CautionIcon(props) {
+  return <BsFillExclamationCircleFill {...props} />;
 }
 
 // export function Icon(props) {

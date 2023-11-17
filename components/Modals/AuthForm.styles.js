@@ -1,31 +1,32 @@
 import styled from 'styled-components';
 
 export const AuthFormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 15px;
+  h1 {
+    margin-bottom: 20px;
+  }
 
-  input {
+  button {
+    width: 100%;
+  }
+
+  .error-message {
+    display: flex;
+    align-items: center;
     border: 1px solid lightgray;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 30px;
+    font-weight: 500;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: ${props => props.theme.colors.pointRed};
+      margin-right: 8px;
+    }
   }
 
-  input:focus {
-    border-color: ${props => props.theme.colors.pointSkyblue};
-    outline: none;
-  }
-
-  .input-alert {
-    font-size: 12px;
-    color: red;
-    margin: 0;
-  }
-
-  .underline {
-    text-decoration: underline;
-    color: ${props => props.theme.colors.pointSkyblue};
-    cursor: pointer;
+  .hide {
+    display: none;
   }
 `;

@@ -1,82 +1,134 @@
 'use client';
 import axios from 'axios';
 import Link from 'next/link';
-import { useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-// css
 import { AuthFormStyled } from './AuthForm.styles';
 import { Button } from '../ui/Button.styles';
+import { validateEmail, validatePassword } from '../../utils/validation';
 
 // redux
-import { useSelector, useDispatch } from 'react-redux';
-import { uiActions } from '../../redux/features/uiSlice';
+import { AuthInput } from '../ui/InputArea';
+import { CautionIcon } from '../../\bstyles/Icons';
 
 // code
-
 function AuthForm() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const isLoginMode = useSelector(state => state.ui.isLoginMode);
   const emailRef = useRef();
-  const passwordRef = useRef();
 
-  const createUser = async (email, password) => {
-    try {
-      const res = await axios.post('/api/auth/signup', { email, password });
+  const [email, setEmail] = useState({
+    value: '',
+    isValid: false,
+    isTouched: false,
+  });
 
-      if (res.data.error) {
-        console.log('회원가입에러');
-      }
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          message: '회원가입 성공',
-        })
-      );
-      // 회원가입 후 창 닫기
-      dispatch(uiActions.toggleModal());
-    } catch (error) {
-      console.log('회원가입에러');
-    }
+  const [password, setPassword] = useState({
+    value: '',
+    isValid: false,
+    isTouched: false,
+  });
 
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
-  };
+  const [passwordCheck, setPasswordCheck] = useState({
+    value: '',
+    isValid: false,
+    isTouched: false,
+  });
 
-  const submitHandler = async event => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  // 바로 타이핑할 수 있도록 input에 포커스
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  // 이메일 검증
+  useEffect(() => {
+    const result = validateEmail(email.value);
+    setEmail({ ...email, isValid: result });
+  }, [email.value]);
+
+  // 비밀번호 및 비밀번호확인 검증
+  useEffect(() => {
+    const result = validatePassword(password.value);
+    setPassword({ ...password, isValid: result });
+    const passwordsMatch =
+      password.value === passwordCheck.value && password.isValid;
+    setPasswordCheck({ ...passwordCheck, isValid: passwordsMatch });
+  }, [password.value, passwordCheck.value]);
+
+  useEffect(() => {
+    setErrorMessage('');
+  }, [email.value, password.value, passwordCheck.value]);
+
+  const handleSubmit = async event => {
     event.preventDefault();
-    const enteredEmail = emailRef.current.value;
-    const enteredPassword = passwordRef.current.value;
 
-    // 회원가입일 때
-    if (!isLoginMode) {
-      const result = await createUser(enteredEmail, enteredPassword);
+    const response = await axios.post('/api/auth', {
+      email: email.value,
+      password: password.value,
+    });
+
+    if (response.data.error) {
+      setErrorMessage(response.data.error);
+      return;
     }
+
+    setSuccess(true);
   };
 
-  const switchAuthModeHandler = () => {
-    dispatch(uiActions.toggleLoginMode());
-    emailRef.current.value = '';
-    passwordRef.current.value = '';
-  };
+  if (success) {
+    return (
+      <AuthFormStyled>
+        <h1>회원가입 완료</h1>
+        <p>
+          <Link href={'#'}>로그인</Link>
+        </p>
+      </AuthFormStyled>
+    );
+  }
 
   return (
-    <AuthFormStyled onSubmit={submitHandler}>
-      <h1>{isLoginMode ? '로그인' : '회원가입'}</h1>
-      <input type="email" placeholder="이메일" ref={emailRef} />
-      <input type="password" placeholder="비밀번호" ref={passwordRef} />
-      <Button type="submit" primary="highlight">
-        {isLoginMode ? '로그인' : '회원가입'}
-      </Button>
-      {isLoginMode && <span className="underline">비밀번호를 잊으셨나요?</span>}
-      <div onClick={switchAuthModeHandler}>
-        <span>{isLoginMode ? '회원이 아니신가요?' : '이미 회원이신가요?'}</span>
-        <span className="underline">
-          {isLoginMode ? '회원가입' : '로그인하러 가기'}
-        </span>
+    <AuthFormStyled onSubmit={handleSubmit}>
+      <h1>회원가입</h1>
+
+      <div className={errorMessage ? 'error-message' : 'hide'}>
+        <CautionIcon />
+        <p>{errorMessage}</p>
       </div>
+
+      <AuthInput
+        type="email"
+        placeholder="이메일"
+        ref={emailRef}
+        onChange={e => setEmail({ ...email, value: e.target.value })}
+        onBlur={() => setEmail({ ...email, isTouched: true })}
+        userInput={email}
+        cautionContent="이메일 형식이 맞는지 확인해주세요."
+      />
+
+      <AuthInput
+        type="password"
+        placeholder="비밀번호"
+        onChange={e => setPassword({ ...password, value: e.target.value })}
+        onBlur={() => setPassword({ ...password, isTouched: true })}
+        userInput={password}
+        cautionContent="비밀번호는 영문 소문자, 숫자, 특수문자(!@#$%^&*) 포함 8~24자리로 설정하세요."
+      />
+
+      <AuthInput
+        type="password"
+        placeholder="비밀번호 확인"
+        onChange={e =>
+          setPasswordCheck({ ...passwordCheck, value: e.target.value })
+        }
+        onBlur={() => setPasswordCheck({ ...passwordCheck, isTouched: true })}
+        userInput={passwordCheck}
+        cautionContent="비밀번호를 다시 한번 확인해주세요."
+      />
+
+      <Button type="submit" primary="highlight">
+        회원가입
+      </Button>
     </AuthFormStyled>
   );
 }

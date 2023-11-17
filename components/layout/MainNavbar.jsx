@@ -13,7 +13,7 @@ import { Logo } from '../../\bstyles/Logo';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
-import AuthForm from '../Modals/AuthForm';
+import AuthForm from '../modals/AuthForm';
 
 // code
 function MainNavbar() {
