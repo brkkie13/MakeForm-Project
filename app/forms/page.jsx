@@ -58,8 +58,8 @@ function FormsPage() {
 
   const formList = useSelector(state => state.form.formList);
   const [filteredFormList, setFilteredFormList] = useState(formList);
-  const [yearOption, setYearOption] = useState('all-year');
-  const [monthOption, setMonthOption] = useState('all-month');
+  const [yearFilter, setYearFilter] = useState('all-year');
+  const [monthFilter, setMonthFilter] = useState('all-month');
   const [searchWord, setSearchWord] = useState('');
 
   // 페이지네이션
@@ -74,96 +74,75 @@ function FormsPage() {
   const totalPosts = filteredFormList.length;
 
   // 게시글의 모든 연도를 배열로 반환
-  const yearOptionList = [
+  const yearOptions = [
     'all-year',
-    ...formList.reduce((accumulator, form) => {
-      const yearOption = new Date(form.creationDate).getFullYear();
-      if (!accumulator.includes(yearOption)) {
-        accumulator.push(yearOption);
-      }
-      return accumulator;
-    }, []),
+    ...new Set(formList.map(form => new Date(form.creationDate).getFullYear())),
   ];
 
   // 1~12월을 배열로 반환
-  const monthOptionList = [
+  const monthOptions = [
     'all-month',
     ...new Array(12).fill().map((_, index) => index + 1),
   ];
 
   useEffect(() => {
     dispatch(fetchFormData());
+
+    const storedYearFilter = localStorage.getItem('yearFilter');
+    const storedMonthFilter = localStorage.getItem('monthFilter');
+    const storedSearchWord = localStorage.getItem('searchWord');
+    const storedCurrentPage = parseInt(localStorage.getItem('currentPage'));
+
+    setYearFilter(storedYearFilter || 'all-year');
+    setMonthFilter(storedMonthFilter || 'all-month');
+    setSearchWord(storedSearchWord || '');
+    setCurrentPage(storedCurrentPage);
   }, []);
 
+  // 새로고침해도 리스트가 뜨도록 함.
   useEffect(() => {
-    setFilteredFormList(formList); // 새로고침해도 전체 리스트가 뜨도록.
+    setFilteredFormList(formList);
+    filterFormList();
   }, [formList]);
 
   // 필터링이 바뀔 때마다 실행
   useEffect(() => {
-    if (
-      yearOption !== 'all-year' ||
-      monthOption !== 'all-month' ||
-      searchWord !== ''
-    ) {
-      getProcessedFormList();
-    }
+    localStorage.setItem('yearFilter', yearFilter);
+    localStorage.setItem('monthFilter', monthFilter);
+    localStorage.setItem('searchWord', searchWord);
 
-    if (
-      yearOption === 'all-year' &&
-      monthOption === 'all-month' &&
-      searchWord === ''
-    ) {
-      setFilteredFormList(formList);
-    }
+    filterFormList();
+  }, [yearFilter, monthFilter, searchWord]);
 
-    // 년,월,검색어가 바뀔 때마다 항상 현재 페이지는 1로 초기화.
-    setCurrentPage(1);
-  }, [yearOption, monthOption, searchWord]);
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
 
   // 폼리스트 필터링
-  function getProcessedFormList() {
-    const yearFilter = item => {
-      if (yearOption !== 'all-year') {
-        const formYear = new Date(item.creationDate).getFullYear();
-        return formYear === parseInt(yearOption);
-      } else {
-        return item;
-      }
-    };
+  function filterFormList() {
+    let filteredList = [...formList];
 
-    const monthFilter = item => {
-      if (monthOption !== 'all-month') {
-        const formMonth = new Date(item.creationDate).getMonth() + 1;
-        return formMonth === parseInt(monthOption);
-      } else {
-        return item;
-      }
-    };
-
-    const searchFilter = item => {
-      if (searchWord !== '') {
-        return item.header.toLowerCase().includes(searchWord.toLowerCase());
-      } else {
-        return item;
-      }
-    };
-
-    let copiedList = JSON.parse(JSON.stringify(formList));
-
-    if (yearOption !== 'all-year') {
-      copiedList = copiedList.filter(item => yearFilter(item));
+    if (yearFilter !== 'all-year') {
+      filteredList = filteredList.filter(
+        item =>
+          new Date(item.creationDate).getFullYear() === parseInt(yearFilter)
+      );
     }
 
-    if (yearOption !== 'all-month') {
-      copiedList = copiedList.filter(item => monthFilter(item));
+    if (monthFilter !== 'all-month') {
+      filteredList = filteredList.filter(
+        item =>
+          new Date(item.creationDate).getMonth() + 1 === parseInt(monthFilter)
+      );
     }
 
     if (searchWord !== '') {
-      copiedList = copiedList.filter(item => searchFilter(item));
+      filteredList = filteredList.filter(item =>
+        item.header.toLowerCase().includes(searchWord.toLowerCase())
+      );
     }
 
-    setFilteredFormList(copiedList);
+    setFilteredFormList(filteredList);
   }
 
   // 쿼리스트링
@@ -220,14 +199,15 @@ function FormsPage() {
 
       <FilterStyled>
         <select
-          value={yearOption}
+          value={yearFilter}
           onChange={e => {
-            setYearOption(e.target.value);
+            setYearFilter(e.target.value);
+            setCurrentPage(1);
             const newQueryString = createQueryString('year', e.target.value);
             router.push(pathname + '?' + newQueryString);
           }}
         >
-          {yearOptionList.map(item => (
+          {yearOptions.map(item => (
             <option key={item} value={item}>
               {item}
             </option>
@@ -235,14 +215,15 @@ function FormsPage() {
         </select>
 
         <select
-          value={monthOption}
+          value={monthFilter}
           onChange={e => {
-            setMonthOption(e.target.value);
+            setMonthFilter(e.target.value);
+            setCurrentPage(1);
             const newQueryString = createQueryString('month', e.target.value);
             router.push(pathname + '?' + newQueryString);
           }}
         >
-          {monthOptionList.map(item => (
+          {monthOptions.map(item => (
             <option key={item} value={item}>
               {item}
             </option>
@@ -257,6 +238,7 @@ function FormsPage() {
             value={searchWord}
             onChange={e => {
               setSearchWord(e.target.value);
+              setCurrentPage(1);
               const newQueryString = createQueryString(
                 'search',
                 e.target.value
