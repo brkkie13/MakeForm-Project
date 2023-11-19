@@ -45,24 +45,24 @@ function MainNavbar() {
 
       <nav>
         <ul>
-          <Link href={'/create'}>
-            <li className={pathname === '/create' ? 'active' : ''}>
-              <span>폼 만들기</span>
+          <li className={pathname === '/create' ? 'active' : ''}>
+            <Link href={'/create'} className="menu-button">
               <CreateIcon />
-            </li>
-          </Link>
-          <Link href="/forms">
-            <li className={pathname === '/forms' ? 'active' : ''}>
-              <span>나의 폼</span>
+              <span>폼 만들기</span>
+            </Link>
+          </li>
+          <li className={pathname === '/forms' ? 'active' : ''}>
+            <Link href="/forms" className="menu-button">
               <FormIcon />
-            </li>
-          </Link>
-          <Link href="/analysis">
-            <li className={pathname === '/analysis' ? 'active' : ''}>
-              <span>통계</span>
+              <span>나의 폼</span>
+            </Link>
+          </li>
+          <li className={pathname === '/analysis' ? 'active' : ''}>
+            <Link href="/analysis" className="menu-button">
               <ChartIcon />
-            </li>
-          </Link>
+              <span>통계</span>
+            </Link>
+          </li>
         </ul>
       </nav>
 
@@ -73,7 +73,7 @@ function MainNavbar() {
             onToggle={toggleDarkModeHandler}
           />
         </div>
-        <div className="control">
+        <div className="control auth-button">
           <Button primary="highlight" onClick={openAuthModalHandler}>
             로그인 / 회원가입
           </Button>

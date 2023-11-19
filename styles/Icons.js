@@ -1,22 +1,22 @@
-// react-icons library
+// react-icons 라이브러리
 import { IoClose } from 'react-icons/io5';
 import { FiSun, FiMoon, FiEdit } from 'react-icons/fi';
-import { HiOutlineChartBar } from 'react-icons/hi';
 import {
   HiOutlineTrash,
   HiMiniCheckCircle,
   HiExclamationTriangle,
+  HiOutlineUserCircle,
 } from 'react-icons/hi2';
-import { CgFileDocument } from 'react-icons/cg';
-import { BiAddToQueue, BiSearch, BiCheckbox } from 'react-icons/bi';
+import { BiSearch, BiCheckbox } from 'react-icons/bi';
 import { GrDrag } from 'react-icons/gr';
-import { AiOutlineLink } from 'react-icons/ai';
+import { AiOutlineLink, AiOutlineLineChart } from 'react-icons/ai';
 import { TbReload } from 'react-icons/tb';
 import { FaStar } from 'react-icons/fa';
 import { FaCheck, FaExclamation } from 'react-icons/fa6';
 import { PiCopy } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
+import { GoHome, GoPlusCircle, GoFile, GoPerson } from 'react-icons/go';
 
 // css
 import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
@@ -34,17 +34,27 @@ export function DarkModeIcon(props) {
   return <FiMoon size="20" {...props} />;
 }
 
+// 메뉴 아이콘
+export function HomeIcon(props) {
+  return <GoHome {...props} />;
+}
+
 export function CreateIcon(props) {
-  return <BiAddToQueue size="18" {...props} />;
+  return <GoPlusCircle {...props} />;
 }
 
 export function FormIcon(props) {
-  return <CgFileDocument size="18" {...props} />;
+  return <GoFile {...props} />;
 }
 
 export function ChartIcon(props) {
-  return <HiOutlineChartBar size="18" {...props} />;
+  return <AiOutlineLineChart {...props} />;
 }
+
+export function UserIcon(props) {
+  return <GoPerson {...props} />;
+}
+// -----------
 
 export function TrashIcon(props) {
   return <HiOutlineTrash size="19" {...props} />;

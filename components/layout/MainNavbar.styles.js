@@ -20,18 +20,23 @@ export const Header = styled.header`
 
   ul {
     display: flex;
-    gap: 35px;
+    gap: 30px;
   }
 
   li {
     background: transparent;
     padding: 8px 14px;
     border-radius: 5px;
-    display: flex;
   }
 
-  li span {
-    margin-right: 7px;
+  .menu-button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   li:hover {
@@ -51,5 +56,45 @@ export const Header = styled.header`
   .control {
     display: flex;
     gap: 7px;
+  }
+
+  // 너비가 줄어들면 nav의 메뉴가 숨겨지게 함.
+  @media screen and (max-width: 890px) {
+    justify-content: initial;
+
+    .logo {
+      padding-right: 60px;
+    }
+
+    nav {
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-right: 20px;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .controls {
+      margin-left: auto;
+      z-index: 200;
+
+      white-space: nowrap;
+    }
+  }
+
+  // 너비가 모바일이면 메뉴대신 하단바가 생김.
+  @media screen and (max-width: 768px) {
+    height: 60px;
+
+    nav,
+    .auth-button {
+      display: none;
+    }
+
+    .logo svg {
+      width: 140px;
+    }
   }
 `;
