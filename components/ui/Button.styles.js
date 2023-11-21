@@ -43,8 +43,8 @@ export const IconButtonStyled = styled.button`
   height: 30px;
   border-radius: 5px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: relative;
 
   &:hover {

@@ -14,6 +14,7 @@ export const FormDetailStyled = styled.article`
     gap: 10px;
     align-items: center;
     justify-content: flex-end;
+    margin-bottom: 50px;
   }
 
   h1 {

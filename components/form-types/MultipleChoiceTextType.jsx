@@ -63,7 +63,6 @@ function MultipleChoiceTextType({ index, isEdit }) {
   return (
     <>
       <TitleInputArea
-        name="title"
         value={isEdit ? editItems[index].title : components[index].title}
         onChange={changeTitleHandler}
         placeholder="질문 제목을 입력하세요"
@@ -77,7 +76,6 @@ function MultipleChoiceTextType({ index, isEdit }) {
               <RemoveBadge onClick={() => removeOptionHandler(option.id)} />
             )}
             <MultipleChoiceInput
-              name="text"
               value={option.text}
               onChange={event => changeOptionHandler(option.id, event)}
             />

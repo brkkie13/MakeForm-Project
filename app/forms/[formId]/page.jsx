@@ -65,7 +65,7 @@ function FormDetailPage() {
   return (
     <Section>
       <FormDetail
-        form={form}
+        formDetail={form}
         onEdit={editFormHandler}
         onRemove={removeFormHandler}
       />
