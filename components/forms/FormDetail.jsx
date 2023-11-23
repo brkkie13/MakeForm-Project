@@ -5,26 +5,47 @@ import {
   OptionsStyled,
 } from './FormDetail.styles';
 import StarRating from '../../helpers/StarRating';
-import {
-  EmptyCheckboxIcon,
-  LinkIcon,
-  EditIcon,
-  TrashIcon,
-} from '../../\bstyles/Icons';
+import { LinkIcon, EditIcon, TrashIcon } from '../../\bstyles/Icons';
 import Tooltip from '../ui/Tooltip';
-import { IconButtonStyled } from '../ui/Button';
+import Button, { IconButtonStyled } from '../ui/Button';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { responsesActions } from '../../redux/features/responsesSlice';
 
 // code
+// formDetail: 관리자모드의 폼 미리보기 페이지.
+// sharedForm: 유저가 실제로 작성하는 공유된 폼 페이지.
 function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
-  // formDetail: 관리자모드의 폼 미리보기 페이지.
-  // sharedForm: 유저가 실제로 작성하는 공유된 폼 페이지.
+  const dispatch = useDispatch();
+  const responses = useSelector(state => state.responses.responses);
+
   const form = formDetail ? formDetail : sharedForm ? sharedForm : null;
   const [isSharedForm, setIsSharedForm] = useState(false);
 
   useEffect(() => {
-    sharedForm && setIsSharedForm(true);
-  }, []);
+    if (sharedForm) {
+      setIsSharedForm(true);
+      dispatch(responsesActions.setInitialValue(form.items));
+    }
+  }, [sharedForm]);
+
+  const changeInputValueHandler = (itemIdx, event) => {
+    const newValue = event.target.value;
+    dispatch(responsesActions.changeInputValue({ itemIdx, newValue }));
+  };
+
+  const changeRatingHandler = (itemIdx, score) => {
+    dispatch(responsesActions.changeRatingValue({ itemIdx, score }));
+  };
+
+  const changeOptionHandler = (itemIdx, optionIdx) => {
+    // 선택한 객관식 옵션의 인덱스번호를 저장.
+    dispatch(responsesActions.changeOptionValue({ itemIdx, optionIdx }));
+  };
+
+  console.log(responses);
+
+  const submitFormHandler = async () => {};
 
   return (
     <FormDetailStyled>
@@ -52,51 +73,74 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
         )}
       </div>
 
-      <h1>{form.header}</h1>
+      <div>
+        <h1>{form.header}</h1>
 
-      {form.items?.map(item => (
-        <FormItemStyled key={item.id}>
-          <h2 className="title">{item.title && item.title}</h2>
+        {form.items?.map((item, itemIdx) => (
+          <FormItemStyled key={item.id}>
+            <h2 className="title">{item.title && item.title}</h2>
 
-          {item.formType === 'shortAnswerType' ? (
-            isSharedForm ? (
-              <input type="text" placeholder="답변을 입력하세요" />
-            ) : (
-              <p className="placeholder-text">단답의 답변이 입력됩니다</p>
-            )
-          ) : item.formType === 'longAnswerType' ? (
-            isSharedForm ? (
-              <textarea placeholder="답변을 입력하세요"></textarea>
-            ) : (
-              <p className="placeholder-text">장문의 답변이 입력됩니다</p>
-            )
-          ) : item.formType === 'ratingType' ? (
-            <StarRating />
-          ) : null}
+            {item.formType === 'shortAnswerType' ? (
+              isSharedForm ? (
+                <input
+                  type="text"
+                  placeholder="답변을 입력하세요"
+                  name="shortAnswerType"
+                  onChange={event => changeInputValueHandler(itemIdx, event)}
+                />
+              ) : (
+                <p className="placeholder-text">단답의 답변이 입력됩니다</p>
+              )
+            ) : item.formType === 'longAnswerType' ? (
+              isSharedForm ? (
+                <textarea
+                  placeholder="답변을 입력하세요"
+                  name="longAnswerType"
+                  onChange={event => changeInputValueHandler(itemIdx, event)}
+                ></textarea>
+              ) : (
+                <p className="placeholder-text">장문의 답변이 입력됩니다</p>
+              )
+            ) : item.formType === 'ratingType' ? (
+              <StarRating
+                onChangeRating={newScore =>
+                  changeRatingHandler(itemIdx, newScore)
+                }
+              />
+            ) : null}
 
-          <OptionsStyled>
-            {item.options &&
-              item.options.map(option =>
-                isSharedForm ? (
-                  <MultipleChoiceInput
-                    key={option.id}
-                    optionId={option.id}
-                    optionText={option.text}
-                    checkable={true}
-                  />
-                ) : (
-                  <MultipleChoiceInput
-                    key={option.id}
-                    optionId={option.id}
-                    optionText={option.text}
-                  />
-                )
-              )}
-          </OptionsStyled>
+            <OptionsStyled>
+              {item.options &&
+                item.options.map((option, optionIdx) =>
+                  isSharedForm ? (
+                    <MultipleChoiceInput
+                      key={option.id}
+                      optionIndex={optionIdx}
+                      optionText={option.text}
+                      checkable={true}
+                      onChangeOption={() =>
+                        changeOptionHandler(itemIdx, optionIdx)
+                      }
+                    />
+                  ) : (
+                    <MultipleChoiceInput
+                      key={option.id}
+                      optionText={option.text}
+                    />
+                  )
+                )}
+            </OptionsStyled>
 
-          <div>{item.description && item.description}</div>
-        </FormItemStyled>
-      ))}
+            <div>{item.description && item.description}</div>
+          </FormItemStyled>
+        ))}
+      </div>
+
+      {isSharedForm && (
+        <div className="submit-button">
+          <Button onClick={submitFormHandler}>제출하기</Button>
+        </div>
+      )}
     </FormDetailStyled>
   );
 }

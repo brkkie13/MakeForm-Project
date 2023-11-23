@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StarsWrapper = styled.div`
+export const StarsStyled = styled.div`
   svg {
     margin-right: 4px;
     fill: lightgray;

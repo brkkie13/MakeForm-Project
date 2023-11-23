@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import uiReducer from './features/uiSlice';
 import formReducer from './features/formSlice';
+import responsesReducer from './features/responsesSlice';
 import utilsReducer from './features/utilsSlice';
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     form: formReducer,
+    responses: responsesReducer,
     utils: utilsReducer,
   },
 

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { MultipleChoiceInputStyled } from './MultipleChoiceInput.styles';
 
 function MultipleChoiceInput(props) {
-  const { value, onChange, optionId, optionText, checkable } = props;
-
-  const getCheckedOption = e => {
-    console.log(e.target.value);
-  };
+  const {
+    value,
+    onChange,
+    optionIndex,
+    optionText,
+    checkable,
+    onChangeOption,
+  } = props;
 
   return (
     <MultipleChoiceInputStyled>
@@ -15,14 +18,14 @@ function MultipleChoiceInput(props) {
         <input
           type="radio"
           name="radio-group"
-          id={`radio${optionId}`}
+          id={optionIndex}
           value={optionText}
-          onChange={getCheckedOption}
+          onChange={onChangeOption}
         />
       )}
 
       {optionText ? (
-        <label htmlFor={`radio${optionId}`}>{optionText}</label>
+        <label htmlFor={optionIndex}>{optionText}</label>
       ) : (
         <label>
           <input value={value} onChange={onChange} placeholder="입력" />
