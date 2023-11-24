@@ -10,8 +10,19 @@ export const responsesSlice = createSlice({
 
   reducers: {
     setInitialValue(state, action) {
-      const items = action.payload;
-      state.responses = items;
+      const items = action.payload || [];
+
+      const processedItems = items.map(item => {
+        const { formType, title, description } = item;
+
+        let newItem = { formType };
+        title && (newItem.title = title);
+        description && (newItem.description = description);
+
+        return newItem;
+      });
+
+      state.responses = processedItems;
     },
 
     changeInputValue(state, action) {

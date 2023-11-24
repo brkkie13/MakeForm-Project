@@ -1,3 +1,5 @@
+'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import {
   FormDetailStyled,
@@ -45,7 +47,20 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
 
   console.log(responses);
 
-  const submitFormHandler = async () => {};
+  const submitFormHandler = async event => {
+    event.preventDefault();
+
+    const data = {
+      formId: form.id,
+      header: form.header,
+      submissionDate: new Date().toISOString(),
+      responses: responses,
+    };
+
+    const res = await axios.post('/api/submitted-form', data);
+
+    // res.ok일 때 제출 완료 되었다는 페이지 만들기
+  };
 
   return (
     <FormDetailStyled>
