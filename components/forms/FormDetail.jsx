@@ -13,6 +13,7 @@ import Button, { IconButtonStyled } from '../ui/Button';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsesActions } from '../../redux/features/responsesSlice';
+import { uiActions } from '../../redux/features/uiSlice';
 
 // code
 // formDetail: 관리자모드의 폼 미리보기 페이지.
@@ -23,6 +24,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
 
   const form = formDetail ? formDetail : sharedForm ? sharedForm : null;
   const [isSharedForm, setIsSharedForm] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (sharedForm) {
@@ -59,8 +61,31 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
 
     const res = await axios.post('/api/submitted-form', data);
 
-    // res.ok일 때 제출 완료 되었다는 페이지 만들기
+    if (res.data.error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '제출에 실패했습니다.',
+        })
+      );
+
+      setTimeout(() => {
+        dispatch(uiActions.clearNotification());
+      }, 3000);
+      return;
+    }
+
+    setSuccess(true);
   };
+
+  // res.ok일 때 제출 완료 되었다는 페이지 만들기
+  if (success) {
+    return (
+      <FormDetailStyled>
+        <p>제출이 완료되었습니다. 감사합니다.</p>
+      </FormDetailStyled>
+    );
+  }
 
   return (
     <FormDetailStyled>

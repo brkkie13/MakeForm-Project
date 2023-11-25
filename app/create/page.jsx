@@ -46,24 +46,13 @@ function CreatePage() {
   };
 
   return (
-    <>
-      {notification && (
-        <Notification
-          status={notification.status}
-          message={notification.message}
-        />
-      )}
-      <Section>
-        <FormTypesToolbar onAddFormType={addFormTypeHandler} />
-        <FormTypes
-          items={components}
-          onRemoveFormType={removeFormTypeHandler}
-        />
-        <Button primary="highlight" onClick={saveFormHandler}>
-          저장
-        </Button>
-      </Section>
-    </>
+    <Section>
+      <FormTypesToolbar onAddFormType={addFormTypeHandler} />
+      <FormTypes items={components} onRemoveFormType={removeFormTypeHandler} />
+      <Button primary="highlight" onClick={saveFormHandler}>
+        저장
+      </Button>
+    </Section>
   );
 }
 
