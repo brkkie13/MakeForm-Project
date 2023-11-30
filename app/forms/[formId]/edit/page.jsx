@@ -18,9 +18,9 @@ import FormTypes from '../../../../components/form-types/FormTypes';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '../../../../redux/actions';
+import { fetchFormData } from '../../../../redux/actions/formActionCreators';
 import { formActions } from '../../../../redux/features/formSlice';
-import { updateFormData } from '../../../../redux/actions';
+import { updateFormData } from '../../../../redux/actions/formActionCreators';
 
 // css
 const Section = styled.section`

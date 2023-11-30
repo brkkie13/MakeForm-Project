@@ -8,7 +8,7 @@ import FormTypes from '../../components/form-types/FormTypes';
 import Button from '../../components/ui/Button';
 
 // redux
-import { sendFormData } from '../../redux/actions';
+import { sendFormData } from '../../redux/actions/formActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
 

@@ -58,12 +58,23 @@ export const Header = styled.header`
     gap: 7px;
   }
 
+  .auth-control {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+  }
+
   // 너비가 줄어들면 nav의 메뉴가 숨겨지게 함.
-  @media screen and (max-width: 890px) {
+  @media screen and (max-width: 1000px) {
     justify-content: initial;
 
     .logo {
-      padding-right: 60px;
+      padding-right: 40px;
     }
 
     nav {
@@ -89,7 +100,7 @@ export const Header = styled.header`
     height: 60px;
 
     nav,
-    .auth-button {
+    .auth-control {
       display: none;
     }
 

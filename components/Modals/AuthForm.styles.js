@@ -5,10 +5,6 @@ export const AuthFormStyled = styled.form`
     margin-bottom: 20px;
   }
 
-  button {
-    width: 100%;
-  }
-
   .error-message {
     display: flex;
     align-items: center;
@@ -28,5 +24,57 @@ export const AuthFormStyled = styled.form`
 
   .hide {
     display: none;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        fill: ${props => props.theme.colors.pointSkyblue};
+      }
+    }
+
+    .line-group {
+      /* margin-top: 10px; */
+      display: flex;
+      align-items: center;
+
+      .line {
+        flex-grow: 1;
+        height: 1px;
+        background: gray;
+      }
+
+      p {
+        padding: 0 8px;
+        font-size: 14px;
+        color: gray;
+      }
+    }
+  }
+
+  .authmode-toggle-button {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      margin-left: 5px;
+      color: ${props => props.theme.colors.pointSkyblue};
+    }
+    a:hover {
+      cursor: pointer;
+    }
   }
 `;

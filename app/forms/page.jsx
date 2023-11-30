@@ -10,7 +10,10 @@ import { SearchIcon } from '../../\bstyles/Icons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { sendFormData, fetchFormData } from '../../redux/actions';
+import {
+  sendFormData,
+  fetchFormData,
+} from '../../redux/actions/formActionCreators';
 
 // css
 const Section = styled.section`

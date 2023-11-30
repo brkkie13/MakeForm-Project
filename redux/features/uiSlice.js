@@ -6,6 +6,7 @@ let initialState = {
   isModalOpen: false,
   modalContent: null,
   isLoginMode: true,
+  isLoggedIn: false,
 };
 
 export const uiSlice = createSlice({

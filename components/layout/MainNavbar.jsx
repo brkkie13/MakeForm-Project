@@ -2,25 +2,28 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// components
 import Button from '../ui/Button';
 import { Header } from './MainNavbar.styles';
 import ToggleSwitch from '../../helpers/ToggleSwitch';
-
-// icons
 import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
+import AuthForm from '../modals/AuthForm';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
-import AuthForm from '../modals/AuthForm';
+
+// firebase auth
+import { logout } from '../../redux/actions/authActionCreators';
+import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
 
 // code
 function MainNavbar() {
   const pathname = usePathname();
-
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
+  const user = useFirebaseAuthState();
 
   const toggleDarkModeHandler = () => {
     dispatch(uiActions.toggleDarkMode());
@@ -35,7 +38,9 @@ function MainNavbar() {
     dispatch(uiActions.openModal(<AuthForm />));
   };
 
-  const loginHandler = () => {};
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
 
   return (
     <Header>
@@ -73,10 +78,23 @@ function MainNavbar() {
             onToggle={toggleDarkModeHandler}
           />
         </div>
-        <div className="control auth-button">
-          <Button primary="highlight" onClick={openAuthModalHandler}>
-            로그인 / 회원가입
-          </Button>
+        <div className="control auth-control">
+          {user ? (
+            <>
+              <img
+                src={user?.photoURL || '/images/profile.png'}
+                alt="유저 프로필"
+              />
+              <span>{user?.displayName || user?.email}님</span>
+              <Button primary="non-outline" onClick={logoutHandler}>
+                로그아웃
+              </Button>
+            </>
+          ) : (
+            <Button primary="highlight" onClick={openAuthModalHandler}>
+              로그인 / 회원가입
+            </Button>
+          )}
         </div>
       </div>
     </Header>

@@ -1,4 +1,4 @@
-import { db } from '../firebase.config';
+import { db } from '../../firebase.config';
 import {
   collection,
   getDocs,
@@ -7,8 +7,8 @@ import {
   deleteDoc,
   doc,
 } from 'firebase/firestore';
-import { formActions } from './features/formSlice';
-import { uiActions } from './features/uiSlice';
+import { formActions } from '../features/formSlice';
+import { uiActions } from '../features/uiSlice';
 
 export const sendFormData = newForm => {
   return async dispatch => {

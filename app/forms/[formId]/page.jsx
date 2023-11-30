@@ -10,7 +10,10 @@ import Confirm from '../../../components/modals/Confirm';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData, removeFormData } from '../../../redux/actions';
+import {
+  fetchFormData,
+  removeFormData,
+} from '../../../redux/actions/formActionCreators';
 import { uiActions } from '../../../redux/features/uiSlice';
 
 const Section = styled.section`

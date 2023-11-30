@@ -11,7 +11,7 @@ import { BiSearch, BiCheckbox } from 'react-icons/bi';
 import { GrDrag } from 'react-icons/gr';
 import { AiOutlineLink, AiOutlineLineChart } from 'react-icons/ai';
 import { TbReload } from 'react-icons/tb';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaGoogle } from 'react-icons/fa';
 import { FaCheck, FaExclamation } from 'react-icons/fa6';
 import { PiCopy } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
@@ -132,6 +132,9 @@ export function CautionIcon(props) {
   return <BsFillExclamationCircleFill {...props} />;
 }
 
+export function GoogleLogo(props) {
+  return <FaGoogle {...props} />;
+}
 // export function Icon(props) {
 //   return < {...props} />;
 // }

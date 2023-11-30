@@ -1,40 +1,50 @@
 'use client';
-import axios from 'axios';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import { AuthFormStyled } from './AuthForm.styles';
 import { Button } from '../ui/Button.styles';
 import { validateEmail, validatePassword } from '../../utils/validation';
 
-// redux
 import { AuthInput } from '../ui/InputArea';
-import { CautionIcon } from '../../\bstyles/Icons';
+import { CautionIcon, GoogleLogo } from '../../\bstyles/Icons';
+
+// redux
+import { uiActions } from '../../redux/features/uiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+// firebase auth
+import {
+  login,
+  register,
+  loginWithGoogle,
+} from '../../redux/actions/authActionCreators';
+import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
+import { authActions } from '../../redux/features/authSlice';
 
 // code
 function AuthForm() {
-  const emailRef = useRef();
+  const dispatch = useDispatch();
 
+  const emailRef = useRef();
   const [email, setEmail] = useState({
     value: '',
     isValid: false,
     isTouched: false,
   });
-
   const [password, setPassword] = useState({
     value: '',
     isValid: false,
     isTouched: false,
   });
-
   const [passwordCheck, setPasswordCheck] = useState({
     value: '',
     isValid: false,
     isTouched: false,
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [success, setSuccess] = useState(false);
+  const errorMessage = useSelector(state => state.auth.errorMessage);
+  const isLoginMode = useSelector(state => state.ui.isLoginMode);
+  const user = useFirebaseAuthState();
 
   // 바로 타이핑할 수 있도록 input에 포커스
   useEffect(() => {
@@ -47,7 +57,7 @@ function AuthForm() {
     setEmail({ ...email, isValid: result });
   }, [email.value]);
 
-  // 비밀번호 및 비밀번호확인 검증
+  // 비밀번호 및 비밀번호확인 검증하여 input 아래 에러메세지 표시.
   useEffect(() => {
     const result = validatePassword(password.value);
     setPassword({ ...password, isValid: result });
@@ -56,40 +66,37 @@ function AuthForm() {
     setPasswordCheck({ ...passwordCheck, isValid: passwordsMatch });
   }, [password.value, passwordCheck.value]);
 
+  // input이 수정되면 에러메세지를 삭제함.
   useEffect(() => {
-    setErrorMessage('');
+    dispatch(authActions.clearErrorMessage());
   }, [email.value, password.value, passwordCheck.value]);
 
-  const handleSubmit = async event => {
+  useEffect(() => {
+    // 로그인이 성공하여 user가 존재하면 모달 닫기.
+    user && dispatch(uiActions.closeModal());
+  }, [user]);
+
+  const submitAuthFormHandler = async event => {
     event.preventDefault();
 
-    const response = await axios.post('/api/auth', {
-      email: email.value,
-      password: password.value,
-    });
-
-    if (response.data.error) {
-      setErrorMessage(response.data.error);
-      return;
+    if (isLoginMode) {
+      dispatch(login(email.value, password.value));
+    } else {
+      dispatch(register(email.value, password.value, passwordCheck.value));
     }
-
-    setSuccess(true);
   };
 
-  if (success) {
-    return (
-      <AuthFormStyled>
-        <h1>회원가입 완료</h1>
-        <p>
-          <Link href={'#'}>로그인</Link>
-        </p>
-      </AuthFormStyled>
-    );
-  }
+  const googleAuthHandler = () => {
+    dispatch(loginWithGoogle());
+  };
+
+  const toggleLoginModeHandler = () => {
+    dispatch(uiActions.toggleLoginMode());
+  };
 
   return (
-    <AuthFormStyled onSubmit={handleSubmit}>
-      <h1>회원가입</h1>
+    <AuthFormStyled onSubmit={submitAuthFormHandler}>
+      <h1>{isLoginMode ? '로그인' : '회원가입'}</h1>
 
       <div className={errorMessage ? 'error-message' : 'hide'}>
         <CautionIcon />
@@ -112,23 +119,46 @@ function AuthForm() {
         onChange={e => setPassword({ ...password, value: e.target.value })}
         onBlur={() => setPassword({ ...password, isTouched: true })}
         userInput={password}
-        cautionContent="비밀번호는 영문 소문자, 숫자, 특수문자(!@#$%^&*) 포함 8~24자리로 설정하세요."
+        cautionContent="비밀번호는 영문 소문자, 숫자, 특수문자(!@#$%^&*) 포함 8~24자리로 입력하세요."
       />
 
-      <AuthInput
-        type="password"
-        placeholder="비밀번호 확인"
-        onChange={e =>
-          setPasswordCheck({ ...passwordCheck, value: e.target.value })
-        }
-        onBlur={() => setPasswordCheck({ ...passwordCheck, isTouched: true })}
-        userInput={passwordCheck}
-        cautionContent="비밀번호를 다시 한번 확인해주세요."
-      />
+      {!isLoginMode && (
+        <AuthInput
+          type="password"
+          placeholder="비밀번호 확인"
+          onChange={e =>
+            setPasswordCheck({ ...passwordCheck, value: e.target.value })
+          }
+          onBlur={() => setPasswordCheck({ ...passwordCheck, isTouched: true })}
+          userInput={passwordCheck}
+          cautionContent="비밀번호를 다시 한번 확인해주세요."
+        />
+      )}
 
-      <Button type="submit" primary="highlight">
-        회원가입
-      </Button>
+      <div className="controls">
+        <Button type="submit" primary="highlight">
+          {isLoginMode ? '로그인' : '회원가입'}
+        </Button>
+        <div className="line-group">
+          <span className="line"></span>
+          <p>또는</p>
+          <span className="line"></span>
+        </div>
+        <Button type="button" onClick={googleAuthHandler}>
+          <GoogleLogo />
+          {isLoginMode ? '구글 로그인' : '구글 회원가입'}
+        </Button>
+      </div>
+
+      {isLoginMode ? (
+        <p className="authmode-toggle-button">
+          회원이 아니신가요?<a onClick={toggleLoginModeHandler}>회원가입</a>
+        </p>
+      ) : (
+        <p className="authmode-toggle-button">
+          이미 회원이신가요?<a onClick={toggleLoginModeHandler}>로그인</a>
+        </p>
+      )}
     </AuthFormStyled>
   );
 }

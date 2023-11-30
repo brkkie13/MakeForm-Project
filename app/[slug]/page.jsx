@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '../../redux/actions';
+import { fetchFormData } from '../../redux/actions/formActionCreators';
 import FormDetail from '../../components/forms/FormDetail';
 
 const Section = styled.section`

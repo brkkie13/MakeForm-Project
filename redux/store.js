@@ -3,6 +3,7 @@ import uiReducer from './features/uiSlice';
 import formReducer from './features/formSlice';
 import responsesReducer from './features/responsesSlice';
 import utilsReducer from './features/utilsSlice';
+import authReducer from './features/authSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     form: formReducer,
     responses: responsesReducer,
     utils: utilsReducer,
+    auth: authReducer,
   },
 
   // 에러 해결: (If your state or actions are very large, you may want to disable the middleware as it might cause too much of a slowdown in development mode.)
