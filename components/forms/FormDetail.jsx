@@ -14,6 +14,7 @@ import MultipleChoiceInput from '../ui/MultipleChoiceInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsesActions } from '../../redux/features/responsesSlice';
 import { uiActions } from '../../redux/features/uiSlice';
+import { sendFormResponse } from '../../redux/actions/formResponseActionCreators';
 
 // code
 // formDetail: 관리자모드의 폼 미리보기 페이지.
@@ -47,8 +48,6 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
     dispatch(responsesActions.changeOptionValue({ itemIdx, optionIdx }));
   };
 
-  console.log(responses);
-
   const submitFormHandler = async event => {
     event.preventDefault();
 
@@ -56,29 +55,13 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
       formId: form.id,
       header: form.header,
       submissionDate: new Date().toISOString(),
-      responses: responses,
+      responses,
     };
 
-    const res = await axios.post('/api/submitted-form', data);
-
-    if (res.data.error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          message: '제출에 실패했습니다.',
-        })
-      );
-
-      setTimeout(() => {
-        dispatch(uiActions.clearNotification());
-      }, 3000);
-      return;
-    }
-
+    dispatch(sendFormResponse(data));
     setSuccess(true);
   };
 
-  // res.ok일 때 제출 완료 되었다는 페이지 만들기
   if (success) {
     return (
       <FormDetailStyled>
