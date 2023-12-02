@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
-  isDarkMode: localStorage.getItem('theme') === 'dark', // 로컬스토리지에서 가져온 값을 초기상태로 설정
+  isDarkMode: false,
   notification: null,
   isModalOpen: false,
   modalContent: null,
@@ -13,12 +13,13 @@ export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    toggleDarkMode(state) {
-      state.isDarkMode = !state.isDarkMode;
+    loadTheme(state, action) {
+      const theme = action.payload;
+      state.isDarkMode = theme === 'dark';
+    },
 
-      state.isDarkMode
-        ? localStorage.setItem('theme', 'dark')
-        : localStorage.setItem('theme', 'light');
+    changeThemeMode(state) {
+      state.isDarkMode = !state.isDarkMode;
     },
 
     // 알림 박스

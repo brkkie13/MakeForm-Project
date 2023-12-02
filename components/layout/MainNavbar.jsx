@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -10,6 +11,7 @@ import ToggleSwitch from '../../helpers/ToggleSwitch';
 import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
 import AuthForm from '../modals/AuthForm';
+import useLocalStorage from '../../utils/useLocalStorage';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,13 +27,22 @@ function MainNavbar() {
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
   const user = useFirebaseAuthState();
+  const { getItem, setItem } = useLocalStorage();
+
+  useEffect(() => {
+    const theme = getItem('theme');
+    dispatch(uiActions.loadTheme(theme));
+  }, [dispatch]);
 
   const toggleDarkModeHandler = () => {
-    dispatch(uiActions.toggleDarkMode());
+    dispatch(uiActions.changeThemeMode());
+
     if (isDarkMode) {
-      document.body.setAttribute('data-theme', 'dark');
-    } else {
+      setItem('theme', 'light');
       document.body.setAttribute('data-theme', 'light');
+    } else {
+      setItem('theme', 'dark');
+      document.body.setAttribute('data-theme', 'dark');
     }
   };
 
