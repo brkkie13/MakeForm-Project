@@ -106,7 +106,7 @@ function FormsPage() {
   useEffect(() => {
     setFilteredFormList(formList);
     filterFormList();
-  }, [formList, filterFormList]);
+  }, [formList]);
 
   // 필터링이 바뀔 때마다 실행
   useEffect(() => {
@@ -115,7 +115,7 @@ function FormsPage() {
     localStorage.setItem('searchWord', searchWord);
 
     filterFormList();
-  }, [yearFilter, monthFilter, searchWord, filterFormList]);
+  }, [yearFilter, monthFilter, searchWord]);
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage);
