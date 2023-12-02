@@ -34,5 +34,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-
+# 추가
 test-db.json
+public/404.html
+public/index.html
+.firebase/
+.firebaserc
+.github/
+firebase.json

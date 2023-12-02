@@ -1,5 +1,5 @@
 'use client';
-import axios from 'axios';
+// import axios from 'axios';
 import { useState, useEffect } from 'react';
 import {
   FormDetailStyled,
@@ -13,7 +13,6 @@ import Button, { IconButtonStyled } from '../ui/Button';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsesActions } from '../../redux/features/responsesSlice';
-import { uiActions } from '../../redux/features/uiSlice';
 import { sendFormResponse } from '../../redux/actions/formResponseActionCreators';
 
 // code
@@ -32,7 +31,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
       setIsSharedForm(true);
       dispatch(responsesActions.setInitialValue(form.items));
     }
-  }, [sharedForm]);
+  }, [sharedForm, dispatch, form.items]);
 
   const changeInputValueHandler = (itemIdx, event) => {
     const newValue = event.target.value;

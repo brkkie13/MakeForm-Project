@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
 } from 'firebase/firestore';
+import { auth } from '../../firebase.config';
 import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
 

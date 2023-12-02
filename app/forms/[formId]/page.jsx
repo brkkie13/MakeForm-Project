@@ -32,19 +32,19 @@ function FormDetailPage() {
 
   useEffect(() => {
     dispatch(fetchFormData());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (formList.length > 0) {
       const targetedForm = formList.find(form => form.id === formId);
       targetedForm ? setForm(targetedForm) : router.push('/forms');
     }
-  }, [formList]);
+  }, [formList, formId, router]);
 
   const editFormHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;
     router.push(editPagePath);
-  }, [router]);
+  }, [formId, router]);
 
   const removeFormHandler = useCallback(() => {
     const clickConfirmHandler = () => {
@@ -63,7 +63,7 @@ function FormDetailPage() {
         />
       )
     );
-  }, [dispatch]);
+  }, [dispatch, formId, router]);
 
   return (
     <Section>

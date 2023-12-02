@@ -55,7 +55,7 @@ function AuthForm() {
   useEffect(() => {
     const result = validateEmail(email.value);
     setEmail({ ...email, isValid: result });
-  }, [email.value]);
+  }, [email]);
 
   // 비밀번호 및 비밀번호확인 검증하여 input 아래 에러메세지 표시.
   useEffect(() => {
@@ -64,17 +64,17 @@ function AuthForm() {
     const passwordsMatch =
       password.value === passwordCheck.value && password.isValid;
     setPasswordCheck({ ...passwordCheck, isValid: passwordsMatch });
-  }, [password.value, passwordCheck.value]);
+  }, [password, passwordCheck]);
 
   // input이 수정되면 에러메세지를 삭제함.
   useEffect(() => {
     dispatch(authActions.clearErrorMessage());
-  }, [email.value, password.value, passwordCheck.value]);
+  }, [email.value, password.value, passwordCheck.value, dispatch]);
 
   useEffect(() => {
     // 로그인이 성공하여 user가 존재하면 모달 닫기.
     user && dispatch(uiActions.closeModal());
-  }, [user]);
+  }, [user, dispatch]);
 
   const submitAuthFormHandler = async event => {
     event.preventDefault();

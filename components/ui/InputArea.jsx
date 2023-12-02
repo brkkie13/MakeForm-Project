@@ -37,7 +37,7 @@ export function TitleInputArea(props) {
 }
 
 // 아이디, 비밀번호 input
-export const AuthInput = forwardRef((props, ref) => {
+const AuthInput = forwardRef((props, ref) => {
   const { type, placeholder, onChange, onBlur, userInput, cautionContent } =
     props;
 
@@ -75,3 +75,7 @@ export const AuthInput = forwardRef((props, ref) => {
     </AuthInputStyled>
   );
 });
+
+AuthInput.displayName = 'AuthInput';
+
+export { AuthInput };

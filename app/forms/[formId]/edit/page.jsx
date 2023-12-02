@@ -5,15 +5,7 @@ import styled from 'styled-components';
 
 // components
 import Button from '../../../../components/ui/Button';
-import HeaderType from '../../../../components/form-types/HeaderType';
-import ShortAnswerType from '../../../../components/form-types/ShortAnswerType';
-import LongAnswerType from '../../../../components/form-types/LongAnswerType';
-import MultipleChoiceImageType from '../../../../components/form-types/MultipleChoiceImageType';
-import MultipleChoiceTextType from '../../../../components/form-types/MultipleChoiceTextType';
-import RatingType from '../../../../components/form-types/RatingType';
-import DescriptionType from '../../../../components/form-types/DescriptionType';
 import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
-import FormTypeCard from '../../../../components/ui/FormTypeCard';
 import FormTypes from '../../../../components/form-types/FormTypes';
 
 // redux
@@ -52,7 +44,7 @@ function EditPage() {
 
   useEffect(() => {
     dispatch(fetchFormData());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (formList.length > 0) {
@@ -64,7 +56,7 @@ function EditPage() {
         router.push('/forms');
       }
     }
-  }, [formList]);
+  }, [formList, formId, dispatch, router]);
 
   const addFormTypeHandler = formType => {
     dispatch(formActions.addEditItem(formType));
@@ -74,9 +66,9 @@ function EditPage() {
     dispatch(formActions.removeEditItem(idx));
   };
 
-  const onCancelHandler = useCallback(() => {
+  const onCancelHandler = () => {
     router.push(`/forms/${formId}`);
-  }, []);
+  };
 
   const saveFormHandler = () => {
     // 폼 수정 시 header,items필드만 수정 (creation,id필드는 유지)

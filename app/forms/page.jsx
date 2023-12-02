@@ -100,13 +100,13 @@ function FormsPage() {
     setMonthFilter(storedMonthFilter || 'all-month');
     setSearchWord(storedSearchWord || '');
     setCurrentPage(storedCurrentPage);
-  }, []);
+  }, [dispatch]);
 
   // 새로고침해도 리스트가 뜨도록 함.
   useEffect(() => {
     setFilteredFormList(formList);
     filterFormList();
-  }, [formList]);
+  }, [formList, filterFormList]);
 
   // 필터링이 바뀔 때마다 실행
   useEffect(() => {
@@ -115,14 +115,14 @@ function FormsPage() {
     localStorage.setItem('searchWord', searchWord);
 
     filterFormList();
-  }, [yearFilter, monthFilter, searchWord]);
+  }, [yearFilter, monthFilter, searchWord, filterFormList]);
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage);
   }, [currentPage]);
 
   // 폼리스트 필터링
-  function filterFormList() {
+  const filterFormList = useCallback(() => {
     let filteredList = [...formList];
 
     if (yearFilter !== 'all-year') {
@@ -146,7 +146,7 @@ function FormsPage() {
     }
 
     setFilteredFormList(filteredList);
-  }
+  }, [formList, yearFilter, monthFilter, searchWord, filteredFormList]);
 
   // 쿼리스트링
   const createQueryString = useCallback(

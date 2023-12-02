@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { MultipleChoiceInputStyled } from './MultipleChoiceInput.styles';
 
 function MultipleChoiceInput(props) {

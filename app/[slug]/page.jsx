@@ -21,14 +21,14 @@ function SharedFormDetailPage() {
 
   useEffect(() => {
     dispatch(fetchFormData());
-  }, []);
+  }, [dispatch, formId]);
 
   useEffect(() => {
     if (formList.length > 0) {
       const targetedForm = formList.find(form => form.id === formId);
       targetedForm && setForm(targetedForm);
     }
-  }, [formList]);
+  }, [formList, dispatch, formId]);
 
   return (
     <Section>

@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 
 // components
-import Notification from '../../components/ui/Notification';
 import FormTypesToolbar from '../../components/form-types/FormTypesToolbar';
 import FormTypes from '../../components/form-types/FormTypes';
 import Button from '../../components/ui/Button';
@@ -11,6 +10,9 @@ import Button from '../../components/ui/Button';
 import { sendFormData } from '../../redux/actions/formActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
+
+// firebase auth
+import { auth } from '../../firebase.config';
 
 // css
 const Section = styled.div`
@@ -41,6 +43,7 @@ function CreatePage() {
       creationDate: new Date().toISOString(),
       header: header,
       items: components,
+      userId: auth?.currentUser?.uid,
     };
     dispatch(sendFormData(data));
   };

@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 // components
@@ -81,9 +82,11 @@ function MainNavbar() {
         <div className="control auth-control">
           {user ? (
             <>
-              <img
+              <Image
                 src={user?.photoURL || '/images/profile.png'}
                 alt="유저 프로필"
+                width={35}
+                height={35}
               />
               <span>{user?.displayName || user?.email}님</span>
               <Button primary="non-outline" onClick={logoutHandler}>
