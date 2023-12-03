@@ -15,6 +15,9 @@ import {
   fetchFormData,
 } from '../../redux/actions/formActionCreators';
 
+import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
+import { formActions } from '../../redux/features/formSlice';
+
 // css
 const Section = styled.section`
   display: flex;
@@ -76,6 +79,8 @@ function FormsPage() {
   );
   const totalPosts = filteredFormList.length;
 
+  const user = useFirebaseAuthState();
+
   // 게시글의 모든 연도를 배열로 반환
   const yearOptions = [
     'all-year',
@@ -89,18 +94,22 @@ function FormsPage() {
   ];
 
   useEffect(() => {
-    dispatch(fetchFormData());
+    if (user) {
+      dispatch(fetchFormData(user?.uid));
 
-    const storedYearFilter = localStorage.getItem('yearFilter');
-    const storedMonthFilter = localStorage.getItem('monthFilter');
-    const storedSearchWord = localStorage.getItem('searchWord');
-    const storedCurrentPage = parseInt(localStorage.getItem('currentPage'));
+      const storedYearFilter = localStorage.getItem('yearFilter');
+      const storedMonthFilter = localStorage.getItem('monthFilter');
+      const storedSearchWord = localStorage.getItem('searchWord');
+      const storedCurrentPage = parseInt(localStorage.getItem('currentPage'));
 
-    setYearFilter(storedYearFilter || 'all-year');
-    setMonthFilter(storedMonthFilter || 'all-month');
-    setSearchWord(storedSearchWord || '');
-    setCurrentPage(storedCurrentPage);
-  }, [dispatch]);
+      setYearFilter(storedYearFilter || 'all-year');
+      setMonthFilter(storedMonthFilter || 'all-month');
+      setSearchWord(storedSearchWord || '');
+      setCurrentPage(storedCurrentPage);
+    } else {
+      dispatch(formActions.replaceFormList([])); // 로그아웃 상태라면 formList를 비움.
+    }
+  }, [dispatch, user]);
 
   // 새로고침해도 리스트가 뜨도록 함.
   useEffect(() => {

@@ -16,6 +16,8 @@ import {
 } from '../../../redux/actions/formActionCreators';
 import { uiActions } from '../../../redux/features/uiSlice';
 
+import useFirebaseAuthState from '../../../utils/useFirebaseAuthState';
+
 const Section = styled.section`
   padding-top: 70px;
 `;
@@ -30,9 +32,17 @@ function FormDetailPage() {
   const formList = useSelector(state => state.form.formList);
   const [form, setForm] = useState({});
 
+  const user = useFirebaseAuthState();
+
   useEffect(() => {
-    dispatch(fetchFormData());
-  }, [dispatch]);
+    if (user) {
+      dispatch(fetchFormData(user?.uid));
+    }
+
+    if (user === undefined) {
+      router.push('/forms');
+    }
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (formList.length > 0) {

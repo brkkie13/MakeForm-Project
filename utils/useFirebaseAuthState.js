@@ -7,7 +7,12 @@ function useFirebaseAuthState() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        // 로그아웃 시
+        setUser(undefined);
+      }
     });
 
     // Cleanup function

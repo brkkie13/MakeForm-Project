@@ -6,8 +6,9 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  query,
+  where,
 } from 'firebase/firestore';
-import { auth } from '../../firebase.config';
 import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
 
@@ -54,12 +55,17 @@ export const sendFormData = newForm => {
   };
 };
 
-export const fetchFormData = () => {
+export const fetchFormData = uid => {
   return async dispatch => {
+    if (!uid) {
+      return;
+    }
+
     const formsCollectionRef = collection(db, 'forms');
+    const q = query(formsCollectionRef, where('userId', '==', uid));
 
     const getData = async () => {
-      const data = await getDocs(formsCollectionRef);
+      const data = await getDocs(q);
       const formattedData = data.docs.map(doc => ({
         ...doc.data(),
         id: doc.id,
