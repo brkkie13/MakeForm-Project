@@ -55,7 +55,7 @@ function AuthForm() {
   useEffect(() => {
     const result = validateEmail(email.value);
     setEmail({ ...email, isValid: result });
-  }, [email]);
+  }, [email.value]);
 
   // 비밀번호 및 비밀번호확인 검증하여 input 아래 에러메세지 표시.
   useEffect(() => {
@@ -64,7 +64,7 @@ function AuthForm() {
     const passwordsMatch =
       password.value === passwordCheck.value && password.isValid;
     setPasswordCheck({ ...passwordCheck, isValid: passwordsMatch });
-  }, [password, passwordCheck]);
+  }, [password.value, passwordCheck.value]);
 
   // input이 수정되면 에러메세지를 삭제함.
   useEffect(() => {
