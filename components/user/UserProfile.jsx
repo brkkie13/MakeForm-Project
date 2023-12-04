@@ -1,36 +1,17 @@
-import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { UserProfileStyled } from './UserProfile.styles';
 import { Button } from '../ui/Button.styles';
 import { logout } from '../../redux/actions/authActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
+import DropdownMenu from '../ui/DropdownMenu';
 
 function UserProfile({ imageUrl, displayName, email }) {
   const dispatch = useDispatch();
   const isDropdownOpen = useSelector(state => state.ui.isDropdownOpen);
-  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const pageClickEvent = e => {
-      if (
-        dropdownRef.current !== null &&
-        !dropdownRef.current.contains(e.target)
-      ) {
-        dispatch(uiActions.toggleDropdownMenu());
-      }
-    };
-
-    if (isDropdownOpen) {
-      window.addEventListener('click', pageClickEvent);
-    }
-
-    return () => {
-      window.removeEventListener('click', pageClickEvent);
-    };
-  }, [isDropdownOpen]);
-
-  const toggleDropdownMenuHandler = () => {
+  const toggleDropdownMenuHandler = e => {
+    e.stopPropagation(); // DropdownMenu 상위요소 window로 버블링을 막음.
     dispatch(uiActions.toggleDropdownMenu());
   };
 
@@ -38,10 +19,16 @@ function UserProfile({ imageUrl, displayName, email }) {
     dispatch(logout());
   };
 
+  const menuList = [
+    { id: 0, text: '로그아웃', onClick: logoutHandler },
+    { id: 1, text: '비밀번호 변경' },
+    { id: 2, text: '회원탈퇴' },
+  ];
+
   const activeUserInfo = isDropdownOpen ? 'user-info active' : 'user-info';
 
   return (
-    <UserProfileStyled ref={dropdownRef}>
+    <UserProfileStyled>
       <div className={activeUserInfo} onClick={toggleDropdownMenuHandler}>
         <Image
           src={imageUrl || '/images/profile.png'}
@@ -52,17 +39,13 @@ function UserProfile({ imageUrl, displayName, email }) {
         <span>{displayName || email}님</span>
       </div>
 
-      {isDropdownOpen && (
-        <div className="dropdown">
-          <ul>
-            <li onClick={logoutHandler}>로그아웃</li>
-          </ul>
-        </div>
-      )}
+      {isDropdownOpen && <DropdownMenu menuList={menuList} />}
       <div className="controls">
-        <Button primary="non-outline" onClick={logoutHandler}>
-          로그아웃
-        </Button>
+        {menuList.map(menu => (
+          <Button primary="non-outline" key={menu.id} onClick={menu.onClick}>
+            {menu.text}
+          </Button>
+        ))}
       </div>
     </UserProfileStyled>
   );
