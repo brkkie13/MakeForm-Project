@@ -1,7 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 // components
@@ -10,6 +9,7 @@ import { Header } from './MainNavbar.styles';
 import ToggleSwitch from '../../helpers/ToggleSwitch';
 import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
+import UserProfile from '../user/UserProfile';
 import AuthForm from '../modals/AuthForm';
 import useLocalStorage from '../../utils/useLocalStorage';
 
@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../redux/features/uiSlice';
 
 // firebase auth
-import { logout } from '../../redux/actions/authActionCreators';
 import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
 
 // code
@@ -48,10 +47,6 @@ function MainNavbar() {
 
   const openAuthModalHandler = () => {
     dispatch(uiActions.openModal(<AuthForm />));
-  };
-
-  const logoutHandler = () => {
-    dispatch(logout());
   };
 
   return (
@@ -92,18 +87,11 @@ function MainNavbar() {
         </div>
         <div className="control auth-control">
           {user ? (
-            <>
-              <Image
-                src={user?.photoURL || '/images/profile.png'}
-                alt="유저 프로필"
-                width={35}
-                height={35}
-              />
-              <span>{user?.displayName || user?.email}님</span>
-              <Button primary="non-outline" onClick={logoutHandler}>
-                로그아웃
-              </Button>
-            </>
+            <UserProfile
+              imageUrl={user?.photoURL}
+              displayName={user?.displayName}
+              email={user?.email}
+            />
           ) : (
             <Button primary="highlight" onClick={openAuthModalHandler}>
               로그인 / 회원가입

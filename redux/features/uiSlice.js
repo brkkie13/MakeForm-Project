@@ -7,6 +7,7 @@ let initialState = {
   modalContent: null,
   isLoginMode: true,
   isLoggedIn: false,
+  isDropdownOpen: false,
 };
 
 export const uiSlice = createSlice({
@@ -46,6 +47,10 @@ export const uiSlice = createSlice({
 
     toggleLoginMode(state) {
       state.isLoginMode = !state.isLoginMode;
+    },
+
+    toggleDropdownMenu(state) {
+      state.isDropdownOpen = !state.isDropdownOpen;
     },
   },
 });

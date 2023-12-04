@@ -17,34 +17,35 @@ export const Header = styled.header`
   .logo svg {
     width: 150px;
   }
-
-  ul {
-    display: flex;
-    gap: 30px;
-  }
-
-  li {
-    background: transparent;
-    padding: 8px 14px;
-    border-radius: 5px;
-  }
-
-  .menu-button {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    svg {
-      width: 18px;
-      height: 18px;
+  nav {
+    ul {
+      display: flex;
+      gap: 30px;
     }
-  }
 
-  li:hover {
-    background: ${props => props.theme.colors.hoverMenu};
-  }
+    li {
+      background: transparent;
+      padding: 8px 14px;
+      border-radius: 5px;
+    }
 
-  li.active {
-    background: ${props => props.theme.colors.activeMenu};
+    li:hover {
+      background: ${props => props.theme.colors.hoverMenu};
+    }
+
+    li.active {
+      background: ${props => props.theme.colors.activeMenu};
+    }
+
+    .menu-button {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
   }
 
   .controls {
@@ -56,17 +57,6 @@ export const Header = styled.header`
   .control {
     display: flex;
     gap: 7px;
-  }
-
-  .auth-control {
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-    }
   }
 
   // 너비가 줄어들면 nav의 메뉴가 숨겨지게 함.
@@ -95,7 +85,7 @@ export const Header = styled.header`
     }
   }
 
-  // 너비가 모바일이면 메뉴대신 하단바가 생김.
+  // 너비가 모바일이면 메뉴대신 하단메뉴바가 생김.
   @media screen and (max-width: 768px) {
     height: 60px;
 

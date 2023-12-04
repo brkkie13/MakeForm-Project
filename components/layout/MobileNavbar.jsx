@@ -40,8 +40,8 @@ function MobileNavbar() {
             <span>통계</span>
           </Link>
         </li>
-        <li className={pathname === '/' ? 'active' : ''}>
-          <Link href="/">
+        <li className={pathname === '/profile' ? 'active' : ''}>
+          <Link href="/profile">
             <UserIcon />
             <span>계정</span>
           </Link>
