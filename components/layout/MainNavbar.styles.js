@@ -59,6 +59,28 @@ export const Header = styled.header`
     gap: 7px;
   }
 
+  .user-info {
+    display: flex;
+    align-items: center;
+    position: relative; // DropdownMenu 컴포넌트와 관련있음.
+    cursor: pointer;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 5px;
+
+    img {
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  }
+
+  .user-info:hover {
+    background: ${props => props.theme.colors.hoverMenu};
+  }
+  .user-info.active {
+    background: ${props => props.theme.colors.activeMenu};
+  }
+
   // 너비가 줄어들면 nav의 메뉴가 숨겨지게 함.
   @media screen and (max-width: 1000px) {
     justify-content: initial;

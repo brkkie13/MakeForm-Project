@@ -1,35 +1,45 @@
 import Image from 'next/image';
 import { UserProfileStyled } from './UserProfile.styles';
 import { Button } from '../ui/Button.styles';
-import { logout } from '../../redux/actions/authActionCreators';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {
+  deleteAccount,
+  logout,
+  resetPassword,
+} from '../../redux/actions/authActionCreators';
 import { uiActions } from '../../redux/features/uiSlice';
-import DropdownMenu from '../ui/DropdownMenu';
+import Confirm from '../modals/Confirm';
 
-function UserProfile({ imageUrl, displayName, email }) {
+function UserProfile({ imageUrl, displayName, email, emailVerified }) {
   const dispatch = useDispatch();
-  const isDropdownOpen = useSelector(state => state.ui.isDropdownOpen);
-
-  const toggleDropdownMenuHandler = e => {
-    e.stopPropagation(); // DropdownMenu 상위요소 window로 버블링을 막음.
-    dispatch(uiActions.toggleDropdownMenu());
-  };
 
   const logoutHandler = () => {
     dispatch(logout());
   };
 
-  const menuList = [
-    { id: 0, text: '로그아웃', onClick: logoutHandler },
-    { id: 1, text: '비밀번호 변경' },
-    { id: 2, text: '회원탈퇴' },
-  ];
+  const resetPasswordHandler = () => {
+    dispatch(resetPassword(email));
+  };
 
-  const activeUserInfo = isDropdownOpen ? 'user-info active' : 'user-info';
+  const deleteAccountHandler = () => {
+    const clickConfirmHandler = () => {
+      dispatch(uiActions.closeModal());
+      dispatch(deleteAccount());
+    };
+
+    dispatch(
+      uiActions.openModal(
+        <Confirm
+          text="정말 탈퇴하시겠습니까? 영구적으로 계정이 삭제됩니다."
+          onclickConfirm={clickConfirmHandler}
+        />
+      )
+    );
+  };
 
   return (
     <UserProfileStyled>
-      <div className={activeUserInfo} onClick={toggleDropdownMenuHandler}>
+      <div className="user-info">
         <Image
           src={imageUrl || '/images/profile.png'}
           alt="유저 프로필"
@@ -39,13 +49,19 @@ function UserProfile({ imageUrl, displayName, email }) {
         <span>{displayName || email}님</span>
       </div>
 
-      {isDropdownOpen && <DropdownMenu menuList={menuList} />}
       <div className="controls">
-        {menuList.map(menu => (
-          <Button primary="non-outline" key={menu.id} onClick={menu.onClick}>
-            {menu.text}
+        <Button primary="non-outline" onClick={logoutHandler}>
+          로그아웃
+        </Button>
+        {/* 이메일&비밀번호로 가입했을 때만 비밀번호 재설정 버튼 활성화 */}
+        {!emailVerified && (
+          <Button primary="non-outline" onClick={resetPasswordHandler}>
+            비밀번호 재설정
           </Button>
-        ))}
+        )}
+        <Button primary="non-outline" onClick={deleteAccountHandler}>
+          회원탈퇴
+        </Button>
       </div>
     </UserProfileStyled>
   );

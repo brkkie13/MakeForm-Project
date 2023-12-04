@@ -4,10 +4,14 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
+  deleteUser,
+  getAuth,
 } from 'firebase/auth';
 import { auth } from '../../firebase.config';
 import { authActions } from '../features/authSlice';
 import { validateEmail, validatePassword } from '../../utils/validation';
+import { uiActions } from '../features/uiSlice';
 
 export const register = (email, password, passwordCheck) => {
   return async dispatch => {
@@ -55,16 +59,56 @@ export const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, googleProvider);
-
-      // const name = result.user.displayName;
-      // const email = result.user.email;
-      // const profilePhoto = result.user.photoURL;
-
-      // localStorage.setItem('googleName', name);
-      // localStorage.setItem('googleEmail', email);
-      // localStorage.setItem('googleProfile', profilePhoto);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
+  };
+};
+
+export const resetPassword = email => {
+  return async dispatch => {
+    const auth = getAuth();
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          message: '이메일로 비밀번호 재설정 링크를 보냈습니다',
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '다시 한번 시도해주세요',
+        })
+      );
+    }
+
+    // 3초 뒤에 notification을 null로 변경
+    setTimeout(() => {
+      dispatch(uiActions.clearNotification());
+    }, 3000);
+  };
+};
+
+export const deleteAccount = () => {
+  return async dispatch => {
+    const auth = getAuth();
+    try {
+      await deleteUser(auth.currentUser);
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '다시 한번 시도해주세요',
+        })
+      );
+    }
+
+    setTimeout(() => {
+      dispatch(uiActions.clearNotification());
+    }, 3000);
   };
 };
