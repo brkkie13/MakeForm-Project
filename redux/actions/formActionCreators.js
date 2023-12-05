@@ -48,10 +48,6 @@ export const sendFormData = newForm => {
         })
       );
     }
-    // 3초 뒤에 notification을 null로 변경
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
   };
 };
 
@@ -118,10 +114,6 @@ export const updateFormData = (formId, editedData) => {
     } catch (error) {
       console.error(error);
     }
-    // 3초 뒤에 notification을 null로 변경
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
   };
 };
 
@@ -153,10 +145,5 @@ export const removeFormData = formId => {
     } catch (error) {
       console.error(error);
     }
-
-    // 3초 뒤에 notification을 null로 변경
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
   };
 };

@@ -85,11 +85,6 @@ export const resetPassword = email => {
         })
       );
     }
-
-    // 3초 뒤에 notification을 null로 변경
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
   };
 };
 
@@ -106,9 +101,5 @@ export const deleteAccount = () => {
         })
       );
     }
-
-    setTimeout(() => {
-      dispatch(uiActions.clearNotification());
-    }, 3000);
   };
 };

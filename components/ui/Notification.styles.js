@@ -22,7 +22,8 @@ const fadeInOut = keyframes`
   }
 `;
 
-export const NotificationBox = styled.div`
+export const NotificationStyled = styled.div`
+  z-index: 200; // MobileNavbar보다 더 위에 오게 함
   animation: ${fadeInOut} 3s ease-in-out;
   position: fixed;
   left: 50%;
@@ -30,9 +31,8 @@ export const NotificationBox = styled.div`
   transform: translate(-50%, -50%); // x축, y축 모두 중심축으로 옴
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 300px;
-  height: 46px;
+  padding: 10px 15px;
+  max-width: 300px;
   border-radius: 10px;
   background-color: ${props => props.theme.colors.background};
   border: 1px solid
@@ -48,19 +48,13 @@ export const NotificationBox = styled.div`
         : props.theme.colors.pointRed};
   }
 
-  & > div {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
+  // badge
   & > div:nth-child(1) {
-    flex: 2;
-    justify-content: center;
+    margin-right: 10px;
   }
 
+  // message
   & > div:nth-child(2) {
-    flex: 8;
     color: ${props =>
       props.status === 'success'
         ? props.theme.colors.pointSkyblue
