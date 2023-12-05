@@ -194,13 +194,13 @@ function FormsPage() {
       const targetedForm = formList.find(form => form.id === formId);
 
       const data = {
+        ...targetedForm,
         creationDate: new Date().toISOString(),
         header: `${targetedForm.header} - 복사`,
-        items: targetedForm.items,
       };
 
-      await dispatch(sendFormData(data));
-      dispatch(fetchFormData());
+      dispatch(sendFormData(data));
+      dispatch(fetchFormData(user?.uid));
     },
     [dispatch, formList]
   );
