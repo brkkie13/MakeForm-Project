@@ -7,29 +7,13 @@ import styled from 'styled-components';
 import Button from '../../../../components/ui/Button';
 import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
 import FormTypes from '../../../../components/form-types/FormTypes';
+import Section from '../../../../components/ui/Section';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../../redux/actions/formActionCreators';
 import { formActions } from '../../../../redux/features/formSlice';
 import { updateFormData } from '../../../../redux/actions/formActionCreators';
-
-// css
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .formBackground {
-    padding-top: 110px;
-  }
-`;
 
 // code
 function EditPage() {
@@ -90,7 +74,7 @@ function EditPage() {
         isEdit={true}
       />
 
-      <div className="controls">
+      <div className="controls centered">
         <Button onClick={onCancelHandler}>취소</Button>
         <Button onClick={saveFormHandler} primary="highlight">
           등록

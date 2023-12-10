@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-export const FormTypeWrapper = styled.article`
+export const FormTypeCardStyled = styled.article`
   background: ${props => props.theme.colors.block};
-  margin: 0 auto;
   margin-bottom: 25px;
-  width: 750px;
   padding: 30px 0;
   border-radius: 13px;
   display: flex;
@@ -14,6 +12,10 @@ export const FormTypeWrapper = styled.article`
   & > div:nth-child(2) {
     flex: 9; // 두번째 자식 div가 90%의 너비를 차지
     padding: 0 20px;
+
+    button {
+      margin-top: 20px;
+    }
   }
 
   & > div:nth-child(1),

@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 export const FiltersStyled = styled.div`
-  margin: 20px 0;
-  width: 80%;
   display: flex;
-  justify-content: end;
-  align-items: center;
+  justify-content: flex-end;
   gap: 15px;
 
   select,

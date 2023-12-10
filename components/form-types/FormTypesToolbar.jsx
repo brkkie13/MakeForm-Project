@@ -1,9 +1,9 @@
 'use client';
-import { Toolbar } from './FormTypesToolbar.styles';
+import { ToolbarStyled } from './FormTypesToolbar.styles';
 
 function FormTypesToolbar({ onAddFormType }) {
   return (
-    <Toolbar>
+    <ToolbarStyled>
       <button
         onClick={e => onAddFormType(e.target.value)}
         value="shortAnswerType"
@@ -37,7 +37,7 @@ function FormTypesToolbar({ onAddFormType }) {
       >
         + 설명 추가
       </button>
-    </Toolbar>
+    </ToolbarStyled>
   );
 }
 

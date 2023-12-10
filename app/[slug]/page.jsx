@@ -1,19 +1,14 @@
 'use client';
-import styled from 'styled-components';
-
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../redux/actions/formActionCreators';
 import FormDetail from '../../components/forms/FormDetail';
-
-const Section = styled.section`
-  padding-top: 70px;
-`;
+import Section from '../../components/ui/Section';
+import { SectionCard } from '../../components/ui/SectionCard';
 
 function SharedFormDetailPage() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const params = useParams();
   const formId = params.slug;
   const formList = useSelector(state => state.form.formList);
@@ -32,7 +27,9 @@ function SharedFormDetailPage() {
 
   return (
     <Section>
-      <FormDetail sharedForm={form} />
+      <SectionCard>
+        <FormDetail sharedForm={form} />
+      </SectionCard>
     </Section>
   );
 }

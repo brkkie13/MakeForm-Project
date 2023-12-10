@@ -1,11 +1,8 @@
 'use client';
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
-import {
-  FormDetailStyled,
-  FormItemStyled,
-  OptionsStyled,
-} from './FormDetail.styles';
+import { FormDetailStyled, FormItemStyled } from './FormDetail.styles';
+import { InputOptionsStyled } from '../ui/InputOptionsStyled';
 import StarRating from '../../helpers/StarRating';
 import { LinkIcon, EditIcon, TrashIcon } from '../../\bstyles/Icons';
 import Tooltip from '../ui/Tooltip';
@@ -131,7 +128,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
               />
             ) : null}
 
-            <OptionsStyled>
+            <InputOptionsStyled>
               {item.options &&
                 item.options.map((option, optionIdx) =>
                   isSharedForm ? (
@@ -151,7 +148,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
                     />
                   )
                 )}
-            </OptionsStyled>
+            </InputOptionsStyled>
 
             <div>{item.description && item.description}</div>
           </FormItemStyled>

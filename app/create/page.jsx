@@ -1,10 +1,10 @@
 'use client';
-import styled from 'styled-components';
 
 // components
 import FormTypesToolbar from '../../components/form-types/FormTypesToolbar';
 import FormTypes from '../../components/form-types/FormTypes';
 import Button from '../../components/ui/Button';
+import Section from '../../components/ui/Section';
 
 // redux
 import { sendFormData } from '../../redux/actions/formActionCreators';
@@ -14,19 +14,10 @@ import { formActions } from '../../redux/features/formSlice';
 // firebase auth
 import { auth } from '../../firebase.config';
 
-// css
-const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 // code
 function CreatePage() {
   const dispatch = useDispatch();
-  const notification = useSelector(state => state.ui.notification);
-  // component 예시: { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
-  // components: component 객체가 모인 배열
+  // component 요소 예시: { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
   const header = useSelector(state => state.form.header);
 
@@ -52,7 +43,11 @@ function CreatePage() {
     <Section>
       <FormTypesToolbar onAddFormType={addFormTypeHandler} />
       <FormTypes items={components} onRemoveFormType={removeFormTypeHandler} />
-      <Button primary="highlight" onClick={saveFormHandler}>
+      <Button
+        className="centered"
+        primary="highlight"
+        onClick={saveFormHandler}
+      >
         저장
       </Button>
     </Section>

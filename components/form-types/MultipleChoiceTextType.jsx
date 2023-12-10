@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { OptionsWrapper } from './MultipleChoiceTextType.styles';
 import { SmallButton } from '../ui/Button';
 import { RemoveBadge } from '../../\bstyles/Icons';
 import { TitleInputArea } from '../ui/InputArea';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
+import { InputOptionsStyled } from '../ui/InputOptionsStyled';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,7 +68,7 @@ function MultipleChoiceTextType({ index, isEdit }) {
         placeholder="질문 제목을 입력하세요"
       />
 
-      <OptionsWrapper>
+      <InputOptionsStyled>
         {optionsToRender.map((option, idx) => (
           <div className="option" key={option.id}>
             {/* 처음 두개옵션은 x표시 안뜨게 함. index가 2인 옵션부터 x표시 렌더링 */}
@@ -81,7 +81,7 @@ function MultipleChoiceTextType({ index, isEdit }) {
             />
           </div>
         ))}
-      </OptionsWrapper>
+      </InputOptionsStyled>
       <SmallButton onClick={addOptionHandler}>+ 옵션 추가</SmallButton>
     </>
   );

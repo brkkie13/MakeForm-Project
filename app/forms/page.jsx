@@ -1,5 +1,4 @@
 'use client';
-import styled from 'styled-components';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -17,21 +16,10 @@ import {
 import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
 import { formActions } from '../../redux/features/formSlice';
 import Filters from '../../components/forms/Filters';
+import Section from '../../components/ui/Section';
 import useFilters from '../../utils/useFilters';
 import usePagination from '../../utils/usePagination';
 import useQueryString from '../../utils/useQueryString';
-
-// css
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    margin-top: 70px;
-    margin-bottom: 20px;
-  }
-`;
 
 // code
 function FormsPage() {

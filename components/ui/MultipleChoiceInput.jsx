@@ -24,7 +24,9 @@ function MultipleChoiceInput(props) {
       )}
 
       {optionText ? (
-        <label htmlFor={optionIndex}>{optionText}</label>
+        <label>
+          <span>{optionText}</span>
+        </label>
       ) : (
         <label>
           <input value={value} onChange={onChange} placeholder="입력" />

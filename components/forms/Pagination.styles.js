@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const PaginationStyled = styled.nav`
-  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 
   ul {
     display: flex;

@@ -1,17 +1,22 @@
-import { FormTypeWrapper } from './FormTypeCard.styles';
+import { FormTypeCardStyled } from './FormTypeCard.styles';
+import { IconButtonStyled } from './Button.styles';
 
 // icons
 import { DragIcon, TrashIcon } from '../../\bstyles/Icons';
 
 const FormTypeCard = ({ onRemoveFormType, content, isHeader }) => {
   return (
-    <FormTypeWrapper>
+    <FormTypeCardStyled>
       <div className="icon drag-icon">{!isHeader && <DragIcon />}</div>
       <div>{content}</div>
       <div className="icon trash-icon" onClick={onRemoveFormType}>
-        {!isHeader && <TrashIcon />}
+        {!isHeader && (
+          <IconButtonStyled>
+            <TrashIcon />
+          </IconButtonStyled>
+        )}
       </div>
-    </FormTypeWrapper>
+    </FormTypeCardStyled>
   );
 };
 

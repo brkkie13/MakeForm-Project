@@ -16,11 +16,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
   }
 
-  body > section {
-    margin-top: 75px; // MainNavbar 높이에 맞게 수정.
-    background: ${props => props.theme.colors.background2};
-  }
-
   ul,button,svg :hover {
     cursor: pointer;
   }

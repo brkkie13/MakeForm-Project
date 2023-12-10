@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 
 export const MultipleChoiceInputStyled = styled.div`
-  padding: 0 25px;
-  height: 50px;
+  padding: 15px 25px;
   gap: 8px;
   border-radius: 5px;
   border: 1px solid lightgray;
   display: flex;
   align-items: center;
+
+  label {
+    width: 100%;
+
+    span {
+      display: block;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+  }
+
+  input {
+    width: 100%;
+  }
 
   [type='radio'] {
     display: none;
@@ -43,10 +56,6 @@ export const MultipleChoiceInputStyled = styled.div`
     visibility: hidden;
   }
 
-  /* [type='radio']:checked ~ label {
-    border: 1px solid salmon;
-  } */
-
   [type='radio']:checked ~ label::after {
     border-color: ${props => props.theme.colors.pointSkyblue};
   }
@@ -54,9 +63,5 @@ export const MultipleChoiceInputStyled = styled.div`
   [type='radio']:checked ~ label::before {
     opacity: 1;
     visibility: visible;
-  }
-
-  svg {
-    fill: darkgray;
   }
 `;

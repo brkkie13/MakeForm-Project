@@ -1,12 +1,13 @@
 'use client';
-import styled from 'styled-components';
 
-import { useEffect, useState, useCallback, Fragment } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
 import FormDetail from '../../../components/forms/FormDetail';
 import Confirm from '../../../components/modals/Confirm';
+import Section from '../../../components/ui/Section';
+import { SectionCard } from '../../../components/ui/SectionCard';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,11 +17,8 @@ import {
 } from '../../../redux/actions/formActionCreators';
 import { uiActions } from '../../../redux/features/uiSlice';
 
+// auth
 import useFirebaseAuthState from '../../../utils/useFirebaseAuthState';
-
-const Section = styled.section`
-  padding-top: 70px;
-`;
 
 // code
 function FormDetailPage() {
@@ -77,11 +75,13 @@ function FormDetailPage() {
 
   return (
     <Section>
-      <FormDetail
-        formDetail={form}
-        onEdit={editFormHandler}
-        onRemove={removeFormHandler}
-      />
+      <SectionCard>
+        <FormDetail
+          formDetail={form}
+          onEdit={editFormHandler}
+          onRemove={removeFormHandler}
+        />
+      </SectionCard>
     </Section>
   );
 }

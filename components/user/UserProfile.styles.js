@@ -4,8 +4,6 @@ export const UserProfileStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${props => props.theme.colors.background};
-  padding: 50px 0;
 
   .user-info {
     display: flex;

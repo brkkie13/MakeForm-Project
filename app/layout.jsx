@@ -1,7 +1,6 @@
 import StyledComponentsRegistry from '../lib/registry';
 import GlobalProvider from './providers/GlobalProvider';
 import MainNavbar from '../components/layout/MainNavbar';
-import MainFooter from '../components/layout/MainFooter';
 import MobileNavbar from '../components/layout/MobileNavbar';
 
 export const metadata = {
@@ -17,8 +16,8 @@ export default function RootLayout({ children }) {
           <GlobalProvider>
             <MainNavbar />
             <MobileNavbar />
-            <section>{children}</section>
-            <MainFooter />
+            {children}
+            {/* <Footer /> */}
           </GlobalProvider>
         </StyledComponentsRegistry>
       </body>
