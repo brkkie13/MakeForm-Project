@@ -35,6 +35,20 @@ function useFilters(setQueryStringState) {
     }
   };
 
+  const resetFilter = () => {
+    filterActions.map(action => {
+      removeItem(action.name);
+      action.setFilter(action.defaultValue);
+    });
+
+    setQueryStringState(prevState => ({
+      ...prevState,
+      year: null,
+      month: null,
+      searchWord: null,
+    }));
+  };
+
   // 폼리스트 필터링
   const filterList = data => {
     let filteredList = [...data];
@@ -60,7 +74,7 @@ function useFilters(setQueryStringState) {
     return filteredList;
   };
 
-  return { year, month, searchWord, changeFilter, filterList };
+  return { year, month, searchWord, changeFilter, resetFilter, filterList };
 }
 
 export default useFilters;

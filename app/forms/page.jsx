@@ -29,7 +29,7 @@ function FormsPage() {
   const formList = useSelector(state => state.form.formList);
   const setQueryStringState = useQueryString();
 
-  const { year, month, searchWord, changeFilter, filterList } =
+  const { year, month, searchWord, changeFilter, resetFilter, filterList } =
     useFilters(setQueryStringState);
 
   const filteredFormList = filterList(formList);
@@ -85,6 +85,7 @@ function FormsPage() {
         month={month}
         searchWord={searchWord}
         onFilterChange={changeFilter}
+        onFilterReset={resetFilter}
         onPageChange={changePage}
       />
 

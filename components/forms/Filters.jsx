@@ -1,6 +1,7 @@
 'use client';
 import { FiltersStyled } from './Filters.styles';
 import { SearchIcon } from '../../\bstyles/Icons';
+import { Button } from '../ui/Button.styles';
 
 function Filters({
   dataList,
@@ -8,6 +9,7 @@ function Filters({
   month,
   searchWord,
   onFilterChange,
+  onFilterReset,
   onPageChange,
 }) {
   const yearOptions = [
@@ -63,6 +65,15 @@ function Filters({
           }}
         />
       </label>
+
+      <Button
+        onClick={() => {
+          onFilterReset();
+          onPageChange(1);
+        }}
+      >
+        필터 초기화
+      </Button>
     </FiltersStyled>
   );
 }
