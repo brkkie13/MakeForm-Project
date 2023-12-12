@@ -5,7 +5,6 @@ import {
   HiOutlineTrash,
   HiMiniCheckCircle,
   HiExclamationTriangle,
-  HiOutlineUserCircle,
 } from 'react-icons/hi2';
 import { BiSearch, BiCheckbox } from 'react-icons/bi';
 import { GrDrag } from 'react-icons/gr';
@@ -17,6 +16,7 @@ import { PiCopy } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
 import { GoHome, GoPlusCircle, GoFile, GoPerson } from 'react-icons/go';
+import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 
 // css
 import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
@@ -135,6 +135,15 @@ export function CautionIcon(props) {
 export function GoogleLogo(props) {
   return <FaGoogle {...props} />;
 }
+
+export function ArrowIcon(props) {
+  return <MdKeyboardArrowLeft size="25" {...props} />;
+}
+
+export function DoubleArrowIcon(props) {
+  return <MdKeyboardDoubleArrowLeft size="25" {...props} />;
+}
+
 // export function Icon(props) {
 //   return < {...props} />;
 // }
