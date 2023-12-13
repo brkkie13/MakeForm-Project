@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PaginationStyled } from './Pagination.styles';
 import { ArrowIcon, DoubleArrowIcon } from '../../\bstyles/Icons';
 
@@ -10,9 +10,7 @@ const pagesPerGroup = 5; // 한 그룹당 페이지 개수
 
 function Pagination({ dataList, currentPage, onPageChange }) {
   const totalPages = Math.ceil(dataList.length / postsPerPage);
-  const [currentPageGroup, setCurrentPageGroup] = useState(
-    Math.ceil(currentPage / pagesPerGroup) // 현재 페이지그룹의 번호
-  );
+  const [currentPageGroup, setCurrentPageGroup] = useState(1);
 
   const pageNumbers = [];
 
@@ -23,6 +21,11 @@ function Pagination({ dataList, currentPage, onPageChange }) {
   ) {
     pageNumbers.push(index);
   }
+
+  // 컴포넌트 첫 렌더링 & 현재 페이지가 바뀔 때마다 현재 페이지의 페이지그룹으로 이동
+  useEffect(() => {
+    setCurrentPageGroup(Math.ceil(currentPage / pagesPerGroup)); // 현재 페이지그룹의 번호
+  }, [currentPage]);
 
   const clickArrowHandler = direction => {
     if (direction === PREV && currentPageGroup > 1) {
