@@ -6,6 +6,9 @@ const BUTTON_TYPE = {
 };
 
 export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 6px 12px;
   border-radius: 5px;
   line-height: 1.5;
@@ -18,6 +21,14 @@ export const Button = styled.button`
     props.primary === BUTTON_TYPE.HIGHLIGHT
       ? '#fff'
       : props.theme.colors.pointSkyblue};
+
+  // 버튼 안에 아이콘이 있다면 아이콘의 컬러를 바꿈.
+  svg {
+    fill: ${props =>
+      props.primary === BUTTON_TYPE.HIGHLIGHT
+        ? '#fff'
+        : props.theme.colors.pointSkyblue};
+  }
 
   background-color: ${props =>
     props.primary === BUTTON_TYPE.HIGHLIGHT && props.theme.colors.pointSkyblue};

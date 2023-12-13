@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { FiltersStyled } from './Filters.styles';
 import { SearchIcon } from '../../\bstyles/Icons';
 import { Button } from '../ui/Button.styles';
@@ -12,6 +13,8 @@ function Filters({
   onFilterReset,
   onPageChange,
 }) {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   const yearOptions = [
     'all-year',
     ...new Set(dataList.map(form => new Date(form.creationDate).getFullYear())),
@@ -23,57 +26,79 @@ function Filters({
     ...new Array(12).fill().map((_, index) => index + 1),
   ];
 
+  const changeFilterHandler = (filterName, value) => {
+    onFilterChange(filterName, value);
+    onPageChange(1);
+  };
+
+  const resetFilterHandler = () => {
+    onFilterReset();
+    onPageChange(1);
+  };
+
+  const toggleSearchButtonHandler = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
   return (
     <FiltersStyled>
-      <select
-        value={year}
-        onChange={e => {
-          onFilterChange('year', e.target.value);
-          onPageChange(1);
-        }}
-      >
-        {yearOptions.map(item => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-
-      <select
-        value={month}
-        onChange={e => {
-          onFilterChange('month', e.target.value);
-          onPageChange(1);
-        }}
-      >
-        {monthOptions.map(item => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-
-      <label>
-        <SearchIcon />
-        <input
-          type="text"
-          placeholder="검색..."
-          value={searchWord}
+      <div className="filters-group">
+        <select
+          value={year}
           onChange={e => {
-            onFilterChange('searchWord', e.target.value);
+            onFilterChange('year', e.target.value);
             onPageChange(1);
           }}
-        />
-      </label>
+        >
+          {yearOptions.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
 
-      <Button
-        onClick={() => {
-          onFilterReset();
-          onPageChange(1);
-        }}
-      >
-        필터 초기화
-      </Button>
+        <select
+          value={month}
+          onChange={e => {
+            onFilterChange('month', e.target.value);
+            onPageChange(1);
+          }}
+        >
+          {monthOptions.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <label className="search-pc">
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="검색..."
+            value={searchWord}
+            onChange={e => changeFilterHandler('searchWord', e.target.value)}
+          />
+        </label>
+
+        <Button className="search-button" onClick={toggleSearchButtonHandler}>
+          <SearchIcon />
+        </Button>
+
+        <Button onClick={resetFilterHandler}>필터 초기화</Button>
+      </div>
+
+      {isSearchOpen && (
+        <label className="search-mobile">
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="검색..."
+            value={searchWord}
+            onChange={e => changeFilterHandler('searchWord', e.target.value)}
+          />
+        </label>
+      )}
     </FiltersStyled>
   );
 }
