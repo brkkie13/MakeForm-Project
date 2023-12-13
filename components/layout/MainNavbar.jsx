@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // components
 import Button from '../ui/Button';
-import { Header } from './MainNavbar.styles';
+import { HeaderContainer, HeaderStyled } from './MainNavbar.styles';
 import ToggleSwitch from '../../helpers/ToggleSwitch';
 import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
@@ -75,66 +75,68 @@ function MainNavbar() {
   const activeUserInfo = isDropdownOpen ? 'user-info active' : 'user-info';
 
   return (
-    <Header>
-      <Link href="/" className="logo">
-        <Logo />
-      </Link>
+    <HeaderContainer>
+      <HeaderStyled>
+        <Link href="/" className="logo">
+          <Logo />
+        </Link>
 
-      <nav>
-        <ul>
-          <li className={pathname === '/create' ? 'active' : ''}>
-            <Link href={'/create'} className="menu-button">
-              <CreateIcon />
-              <span>폼 만들기</span>
-            </Link>
-          </li>
-          <li className={pathname === '/forms' ? 'active' : ''}>
-            <Link href="/forms" className="menu-button">
-              <FormIcon />
-              <span>나의 폼</span>
-            </Link>
-          </li>
-          <li className={pathname === '/analysis' ? 'active' : ''}>
-            <Link href="/analysis" className="menu-button">
-              <ChartIcon />
-              <span>통계</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+        <nav>
+          <ul>
+            <li className={pathname === '/create' ? 'active' : ''}>
+              <Link href={'/create'} className="menu-button">
+                <CreateIcon />
+                <span>폼 만들기</span>
+              </Link>
+            </li>
+            <li className={pathname === '/forms' ? 'active' : ''}>
+              <Link href="/forms" className="menu-button">
+                <FormIcon />
+                <span>나의 폼</span>
+              </Link>
+            </li>
+            <li className={pathname === '/analysis' ? 'active' : ''}>
+              <Link href="/analysis" className="menu-button">
+                <ChartIcon />
+                <span>통계</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
-      <div className="controls">
-        <div className="control">
-          <ToggleSwitch
-            isToggled={!isDarkMode}
-            onToggle={toggleDarkModeHandler}
-          />
+        <div className="controls">
+          <div className="control">
+            <ToggleSwitch
+              isToggled={!isDarkMode}
+              onToggle={toggleDarkModeHandler}
+            />
+          </div>
+          <div className="control auth-control">
+            {user ? (
+              <>
+                <div
+                  className={activeUserInfo}
+                  onClick={toggleDropdownMenuHandler}
+                >
+                  <Image
+                    src={user?.photoURL || '/images/profile.png'}
+                    alt="유저 프로필"
+                    width={30}
+                    height={30}
+                  />
+                  <span>{user?.displayName || user?.email}님</span>
+                </div>
+                {isDropdownOpen && <DropdownMenu menuList={menuList} />}
+              </>
+            ) : (
+              <Button primary="highlight" onClick={openAuthModalHandler}>
+                로그인 / 회원가입
+              </Button>
+            )}
+          </div>
         </div>
-        <div className="control auth-control">
-          {user ? (
-            <>
-              <div
-                className={activeUserInfo}
-                onClick={toggleDropdownMenuHandler}
-              >
-                <Image
-                  src={user?.photoURL || '/images/profile.png'}
-                  alt="유저 프로필"
-                  width={30}
-                  height={30}
-                />
-                <span>{user?.displayName || user?.email}님</span>
-              </div>
-              {isDropdownOpen && <DropdownMenu menuList={menuList} />}
-            </>
-          ) : (
-            <Button primary="highlight" onClick={openAuthModalHandler}>
-              로그인 / 회원가입
-            </Button>
-          )}
-        </div>
-      </div>
-    </Header>
+      </HeaderStyled>
+    </HeaderContainer>
   );
 }
 

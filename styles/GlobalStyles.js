@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${props => props.theme.colors.background2};
     width: 100vw;
-    height: 100vh;
+    height: auto;
   }
 
   ul,button,svg :hover {

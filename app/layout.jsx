@@ -2,6 +2,7 @@ import StyledComponentsRegistry from '../lib/registry';
 import GlobalProvider from './providers/GlobalProvider';
 import MainNavbar from '../components/layout/MainNavbar';
 import MobileNavbar from '../components/layout/MobileNavbar';
+import Footer from '../components/layout/Footer';
 
 export const metadata = {
   title: 'make form - 손쉬운 설문 관리',
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
             <MainNavbar />
             <MobileNavbar />
             {children}
-            {/* <Footer /> */}
+            <Footer />
           </GlobalProvider>
         </StyledComponentsRegistry>
       </body>

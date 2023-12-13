@@ -1,18 +1,27 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  padding: 0 30px;
-  z-index: 100;
   height: 75px;
+  background-color: ${props => props.theme.colors.background};
+  z-index: 100;
+  width: 100vw;
+  @media screen and (max-width: 768px) {
+    height: 60px;
+  }
+`;
+
+export const HeaderStyled = styled.header`
+  width: 1300px;
+  padding: 0 30px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${props => props.theme.colors.background};
-  border-bottom: 1px solid ${props => props.theme.colors.border};
 
   .logo svg {
     width: 150px;
@@ -109,8 +118,6 @@ export const Header = styled.header`
 
   // 너비가 모바일이면 메뉴대신 하단메뉴바가 생김.
   @media screen and (max-width: 768px) {
-    height: 60px;
-
     nav,
     .auth-control {
       display: none;

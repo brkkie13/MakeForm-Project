@@ -1,5 +1,5 @@
 // react-icons 라이브러리
-import { IoClose } from 'react-icons/io5';
+import { IoClose, IoMail } from 'react-icons/io5';
 import { FiSun, FiMoon, FiEdit } from 'react-icons/fi';
 import {
   HiOutlineTrash,
@@ -142,6 +142,10 @@ export function ArrowIcon(props) {
 
 export function DoubleArrowIcon(props) {
   return <MdKeyboardDoubleArrowLeft size="25" {...props} />;
+}
+
+export function MailIcon(props) {
+  return <IoMail {...props} />;
 }
 
 // export function Icon(props) {

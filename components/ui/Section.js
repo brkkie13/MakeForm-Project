@@ -4,12 +4,13 @@ const Section = styled.section`
   background: ${props => props.theme.colors.background2};
   margin: 0 auto;
   max-width: 900px;
-  padding: 30px 0;
 
   margin-top: 75px; // MainNavbar 높이에 맞게 수정.
 
   display: flex;
   flex-direction: column;
+
+  padding: 40px 0;
 
   h1 {
     margin-bottom: 30px;
@@ -38,7 +39,7 @@ const Section = styled.section`
 
   @media screen and (max-width: 768px) {
     margin-top: 60px; // MobileNavbar 높이에 맞게 수정.
-    margin-bottom: 75px; // MobileNavbar 높이에 맞게 수정.
+    //padding-bottom: 70px; // MobileNavbar 높이에 맞게 수정.
   }
 `;
 
