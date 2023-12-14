@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import useLocalStorage from './useLocalStorage';
-import useQueryString from './useQueryString';
+import { useLocalStorage } from './localStorage';
 
 function usePagination(setQueryStringState) {
-  // const createQueryString = useQueryString();
   const { getItem, setItem, removeItem } = useLocalStorage();
 
   const [currentPage, setCurrentPage] = useState(
@@ -21,7 +19,6 @@ function usePagination(setQueryStringState) {
   const changePage = number => {
     setCurrentPage(number);
 
-    // createQueryString('page', number);
     setQueryStringState(prevState => ({
       ...prevState,
       page: number !== 1 ? number : null,

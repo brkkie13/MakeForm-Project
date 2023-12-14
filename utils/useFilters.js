@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useLocalStorage from './useLocalStorage';
+import { useLocalStorage } from './localStorage';
 
 function useFilters(setQueryStringState) {
   const { getItem, setItem, removeItem } = useLocalStorage();

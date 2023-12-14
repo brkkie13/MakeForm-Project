@@ -11,8 +11,48 @@ import {
 } from 'firebase/firestore';
 import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
+import { storeDataToLocalStorage } from '../../utils/localStorage';
 
-export const sendFormData = newForm => {
+const validateForm = form => {
+  if (form.header === '') {
+    throw new Error('빈칸을 모두 입력하세요.');
+  }
+
+  if (form.items.length === 0) {
+    throw new Error('최소 한 개 이상의 질문을 입력하세요.');
+  }
+
+  let hasTitle = false;
+
+  form.items.forEach(item => {
+    // 모든 item객체에 'title'필드가 없고 'description'같이 질문이 아닌 필드만 있을 때
+    if ('title' in item) {
+      hasTitle = true;
+    }
+
+    if ('title' in item && item.title === '') {
+      throw new Error('빈칸을 모두 입력하세요.');
+    }
+
+    if ('description' in item && item.description === '') {
+      throw new Error('빈칸을 모두 입력하세요.');
+    }
+
+    if ('options' in item) {
+      item.options.forEach(option => {
+        if ('text' in option && option.text === '') {
+          throw new Error('빈칸을 모두 입력하세요.');
+        }
+      });
+    }
+  });
+
+  if (!hasTitle) {
+    throw new Error('최소 한 개 이상의 질문을 입력하세요.');
+  }
+};
+
+export const sendFormData = (user, newForm) => {
   return async dispatch => {
     const formsCollectionRef = collection(db, 'forms');
 
@@ -32,40 +72,12 @@ export const sendFormData = newForm => {
     // };
 
     try {
-      // 조건 추가 (입력해야 할 값 중 비어있는 값이 있을 때)
-      if (newForm.header === '') {
-        console.log(newForm);
-        throw new Error('빈칸을 모두 입력해주세요.');
-      }
+      console.log(newForm);
+      validateForm(newForm);
 
-      if (newForm.items.length === 0) {
-        throw new Error('최소 한 개 이상의 질문을 입력하세요.');
-      }
+      user && (await postData());
+      !user && storeDataToLocalStorage(newForm);
 
-      newForm.items.forEach(item => {
-        // 'title'필드가 없고 'description'같이 질문이 아닌 필드만 있을 때
-        if (!('title' in item)) {
-          throw new Error('최소 한 개 이상의 질문을 입력하세요.');
-        }
-
-        if ('title' in item && item.title === '') {
-          throw new Error('빈칸을 모두 입력하세요.');
-        }
-
-        if ('description' in item && item.description === '') {
-          throw new Error('빈칸을 모두 입력하세요.');
-        }
-
-        if ('options' in item) {
-          item.options.forEach(option => {
-            if ('text' in option && option.text === '') {
-              throw new Error('빈칸을 모두 입력하세요.');
-            }
-          });
-        }
-      });
-
-      await postData();
       // post 성공했을 때만 create페이지 값 리셋
       dispatch(formActions.resetAllValue());
 
@@ -89,7 +101,7 @@ export const sendFormData = newForm => {
       dispatch(
         uiActions.showNotification({
           status: 'error',
-          message: '저장 실패!',
+          message: '저장 실패',
         })
       );
     }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import useLocalStorage from './useLocalStorage';
+import { useLocalStorage } from './localStorage';
 
 function useQueryString() {
   const router = useRouter();

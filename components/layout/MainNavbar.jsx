@@ -11,7 +11,7 @@ import ToggleSwitch from '../../helpers/ToggleSwitch';
 import { CreateIcon, FormIcon, ChartIcon } from '../../\bstyles/Icons';
 import { Logo } from '../../\bstyles/Logo';
 import AuthForm from '../modals/AuthForm';
-import useLocalStorage from '../../utils/useLocalStorage';
+import { useLocalStorage } from '../../utils/localStorage';
 import DropdownMenu from '../ui/DropdownMenu';
 
 // redux

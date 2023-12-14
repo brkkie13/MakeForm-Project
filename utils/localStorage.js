@@ -1,4 +1,4 @@
-function useLocalStorage() {
+export const useLocalStorage = () => {
   const setItem = (key, value) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(key, value);
@@ -19,6 +19,19 @@ function useLocalStorage() {
   };
 
   return { setItem, getItem, removeItem };
-}
+};
 
-export default useLocalStorage;
+export const storeDataToLocalStorage = data => {
+  const { setItem, getItem, removeItem } = useLocalStorage();
+
+  let storedForms = getItem('forms');
+
+  if (!storedForms) {
+    storedForms = [];
+  } else {
+    storedForms = JSON.parse(storedForms);
+  }
+
+  storedForms.push(data);
+  setItem('forms', JSON.stringify(storedForms));
+};
