@@ -72,7 +72,6 @@ export const sendFormData = (user, newForm) => {
     // };
 
     try {
-      console.log(newForm);
       validateForm(newForm);
 
       user && (await postData());

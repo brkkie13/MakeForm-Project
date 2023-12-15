@@ -22,7 +22,7 @@ export const useLocalStorage = () => {
 };
 
 export const storeDataToLocalStorage = data => {
-  const { setItem, getItem, removeItem } = useLocalStorage();
+  const { setItem, getItem } = useLocalStorage();
 
   let storedForms = getItem('forms');
 
@@ -34,4 +34,15 @@ export const storeDataToLocalStorage = data => {
 
   storedForms.push(data);
   setItem('forms', JSON.stringify(storedForms));
+};
+
+export const getDataFromLocalStorage = () => {
+  const { getItem } = useLocalStorage();
+  let storedForms = getItem('forms');
+
+  if (!storedForms) {
+    return;
+  }
+
+  return JSON.parse(storedForms);
 };
