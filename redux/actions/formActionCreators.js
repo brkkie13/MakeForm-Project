@@ -52,7 +52,7 @@ const validateForm = form => {
   }
 };
 
-export const sendFormData = (user, newForm) => {
+export const sendFormData = (user, newForm, isCreatePage) => {
   return async dispatch => {
     const formsCollectionRef = collection(db, 'forms');
 
@@ -72,7 +72,8 @@ export const sendFormData = (user, newForm) => {
     // };
 
     try {
-      validateForm(newForm);
+      // '/create'페이지에서 새로 생성할 때만 검증. copyFormHandler에서는 검증할 필요 없음.
+      isCreatePage && validateForm(newForm);
 
       user && (await postData());
       !user && storeDataToLocalStorage(newForm);

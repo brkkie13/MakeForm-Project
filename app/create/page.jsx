@@ -35,6 +35,8 @@ function CreatePage() {
   };
 
   const saveFormHandler = () => {
+    const isCreatePage = true; // sendFormData에서 폼 생성시에만 validateForm함수를 실행
+
     const data = {
       creationDate: new Date().toISOString(),
       header: header,
@@ -44,7 +46,7 @@ function CreatePage() {
     user && (data.userId = auth.currentUser.uid);
     !user && (data.id = dataId);
 
-    dispatch(sendFormData(user, data));
+    dispatch(sendFormData(user, data, isCreatePage));
 
     dataId++;
     localStorage.setItem('dataId', dataId);
