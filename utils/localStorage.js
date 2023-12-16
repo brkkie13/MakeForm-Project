@@ -21,28 +21,33 @@ export const useLocalStorage = () => {
   return { setItem, getItem, removeItem };
 };
 
-export const storeDataToLocalStorage = data => {
-  const { setItem, getItem } = useLocalStorage();
-
-  let storedForms = getItem('forms');
-
-  if (!storedForms) {
-    storedForms = [];
-  } else {
-    storedForms = JSON.parse(storedForms);
-  }
-
-  storedForms.push(data);
-  setItem('forms', JSON.stringify(storedForms));
-};
+const { setItem, getItem } = useLocalStorage();
 
 export const getDataFromLocalStorage = () => {
-  const { getItem } = useLocalStorage();
   let storedForms = getItem('forms');
-
   if (!storedForms) {
     return;
   }
 
   return JSON.parse(storedForms);
+};
+
+export const storeDataToLocalStorage = data => {
+  const storedForms = getDataFromLocalStorage() || [];
+  storedForms.push(data);
+  setItem('forms', JSON.stringify(storedForms));
+};
+
+export const removeDataFromLocalStorage = id => {
+  const storedForms = getDataFromLocalStorage();
+  const filteredForms = storedForms.filter(form => form.id !== id);
+  setItem('forms', JSON.stringify(filteredForms));
+};
+
+export const updateDataToLocalStorage = (id, editedData) => {
+  const storedForms = getDataFromLocalStorage();
+  const editedForms = storedForms.map(form =>
+    form.id === id ? { ...form, ...editedData } : form
+  );
+  setItem('forms', JSON.stringify(editedForms));
 };

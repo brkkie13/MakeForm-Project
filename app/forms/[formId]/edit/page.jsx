@@ -1,7 +1,6 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import styled from 'styled-components';
 
 // components
 import Button from '../../../../components/ui/Button';
@@ -10,14 +9,12 @@ import FormTypes from '../../../../components/form-types/FormTypes';
 import Section from '../../../../components/ui/Section';
 import useFirebaseAuthState from '../../../../utils/useFirebaseAuthState';
 import { getDataFromLocalStorage } from '../../../../utils/localStorage';
-import { useLocalStorage } from '../../../../utils/localStorage';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormData } from '../../../../redux/actions/formActionCreators';
 import { formActions } from '../../../../redux/features/formSlice';
 import { updateFormData } from '../../../../redux/actions/formActionCreators';
-import { uiActions } from '../../../../redux/features/uiSlice';
 
 // code
 function EditPage() {
@@ -26,7 +23,6 @@ function EditPage() {
   const formId = params.formId;
   const dispatch = useDispatch();
   const user = useFirebaseAuthState();
-  const { setItem } = useLocalStorage();
 
   const formList = useSelector(state => state.form.formList);
   const editHeader = useSelector(state => state.form.editHeader);
@@ -49,9 +45,7 @@ function EditPage() {
       const storedForms = getDataFromLocalStorage();
 
       if (storedForms && storedForms.length > 0) {
-        const targetedForm = storedForms.find(
-          form => form.id === Number(formId)
-        );
+        const targetedForm = storedForms.find(form => form.id === formId);
 
         targetedForm
           ? dispatch(formActions.setInitialEditValue(targetedForm))
@@ -79,24 +73,7 @@ function EditPage() {
       items: editItems,
     };
 
-    user && dispatch(updateFormData(formId, editedData));
-    if (!user) {
-      const storedForms = getDataFromLocalStorage();
-      const editedForms = storedForms.map(form =>
-        form.id === Number(formId)
-          ? { ...form, header: editHeader, items: editItems }
-          : form
-      );
-
-      setItem('forms', JSON.stringify(editedForms));
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          message: '수정되었습니다',
-        })
-      );
-    }
-
+    dispatch(updateFormData(user, formId, editedData));
     router.push(`/forms/${formId}`);
   };
 

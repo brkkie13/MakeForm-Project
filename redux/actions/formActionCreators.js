@@ -11,7 +11,11 @@ import {
 } from 'firebase/firestore';
 import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
-import { storeDataToLocalStorage } from '../../utils/localStorage';
+import {
+  removeDataFromLocalStorage,
+  storeDataToLocalStorage,
+  updateDataToLocalStorage,
+} from '../../utils/localStorage';
 
 const validateForm = form => {
   if (form.header === '') {
@@ -142,7 +146,7 @@ export const fetchFormData = uid => {
   };
 };
 
-export const updateFormData = (formId, editedData) => {
+export const updateFormData = (user, formId, editedData) => {
   return async dispatch => {
     const patchData = async () => {
       const formDoc = doc(db, 'forms', formId);
@@ -161,7 +165,9 @@ export const updateFormData = (formId, editedData) => {
     // };
 
     try {
-      await patchData();
+      user && (await patchData());
+      !user && updateDataToLocalStorage(formId, editedData);
+
       dispatch(
         uiActions.showNotification({
           status: 'success',
@@ -174,7 +180,7 @@ export const updateFormData = (formId, editedData) => {
   };
 };
 
-export const removeFormData = formId => {
+export const removeFormData = (user, formId) => {
   return async dispatch => {
     const deleteData = async () => {
       const formDoc = doc(db, 'forms', formId);
@@ -192,7 +198,8 @@ export const removeFormData = formId => {
     // };
 
     try {
-      await deleteData();
+      user && (await deleteData());
+      !user && removeDataFromLocalStorage(formId);
       dispatch(
         uiActions.showNotification({
           status: 'success',

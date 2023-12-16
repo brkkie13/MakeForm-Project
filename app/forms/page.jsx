@@ -20,10 +20,8 @@ import Section from '../../components/ui/Section';
 import useFilters from '../../utils/useFilters';
 import usePagination from '../../utils/usePagination';
 import useQueryString from '../../utils/useQueryString';
-import {
-  getDataFromLocalStorage,
-  storeDataToLocalStorage,
-} from '../../utils/localStorage';
+import { getDataFromLocalStorage } from '../../utils/localStorage';
+import { useLocalStorage } from '../../utils/localStorage';
 
 // code
 function FormsPage() {
@@ -32,6 +30,7 @@ function FormsPage() {
   const user = useFirebaseAuthState();
   const formList = useSelector(state => state.form.formList);
   const setQueryStringState = useQueryString();
+  const { setItem, getItem } = useLocalStorage();
 
   const { year, month, searchWord, changeFilter, resetFilter, filterList } =
     useFilters(setQueryStringState);
@@ -86,7 +85,7 @@ function FormsPage() {
 
       // 로그인상태 아닐 때 데이터 복사해서 로컬스토리지에 저장
       if (!user) {
-        let dataId = Number(localStorage.getItem('dataId'));
+        let dataId = getItem('dataId');
         let storedForms = getDataFromLocalStorage();
         const targetedForm = storedForms.find(form => form.id === formId);
 
@@ -99,7 +98,7 @@ function FormsPage() {
 
         dispatch(sendFormData(user, data));
         dataId++;
-        localStorage.setItem('dataId', dataId);
+        setItem('dataId', dataId);
 
         // 복사된 데이터가 바로 화면에 업데이트 되도록 함
         storedForms = getDataFromLocalStorage();

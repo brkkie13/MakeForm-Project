@@ -18,13 +18,14 @@ import { auth } from '../../firebase.config';
 
 // code
 function CreatePage() {
-  const { setItem, getItem } = useLocalStorage();
+  const { getItem, setItem } = useLocalStorage();
   const dispatch = useDispatch();
   const user = useFirebaseAuthState();
+
   // component 요소 예시: { formType: 'multipleChoiceType', id: 0, title: '~~', options: [ {text: '~~'}, { text: '~~'} ] }
   const components = useSelector(state => state.form.components);
   const header = useSelector(state => state.form.header);
-  let dataId = Number(localStorage.getItem('dataId')) || 0;
+  let dataId = getItem('dataId') || 'localData0';
 
   const addFormTypeHandler = formType => {
     dispatch(formActions.addComponent(formType));
@@ -48,8 +49,12 @@ function CreatePage() {
 
     dispatch(sendFormData(user, data, isCreatePage));
 
-    dataId++;
-    localStorage.setItem('dataId', dataId);
+    // 데이터 저장 후, dataId 뒤의 숫자를 1만큼 올려서 로컬스토리지에 저장.
+    let numOfDataId = dataId.replace('localData', '');
+    numOfDataId++;
+    dataId = `localData${numOfDataId}`;
+
+    setItem('dataId', dataId);
   };
 
   return (
