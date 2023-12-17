@@ -137,8 +137,8 @@ export const formSlice = createSlice({
       const compareDates = (a, b) => {
         return new Date(b.creationDate) - new Date(a.creationDate);
       };
-      formData.sort(compareDates);
 
+      formData && formData.sort(compareDates);
       state.formList = formData;
     },
 

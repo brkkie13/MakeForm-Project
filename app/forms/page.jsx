@@ -31,20 +31,20 @@ function FormsPage() {
   const user = useFirebaseAuthState();
   const formList = useSelector(state => state.form.formList);
   const setQueryStringState = useQueryString();
-  const { setItem, getItem } = useLocalStorage();
+  const { getItem } = useLocalStorage();
 
   const { year, month, searchWord, changeFilter, resetFilter, filterList } =
     useFilters(setQueryStringState);
 
-  const filteredFormList = filterList(formList);
-
   const { currentPage, indexOfFirstPost, indexOfLastPost, changePage } =
     usePagination(setQueryStringState);
 
-  const currentPosts = filteredFormList.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
+  const filteredFormList = formList ? filterList(formList) : [];
+
+  const currentPosts =
+    filteredFormList.length > 0
+      ? filteredFormList.slice(indexOfFirstPost, indexOfLastPost)
+      : [];
 
   useEffect(() => {
     if (user) {

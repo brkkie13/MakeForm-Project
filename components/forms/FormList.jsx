@@ -16,7 +16,7 @@ import { formatDate } from '../../utils/date';
 function FormList({ allPosts, currentPosts, onShow, onCopy }) {
   const router = useRouter();
 
-  if (currentPosts.length === 0) {
+  if (allPosts.length === 0) {
     return (
       <EmptyListStyled>
         <EmptyIcon />
