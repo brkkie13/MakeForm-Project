@@ -11,7 +11,7 @@ import { GrDrag } from 'react-icons/gr';
 import { AiOutlineLink, AiOutlineLineChart } from 'react-icons/ai';
 import { TbReload } from 'react-icons/tb';
 import { FaStar, FaGoogle } from 'react-icons/fa';
-import { FaCheck, FaExclamation } from 'react-icons/fa6';
+import { FaCheck, FaExclamation, FaFolderOpen } from 'react-icons/fa6';
 import { PiCopy } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
@@ -146,6 +146,10 @@ export function DoubleArrowIcon(props) {
 
 export function MailIcon(props) {
   return <IoMail {...props} />;
+}
+
+export function EmptyIcon(props) {
+  return <FaFolderOpen {...props} />;
 }
 
 // export function Icon(props) {

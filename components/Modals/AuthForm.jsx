@@ -6,7 +6,7 @@ import { Button } from '../ui/Button.styles';
 import { validateEmail, validatePassword } from '../../utils/validation';
 
 import { AuthInput } from '../ui/InputArea';
-import { CautionIcon, GoogleLogo } from '../../\bstyles/Icons';
+import { GoogleLogo } from '../../\bstyles/Icons';
 
 // redux
 import { uiActions } from '../../redux/features/uiSlice';
@@ -20,6 +20,7 @@ import {
 } from '../../redux/actions/authActionCreators';
 import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
 import { authActions } from '../../redux/features/authSlice';
+import ErrorBox from '../ui/ErrorBox';
 
 // code
 function AuthForm() {
@@ -98,10 +99,7 @@ function AuthForm() {
     <AuthFormStyled onSubmit={submitAuthFormHandler}>
       <h1>{isLoginMode ? '로그인' : '회원가입'}</h1>
 
-      <div className={errorMessage ? 'error-message' : 'hide'}>
-        <CautionIcon />
-        <p>{errorMessage}</p>
-      </div>
+      {errorMessage && <ErrorBox message={errorMessage} />}
 
       <AuthInput
         type="email"

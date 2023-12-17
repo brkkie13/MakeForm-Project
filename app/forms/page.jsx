@@ -22,6 +22,7 @@ import usePagination from '../../utils/usePagination';
 import useQueryString from '../../utils/useQueryString';
 import { getDataFromLocalStorage } from '../../utils/localStorage';
 import { useLocalStorage } from '../../utils/localStorage';
+import ErrorBox from '../../components/ui/ErrorBox';
 
 // code
 function FormsPage() {
@@ -110,29 +111,37 @@ function FormsPage() {
 
   return (
     <Section>
+      {!user && (
+        <ErrorBox message="게시물은 브라우저에 임시로 저장됩니다. 로그인을 해주세요." />
+      )}
       <h1>최근 폼</h1>
 
-      <Filters
-        dataList={filteredFormList}
-        year={year}
-        month={month}
-        searchWord={searchWord}
-        onFilterChange={changeFilter}
-        onFilterReset={resetFilter}
-        onPageChange={changePage}
-      />
+      {currentPosts.length > 0 && (
+        <Filters
+          dataList={filteredFormList}
+          year={year}
+          month={month}
+          searchWord={searchWord}
+          onFilterChange={changeFilter}
+          onFilterReset={resetFilter}
+          onPageChange={changePage}
+        />
+      )}
 
       <FormList
+        allPosts={filteredFormList}
         currentPosts={currentPosts}
         onShow={showDetailHandler}
         onCopy={copyFormHandler}
       />
 
-      <Pagination
-        dataList={filteredFormList}
-        currentPage={currentPage}
-        onPageChange={changePage}
-      />
+      {currentPosts.length > 0 && (
+        <Pagination
+          dataList={filteredFormList}
+          currentPage={currentPage}
+          onPageChange={changePage}
+        />
+      )}
     </Section>
   );
 }

@@ -7,17 +7,34 @@ export const FormListStyled = styled.table`
   border-collapse: collapse; // 테두리 겹치기 해제
   border-spacing: 0; // 셀 사이의 간격 없애기
 
-  tr {
+  thead > tr > td {
+    padding-bottom: 6px;
+
+    .number {
+      font-weight: bold;
+      color: ${props => props.theme.colors.pointSkyblue};
+    }
+  }
+
+  tbody > tr {
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
   }
 
-  tr:hover {
+  tbody > tr:first-child {
+    border-top: 2px solid lightgray;
+  }
+
+  tbody > tr:last-child {
+    border-bottom: 2px solid lightgray;
+  }
+
+  tbody > tr:hover {
     background-color: ${props => props.theme.colors.background};
     cursor: pointer;
   }
 
-  td {
+  tbody > tr > td {
     padding: 20px 10px;
     display: flex;
     flex-direction: column;
@@ -44,5 +61,48 @@ export const FormListStyled = styled.table`
     display: flex;
     gap: 20px;
     align-items: center;
+  }
+`;
+
+export const EmptyListStyled = styled.article`
+  margin: 30px 0;
+  padding: 80px 0;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  & > svg {
+    width: 90px;
+    height: 90px;
+    fill: lightgray;
+  }
+
+  .main-text {
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .sub-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+  }
+
+  .create-form-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: ${props => props.theme.colors.activeMenu};
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
   }
 `;
