@@ -12,6 +12,7 @@ import {
 import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
 import {
+  getDataFromLocalStorage,
   removeDataFromLocalStorage,
   storeDataIdToLocalStorage,
   storeDataToLocalStorage,
@@ -79,6 +80,17 @@ export const sendFormData = (user, newForm, isCreatePage) => {
     try {
       // '/create'페이지에서 새로 생성할 때만 검증. copyFormHandler에서는 검증할 필요 없음.
       isCreatePage && validateForm(newForm);
+
+      // 로그인을 하지 않았을 때 생성할 수 있는 게시물은 총 30개까지로 제한
+      if (!user) {
+        const storedForms = getDataFromLocalStorage();
+
+        if (storedForms.length >= 30) {
+          throw new Error(
+            '로그인을 하지 않으면 임시 폼을 30개까지만 생성할 수 있습니다.'
+          );
+        }
+      }
 
       // 로그인 상태에서는 db에 저장, 로그아웃 상태에서는 로컬스토리지에 저장
       user && (await postData());
