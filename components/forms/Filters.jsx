@@ -16,13 +16,13 @@ function Filters({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const yearOptions = [
-    'all-year',
+    '전체 년',
     ...new Set(dataList.map(form => new Date(form.creationDate).getFullYear())),
   ];
 
   // 1~12월을 배열로 반환
   const monthOptions = [
-    'all-month',
+    '전체 월',
     ...new Array(12).fill().map((_, index) => index + 1),
   ];
 
