@@ -38,6 +38,14 @@ export const storeDataToLocalStorage = data => {
   setItem('forms', JSON.stringify(storedForms));
 };
 
+export const storeDataIdToLocalStorage = () => {
+  let dataId = getItem('dataId') || 'localData0';
+  let numOfDataId = Number(dataId.replace('localData', '')); // 숫자만 추출
+  numOfDataId++;
+  dataId = `localData${numOfDataId}`;
+  setItem('dataId', dataId);
+};
+
 export const removeDataFromLocalStorage = id => {
   const storedForms = getDataFromLocalStorage();
   const filteredForms = storedForms.filter(form => form.id !== id);

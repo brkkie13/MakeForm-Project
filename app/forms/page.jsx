@@ -98,8 +98,6 @@ function FormsPage() {
         };
 
         dispatch(sendFormData(user, data));
-        dataId++;
-        setItem('dataId', dataId);
 
         // 복사된 데이터가 바로 화면에 업데이트 되도록 함
         storedForms = getDataFromLocalStorage();

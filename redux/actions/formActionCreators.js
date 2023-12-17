@@ -13,6 +13,7 @@ import { formActions } from '../features/formSlice';
 import { uiActions } from '../features/uiSlice';
 import {
   removeDataFromLocalStorage,
+  storeDataIdToLocalStorage,
   storeDataToLocalStorage,
   updateDataToLocalStorage,
 } from '../../utils/localStorage';
@@ -79,11 +80,15 @@ export const sendFormData = (user, newForm, isCreatePage) => {
       // '/create'페이지에서 새로 생성할 때만 검증. copyFormHandler에서는 검증할 필요 없음.
       isCreatePage && validateForm(newForm);
 
+      // 로그인 상태에서는 db에 저장, 로그아웃 상태에서는 로컬스토리지에 저장
       user && (await postData());
       !user && storeDataToLocalStorage(newForm);
 
-      // post 성공했을 때만 create페이지 값 리셋
+      // 저장 성공했을 때 create페이지의 모든 값 리셋
       dispatch(formActions.resetAllValue());
+
+      // 로그아웃 상태일 땐 dataId 뒤의 숫자를 1만큼 올려서 로컬스토리지에 저장
+      !user && storeDataIdToLocalStorage();
 
       dispatch(
         uiActions.showNotification({

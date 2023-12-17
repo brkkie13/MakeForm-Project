@@ -48,13 +48,6 @@ function CreatePage() {
     !user && (data.id = dataId);
 
     dispatch(sendFormData(user, data, isCreatePage));
-
-    // 데이터 저장 후, dataId 뒤의 숫자를 1만큼 올려서 로컬스토리지에 저장.
-    let numOfDataId = dataId.replace('localData', '');
-    numOfDataId++;
-    dataId = `localData${numOfDataId}`;
-
-    setItem('dataId', dataId);
   };
 
   return (
