@@ -21,7 +21,9 @@ function StarRating({ onChangeRating }) {
     );
     setClickedStars(copiedClickedStars);
     const newScore = copiedClickedStars.filter(Boolean).length;
-    onChangeRating(newScore); // 부모컴포넌트로 별점 score 전달.
+
+    // 부모 컴포넌트로부터 onChangeRating함수를 전달 받았을 때만 실행(부모컴포넌트로 별점 score 전달)
+    onChangeRating && onChangeRating(newScore);
   };
 
   return (

@@ -32,7 +32,10 @@ export const responsesSlice = createSlice({
 
     changeRatingValue(state, action) {
       const { itemIdx, score } = action.payload;
-      state.responses[itemIdx].response = score;
+
+      if (state.responses.length > 0) {
+        state.responses[itemIdx].response = score;
+      }
     },
 
     changeOptionValue(state, action) {
