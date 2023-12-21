@@ -85,7 +85,7 @@ export const sendFormData = (user, newForm, isCreatePage) => {
       if (!user) {
         const storedForms = getDataFromLocalStorage();
 
-        if (storedForms.length >= 30) {
+        if (storedForms && storedForms.length >= 30) {
           throw new Error(
             '로그인을 하지 않으면 임시 폼을 30개까지만 생성할 수 있습니다.'
           );
