@@ -7,21 +7,21 @@ const GlobalStyle = createGlobalStyle`
   font-family: inherit;
   font-size: 16px;
   box-sizing: border-box;
-  color: ${props => props.theme.colors.font};
+  color: ${props => props.theme.colorBlackOrWhite};
   }
 
   body {
-    background: ${props => props.theme.colors.background2};
+    background: ${props => props.theme.colorBackground1}; // 배경색
     width: 100vw;
     height: auto;
   }
 
-  ul,button,svg :hover {
+  li,button,svg :hover {
     cursor: pointer;
   }
 
   // reset CSS
-  html,body,ul,h1,h2,h3,h4,h5,h6,p,span,svg,input,textarea,button,select {
+  html,body,ul,ol,h1,h2,h3,h4,h5,h6,p,span,svg,input,textarea,button,select {
     margin: 0;
     padding: 0;
   }

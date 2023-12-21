@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { FormListStyled, EmptyListStyled } from './FormList.styles';
 import {
   LinkIcon,
@@ -8,14 +7,12 @@ import {
   EmptyIcon,
   CreateIcon,
 } from '../../\bstyles/Icons';
-import { IconButtonStyled } from '../ui/Button.styles';
+import { IconButtonStyled } from '../ui/Buttons';
 import Tooltip from '../ui/Tooltip';
 import { formatDate } from '../../utils/date';
 
 // code
 function FormList({ allPosts, currentPosts, onShow, onCopy }) {
-  const router = useRouter();
-
   if (allPosts.length === 0) {
     return (
       <EmptyListStyled>
@@ -33,38 +30,45 @@ function FormList({ allPosts, currentPosts, onShow, onCopy }) {
 
   return (
     <FormListStyled>
-      <thead>
-        <tr>
-          <td>
-            총 <span className="number">{allPosts.length}</span>건
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        {currentPosts.map(data => (
-          <tr key={data.id} onClick={() => onShow(data.id)}>
+      <table>
+        <thead>
+          <tr>
             <td>
-              <div className="header">{data.header}</div>
-              <div className="date-and-controls">
-                <span className="date">{formatDate(data.creationDate)}</span>
-                <span className="controls">
-                  <Tooltip text="링크 복사">
-                    <IconButtonStyled>
-                      <LinkIcon />
-                    </IconButtonStyled>
-                  </Tooltip>
-
-                  <Tooltip text="폼 복제">
-                    <IconButtonStyled onClick={event => onCopy(event, data.id)}>
-                      <CopyIcon />
-                    </IconButtonStyled>
-                  </Tooltip>
-                </span>
-              </div>
+              총 <span className="number">{allPosts.length}</span>건
             </td>
           </tr>
-        ))}
-      </tbody>
+        </thead>
+        <tbody>
+          {currentPosts.map(data => (
+            <tr key={data.id} onClick={() => onShow(data.id)}>
+              <td>
+                <div className="header">{data.header}</div>
+                <div className="date-and-controls">
+                  <div className="date">{formatDate(data.creationDate)}</div>
+                  <div className="controls">
+                    <Tooltip text="공유">
+                      <IconButtonStyled>
+                        <LinkIcon />
+                        {/* 너비가 모바일일 때만 span 노출(IconButtonStyled에서 설정함) */}
+                        <span>공유</span>
+                      </IconButtonStyled>
+                    </Tooltip>
+
+                    <Tooltip text="복제">
+                      <IconButtonStyled
+                        onClick={event => onCopy(event, data.id)}
+                      >
+                        <CopyIcon />
+                        <span>복제</span>
+                      </IconButtonStyled>
+                    </Tooltip>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </FormListStyled>
   );
 }

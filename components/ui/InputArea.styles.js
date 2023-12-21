@@ -7,7 +7,7 @@ export const Textarea = styled.textarea`
   height: 20px;
   line-height: 1.3;
   &::placeholder {
-    color: #bbbbbb;
+    color: ${props => props.theme.colorGrayLight};
   }
 `;
 
@@ -35,7 +35,7 @@ export const AuthInputStyled = styled.div`
 
   input {
     padding: 10px;
-    border: 1px solid lightgray;
+    border: 1px solid ${props => props.theme.colorGrayLightest};
     border-radius: 5px;
     transition: border-color 0.3s;
     padding-right: 40px;
@@ -43,11 +43,11 @@ export const AuthInputStyled = styled.div`
   }
 
   input:focus {
-    border-color: ${props => props.theme.colors.pointSkyblue};
+    border-color: ${props => props.theme.colorBlue0};
   }
 
   input.invalid {
-    border-color: ${props => props.theme.colors.pointRed};
+    border-color: ${props => props.theme.colorRed};
   }
 
   .validation-icon {
@@ -60,21 +60,21 @@ export const AuthInputStyled = styled.div`
   }
 
   .validation-icon > .valid {
-    fill: ${props => props.theme.colors.pointSkyblue};
+    fill: ${props => props.theme.colorBlue0};
   }
 
   .validation-icon > .invalid {
-    fill: ${props => props.theme.colors.pointRed};
+    fill: ${props => props.theme.colorRed};
   }
 
   .caution {
     display: flex;
     font-size: 13px;
-    color: ${props => props.theme.colors.pointRed};
+    color: ${props => props.theme.colorRed};
     margin-top: 5px;
 
     svg {
-      fill: ${props => props.theme.colors.pointRed};
+      fill: ${props => props.theme.colorRed};
       margin-right: 3px;
     }
   }

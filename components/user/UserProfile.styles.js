@@ -30,7 +30,9 @@ export const UserProfileStyled = styled.div`
 
   .controls {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
     margin-top: 50px;
   }
 `;

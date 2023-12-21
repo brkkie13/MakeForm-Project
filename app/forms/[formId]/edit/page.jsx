@@ -3,12 +3,15 @@ import { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
-import Button from '../../../../components/ui/Button';
 import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
 import FormTypes from '../../../../components/form-types/FormTypes';
 import Section from '../../../../components/ui/Section';
 import useFirebaseAuthState from '../../../../utils/useFirebaseAuthState';
 import { getDataFromLocalStorage } from '../../../../utils/localStorage';
+import {
+  OutlinedButtonStyled,
+  FilledButtonStyled,
+} from '../../../../components/ui/Buttons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -88,10 +91,10 @@ function EditPage() {
       />
 
       <div className="controls centered">
-        <Button onClick={onCancelHandler}>취소</Button>
-        <Button onClick={saveFormHandler} primary="highlight">
-          등록
-        </Button>
+        <OutlinedButtonStyled onClick={onCancelHandler}>
+          취소
+        </OutlinedButtonStyled>
+        <FilledButtonStyled onClick={saveFormHandler}>수정</FilledButtonStyled>
       </div>
     </Section>
   );

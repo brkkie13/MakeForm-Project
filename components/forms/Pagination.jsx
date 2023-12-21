@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PaginationStyled } from './Pagination.styles';
 import { ArrowIcon, DoubleArrowIcon } from '../../\bstyles/Icons';
+import { PaginationButtonStyled } from '../ui/Buttons';
 
 // code
 const PREV = 'prev';
@@ -62,17 +63,17 @@ function Pagination({ dataList, currentPage, onPageChange }) {
     <PaginationStyled>
       <DoubleArrowIcon onClick={() => clickDoubleArrowHandler(PREV)} />
       <ArrowIcon onClick={() => clickArrowHandler(PREV)} />
-      <ul>
+      <ol>
         {pageNumbers.map(number => (
-          <li
+          <PaginationButtonStyled
             key={number}
             className={currentPage === number ? 'active' : ''}
             onClick={() => onPageChange(number)}
           >
             {number}
-          </li>
+          </PaginationButtonStyled>
         ))}
-      </ul>
+      </ol>
       <ArrowIcon onClick={() => clickArrowHandler(NEXT)} />
       <DoubleArrowIcon onClick={() => clickDoubleArrowHandler(NEXT)} />
     </PaginationStyled>

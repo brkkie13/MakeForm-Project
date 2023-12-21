@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
+  background: ${props => props.theme.colorBackground0};
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   height: 75px;
-  background-color: ${props => props.theme.colors.background};
   z-index: 100;
   width: 100vw;
-  @media screen and (max-width: 768px) {
+
+  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
     height: 60px;
   }
 `;
@@ -20,30 +21,58 @@ export const HeaderStyled = styled.header`
   padding: 0 30px;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
-  .logo svg {
-    width: 150px;
+  .logo {
+    svg {
+      width: 150px;
+    }
   }
+
   nav {
+    white-space: nowrap; // 메뉴의 글자가 줄바꿈이 되지 않도록 함
+    margin: 0 50px;
+    width: 100%;
+
     ul {
       display: flex;
-      gap: 30px;
+      justify-content: center;
+      gap: 40px;
     }
 
     li {
       background: transparent;
       padding: 8px 14px;
       border-radius: 5px;
+
+      svg {
+        fill: ${props => props.theme.colorGrayHeavy};
+      }
+
+      span {
+        color: ${props => props.theme.colorGrayHeavy};
+        font-weight: 600;
+      }
     }
 
     li:hover {
-      background: ${props => props.theme.colors.hoverMenu};
+      svg {
+        fill: ${props => props.theme.colorBlue0};
+      }
+
+      span {
+        color: ${props => props.theme.colorGrayHeaviest};
+      }
     }
 
     li.active {
-      background: ${props => props.theme.colors.activeMenu};
+      svg {
+        fill: ${props => props.theme.colorBlue0};
+      }
+
+      span {
+        color: ${props => props.theme.colorBlackOrWhite};
+      }
     }
 
     .menu-button {
@@ -61,6 +90,7 @@ export const HeaderStyled = styled.header`
     display: flex;
     align-items: center;
     gap: 20px;
+    white-space: nowrap;
   }
 
   .control {
@@ -73,9 +103,7 @@ export const HeaderStyled = styled.header`
     align-items: center;
     position: relative; // DropdownMenu 컴포넌트와 관련있음.
     cursor: pointer;
-    background: transparent;
-    padding: 8px 14px;
-    border-radius: 5px;
+    border-radius: ${props => props.theme.radiusSmall};
 
     img {
       border-radius: 50%;
@@ -84,40 +112,24 @@ export const HeaderStyled = styled.header`
   }
 
   .user-info:hover {
-    background: ${props => props.theme.colors.hoverMenu};
-  }
-  .user-info.active {
-    background: ${props => props.theme.colors.activeMenu};
+    span {
+      text-decoration: underline;
+    }
   }
 
-  // 너비가 줄어들면 nav의 메뉴가 숨겨지게 함.
-  @media screen and (max-width: 1000px) {
+  .user-info.active {
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
     justify-content: initial;
 
-    .logo {
-      padding-right: 40px;
+    & {
+      justify-content: space-between;
     }
 
-    nav {
-      overflow-x: auto;
-      white-space: nowrap;
-      margin-right: 20px;
-    }
-
-    nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .controls {
-      margin-left: auto;
-      z-index: 200;
-
-      white-space: nowrap;
-    }
-  }
-
-  // 너비가 모바일이면 메뉴대신 하단메뉴바가 생김.
-  @media screen and (max-width: 768px) {
     nav,
     .auth-control {
       display: none;

@@ -2,10 +2,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  CreateIcon,
-  FormIcon,
-  ChartIcon,
+  FilledHomeIcon,
   HomeIcon,
+  FilledCreateIcon,
+  CreateIcon,
+  FilledFormIcon,
+  FormIcon,
+  FilledChartIcon,
+  ChartIcon,
+  FilledUserIcon,
   UserIcon,
 } from '../../\bstyles/Icons';
 import { MobileNavbarStyled } from './MobileNavbar.styles';
@@ -18,31 +23,31 @@ function MobileNavbar() {
       <ul>
         <li className={pathname === '/' ? 'active' : ''}>
           <Link href={'/'}>
-            <HomeIcon />
+            {pathname === '/' ? <FilledHomeIcon /> : <HomeIcon />}
             <span>홈</span>
           </Link>
         </li>
         <li className={pathname === '/create' ? 'active' : ''}>
           <Link href={'/create'}>
-            <CreateIcon />
+            {pathname === '/create' ? <FilledCreateIcon /> : <CreateIcon />}
             <span>폼 만들기</span>
           </Link>
         </li>
         <li className={pathname === '/forms' ? 'active' : ''}>
           <Link href="/forms">
-            <FormIcon />
+            {pathname === '/forms' ? <FilledFormIcon /> : <FormIcon />}
             <span>나의 폼</span>
           </Link>
         </li>
         <li className={pathname === '/analysis' ? 'active' : ''}>
           <Link href="/analysis">
-            <ChartIcon />
+            {pathname === '/analysis' ? <FilledChartIcon /> : <ChartIcon />}
             <span>통계</span>
           </Link>
         </li>
         <li className={pathname === '/profile' ? 'active' : ''}>
           <Link href="/profile">
-            <UserIcon />
+            {pathname === '/profile' ? <FilledUserIcon /> : <UserIcon />}
             <span>계정</span>
           </Link>
         </li>

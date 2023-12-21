@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const ErrorBoxStyled = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid lightgray;
-  border-radius: 10px;
+  border: 1px solid ${props => props.theme.colorGrayLight};
+  border-radius: ${props => props.theme.radiusMedium};
   padding: 14px 18px;
   margin-bottom: 30px;
   gap: 8px;
@@ -12,11 +12,10 @@ export const ErrorBoxStyled = styled.div`
   svg {
     min-width: 20px;
     min-height: 20px;
-    fill: ${props => props.theme.colors.pointRed};
+    fill: ${props => props.theme.colorRed};
   }
 
   p {
-    font-weight: 500;
-    color: gray;
+    color: ${props => props.theme.colorGrayLight};
   }
 `;

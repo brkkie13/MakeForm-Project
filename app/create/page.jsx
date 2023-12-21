@@ -3,8 +3,8 @@
 // components
 import FormTypesToolbar from '../../components/form-types/FormTypesToolbar';
 import FormTypes from '../../components/form-types/FormTypes';
-import Button from '../../components/ui/Button';
 import Section from '../../components/ui/Section';
+import { FilledButtonStyled } from '../../components/ui/Buttons';
 
 // redux
 import { sendFormData } from '../../redux/actions/formActionCreators';
@@ -54,13 +54,9 @@ function CreatePage() {
     <Section>
       <FormTypesToolbar onAddFormType={addFormTypeHandler} />
       <FormTypes items={components} onRemoveFormType={removeFormTypeHandler} />
-      <Button
-        className="centered"
-        primary="highlight"
-        onClick={saveFormHandler}
-      >
+      <FilledButtonStyled className="centered" onClick={saveFormHandler}>
         저장
-      </Button>
+      </FilledButtonStyled>
     </Section>
   );
 }

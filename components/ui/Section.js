@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const Section = styled.section`
-  background: ${props => props.theme.colors.background2};
-  margin: 0 auto;
+  margin: 0 auto; // 가운데 정렬
   max-width: 900px;
 
-  margin-top: 75px; // MainNavbar 높이에 맞게 수정.
+  // MainNavbar 높이에 맞게 수정
+  margin-top: 75px;
 
   display: flex;
   flex-direction: column;
@@ -18,7 +18,8 @@ const Section = styled.section`
 
   // app/page.jsx
   .cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
   }
 
@@ -32,14 +33,15 @@ const Section = styled.section`
     gap: 20px;
   }
 
-  @media screen and (max-width: 1000px) {
+  // 화면 너비가 줄어들면 양옆의 여백 설정
+  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
     margin-left: 5%;
     margin-right: 5%;
   }
 
-  @media screen and (max-width: 768px) {
-    margin-top: 60px; // MobileNavbar 높이에 맞게 수정.
-    //padding-bottom: 70px; // MobileNavbar 높이에 맞게 수정.
+  // MobileNavbar 높이에 맞게 수정
+  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
+    margin-top: 60px;
   }
 `;
 

@@ -18,7 +18,7 @@ export const Label = styled.label`
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #4b4b4b;
+    background: ${props => props.theme.colorGrayLightest};
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -30,14 +30,14 @@ export const Label = styled.label`
     height: 22px;
     width: 22px;
     border-radius: 50%;
-    background-color: white;
+    background: ${props => props.theme.colorBackground0};
     left: 4px;
     bottom: 4px;
     transition: 0.3s;
   }
 
   input:checked + span {
-    background-color: gold;
+    background: ${props => props.theme.colorGold};
     transition: 0.3s;
   }
 

@@ -16,10 +16,10 @@ export const AuthFormStyled = styled.form`
       align-items: center;
       gap: 5px;
 
+      // 구글 로고
       svg {
         width: 18px;
         height: 18px;
-        fill: ${props => props.theme.colors.pointSkyblue};
       }
     }
 
@@ -41,18 +41,11 @@ export const AuthFormStyled = styled.form`
     }
   }
 
-  .authmode-toggle-button {
+  .toggle-authmode-prompt {
     margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    a {
-      margin-left: 5px;
-      color: ${props => props.theme.colors.pointSkyblue};
-    }
-    a:hover {
-      cursor: pointer;
-    }
+    gap: 5px;
   }
 `;

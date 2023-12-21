@@ -1,22 +1,26 @@
 // react-icons 라이브러리
-import { IoClose, IoMail } from 'react-icons/io5';
-import { FiSun, FiMoon, FiEdit } from 'react-icons/fi';
-import {
-  HiOutlineTrash,
-  HiMiniCheckCircle,
-  HiExclamationTriangle,
-} from 'react-icons/hi2';
+import { AiOutlineLink, AiOutlineFile, AiFillFile } from 'react-icons/ai';
 import { BiSearch, BiCheckbox } from 'react-icons/bi';
-import { GrDrag } from 'react-icons/gr';
-import { AiOutlineLink, AiOutlineLineChart } from 'react-icons/ai';
-import { TbReload } from 'react-icons/tb';
+import {
+  BsFillExclamationCircleFill,
+  BsPlusCircle,
+  BsPlusCircleFill,
+  BsBarChart,
+  BsBarChartFill,
+} from 'react-icons/bs';
 import { FaStar, FaGoogle } from 'react-icons/fa';
-import { FaCheck, FaExclamation, FaFolderOpen } from 'react-icons/fa6';
-import { PiCopy } from 'react-icons/pi';
-import { RiInformationLine } from 'react-icons/ri';
-import { BsFillExclamationCircleFill } from 'react-icons/bs';
-import { GoHome, GoPlusCircle, GoFile, GoPerson } from 'react-icons/go';
+import { FaCheck, FaExclamation } from 'react-icons/fa6';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import { GoHome, GoHomeFill, GoTrash } from 'react-icons/go';
+import { GrDrag } from 'react-icons/gr';
+import { HiMiniCheckCircle, HiExclamationTriangle } from 'react-icons/hi2';
+import { IoClose, IoMail } from 'react-icons/io5';
 import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft } from 'react-icons/md';
+import { PiCopy, PiFolderSimpleLight } from 'react-icons/pi';
+import { RiInformationLine } from 'react-icons/ri';
+import { RiUserFill, RiUserLine } from 'react-icons/ri';
+import { TbReload } from 'react-icons/tb';
+import { VscEdit } from 'react-icons/vsc';
 
 // css
 import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
@@ -39,25 +43,45 @@ export function HomeIcon(props) {
   return <GoHome {...props} />;
 }
 
+export function FilledHomeIcon(props) {
+  return <GoHomeFill {...props} />;
+}
+
 export function CreateIcon(props) {
-  return <GoPlusCircle {...props} />;
+  return <BsPlusCircle {...props} />;
+}
+
+export function FilledCreateIcon(props) {
+  return <BsPlusCircleFill {...props} />;
 }
 
 export function FormIcon(props) {
-  return <GoFile {...props} />;
+  return <AiOutlineFile {...props} />;
+}
+
+export function FilledFormIcon(props) {
+  return <AiFillFile {...props} />;
 }
 
 export function ChartIcon(props) {
-  return <AiOutlineLineChart {...props} />;
+  return <BsBarChart {...props} />;
+}
+
+export function FilledChartIcon(props) {
+  return <BsBarChartFill {...props} />;
 }
 
 export function UserIcon(props) {
-  return <GoPerson {...props} />;
+  return <RiUserLine {...props} />;
 }
-// -----------
+
+export function FilledUserIcon(props) {
+  return <RiUserFill {...props} />;
+}
+// 메뉴 아이콘 끝
 
 export function TrashIcon(props) {
-  return <HiOutlineTrash size="19" {...props} />;
+  return <GoTrash {...props} />;
 }
 
 export function DragIcon(props) {
@@ -69,7 +93,7 @@ export function LinkIcon(props) {
 }
 
 export function EditIcon(props) {
-  return <FiEdit size="18" {...props} />;
+  return <VscEdit size="18" {...props} />;
 }
 
 export function CopyIcon(props) {
@@ -149,7 +173,7 @@ export function MailIcon(props) {
 }
 
 export function EmptyIcon(props) {
-  return <FaFolderOpen {...props} />;
+  return <PiFolderSimpleLight {...props} />;
 }
 
 // export function Icon(props) {

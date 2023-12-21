@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const MultipleChoiceInputStyled = styled.div`
   padding: 15px 25px;
   gap: 8px;
-  border-radius: 5px;
-  border: 1px solid lightgray;
+  border-radius: ${props => props.theme.radiusSmall};
+  border: 1px solid ${props => props.theme.colorGrayLightest};
   display: flex;
   align-items: center;
 
@@ -20,6 +20,10 @@ export const MultipleChoiceInputStyled = styled.div`
 
   input {
     width: 100%;
+  }
+
+  input::placeholder {
+    color: ${props => props.theme.colorGrayLightest};
   }
 
   [type='radio'] {
@@ -41,13 +45,13 @@ export const MultipleChoiceInputStyled = styled.div`
   label::after {
     height: 16px;
     width: 16px;
-    border: 2px solid gray;
+    border: 2px solid ${props => props.theme.colorGrayLightest};
     left: 0px;
     top: calc(50% - 10px);
   }
 
   label::before {
-    background-color: ${props => props.theme.colors.pointSkyblue};
+    background-color: ${props => props.theme.colorBlue0};
     height: 10px;
     width: 10px;
     left: 5px;
@@ -57,7 +61,7 @@ export const MultipleChoiceInputStyled = styled.div`
   }
 
   [type='radio']:checked ~ label::after {
-    border-color: ${props => props.theme.colors.pointSkyblue};
+    border-color: ${props => props.theme.colorBlue0};
   }
 
   [type='radio']:checked ~ label::before {

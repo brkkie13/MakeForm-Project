@@ -6,7 +6,7 @@ import { InputOptionsStyled } from '../ui/InputOptionsStyled';
 import StarRating from '../../helpers/StarRating';
 import { LinkIcon, EditIcon, TrashIcon } from '../../\bstyles/Icons';
 import Tooltip from '../ui/Tooltip';
-import Button, { IconButtonStyled } from '../ui/Button';
+import { FilledButtonStyled, IconButtonStyled } from '../ui/Buttons';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsesActions } from '../../redux/features/responsesSlice';
@@ -70,8 +70,10 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
     <FormDetailStyled>
       <div className="controls">
         <Tooltip text="공유">
-          <IconButtonStyled onClick={onRemove}>
+          <IconButtonStyled>
             <LinkIcon />
+            {/* 너비가 모바일일 때만 span 노출(IconButtonStyled에서 설정함) */}
+            <span>공유</span>
           </IconButtonStyled>
         </Tooltip>
 
@@ -80,12 +82,14 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
             <Tooltip text="편집">
               <IconButtonStyled onClick={onEdit}>
                 <EditIcon />
+                <span>편집</span>
               </IconButtonStyled>
             </Tooltip>
 
             <Tooltip text="삭제">
               <IconButtonStyled onClick={onRemove}>
                 <TrashIcon />
+                <span>삭제</span>
               </IconButtonStyled>
             </Tooltip>
           </>
@@ -157,7 +161,9 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
 
       {isSharedForm && (
         <div className="submit-button">
-          <Button onClick={submitFormHandler}>제출하기</Button>
+          <FilledButtonStyled onClick={submitFormHandler}>
+            제출하기
+          </FilledButtonStyled>
         </div>
       )}
     </FormDetailStyled>

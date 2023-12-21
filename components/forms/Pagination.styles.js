@@ -6,27 +6,13 @@ export const PaginationStyled = styled.nav`
   align-items: center;
   gap: 10px;
 
-  ul {
+  ol {
     display: flex;
     gap: 10px;
   }
 
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;
-  }
-
-  li.active {
-    background-color: ${props => props.theme.colors.pointSkyblue};
-    color: white;
-  }
-
   svg {
-    fill: gray;
+    fill: ${props => props.theme.colorGrayLightest};
     cursor: pointer;
   }
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const RemoveBadgeStyled = styled.span`
-  background: #f44336;
+  background: ${props => props.theme.colorRed};
   width: 18px;
   height: 18px;
   border-radius: 30px;
@@ -17,7 +17,7 @@ export const RemoveBadgeStyled = styled.span`
   cursor: pointer;
 
   svg {
-    fill: white;
+    fill: ${props => props.theme.colorBackground0};
   }
 `;
 
@@ -31,7 +31,7 @@ export const LoadingSpinnerStyled = styled.section`
   .loading-spinner {
     width: 35px;
     height: 35px;
-    border: 5px solid lightgray;
+    border: 5px solid ${props => props.theme.colorGrayLightest};
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

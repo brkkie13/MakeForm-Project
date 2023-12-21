@@ -1,7 +1,6 @@
 'use client';
 
 // components
-import { SmallButton } from '../ui/Button';
 import { RemoveBadge } from '../../\bstyles/Icons';
 import { TitleInputArea } from '../ui/InputArea';
 import MultipleChoiceInput from '../ui/MultipleChoiceInput';
@@ -10,6 +9,7 @@ import { InputOptionsStyled } from '../ui/InputOptionsStyled';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '../../redux/features/formSlice';
+import { RoundedButtonStyled } from '../ui/Buttons';
 
 // code
 function MultipleChoiceTextType({ index, isEdit }) {
@@ -82,7 +82,9 @@ function MultipleChoiceTextType({ index, isEdit }) {
           </div>
         ))}
       </InputOptionsStyled>
-      <SmallButton onClick={addOptionHandler}>+ 옵션 추가</SmallButton>
+      <RoundedButtonStyled onClick={addOptionHandler}>
+        + 옵션 추가
+      </RoundedButtonStyled>
     </>
   );
 }

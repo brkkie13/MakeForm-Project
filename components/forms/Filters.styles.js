@@ -8,26 +8,27 @@ export const FiltersStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
   }
 
   select,
   label {
     display: flex;
     align-items: center;
-    background: ${props => props.theme.colors.block};
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid lightgray;
+    background: ${props => props.theme.colorBackground0};
+    border: 1px solid ${props => props.theme.colorBackground0};
+    border-radius: ${props => props.theme.radiusSmall};
     padding: 0 10px;
+    box-shadow: ${props => props.theme.shadow};
 
     &:focus-within {
-      border: 1.5px solid ${props => props.theme.colors.pointSkyblue};
+      border: 1px solid ${props => props.theme.colorBlue0};
+      box-shadow: none;
     }
 
     svg {
-      fill: lightgray;
+      fill: ${props => props.theme.colorGrayLight};
       margin-right: 5px;
     }
   }
@@ -37,7 +38,7 @@ export const FiltersStyled = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
     .search-pc {
       display: none;
     }
@@ -45,6 +46,11 @@ export const FiltersStyled = styled.div`
     .search-button,
     .search-mobile {
       display: flex;
+    }
+
+    .search-mobile {
+      padding: 10px;
+      margin-top: 10px;
     }
   }
 `;

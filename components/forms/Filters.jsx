@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { FiltersStyled } from './Filters.styles';
 import { SearchIcon } from '../../\bstyles/Icons';
-import { Button } from '../ui/Button.styles';
+import { OutlinedButtonStyled } from '../ui/Buttons';
 
 function Filters({
   dataList,
@@ -81,11 +81,16 @@ function Filters({
           />
         </label>
 
-        <Button className="search-button" onClick={toggleSearchButtonHandler}>
+        <OutlinedButtonStyled
+          className="search-button"
+          onClick={toggleSearchButtonHandler}
+        >
           <SearchIcon />
-        </Button>
+        </OutlinedButtonStyled>
 
-        <Button onClick={resetFilterHandler}>필터 초기화</Button>
+        <OutlinedButtonStyled onClick={resetFilterHandler}>
+          필터 초기화
+        </OutlinedButtonStyled>
       </div>
 
       {isSearchOpen && (

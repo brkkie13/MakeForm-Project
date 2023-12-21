@@ -5,7 +5,7 @@ export const FooterContainer = styled.div`
   justify-content: center;
   height: 100px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
     margin-bottom: 70px;
   }
 `;
@@ -17,6 +17,14 @@ export const FooterStyled = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  // 글자 색상 변경
+  div {
+    color: ${props => props.theme.colorGrayLight};
+    svg {
+      fill: ${props => props.theme.colorGrayLight};
+    }
+  }
 
   .email {
     cursor: pointer;
@@ -36,5 +44,10 @@ export const FooterStyled = styled.footer`
   .email:hover,
   .email:active {
     transform: scale(1.05);
+    color: ${props => props.theme.colorBlue0};
+
+    svg {
+      fill: ${props => props.theme.colorBlue0};
+    }
   }
 `;

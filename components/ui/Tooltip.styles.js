@@ -5,12 +5,12 @@ export const TooltipWrapper = styled.div`
 `;
 export const TooltipStyled = styled.div`
   position: absolute;
-  background: ${props => props.theme.colors.tooltip};
-  color: ${props => props.theme.colors.fontReverse};
+  background: ${props => props.theme.colorBackgroundReverse};
+  color: ${props => props.theme.colorWhiteOrBlack};
   padding: 8px 10px;
   border-radius: 5px;
   left: 50%;
-  top: 130%;
+  top: 150%;
   transform: translateX(-50%);
   font-size: 15px;
   white-space: nowrap; //한글일 때 글자가 세로로 나오는 경우 해결.
@@ -25,7 +25,11 @@ export const TooltipStyled = styled.div`
     transform: translateX(-50%);
     border-width: 0 10px 10px 10px;
     border-style: solid;
-    border-color: transparent transparent ${props => props.theme.colors.tooltip}
-      transparent;
+    border-color: transparent transparent
+      ${props => props.theme.colorBackgroundReverse} transparent;
+  }
+
+  @media (max-width: ${props => props.theme.mobileWidth}) {
+    display: none;
   }
 `;

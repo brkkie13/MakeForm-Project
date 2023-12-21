@@ -6,10 +6,10 @@ export const DropdownMenuStyled = styled.div`
   top: 70px;
   right: 30px;
   min-width: 160px;
-  background-color: ${props => props.theme.colors.background};
-  border: 1px solid ${props => props.theme.colors.pointSkyblue};
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  background: ${props => props.theme.colorBackground0};
+  border: 1px solid ${props => props.theme.colorBlue0};
+  border-radius: ${props => props.theme.radiusMedium};
+  box-shadow: ${props => props.theme.shadow};
 
   ul {
     display: flex;
@@ -23,11 +23,11 @@ export const DropdownMenuStyled = styled.div`
 
   li:hover,
   li:active {
-    background: ${props => props.theme.colors.hoverMenu};
-    color: ${props => props.theme.colors.pointSkyblue};
+    background: ${props => props.theme.colorBackground1};
+    color: ${props => props.theme.colorBlue0};
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
     display: none;
   }
 `;

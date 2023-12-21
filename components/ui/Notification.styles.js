@@ -33,19 +33,19 @@ export const NotificationStyled = styled.div`
   align-items: center;
   padding: 10px 15px;
   max-width: 300px;
-  border-radius: 10px;
-  background-color: ${props => props.theme.colors.background};
+  border-radius: ${props => props.theme.radiusMedium};
+  background: ${props => props.theme.colorBackground0};
   border: 1px solid
     ${props =>
       props.status === 'success'
-        ? props.theme.colors.pointSkyblue
-        : props.theme.colors.pointRed};
+        ? props.theme.colorBlue0
+        : props.theme.colorRed};
 
   svg {
     fill: ${props =>
       props.status === 'success'
-        ? props.theme.colors.pointSkyblue
-        : props.theme.colors.pointRed};
+        ? props.theme.colorBlue0
+        : props.theme.colorRed};
   }
 
   // badge
@@ -57,7 +57,7 @@ export const NotificationStyled = styled.div`
   & > div:nth-child(2) {
     color: ${props =>
       props.status === 'success'
-        ? props.theme.colors.pointSkyblue
-        : props.theme.colors.pointRed};
+        ? props.theme.colorBlue0
+        : props.theme.colorRed};
   }
 `;

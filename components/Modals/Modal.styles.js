@@ -17,14 +17,14 @@ export const ModalStyled = styled.div`
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.6);
   }
 
   .modal-content {
     width: 500px;
-    border-radius: 12px;
-    background: ${props => props.theme.colors.block};
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: ${props => props.theme.radiusLarge};
+    background: ${props => props.theme.colorBackground0};
+    box-shadow: ${props => props.theme.shadow};
     display: flex;
     flex-direction: column;
     padding: 25px;
@@ -39,8 +39,12 @@ export const ModalStyled = styled.div`
         height: 30px;
       }
     }
+  }
 
-    .body {
+  @media (max-width: ${props => props.theme.mobileWidth}) {
+    .modal-content {
+      margin-left: 10%;
+      margin-right: 10%;
     }
   }
 `;

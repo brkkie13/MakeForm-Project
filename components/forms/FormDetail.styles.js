@@ -7,7 +7,7 @@ export const FormDetailStyled = styled.article`
 
   .controls {
     display: flex;
-    gap: 10px;
+    gap: 25px;
     align-items: center;
     justify-content: flex-end;
   }
@@ -37,6 +37,6 @@ export const FormItemStyled = styled.div`
   }
 
   .placeholder-text {
-    color: gray;
+    color: ${props => props.theme.colorGrayLight};
   }
 `;

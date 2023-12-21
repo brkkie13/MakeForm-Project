@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { UserProfileStyled } from './UserProfile.styles';
-import { Button } from '../ui/Button.styles';
+import { ButtonStyled } from '../ui/Buttons';
 import { useDispatch } from 'react-redux';
 import {
   deleteAccount,
@@ -46,22 +46,18 @@ function UserProfile({ imageUrl, displayName, email, emailVerified }) {
           width={30}
           height={30}
         />
-        <span>{displayName || email}님</span>
+        <span>{displayName || email}</span>
       </div>
 
       <div className="controls">
-        <Button primary="non-outline" onClick={logoutHandler}>
-          로그아웃
-        </Button>
+        <ButtonStyled onClick={logoutHandler}>로그아웃</ButtonStyled>
         {/* 이메일&비밀번호로 가입했을 때만 비밀번호 재설정 버튼 활성화 */}
         {!emailVerified && (
-          <Button primary="non-outline" onClick={resetPasswordHandler}>
+          <ButtonStyled onClick={resetPasswordHandler}>
             비밀번호 재설정
-          </Button>
+          </ButtonStyled>
         )}
-        <Button primary="non-outline" onClick={deleteAccountHandler}>
-          회원탈퇴
-        </Button>
+        <ButtonStyled onClick={deleteAccountHandler}>회원탈퇴</ButtonStyled>
       </div>
     </UserProfileStyled>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MobileNavbarStyled = styled.nav`
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1001px) {
     display: none;
   }
 
@@ -10,8 +10,8 @@ export const MobileNavbarStyled = styled.nav`
   width: 100%;
   z-index: 100;
   height: 70px;
-  background-color: ${props => props.theme.colors.background};
-  border-top: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colorBackground0};
+  border-top: 1px solid ${props => props.theme.colorGrayLightest};
 
   ul {
     display: flex;
@@ -36,21 +36,35 @@ export const MobileNavbarStyled = styled.nav`
 
     svg {
       width: 25px;
-      height: 25px;
+      height: 23px;
+      fill: ${props => props.theme.colorGrayHeavy};
     }
 
     span {
       font-size: 12px;
+      color: ${props => props.theme.colorGrayHeavy};
+      font-weight: 600;
+    }
+  }
+
+  a:hover {
+    svg {
+      fill: ${props => props.theme.colorBlue0};
+    }
+
+    span {
+      color: ${props => props.theme.colorGrayHeaviest};
     }
   }
 
   // 현재 클릭된 메뉴에 색상 넣기
   .active {
-    span {
-      color: ${props => props.theme.colors.pointSkyblue};
-    }
     svg {
-      fill: ${props => props.theme.colors.pointSkyblue};
+      fill: ${props => props.theme.colorBlue0};
+    }
+
+    span {
+      color: ${props => props.theme.colorBlue0};
     }
   }
 `;

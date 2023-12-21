@@ -2,7 +2,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { AuthFormStyled } from './AuthForm.styles';
-import { Button } from '../ui/Button.styles';
+import {
+  FilledButtonStyled,
+  OutlinedButtonStyled,
+  ButtonStyled,
+} from '../ui/Buttons';
 import { validateEmail, validatePassword } from '../../utils/validation';
 
 import { AuthInput } from '../ui/InputArea';
@@ -134,27 +138,29 @@ function AuthForm() {
       )}
 
       <div className="controls">
-        <Button type="submit" primary="highlight">
+        <FilledButtonStyled type="submit">
           {isLoginMode ? '로그인' : '회원가입'}
-        </Button>
+        </FilledButtonStyled>
         <div className="line-group">
           <span className="line"></span>
           <p>또는</p>
           <span className="line"></span>
         </div>
-        <Button type="button" onClick={googleAuthHandler}>
+        <OutlinedButtonStyled type="button" onClick={googleAuthHandler}>
           <GoogleLogo />
           {isLoginMode ? '구글 로그인' : '구글 회원가입'}
-        </Button>
+        </OutlinedButtonStyled>
       </div>
 
       {isLoginMode ? (
-        <p className="authmode-toggle-button">
-          회원이 아니신가요?<a onClick={toggleLoginModeHandler}>회원가입</a>
+        <p className="toggle-authmode-prompt">
+          회원이 아니신가요?
+          <ButtonStyled onClick={toggleLoginModeHandler}>회원가입</ButtonStyled>
         </p>
       ) : (
-        <p className="authmode-toggle-button">
-          이미 회원이신가요?<a onClick={toggleLoginModeHandler}>로그인</a>
+        <p className="toggle-authmode-prompt">
+          이미 회원이신가요?
+          <ButtonStyled onClick={toggleLoginModeHandler}>로그인</ButtonStyled>
         </p>
       )}
     </AuthFormStyled>
