@@ -32,27 +32,22 @@ function EditPage() {
   const editItems = useSelector(state => state.form.editItems);
 
   useEffect(() => {
+    // 로그인 되어있을 때, db에서 데이터 가져옴
     user && dispatch(fetchFormData());
-  }, [dispatch]);
 
-  useEffect(() => {
-    if (formList.length > 0 && user) {
+    // db에서 가져온 데이터 formList의 길이가 0보다 클 때, targetedForm을 찾음
+    if (formList.length > 0) {
       const targetedForm = formList.find(form => form.id === formId);
-
-      targetedForm
-        ? dispatch(formActions.setInitialEditValue(targetedForm)) // edit페이지의 초기 input값을 세팅.
-        : router.push('/forms');
+      targetedForm && dispatch(formActions.setInitialEditValue(targetedForm)); // edit페이지의 초기 input값을 세팅.
     }
 
+    // 로그인 안되어 있을 때는 로컬스토리지에서 데이터를 가져옴
     if (!user) {
       const storedForms = getDataFromLocalStorage();
 
       if (storedForms && storedForms.length > 0) {
         const targetedForm = storedForms.find(form => form.id === formId);
-
-        targetedForm
-          ? dispatch(formActions.setInitialEditValue(targetedForm))
-          : router.push('/forms');
+        targetedForm && dispatch(formActions.setInitialEditValue(targetedForm));
       }
     }
   }, [formList, formId, dispatch, router]);

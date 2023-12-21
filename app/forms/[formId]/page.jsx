@@ -33,27 +33,25 @@ function FormDetailPage() {
   const [form, setForm] = useState({});
 
   useEffect(() => {
+    // 로그인 되어있을 때, db에서 데이터 가져옴
     user && dispatch(fetchFormData(user?.uid));
 
-    // 접근한 폼 id의 userId정보와 현재 로그인된 user.uid정보가 불일치하면 router.push('/forms')
-  }, [dispatch, user]);
-
-  useEffect(() => {
-    if (formList.length > 0 && user) {
+    // db에서 가져온 데이터 formList의 길이가 0보다 클 때, targetedForm을 찾음
+    if (formList.length > 0) {
       const targetedForm = formList.find(form => form.id === formId);
-      targetedForm ? setForm(targetedForm) : router.push('/forms');
+      targetedForm && setForm(targetedForm);
     }
 
+    // 로그인 안되어 있을 때는 로컬스토리지에서 데이터를 가져옴
     if (!user) {
       const storedForms = getDataFromLocalStorage();
 
       if (storedForms && storedForms.length > 0) {
         const targetedForm = storedForms.find(form => form.id === formId);
-
-        targetedForm ? setForm(targetedForm) : router.push('/forms');
+        targetedForm && setForm(targetedForm);
       }
     }
-  }, [formList, formId, router, user]);
+  }, [formList, user, dispatch]);
 
   const editFormHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;

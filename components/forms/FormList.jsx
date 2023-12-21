@@ -12,7 +12,7 @@ import Tooltip from '../ui/Tooltip';
 import { formatDate } from '../../utils/date';
 
 // code
-function FormList({ allPosts, currentPosts, onShow, onCopy }) {
+function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
   if (allPosts.length === 0) {
     return (
       <EmptyListStyled>
@@ -34,7 +34,7 @@ function FormList({ allPosts, currentPosts, onShow, onCopy }) {
         <thead>
           <tr>
             <td>
-              총 <span className="number">{allPosts.length}</span>건
+              총 <span className="number">{filteredPosts.length}</span>건
             </td>
           </tr>
         </thead>

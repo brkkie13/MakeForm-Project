@@ -19,16 +19,20 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
   const dispatch = useDispatch();
   const responses = useSelector(state => state.responses.responses);
 
-  const form = formDetail ? formDetail : sharedForm ? sharedForm : null;
+  const [form, setForm] = useState({});
   const [isSharedForm, setIsSharedForm] = useState(false);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    if (sharedForm) {
-      setIsSharedForm(true);
+    if (formDetail) {
+      setForm(formDetail);
       dispatch(responsesActions.setInitialValue(form.items));
+    } else if (sharedForm) {
+      setForm(sharedForm);
+      setIsSharedForm(true);
+      dispatch(responsesActions.setInitialValue(sharedForm.items));
     }
-  }, [sharedForm, dispatch, form.items]);
+  }, [formDetail, sharedForm, dispatch]);
 
   const changeInputValueHandler = (itemIdx, event) => {
     const newValue = event.target.value;

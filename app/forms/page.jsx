@@ -114,7 +114,7 @@ function FormsPage() {
       )}
       <h1>최근 폼</h1>
 
-      {currentPosts.length > 0 && (
+      {formList.length > 0 && (
         <Filters
           dataList={filteredFormList}
           year={year}
@@ -127,7 +127,8 @@ function FormsPage() {
       )}
 
       <FormList
-        allPosts={filteredFormList}
+        allPosts={formList}
+        filteredPosts={filteredFormList}
         currentPosts={currentPosts}
         onShow={showDetailHandler}
         onCopy={copyFormHandler}
