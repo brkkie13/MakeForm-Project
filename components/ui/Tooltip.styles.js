@@ -29,7 +29,7 @@ export const TooltipStyled = styled.div`
       ${props => props.theme.colorBackgroundReverse} transparent;
   }
 
-  @media (max-width: ${props => props.theme.mobileWidth}) {
+  @media (max-width: ${props => props.theme.tabletWidth}) {
     display: none;
   }
 `;

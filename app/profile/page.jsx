@@ -10,7 +10,7 @@ import { SectionCard } from '../../components/ui/SectionCard';
 function ProfilePage() {
   const router = useRouter();
   const user = useFirebaseAuthState();
-  const windowWidth = useWindowWidth(); // 모바일 너비일 때 회원가입 폼이 보이고, pc너비이면 회원가입 폼이 보이지 않음 (팝업창으로 보임)
+  const windowWidth = useWindowWidth(); // 화면 너비가 1000px 이하일 때 '/profile' 페이지에서 로그인 폼이 보이고, 초과하면 회원가입 폼이 보이지 않고 모달창으로 보임.
 
   return (
     <Section>
@@ -22,7 +22,7 @@ function ProfilePage() {
             email={user?.email}
             emailVerified={user?.emailVerified}
           />
-        ) : windowWidth <= 768 ? (
+        ) : windowWidth <= 1000 ? (
           <AuthForm />
         ) : (
           router.push('/')

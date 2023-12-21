@@ -80,7 +80,7 @@ export const IconButtonStyled = styled.button`
     display: none;
   }
 
-  @media (max-width: ${props => props.theme.mobileWidth}) {
+  @media (max-width: ${props => props.theme.tabletWidth}) {
     span {
       display: block;
       font-size: 15px;
