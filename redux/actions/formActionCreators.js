@@ -58,7 +58,7 @@ const validateForm = form => {
   }
 };
 
-export const sendFormData = (user, newForm, isCreatePage) => {
+export const sendFormData = (user, newForm) => {
   return async dispatch => {
     const formsCollectionRef = collection(db, 'forms');
 
@@ -79,7 +79,7 @@ export const sendFormData = (user, newForm, isCreatePage) => {
 
     try {
       // '/create'페이지에서 새로 생성할 때만 검증. copyFormHandler에서는 검증할 필요 없음.
-      isCreatePage && validateForm(newForm);
+      validateForm(newForm);
 
       // 로그인을 하지 않았을 때 생성할 수 있는 게시물은 총 30개까지로 제한
       if (!user) {
@@ -105,24 +105,16 @@ export const sendFormData = (user, newForm, isCreatePage) => {
       dispatch(
         uiActions.showNotification({
           status: 'success',
-          message: '생성되었습니다',
+          message: '생성되었습니다.',
         })
       );
-    } catch (error) {
-      if (error.message) {
-        dispatch(
-          uiActions.showNotification({
-            status: 'error',
-            message: error.message,
-          })
-        );
-        return;
-      }
 
+      return true; // Promise가 성공적으로 완료
+    } catch (error) {
       dispatch(
         uiActions.showNotification({
           status: 'error',
-          message: '저장 실패',
+          message: error.message,
         })
       );
     }
@@ -158,16 +150,21 @@ export const fetchFormData = uid => {
       const formData = await getData();
       dispatch(formActions.replaceFormList(formData)); // formList변수에 데이터 저장.
     } catch (error) {
-      console.error(error);
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '데이터를 불러올 수 없습니다.',
+        })
+      );
     }
   };
 };
 
-export const updateFormData = (user, formId, editedData) => {
+export const updateFormData = (user, formId, editedForm) => {
   return async dispatch => {
     const patchData = async () => {
       const formDoc = doc(db, 'forms', formId);
-      await updateDoc(formDoc, editedData);
+      await updateDoc(formDoc, editedForm);
     };
 
     // 가짜api연결(json-server)
@@ -182,17 +179,28 @@ export const updateFormData = (user, formId, editedData) => {
     // };
 
     try {
+      validateForm(editedForm);
+
       user && (await patchData());
-      !user && updateDataToLocalStorage(formId, editedData);
+      !user && updateDataToLocalStorage(formId, editedForm);
 
       dispatch(
         uiActions.showNotification({
           status: 'success',
-          message: '수정되었습니다',
+          message: '수정되었습니다.',
         })
       );
+
+      return true; // Promise가 성공적으로 완료
     } catch (error) {
-      console.error(error);
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: error.message,
+        })
+      );
+
+      throw error; // 에러를 던져 호출하는 곳에서 에러를 잡아낼 수 있게 함.
     }
   };
 };
@@ -220,11 +228,16 @@ export const removeFormData = (user, formId) => {
       dispatch(
         uiActions.showNotification({
           status: 'success',
-          message: '삭제되었습니다',
+          message: '삭제되었습니다.',
         })
       );
     } catch (error) {
-      console.error(error);
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '삭제에 실패했습니다.',
+        })
+      );
     }
   };
 };

@@ -64,15 +64,19 @@ function EditPage() {
     router.push(`/forms/${formId}`);
   };
 
-  const saveFormHandler = () => {
+  const saveFormHandler = async () => {
     // 폼 수정 시 header,items필드만 수정 (creation,id필드는 유지)
     const editedData = {
       header: editHeader,
       items: editItems,
     };
 
-    dispatch(updateFormData(user, formId, editedData));
-    router.push(`/forms/${formId}`);
+    try {
+      await dispatch(updateFormData(user, formId, editedData));
+      router.push(`/forms/${formId}`); // updateFormData에서 에러가 있으면 throw error로 에러를 발생시켜 해당 코드가 실행되지 않게 함.
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   return (
