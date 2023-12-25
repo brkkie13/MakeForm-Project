@@ -1,4 +1,4 @@
-import { db } from '../../firebase.config';
+import { db } from '@root/firebase.config';
 import {
   collection,
   getDocs,
@@ -9,16 +9,17 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { formActions } from '../features/formSlice';
-import { uiActions } from '../features/uiSlice';
+import { formActions } from '@redux/features/formSlice';
+import { uiActions } from '@redux/features/uiSlice';
 import {
   getDataFromLocalStorage,
   removeDataFromLocalStorage,
   storeDataIdToLocalStorage,
   storeDataToLocalStorage,
   updateDataToLocalStorage,
-} from '../../utils/localStorage';
+} from '@utils/localStorage';
 
+// code
 const validateForm = form => {
   if (form.header === '') {
     throw new Error('빈칸을 모두 입력하세요.');

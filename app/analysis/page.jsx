@@ -1,5 +1,5 @@
 'use client';
-import Section from '../../components/ui/Section';
+import Section from '@components/ui/Section';
 
 function AnalysisPage() {
   return (

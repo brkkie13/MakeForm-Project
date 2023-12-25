@@ -1,8 +1,11 @@
-import { ConfirmStyled } from './Confirm.styles';
-import { OutlinedButtonStyled, FilledButtonStyled } from '../ui/Buttons';
-import { CautionIcon } from '../../\bstyles/Icons';
-import { uiActions } from '../../redux/features/uiSlice';
+import { ConfirmStyled } from '@components/modals/Confirm.styles';
+import {
+  OutlinedButtonStyled,
+  FilledButtonStyled,
+} from '@components/ui/Buttons';
+import { CautionIcon } from '@styles/Icons';
 import { useDispatch } from 'react-redux';
+import { uiActions } from '@redux/features/uiSlice';
 
 function Confirm({ text, onclickConfirm }) {
   const dispatch = useDispatch();

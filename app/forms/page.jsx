@@ -3,26 +3,23 @@ import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 // components
-import FormList from '../../components/forms/FormList';
-import Pagination from '../../components/forms/Pagination';
+import FormList from '@components/forms/FormList';
+import Pagination from '@components/forms/Pagination';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  sendFormData,
-  fetchFormData,
-} from '../../redux/actions/formActionCreators';
+import { sendFormData, fetchFormData } from '@redux/actions/formActionCreators';
 
-import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
-import { formActions } from '../../redux/features/formSlice';
-import Filters from '../../components/forms/Filters';
-import Section from '../../components/ui/Section';
-import useFilters from '../../utils/useFilters';
-import usePagination from '../../utils/usePagination';
-import useQueryString from '../../utils/useQueryString';
-import { getDataFromLocalStorage } from '../../utils/localStorage';
-import { useLocalStorage } from '../../utils/localStorage';
-import ErrorBox from '../../components/ui/ErrorBox';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
+import { formActions } from '@redux/features/formSlice';
+import Filters from '@components/forms/Filters';
+import Section from '@components/ui/Section';
+import useFilters from '@utils/useFilters';
+import usePagination from '@utils/usePagination';
+import useQueryString from '@utils/useQueryString';
+import { getDataFromLocalStorage } from '@utils/localStorage';
+import { useLocalStorage } from '@utils/localStorage';
+import ErrorBox from '@components/ui/ErrorBox';
 
 // code
 function FormsPage() {

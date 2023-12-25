@@ -1,16 +1,21 @@
 'use client';
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { FormDetailStyled, FormItemStyled } from './FormDetail.styles';
-import { InputOptionsStyled } from '../ui/InputOptionsStyled';
-import StarRating from '../../helpers/StarRating';
-import { LinkIcon, EditIcon, TrashIcon } from '../../\bstyles/Icons';
-import Tooltip from '../ui/Tooltip';
-import { FilledButtonStyled, IconButtonStyled } from '../ui/Buttons';
-import MultipleChoiceInput from '../ui/MultipleChoiceInput';
+import {
+  FormDetailStyled,
+  FormItemStyled,
+} from '@components/forms/FormDetail.styles';
+import Tooltip from '@components/ui/Tooltip';
+import StarRating from '@helpers/StarRating';
+import { LinkIcon, EditIcon, TrashIcon } from '@styles/Icons';
+import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
+import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
+import MultipleChoiceInput from '@components/ui/MultipleChoiceInput';
+
+// redux
 import { useDispatch, useSelector } from 'react-redux';
-import { responsesActions } from '../../redux/features/responsesSlice';
-import { sendFormResponse } from '../../redux/actions/formResponseActionCreators';
+import { responsesActions } from '@redux/features/responsesSlice';
+import { sendFormResponse } from '@redux/actions/formResponseActionCreators';
 
 // code
 // formDetail: 관리자모드의 폼 미리보기 페이지.

@@ -1,5 +1,5 @@
-import { ErrorBoxStyled } from './ErrorBox.styles';
-import { CautionIcon } from '../../\bstyles/Icons';
+import { ErrorBoxStyled } from '@components/ui/ErrorBox.styles';
+import { CautionIcon } from '@styles/Icons';
 
 function ErrorBox({ message }) {
   return (

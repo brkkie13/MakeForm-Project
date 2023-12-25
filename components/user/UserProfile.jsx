@@ -1,15 +1,18 @@
 import Image from 'next/image';
-import { UserProfileStyled } from './UserProfile.styles';
-import { ButtonStyled } from '../ui/Buttons';
+import { UserProfileStyled } from '@components/user/UserProfile.styles';
+import { ButtonStyled } from '@components/ui/Buttons';
+import Confirm from '@components/modals/Confirm';
+
+// redux
 import { useDispatch } from 'react-redux';
+import { uiActions } from '@redux/features/uiSlice';
 import {
   deleteAccount,
   logout,
   resetPassword,
-} from '../../redux/actions/authActionCreators';
-import { uiActions } from '../../redux/features/uiSlice';
-import Confirm from '../modals/Confirm';
+} from '@redux/actions/authActionCreators';
 
+// code
 function UserProfile({ imageUrl, displayName, email, emailVerified }) {
   const dispatch = useDispatch();
 

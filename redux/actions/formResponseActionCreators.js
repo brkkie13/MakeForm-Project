@@ -1,4 +1,4 @@
-import { db } from '../../firebase.config';
+import { db } from '@root/firebase.config';
 import {
   collection,
   addDoc,
@@ -6,8 +6,9 @@ import {
   updateDoc,
   doc,
 } from 'firebase/firestore';
-import { uiActions } from '../features/uiSlice';
+import { uiActions } from '@redux/features/uiSlice';
 
+// code
 export const sendFormResponse = submittedForm => {
   return async dispatch => {
     const submittedResponsesCollectionRef = collection(

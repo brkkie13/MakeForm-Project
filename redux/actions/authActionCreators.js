@@ -8,11 +8,12 @@ import {
   deleteUser,
   getAuth,
 } from 'firebase/auth';
-import { auth } from '../../firebase.config';
-import { authActions } from '../features/authSlice';
-import { validateEmail, validatePassword } from '../../utils/validation';
-import { uiActions } from '../features/uiSlice';
+import { auth } from '@root/firebase.config';
+import { authActions } from '@redux/features/authSlice';
+import { validateEmail, validatePassword } from '@utils/validation';
+import { uiActions } from '@redux/features/uiSlice';
 
+// code
 export const register = (email, password, passwordCheck) => {
   return async dispatch => {
     try {

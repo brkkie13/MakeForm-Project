@@ -1,15 +1,15 @@
 'use client';
 
 // components
-import { RemoveBadge } from '../../\bstyles/Icons';
-import { TitleInputArea } from '../ui/InputArea';
-import MultipleChoiceInput from '../ui/MultipleChoiceInput';
-import { InputOptionsStyled } from '../ui/InputOptionsStyled';
+import { RemoveBadge } from '@styles/Icons';
+import { TitleInputArea } from '@components/ui/InputArea';
+import MultipleChoiceInput from '@components/ui/MultipleChoiceInput';
+import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
+import { RoundedButtonStyled } from '@components/ui/Buttons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '../../redux/features/formSlice';
-import { RoundedButtonStyled } from '../ui/Buttons';
+import { formActions } from '@redux/features/formSlice';
 
 // code
 function MultipleChoiceTextType({ index, isEdit }) {

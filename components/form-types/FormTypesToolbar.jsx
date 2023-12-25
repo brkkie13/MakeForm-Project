@@ -1,6 +1,6 @@
 'use client';
-import { ToolbarStyled } from './FormTypesToolbar.styles';
-import { RoundedButtonStyled } from '../ui/Buttons';
+import { ToolbarStyled } from '@components/form-types/FormTypesToolbar.styles';
+import { RoundedButtonStyled } from '@components/ui/Buttons';
 
 function FormTypesToolbar({ onAddFormType }) {
   return (

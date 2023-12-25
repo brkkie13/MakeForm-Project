@@ -1,7 +1,8 @@
 'use client';
-import { SummaryCardStyled } from './SummaryCard.styles';
-import { ReloadIcon } from '../../\bstyles/Icons';
+import { SummaryCardStyled } from '@components/ui/SummaryCard.styles';
+import { ReloadIcon } from '@styles/Icons';
 
+// code
 function SummaryCard(props) {
   return (
     <SummaryCardStyled>

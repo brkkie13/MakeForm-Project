@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
-import { AuthInput } from '../ui/InputArea';
-import { Button } from '../ui/Buttons';
+import { AuthInput } from '@components/ui/InputArea';
+import { Button } from '@components/ui/Buttons';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 function ChangePasswordForm() {

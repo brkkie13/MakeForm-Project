@@ -1,5 +1,6 @@
-import { MultipleChoiceInputStyled } from './MultipleChoiceInput.styles';
+import { MultipleChoiceInputStyled } from '@components/ui/MultipleChoiceInput.styles';
 
+// code
 function MultipleChoiceInput(props) {
   const {
     value,

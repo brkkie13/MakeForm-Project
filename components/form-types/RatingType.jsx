@@ -1,12 +1,12 @@
 'use client';
 
 // components
-import StarRating from '../../helpers/StarRating';
-import { TitleInputArea } from '../ui/InputArea';
+import StarRating from '@helpers/StarRating';
+import { TitleInputArea } from '@components/ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '../../redux/features/formSlice';
+import { formActions } from '@redux/features/formSlice';
 
 // code
 function RatingType({ index, isEdit }) {

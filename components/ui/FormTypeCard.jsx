@@ -1,9 +1,9 @@
-import { FormTypeCardStyled } from './FormTypeCard.styles';
-import { IconButtonStyled } from './Buttons';
-import Tooltip from './Tooltip';
+import { FormTypeCardStyled } from '@components/ui/FormTypeCard.styles';
+import { IconButtonStyled } from '@components/ui/Buttons';
+import Tooltip from '@components/ui/Tooltip';
 
 // icons
-import { DragIcon, TrashIcon } from '../../\bstyles/Icons';
+import { DragIcon, TrashIcon } from '@styles/Icons';
 
 const FormTypeCard = ({ onRemoveFormType, content, isHeader }) => {
   return (

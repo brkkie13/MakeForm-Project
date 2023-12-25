@@ -1,19 +1,19 @@
-import { FormTypesStyled } from './FormTypes.styles';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { FormTypesStyled } from '@components/form-types/FormTypes.styles';
 
 // components
-import HeaderType from './HeaderType';
-import FormTypeCard from '../ui/FormTypeCard';
-import ShortAnswerType from './ShortAnswerType';
-import LongAnswerType from './LongAnswerType';
-import MultipleChoiceImageType from './MultipleChoiceImageType';
-import MultipleChoiceTextType from './MultipleChoiceTextType';
-import RatingType from './RatingType';
-import DescriptionType from './DescriptionType';
+import FormTypeCard from '@components/ui/FormTypeCard';
+import HeaderType from '@components/form-types/HeaderType';
+import ShortAnswerType from '@components/form-types/ShortAnswerType';
+import LongAnswerType from '@components/form-types/LongAnswerType';
+import MultipleChoiceImageType from '@components/form-types/MultipleChoiceImageType';
+import MultipleChoiceTextType from '@components/form-types/MultipleChoiceTextType';
+import RatingType from '@components/form-types/RatingType';
+import DescriptionType from '@components/form-types/DescriptionType';
 
 // redux
 import { useDispatch } from 'react-redux';
-import { formActions } from '../../redux/features/formSlice';
+import { formActions } from '@redux/features/formSlice';
 
 // code
 function FormTypes({ items, onRemoveFormType, isEdit }) {

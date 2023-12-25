@@ -1,15 +1,13 @@
 'use client';
 import Link from 'next/link';
-import { FormListStyled, EmptyListStyled } from './FormList.styles';
 import {
-  LinkIcon,
-  CopyIcon,
-  EmptyIcon,
-  CreateIcon,
-} from '../../\bstyles/Icons';
-import { IconButtonStyled } from '../ui/Buttons';
-import Tooltip from '../ui/Tooltip';
-import { formatDate } from '../../utils/date';
+  FormListStyled,
+  EmptyListStyled,
+} from '@components/forms/FormList.styles';
+import { LinkIcon, CopyIcon, EmptyIcon, CreateIcon } from '@styles/Icons';
+import { IconButtonStyled } from '@components/ui/Buttons';
+import Tooltip from '@components/ui/Tooltip';
+import { formatDate } from '@utils/date';
 
 // code
 function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {

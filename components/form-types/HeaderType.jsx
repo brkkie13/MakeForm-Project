@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { HeaderInputArea } from '../ui/InputArea';
+import { HeaderInputArea } from '@components/ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '../../redux/features/formSlice';
+import { formActions } from '@redux/features/formSlice';
 
 // code
 function HeaderType({ isEdit }) {

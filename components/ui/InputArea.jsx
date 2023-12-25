@@ -5,8 +5,8 @@ import {
   HeaderTextarea,
   TitleTextarea,
   AuthInputStyled,
-} from './InputArea.styles';
-import { CorrectMark, WrongMark, InfoIcon } from '../../\bstyles/Icons';
+} from '@components/ui/InputArea.styles';
+import { CorrectMark, WrongMark, InfoIcon } from '@styles/Icons';
 
 // textarea에 입력된 글 길이에 따라 높이가 자동 조절되는 함수.
 const resizeHeightHandler = event => {

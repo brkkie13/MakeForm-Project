@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { TitleInputArea } from '../ui/InputArea';
+import { TitleInputArea } from '@components/ui/InputArea';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '../../redux/features/formSlice';
+import { formActions } from '@redux/features/formSlice';
 
 // code
 function ShortAnswerType({ index, isEdit }) {

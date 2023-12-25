@@ -23,7 +23,7 @@ import { TbReload } from 'react-icons/tb';
 import { VscEdit } from 'react-icons/vsc';
 
 // css
-import { LoadingSpinnerStyled, RemoveBadgeStyled } from './Icons.styles';
+import { LoadingSpinnerStyled, RemoveBadgeStyled } from '@styles/Icons.styles';
 
 // components
 export function CloseIcon(props) {

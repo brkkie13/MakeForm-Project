@@ -5,8 +5,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 // components
-import { HeaderContainer, HeaderStyled } from './MainNavbar.styles';
-import ToggleSwitch from '../../helpers/ToggleSwitch';
+import {
+  HeaderContainer,
+  HeaderStyled,
+} from '@components/layout/MainNavbar.styles';
+import ToggleSwitch from '@helpers/ToggleSwitch';
 import {
   FilledCreateIcon,
   CreateIcon,
@@ -14,20 +17,20 @@ import {
   FormIcon,
   FilledChartIcon,
   ChartIcon,
-} from '../../\bstyles/Icons';
-import { Logo } from '../../\bstyles/Logo';
-import AuthForm from '../modals/AuthForm';
-import { useLocalStorage } from '../../utils/localStorage';
-import DropdownMenu from '../ui/DropdownMenu';
-import { FilledButtonStyled } from '../ui/Buttons';
+} from '@styles/Icons';
+import { Logo } from '@styles/Logo';
+import AuthForm from '@components/modals/AuthForm';
+import DropdownMenu from '@components/ui/DropdownMenu';
+import { FilledButtonStyled } from '@components/ui/Buttons';
+import { useLocalStorage } from '@utils/localStorage';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { uiActions } from '../../redux/features/uiSlice';
+import { uiActions } from '@redux/features/uiSlice';
 
 // firebase auth
-import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
-import { logout } from '../../redux/actions/authActionCreators';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
+import { logout } from '@redux/actions/authActionCreators';
 
 // code
 function MainNavbar() {

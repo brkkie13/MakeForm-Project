@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { PaginationStyled } from './Pagination.styles';
-import { ArrowIcon, DoubleArrowIcon } from '../../\bstyles/Icons';
-import { PaginationButtonStyled } from '../ui/Buttons';
+import { PaginationStyled } from '@components/forms/Pagination.styles';
+import { ArrowIcon, DoubleArrowIcon } from '@styles/Icons';
+import { PaginationButtonStyled } from '@components/ui/Buttons';
 
 // code
 const PREV = 'prev';

@@ -12,7 +12,7 @@ import {
   ChartIcon,
   FilledUserIcon,
   UserIcon,
-} from '../../\bstyles/Icons';
+} from '../../styles/Icons';
 import { MobileNavbarStyled } from './MobileNavbar.styles';
 
 function MobileNavbar() {

@@ -1,6 +1,7 @@
 'use client';
-import { LoadingSpinner } from '../../../\bstyles/Icons';
+import { LoadingSpinner } from '@styles/Icons';
 
+// code
 const Loading = () => {
   return <LoadingSpinner />;
 };

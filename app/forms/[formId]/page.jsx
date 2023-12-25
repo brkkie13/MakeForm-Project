@@ -4,22 +4,22 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
-import FormDetail from '../../../components/forms/FormDetail';
-import Confirm from '../../../components/modals/Confirm';
-import Section from '../../../components/ui/Section';
-import { SectionCard } from '../../../components/ui/SectionCard';
-import { getDataFromLocalStorage } from '../../../utils/localStorage';
+import FormDetail from '@components/forms/FormDetail';
+import Confirm from '@components/modals/Confirm';
+import Section from '@components/ui/Section';
+import { SectionCard } from '@components/ui/SectionCard';
+import { getDataFromLocalStorage } from '@utils/localStorage';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchFormData,
   removeFormData,
-} from '../../../redux/actions/formActionCreators';
-import { uiActions } from '../../../redux/features/uiSlice';
+} from '@redux/actions/formActionCreators';
+import { uiActions } from '@redux/features/uiSlice';
 
 // auth
-import useFirebaseAuthState from '../../../utils/useFirebaseAuthState';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // code
 function FormDetailPage() {
@@ -51,7 +51,7 @@ function FormDetailPage() {
         targetedForm && setForm(targetedForm);
       }
     }
-  }, [formList, user, dispatch]);
+  }, [user, dispatch]); // 무한루프로 인해 의존성배열의 formList 삭제
 
   const editFormHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;

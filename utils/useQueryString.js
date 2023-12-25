@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useLocalStorage } from './localStorage';
+import { useLocalStorage } from '@utils/localStorage';
 
+// code
 function useQueryString() {
   const router = useRouter();
   const pathname = usePathname();

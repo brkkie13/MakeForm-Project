@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useLocalStorage } from './localStorage';
+import { useLocalStorage } from '@utils/localStorage';
 
+// code
 function usePagination(setQueryStringState) {
   const { getItem, setItem, removeItem } = useLocalStorage();
 

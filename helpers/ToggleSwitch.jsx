@@ -1,5 +1,5 @@
-import { Label } from './ToggleSwitch.styles';
-import { DarkModeIcon, LightModeIcon } from '../\bstyles/Icons';
+import { Label } from '@helpers/ToggleSwitch.styles';
+import { DarkModeIcon, LightModeIcon } from '@styles/Icons';
 
 function ToggleSwitch({ isToggled, onToggle }) {
   return (

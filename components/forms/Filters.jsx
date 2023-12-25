@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { FiltersStyled } from './Filters.styles';
-import { SearchIcon } from '../../\bstyles/Icons';
-import { OutlinedButtonStyled } from '../ui/Buttons';
+import { FiltersStyled } from '@components/forms/Filters.styles';
+import { SearchIcon } from '@styles/Icons';
+import { OutlinedButtonStyled } from '@components/ui/Buttons';
 
+// code
 function Filters({
   dataList,
   year,

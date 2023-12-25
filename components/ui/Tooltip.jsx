@@ -1,6 +1,7 @@
-import { TooltipWrapper, TooltipStyled } from './Tooltip.styles';
 import { useState } from 'react';
+import { TooltipWrapper, TooltipStyled } from '@components/ui/Tooltip.styles';
 
+// code
 function Tooltip({ children, text }) {
   const [isVisible, setIsVisible] = useState(false);
 

@@ -3,21 +3,21 @@ import { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
-import FormTypesToolbar from '../../../../components/form-types/FormTypesToolbar';
-import FormTypes from '../../../../components/form-types/FormTypes';
-import Section from '../../../../components/ui/Section';
-import useFirebaseAuthState from '../../../../utils/useFirebaseAuthState';
-import { getDataFromLocalStorage } from '../../../../utils/localStorage';
+import FormTypesToolbar from '@components/form-types/FormTypesToolbar';
+import FormTypes from '@components/form-types/FormTypes';
+import Section from '@components/ui/Section';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
+import { getDataFromLocalStorage } from '@utils/localStorage';
 import {
   OutlinedButtonStyled,
   FilledButtonStyled,
-} from '../../../../components/ui/Buttons';
+} from '@components/ui/Buttons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '../../../../redux/actions/formActionCreators';
-import { formActions } from '../../../../redux/features/formSlice';
-import { updateFormData } from '../../../../redux/actions/formActionCreators';
+import { fetchFormData } from '@redux/actions/formActionCreators';
+import { formActions } from '@redux/features/formSlice';
+import { updateFormData } from '@redux/actions/formActionCreators';
 
 // code
 function EditPage() {

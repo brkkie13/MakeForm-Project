@@ -1,30 +1,30 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-import { AuthFormStyled } from './AuthForm.styles';
+import { AuthFormStyled } from '@components/modals/AuthForm.styles';
 import {
   FilledButtonStyled,
   OutlinedButtonStyled,
   ButtonStyled,
-} from '../ui/Buttons';
-import { validateEmail, validatePassword } from '../../utils/validation';
+} from '@components/ui/Buttons';
+import { validateEmail, validatePassword } from '@utils/validation';
 
-import { AuthInput } from '../ui/InputArea';
-import { GoogleLogo } from '../../\bstyles/Icons';
+import { AuthInput } from '@components/ui/InputArea';
+import { GoogleLogo } from '@styles/Icons';
 
 // redux
-import { uiActions } from '../../redux/features/uiSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '@redux/features/uiSlice';
 
 // firebase auth
 import {
   login,
   register,
   loginWithGoogle,
-} from '../../redux/actions/authActionCreators';
-import useFirebaseAuthState from '../../utils/useFirebaseAuthState';
-import { authActions } from '../../redux/features/authSlice';
-import ErrorBox from '../ui/ErrorBox';
+} from '@redux/actions/authActionCreators';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
+import { authActions } from '@redux/features/authSlice';
+import ErrorBox from '@components/ui/ErrorBox';
 
 // code
 function AuthForm() {

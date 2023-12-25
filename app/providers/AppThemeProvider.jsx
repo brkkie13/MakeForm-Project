@@ -1,11 +1,11 @@
 'use client';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../../styles/GlobalStyles';
-import { darkTheme, lightTheme } from '../../styles/Theme';
+import GlobalStyle from '@styles/GlobalStyles';
+import { darkTheme, lightTheme } from '@styles/Theme';
 
 // components
-import Notification from '../../components/ui/Notification';
-import Modal from '../../components/modals/Modal';
+import Notification from '@components/ui/Notification';
+import Modal from '@components/modals/Modal';
 
 // redux
 import { useSelector } from 'react-redux';
