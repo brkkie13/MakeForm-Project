@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { HeaderInputArea } from '@components/ui/InputArea';
+import { FormHeaderInput } from '@components/ui/FormInputs';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 
 // code
 function HeaderType({ isEdit }) {
@@ -23,13 +23,11 @@ function HeaderType({ isEdit }) {
   };
 
   return (
-    <>
-      <HeaderInputArea
-        value={isEdit ? editHeader : header}
-        onChange={changeHeaderHandler}
-        placeholder="폼 주제를 입력하세요"
-      />
-    </>
+    <FormHeaderInput
+      value={isEdit ? editHeader : header}
+      onChange={changeHeaderHandler}
+      placeholder="폼 주제를 입력하세요"
+    />
   );
 }
 

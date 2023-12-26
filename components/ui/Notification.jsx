@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { NotificationStyled } from '@components/ui/Notification.styles';
-import { ErrorBadge, SuccessBadge } from '@styles/Icons';
+import { ErrorBadge, SuccessBadge } from '@components/assets/Icons';
 import { useDispatch } from 'react-redux';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // code
 function Notification({ status, message }) {

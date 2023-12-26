@@ -1,6 +1,6 @@
 import StyledComponentsRegistry from '@lib/registry';
 import GlobalProvider from '@app/providers/GlobalProvider';
-import MainNavbar from '@components/layout/MainNavbar';
+import Navbar from '@components/layout/Navbar';
 import MobileNavbar from '@components/layout/MobileNavbar';
 import Footer from '@components/layout/Footer';
 
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <StyledComponentsRegistry>
           <GlobalProvider>
-            <MainNavbar />
+            <Navbar />
             <MobileNavbar />
             {children}
             <Footer />

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { StarsStyled } from '@helpers/StarRating.styles';
-import { StarIcon } from '@styles/Icons';
+import { StarsStyled } from '@components/ui/StarRating.styles';
+import { StarIcon } from '@components/assets/Icons';
 
 // code
 function StarRating({ onChangeRating }) {

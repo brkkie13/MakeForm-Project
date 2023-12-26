@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { FiltersStyled } from '@components/forms/Filters.styles';
-import { SearchIcon } from '@styles/Icons';
+import { SearchIcon } from '@components/assets/Icons';
 import { OutlinedButtonStyled } from '@components/ui/Buttons';
 
 // code

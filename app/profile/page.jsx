@@ -1,11 +1,10 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import AuthForm from '@components/modals/AuthForm';
+import AuthForm from '@components/user/AuthForm';
 import UserProfile from '@components/user/UserProfile';
-import Section from '@components/ui/Section';
+import { Section, SectionCard } from '@components/ui/Section';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import useWindowWidth from '@utils/useWindowWidth';
-import { SectionCard } from '@components/ui/SectionCard';
 
 function ProfilePage() {
   const router = useRouter();

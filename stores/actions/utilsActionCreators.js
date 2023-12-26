@@ -1,4 +1,4 @@
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // code
 export const copyToClipboard = text => {

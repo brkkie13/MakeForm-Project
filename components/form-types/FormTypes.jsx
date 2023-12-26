@@ -2,7 +2,7 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { FormTypesStyled } from '@components/form-types/FormTypes.styles';
 
 // components
-import FormTypeCard from '@components/ui/FormTypeCard';
+import FormTypeCard from '@components/form-types/FormTypeCard';
 import HeaderType from '@components/form-types/HeaderType';
 import ShortAnswerType from '@components/form-types/ShortAnswerType';
 import LongAnswerType from '@components/form-types/LongAnswerType';
@@ -13,7 +13,7 @@ import DescriptionType from '@components/form-types/DescriptionType';
 
 // redux
 import { useDispatch } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 
 // code
 function FormTypes({ items, onRemoveFormType, isEdit }) {

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DropdownMenuStyled } from '@components/ui/DropdownMenu.styles';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 function DropdownMenu({ menuList }) {
   const dispatch = useDispatch();

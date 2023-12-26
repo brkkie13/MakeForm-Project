@@ -1,12 +1,12 @@
 // css
-import { ModalStyled } from '@components/modals/Modal.styles';
+import { ModalStyled } from '@components/ui/Modal.styles';
 
 // icons
-import { CloseIcon } from '@styles/Icons';
+import { CloseIcon } from '@components/assets/Icons';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // code
 function Modal() {

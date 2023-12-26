@@ -4,7 +4,12 @@ import {
   FormListStyled,
   EmptyListStyled,
 } from '@components/forms/FormList.styles';
-import { LinkIcon, CopyIcon, EmptyIcon, CreateIcon } from '@styles/Icons';
+import {
+  LinkIcon,
+  CopyIcon,
+  EmptyIcon,
+  CreateIcon,
+} from '@components/assets/Icons';
 import { IconButtonStyled } from '@components/ui/Buttons';
 import Tooltip from '@components/ui/Tooltip';
 import { formatDate } from '@utils/date';

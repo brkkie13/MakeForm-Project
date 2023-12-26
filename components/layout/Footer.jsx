@@ -1,11 +1,11 @@
 'use client';
-import { MailIcon } from '@styles/Icons';
+import { MailIcon } from '@components/assets/Icons';
 import {
   FooterContainer,
   FooterStyled,
 } from '@components/layout/Footer.styles';
 import { useDispatch } from 'react-redux';
-import { copyToClipboard } from '@redux/actions/utilsActionCreators';
+import { copyToClipboard } from '@stores/actions/utilsActionCreators';
 
 function Footer() {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 'use client';
-import Section from '@components/ui/Section';
+import { Section } from '@components/ui/Section';
 import SummaryCard from '@components/ui/SummaryCard';
 
 function HomePage() {

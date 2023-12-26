@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { InputArea } from '@components/ui/InputArea';
+import { FormInput } from '@/components/ui/FormInputs';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 
 // code
 function DescriptionType({ index, isEdit }) {
@@ -21,15 +21,13 @@ function DescriptionType({ index, isEdit }) {
   };
 
   return (
-    <>
-      <InputArea
-        value={
-          isEdit ? editItems[index].description : components[index].description
-        }
-        onChange={changeDescriptionHandler}
-        placeholder="설명을 입력하세요"
-      />
-    </>
+    <FormInput
+      value={
+        isEdit ? editItems[index].description : components[index].description
+      }
+      onChange={changeDescriptionHandler}
+      placeholder="설명을 입력하세요"
+    />
   );
 }
 

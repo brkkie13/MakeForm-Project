@@ -1,4 +1,4 @@
-import { db } from '@root/firebase.config';
+import { db } from '@/firebase.config';
 import {
   collection,
   getDocs,
@@ -9,8 +9,8 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { formActions } from '@redux/features/formSlice';
-import { uiActions } from '@redux/features/uiSlice';
+import { formActions } from '@stores/features/formSlice';
+import { uiActions } from '@stores/features/uiSlice';
 import {
   getDataFromLocalStorage,
   removeDataFromLocalStorage,

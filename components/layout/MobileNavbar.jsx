@@ -12,9 +12,10 @@ import {
   ChartIcon,
   FilledUserIcon,
   UserIcon,
-} from '../../styles/Icons';
-import { MobileNavbarStyled } from './MobileNavbar.styles';
+} from '@components/assets/Icons.jsx';
+import { MobileNavbarStyled } from '@components/layout/MobileNavbar.styles';
 
+// code
 function MobileNavbar() {
   const pathname = usePathname();
 

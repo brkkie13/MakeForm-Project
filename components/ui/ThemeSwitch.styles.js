@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
+export const ThemeSwitchStyled = styled.label`
   position: relative;
   width: 56px;
   height: 30px;

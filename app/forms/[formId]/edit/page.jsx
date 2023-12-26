@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 // components
 import FormTypesToolbar from '@components/form-types/FormTypesToolbar';
 import FormTypes from '@components/form-types/FormTypes';
-import Section from '@components/ui/Section';
+import { Section } from '@components/ui/Section';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { getDataFromLocalStorage } from '@utils/localStorage';
 import {
@@ -15,9 +15,9 @@ import {
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '@redux/actions/formActionCreators';
-import { formActions } from '@redux/features/formSlice';
-import { updateFormData } from '@redux/actions/formActionCreators';
+import { fetchFormData } from '@stores/actions/formActionCreators';
+import { formActions } from '@stores/features/formSlice';
+import { updateFormData } from '@stores/actions/formActionCreators';
 
 // code
 function EditPage() {

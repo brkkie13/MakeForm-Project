@@ -1,15 +1,15 @@
 'use client';
 
 // components
-import { RemoveBadge } from '@styles/Icons';
-import { TitleInputArea } from '@components/ui/InputArea';
-import MultipleChoiceInput from '@components/ui/MultipleChoiceInput';
+import { RemoveBadge } from '@components/assets/Icons';
+import { FormTitleInput } from '@components/ui/FormInputs';
+import MultipleChoiceInput from '@components/form-types/MultipleChoiceInput';
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { RoundedButtonStyled } from '@components/ui/Buttons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 
 // code
 function MultipleChoiceTextType({ index, isEdit }) {
@@ -62,7 +62,7 @@ function MultipleChoiceTextType({ index, isEdit }) {
 
   return (
     <>
-      <TitleInputArea
+      <FormTitleInput
         value={isEdit ? editItems[index].title : components[index].title}
         onChange={changeTitleHandler}
         placeholder="질문 제목을 입력하세요"

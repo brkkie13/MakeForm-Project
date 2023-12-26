@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-import { AuthFormStyled } from '@components/modals/AuthForm.styles';
+import { AuthFormStyled } from '@components/user/AuthForm.styles';
 import {
   FilledButtonStyled,
   OutlinedButtonStyled,
@@ -9,21 +9,21 @@ import {
 } from '@components/ui/Buttons';
 import { validateEmail, validatePassword } from '@utils/validation';
 
-import { AuthInput } from '@components/ui/InputArea';
-import { GoogleLogo } from '@styles/Icons';
+import AuthInput from '@components/user/AuthInput';
+import { GoogleLogo } from '@components/assets/Icons';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // firebase auth
 import {
   login,
   register,
   loginWithGoogle,
-} from '@redux/actions/authActionCreators';
+} from '@stores/actions/authActionCreators';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
-import { authActions } from '@redux/features/authSlice';
+import { authActions } from '@stores/features/authSlice';
 import ErrorBox from '@components/ui/ErrorBox';
 
 // code

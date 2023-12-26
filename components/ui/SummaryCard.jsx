@@ -1,6 +1,6 @@
 'use client';
 import { SummaryCardStyled } from '@components/ui/SummaryCard.styles';
-import { ReloadIcon } from '@styles/Icons';
+import { ReloadIcon } from '@components/assets/Icons';
 
 // code
 function SummaryCard(props) {

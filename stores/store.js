@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import uiReducer from '@redux/features/uiSlice';
-import formReducer from '@redux/features/formSlice';
-import responsesReducer from '@redux/features/responsesSlice';
-import utilsReducer from '@redux/features/utilsSlice';
-import authReducer from '@redux/features/authSlice';
+import uiReducer from '@stores/features/uiSlice';
+import formReducer from '@stores/features/formSlice';
+import responsesReducer from '@stores/features/responsesSlice';
+import utilsReducer from '@stores/features/utilsSlice';
+import authReducer from '@stores/features/authSlice';
 
 const store = configureStore({
   reducer: {

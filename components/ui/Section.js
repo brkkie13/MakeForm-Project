@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Section = styled.section`
+export const Section = styled.section`
   margin: 0 auto; // 가운데 정렬
   max-width: 900px;
 
@@ -45,4 +45,10 @@ const Section = styled.section`
   }
 `;
 
-export default Section;
+// Section 내부의 블럭
+export const SectionCard = styled.div`
+  background: ${props => props.theme.colorBackground0};
+  box-shadow: ${props => props.theme.shadow};
+  border-radius: ${props => props.theme.radiusLarge};
+  padding: 50px;
+`;

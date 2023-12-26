@@ -3,18 +3,18 @@
 // components
 import FormTypesToolbar from '@components/form-types/FormTypesToolbar';
 import FormTypes from '@components/form-types/FormTypes';
-import Section from '@components/ui/Section';
+import { Section } from '@components/ui/Section';
 import { FilledButtonStyled } from '@components/ui/Buttons';
 
 // redux
-import { sendFormData } from '@redux/actions/formActionCreators';
+import { sendFormData } from '@stores/actions/formActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 import { useLocalStorage } from '@utils/localStorage';
 
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
-import { auth } from '@root/firebase.config';
+import { auth } from '@/firebase.config';
 
 // code
 function CreatePage() {

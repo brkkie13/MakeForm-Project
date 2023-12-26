@@ -1,11 +1,11 @@
 'use client';
 
 // components
-import { TitleInputArea } from '@components/ui/InputArea';
+import { FormTitleInput } from '@components/ui/FormInputs';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { formActions } from '@redux/features/formSlice';
+import { formActions } from '@stores/features/formSlice';
 
 function MultipleChoiceImageType({ index, isEdit }) {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function MultipleChoiceImageType({ index, isEdit }) {
 
   return (
     <>
-      <TitleInputArea
+      <FormTitleInput
         value={isEdit ? editItems[index].title : components[index].title}
         onChange={changeTitleHandler}
         placeholder="질문 제목을 입력하세요"

@@ -1,4 +1,4 @@
-import { MultipleChoiceInputStyled } from '@components/ui/MultipleChoiceInput.styles';
+import { MultipleChoiceInputStyled } from '@components/form-types/MultipleChoiceInput.styles';
 
 // code
 function MultipleChoiceInput(props) {

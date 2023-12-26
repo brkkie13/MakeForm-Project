@@ -5,7 +5,7 @@ import { darkTheme, lightTheme } from '@styles/Theme';
 
 // components
 import Notification from '@components/ui/Notification';
-import Modal from '@components/modals/Modal';
+import Modal from '@components/ui/Modal';
 
 // redux
 import { useSelector } from 'react-redux';

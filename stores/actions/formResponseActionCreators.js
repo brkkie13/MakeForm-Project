@@ -1,4 +1,4 @@
-import { db } from '@root/firebase.config';
+import { db } from '@/firebase.config';
 import {
   collection,
   addDoc,
@@ -6,7 +6,7 @@ import {
   updateDoc,
   doc,
 } from 'firebase/firestore';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // code
 export const sendFormResponse = submittedForm => {

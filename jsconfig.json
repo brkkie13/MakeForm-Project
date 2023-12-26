@@ -2,12 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@root/*": ["./*"],
+      "@/*": ["./*"],
       "@app/*": ["app/*"],
       "@components/*": ["components/*"],
-      "@helpers/*": ["helpers/*"],
       "@lib/*": ["lib/*"],
-      "@redux/*": ["redux/*"],
+      "@stores/*": ["stores/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     }

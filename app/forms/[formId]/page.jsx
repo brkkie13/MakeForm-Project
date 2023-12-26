@@ -5,9 +5,8 @@ import { useRouter, useParams } from 'next/navigation';
 
 // components
 import FormDetail from '@components/forms/FormDetail';
-import Confirm from '@components/modals/Confirm';
-import Section from '@components/ui/Section';
-import { SectionCard } from '@components/ui/SectionCard';
+import Confirm from '@components/ui/Confirm';
+import { Section, SectionCard } from '@components/ui/Section';
 import { getDataFromLocalStorage } from '@utils/localStorage';
 
 // redux
@@ -15,8 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchFormData,
   removeFormData,
-} from '@redux/actions/formActionCreators';
-import { uiActions } from '@redux/features/uiSlice';
+} from '@stores/actions/formActionCreators';
+import { uiActions } from '@stores/features/uiSlice';
 
 // auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';

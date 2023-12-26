@@ -1,12 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '@redux/actions/formActionCreators';
 import FormDetail from '@components/forms/FormDetail';
-import Section from '@components/ui/Section';
-import { SectionCard } from '@components/ui/SectionCard';
+import { Section, SectionCard } from '@components/ui/Section';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFormData } from '@stores/actions/formActionCreators';
+
+// code
 function SharedFormDetailPage() {
   const dispatch = useDispatch();
   const params = useParams();

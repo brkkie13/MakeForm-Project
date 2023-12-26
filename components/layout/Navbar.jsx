@@ -8,8 +8,8 @@ import Image from 'next/image';
 import {
   HeaderContainer,
   HeaderStyled,
-} from '@components/layout/MainNavbar.styles';
-import ToggleSwitch from '@helpers/ToggleSwitch';
+} from '@components/layout/Navbar.styles';
+import ThemeSwitch from '@components/ui/ThemeSwitch';
 import {
   FilledCreateIcon,
   CreateIcon,
@@ -17,23 +17,23 @@ import {
   FormIcon,
   FilledChartIcon,
   ChartIcon,
-} from '@styles/Icons';
-import { Logo } from '@styles/Logo';
-import AuthForm from '@components/modals/AuthForm';
+} from '@components/assets/Icons';
+import { Logo } from '@components/assets/Logo';
+import AuthForm from '@components/user/AuthForm';
 import DropdownMenu from '@components/ui/DropdownMenu';
 import { FilledButtonStyled } from '@components/ui/Buttons';
 import { useLocalStorage } from '@utils/localStorage';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { uiActions } from '@redux/features/uiSlice';
+import { uiActions } from '@stores/features/uiSlice';
 
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
-import { logout } from '@redux/actions/authActionCreators';
+import { logout } from '@stores/actions/authActionCreators';
 
 // code
-function MainNavbar() {
+function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -116,7 +116,7 @@ function MainNavbar() {
 
         <div className="controls">
           <div className="control">
-            <ToggleSwitch
+            <ThemeSwitch
               isToggled={!isDarkMode}
               onToggle={toggleDarkModeHandler}
             />
@@ -150,4 +150,4 @@ function MainNavbar() {
   );
 }
 
-export default MainNavbar;
+export default Navbar;
