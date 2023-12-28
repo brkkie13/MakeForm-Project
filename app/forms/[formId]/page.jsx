@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
@@ -32,13 +31,9 @@ function FormDetailPage() {
   const [form, setForm] = useState({});
 
   useEffect(() => {
-    // 로그인 되어있을 때, db에서 데이터 가져옴
-    user && dispatch(fetchFormData(user?.uid));
-
-    // db에서 가져온 데이터 formList의 길이가 0보다 클 때, targetedForm을 찾음
-    if (formList.length > 0) {
-      const targetedForm = formList.find(form => form.id === formId);
-      targetedForm && setForm(targetedForm);
+    // 로그인 되어있을 때, db에서 데이터 가져옴(formList에 값이 생김)
+    if (user) {
+      dispatch(fetchFormData(user.uid));
     }
 
     // 로그인 안되어 있을 때는 로컬스토리지에서 데이터를 가져옴
@@ -50,7 +45,15 @@ function FormDetailPage() {
         targetedForm && setForm(targetedForm);
       }
     }
-  }, [user, dispatch]); // 무한루프로 인해 의존성배열의 formList 삭제
+  }, [user, dispatch]);
+
+  useEffect(() => {
+    // formList의 길이가 0보다 클 때, targetedForm을 찾음
+    if (formList.length > 0) {
+      const targetedForm = formList.find(form => form.id === formId);
+      targetedForm && setForm(targetedForm);
+    }
+  }, [formList]);
 
   const editFormHandler = useCallback(() => {
     const editPagePath = `/forms/${formId}/edit`;
@@ -58,12 +61,14 @@ function FormDetailPage() {
   }, [formId, router]);
 
   const removeFormHandler = useCallback(() => {
-    const clickConfirmHandler = () => {
+    const clickConfirmHandler = async () => {
       dispatch(uiActions.closeModal());
-      dispatch(removeFormData(user, formId));
+
+      dispatch(await removeFormData(user, formId));
       // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
       user && dispatch(fetchFormData());
-      router.push('/forms');
+
+      router.replace('/forms');
     };
 
     dispatch(
@@ -74,7 +79,7 @@ function FormDetailPage() {
         />
       )
     );
-  }, [dispatch, formId, router]);
+  }, [dispatch, formId, router, user]);
 
   return (
     <Section>

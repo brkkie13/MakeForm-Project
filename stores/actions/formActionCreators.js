@@ -226,6 +226,7 @@ export const removeFormData = (user, formId) => {
     try {
       user && (await deleteData());
       !user && removeDataFromLocalStorage(formId);
+
       dispatch(
         uiActions.showNotification({
           status: 'success',
