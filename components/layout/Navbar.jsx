@@ -31,11 +31,12 @@ import { uiActions } from '@stores/features/uiSlice';
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { logout } from '@stores/actions/authActionCreators';
+import { replaceFirstSegmentOfPath } from '@/utils/replacePath';
 
 // code
 function Navbar() {
-  const pathname = usePathname();
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.ui.isDarkMode);
   const user = useFirebaseAuthState();
@@ -45,6 +46,9 @@ function Navbar() {
 
   const logoutHandler = () => {
     dispatch(logout());
+
+    // '/forms/[formId]'페이지에서 로그아웃했을 때 '/forms'페이지로 이동
+    replaceFirstSegmentOfPath(router, pathname);
   };
 
   const routeProfilePageHandler = () => {

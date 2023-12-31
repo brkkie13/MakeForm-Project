@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { AuthFormStyled } from '@components/user/AuthForm.styles';
 import {
@@ -25,9 +26,12 @@ import {
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { authActions } from '@stores/features/authSlice';
 import ErrorBox from '@components/ui/ErrorBox';
+import { replaceFirstSegmentOfPath } from '@/utils/replacePath';
 
 // code
 function AuthForm() {
+  const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
 
   const emailRef = useRef();
@@ -77,8 +81,13 @@ function AuthForm() {
   }, [email.value, password.value, passwordCheck.value, dispatch]);
 
   useEffect(() => {
-    // 로그인이 성공하여 user가 존재하면 모달 닫기.
-    user && dispatch(uiActions.closeModal());
+    if (user) {
+      // 로그인이 성공하여 user가 존재하면 모달 닫기
+      dispatch(uiActions.closeModal());
+
+      // '/forms/[formId]'페이지일 때 '/forms'페이지로 이동
+      replaceFirstSegmentOfPath(router, pathname);
+    }
   }, [user, dispatch]);
 
   const submitAuthFormHandler = async event => {
