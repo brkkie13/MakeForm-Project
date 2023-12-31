@@ -12,9 +12,10 @@ export const useLocalStorage = () => {
     return null;
   };
 
-  const removeItem = key => {
+  // removeItem은 한번에 여러 개의 key 인자를 받을 수 있음.
+  const removeItem = (...keys) => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem(key);
+      keys.forEach(key => localStorage.removeItem(key));
     }
   };
 
