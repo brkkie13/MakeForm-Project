@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 // components
 import FormList from '@components/forms/FormList';
@@ -47,6 +47,7 @@ function FormsPage() {
       : [];
 
   useEffect(() => {
+    // 로그인 되었을 때 데이터를 불러옴
     if (user) {
       dispatch(fetchFormData(user?.uid));
     }
@@ -57,6 +58,15 @@ function FormsPage() {
       dispatch(formActions.replaceFormList(storedForms));
     }
   }, [dispatch, user]);
+
+  const resetFilterHandler = () => {
+    resetFilter();
+    changePage(1);
+  };
+
+  useEffect(() => {
+    resetFilterHandler();
+  }, [user]);
 
   const showDetailHandler = useCallback(
     dataId => {
@@ -121,7 +131,7 @@ function FormsPage() {
           month={month}
           searchWord={searchWord}
           onFilterChange={changeFilter}
-          onFilterReset={resetFilter}
+          onFilterReset={resetFilterHandler}
           onPageChange={changePage}
         />
       )}

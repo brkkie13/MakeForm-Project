@@ -32,11 +32,6 @@ function Filters({
     onPageChange(1);
   };
 
-  const resetFilterHandler = () => {
-    onFilterReset();
-    onPageChange(1);
-  };
-
   const toggleSearchButtonHandler = () => {
     setIsSearchOpen(!isSearchOpen);
   };
@@ -89,7 +84,7 @@ function Filters({
           <SearchIcon />
         </OutlinedButtonStyled>
 
-        <OutlinedButtonStyled onClick={resetFilterHandler}>
+        <OutlinedButtonStyled onClick={onFilterReset}>
           필터 초기화
         </OutlinedButtonStyled>
       </div>
