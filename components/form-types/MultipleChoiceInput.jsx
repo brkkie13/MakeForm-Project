@@ -14,7 +14,7 @@ function MultipleChoiceInput(props) {
   return (
     <MultipleChoiceInputStyled>
       {/* 체크 가능할 때만 radio 활성화 */}
-      {checkable && (
+      {checkable === true && (
         <input
           type="radio"
           name="radio-group"
@@ -25,7 +25,7 @@ function MultipleChoiceInput(props) {
       )}
 
       {optionText ? (
-        <label>
+        <label htmlFor={optionIndex}>
           <span>{optionText}</span>
         </label>
       ) : (
