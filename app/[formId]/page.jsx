@@ -5,27 +5,21 @@ import FormDetail from '@components/forms/FormDetail';
 import { Section, SectionCard } from '@components/ui/Section';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormData } from '@stores/actions/formActionCreators';
+import { useDispatch } from 'react-redux';
+import { fetchFormDataWithFormId } from '@stores/actions/formActionCreators';
 
 // code
 function SharedFormDetailPage() {
   const dispatch = useDispatch();
   const params = useParams();
-  const formId = params.slug;
-  const formList = useSelector(state => state.form.formList);
+  const formId = params.formId;
   const [form, setForm] = useState({});
 
   useEffect(() => {
-    dispatch(fetchFormData());
+    dispatch(fetchFormDataWithFormId(formId)).then(formData =>
+      setForm(formData)
+    );
   }, [dispatch, formId]);
-
-  useEffect(() => {
-    if (formList.length > 0) {
-      const targetedForm = formList.find(form => form.id === formId);
-      targetedForm && setForm(targetedForm);
-    }
-  }, [formList, dispatch, formId]);
 
   return (
     <Section>

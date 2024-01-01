@@ -25,7 +25,6 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
   const responses = useSelector(state => state.responses.responses);
 
   const [form, setForm] = useState({});
-  const [isSharedForm, setIsSharedForm] = useState(false);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
       dispatch(responsesActions.setInitialValue(form.items));
     } else if (sharedForm) {
       setForm(sharedForm);
-      setIsSharedForm(true);
       dispatch(responsesActions.setInitialValue(sharedForm.items));
     }
   }, [formDetail, sharedForm, dispatch]);
@@ -63,8 +61,12 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
       responses,
     };
 
-    dispatch(sendFormResponse(data));
-    setSuccess(true);
+    try {
+      await dispatch(sendFormResponse(data));
+      setSuccess(true);
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   if (success) {
@@ -86,7 +88,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
           </IconButtonStyled>
         </Tooltip>
 
-        {!isSharedForm && (
+        {!sharedForm && (
           <>
             <Tooltip text="편집">
               <IconButtonStyled onClick={onEdit}>
@@ -113,7 +115,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
             <h2 className="title">{item.title && item.title}</h2>
 
             {item.formType === 'shortAnswerType' ? (
-              isSharedForm ? (
+              sharedForm ? (
                 <input
                   type="text"
                   placeholder="답변을 입력하세요"
@@ -124,7 +126,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
                 <p className="placeholder-text">단답의 답변이 입력됩니다</p>
               )
             ) : item.formType === 'longAnswerType' ? (
-              isSharedForm ? (
+              sharedForm ? (
                 <textarea
                   placeholder="답변을 입력하세요"
                   name="longAnswerType"
@@ -144,7 +146,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
             <InputOptionsStyled>
               {item.options &&
                 item.options.map((option, optionIdx) =>
-                  isSharedForm ? (
+                  sharedForm ? (
                     <MultipleChoiceInput
                       key={option.id}
                       optionIndex={optionIdx}
@@ -168,7 +170,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
         ))}
       </div>
 
-      {isSharedForm && (
+      {sharedForm && (
         <div className="submit-button">
           <FilledButtonStyled onClick={submitFormHandler}>
             제출하기

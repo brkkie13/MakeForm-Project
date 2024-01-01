@@ -53,8 +53,8 @@ export const sendFormResponse = submittedForm => {
 
     try {
       await postData();
+      return true; // Promise가 성공적으로 완료
     } catch (error) {
-      console.log(error.message);
       dispatch(
         uiActions.showNotification({
           status: 'error',
@@ -62,9 +62,7 @@ export const sendFormResponse = submittedForm => {
         })
       );
 
-      setTimeout(() => {
-        dispatch(uiActions.clearNotification());
-      }, 3000);
+      throw error; // 에러를 던져 호출하는 곳에서 에러를 잡아낼 수 있게 함.
     }
   };
 };

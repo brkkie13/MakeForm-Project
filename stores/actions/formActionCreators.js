@@ -2,6 +2,7 @@ import { db } from '@/firebase.config';
 import {
   collection,
   getDocs,
+  getDoc,
   addDoc,
   updateDoc,
   deleteDoc,
@@ -150,6 +151,35 @@ export const fetchFormData = uid => {
     try {
       const formData = await getData();
       dispatch(formActions.replaceFormList(formData)); // formList변수에 데이터 저장.
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '데이터를 불러올 수 없습니다.',
+        })
+      );
+    }
+  };
+};
+
+export const fetchFormDataWithFormId = formId => {
+  return async dispatch => {
+    const formDocRef = doc(db, 'forms', formId);
+
+    const getData = async () => {
+      const formDoc = await getDoc(formDocRef);
+      const data = formDoc.data();
+      const formattedData = {
+        id: formId,
+        header: data.header,
+        items: data.items,
+      };
+      return formattedData;
+    };
+
+    try {
+      const formData = await getData();
+      return formData;
     } catch (error) {
       dispatch(
         uiActions.showNotification({
