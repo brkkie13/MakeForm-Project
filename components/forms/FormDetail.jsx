@@ -7,10 +7,16 @@ import {
 } from '@components/forms/FormDetail.styles';
 import Tooltip from '@components/ui/Tooltip';
 import StarRating from '@components/ui/StarRating';
-import { LinkIcon, EditIcon, TrashIcon } from '@components/assets/Icons';
+import {
+  LinkIcon,
+  EditIcon,
+  TrashIcon,
+  CorrectIcon,
+} from '@components/assets/Icons';
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
 import MultipleChoiceInput from '@components/form-types/MultipleChoiceInput';
+import NotificationBanner from '../ui/NotificationBanner';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,9 +77,11 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
 
   if (success) {
     return (
-      <FormDetailStyled>
-        <p>제출이 완료되었습니다. 감사합니다.</p>
-      </FormDetailStyled>
+      <NotificationBanner
+        icon={<CorrectIcon />}
+        mainText={'작성한 폼이 제출되었습니다.'}
+        subText={'감사합니다.'}
+      />
     );
   }
 

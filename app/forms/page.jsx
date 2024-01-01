@@ -1,10 +1,17 @@
 'use client';
 import { useCallback, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-// components
 import FormList from '@components/forms/FormList';
 import Pagination from '@components/forms/Pagination';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
+import Filters from '@components/forms/Filters';
+import { Section, SectionCard } from '@components/ui/Section';
+import useFilters from '@components/forms/hooks/useFilters';
+import usePagination from '@components/forms/hooks/usePagination';
+import useQueryString from '@components/forms/hooks/useQueryString';
+import { getDataFromLocalStorage, useLocalStorage } from '@utils/localStorage';
+import ErrorBox from '@components/ui/ErrorBox';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,17 +19,7 @@ import {
   sendFormData,
   fetchFormData,
 } from '@stores/actions/formActionCreators';
-
-import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { formActions } from '@stores/features/formSlice';
-import Filters from '@components/forms/Filters';
-import { Section } from '@components/ui/Section';
-import useFilters from '@components/forms/hooks/useFilters';
-import usePagination from '@components/forms/hooks/usePagination';
-import useQueryString from '@components/forms/hooks/useQueryString';
-import { getDataFromLocalStorage } from '@utils/localStorage';
-import { useLocalStorage } from '@utils/localStorage';
-import ErrorBox from '@components/ui/ErrorBox';
 
 // code
 function FormsPage() {
@@ -136,13 +133,15 @@ function FormsPage() {
         />
       )}
 
-      <FormList
-        allPosts={formList}
-        filteredPosts={filteredFormList}
-        currentPosts={currentPosts}
-        onShow={showDetailHandler}
-        onCopy={copyFormHandler}
-      />
+      <SectionCard>
+        <FormList
+          allPosts={formList}
+          filteredPosts={filteredFormList}
+          currentPosts={currentPosts}
+          onShow={showDetailHandler}
+          onCopy={copyFormHandler}
+        />
+      </SectionCard>
 
       {currentPosts.length > 0 && (
         <Pagination

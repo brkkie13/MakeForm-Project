@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const FiltersStyled = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px; // 필터 아래~게시글 위 사이 여백
 
   .filters-group {
     display: flex;

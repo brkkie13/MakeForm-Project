@@ -5,6 +5,7 @@ export const PaginationStyled = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-top: 30px; // 페이지네이션 위~게시글 아래 사이 여백
 
   ol {
     display: flex;

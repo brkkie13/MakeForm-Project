@@ -14,7 +14,7 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import { GoHome, GoHomeFill, GoTrash } from 'react-icons/go';
 import { GrDrag } from 'react-icons/gr';
 import { HiMiniCheckCircle, HiExclamationTriangle } from 'react-icons/hi2';
-import { IoClose, IoMail } from 'react-icons/io5';
+import { IoClose, IoMail, IoCheckmarkCircle } from 'react-icons/io5';
 import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { PiCopy, PiFolderSimpleLight } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
@@ -145,6 +145,10 @@ export function LoadingSpinner(props) {
 
 export function InfoIcon(props) {
   return <RiInformationLine {...props} />;
+}
+
+export function CorrectIcon(props) {
+  return <IoCheckmarkCircle {...props} />;
 }
 
 export function CorrectMark(props) {

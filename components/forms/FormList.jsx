@@ -13,21 +13,37 @@ import {
 import { IconButtonStyled } from '@components/ui/Buttons';
 import Tooltip from '@components/ui/Tooltip';
 import { formatDate } from '@utils/date';
+import NotificationBanner from '../ui/NotificationBanner';
 
 // code
 function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
   if (!allPosts || allPosts.length === 0) {
+    // return (
+    //   <EmptyListStyled>
+    //     <EmptyIcon />
+    //     <p className="main-text">게시물이 존재하지 않습니다.</p>
+    //     <div className="sub-text">
+    //       <Link href={'/create'} className="create-form-button">
+    //         <CreateIcon />폼 만들기
+    //       </Link>
+    //       <p>에서 새로운 폼을 추가하세요!</p>
+    //     </div>
+    //   </EmptyListStyled>
+    // );
+
     return (
-      <EmptyListStyled>
-        <EmptyIcon />
-        <p className="main-text">게시물이 존재하지 않습니다.</p>
-        <div className="sub-text">
-          <Link href={'/create'} className="create-form-button">
-            <CreateIcon />폼 만들기
-          </Link>
-          <p>에서 새로운 폼을 추가하세요!</p>
-        </div>
-      </EmptyListStyled>
+      <NotificationBanner
+        icon={<EmptyIcon />}
+        mainText={'게시물이 존재하지 않습니다.'}
+        subText={
+          <>
+            <Link href={'/create'} className="button">
+              <CreateIcon />폼 만들기
+            </Link>
+            <p>에서 새로운 폼을 추가하세요!</p>
+          </>
+        }
+      />
     );
   }
 
