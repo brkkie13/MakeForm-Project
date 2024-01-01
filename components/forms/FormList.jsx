@@ -16,7 +16,7 @@ import { formatDate } from '@utils/date';
 
 // code
 function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
-  if (allPosts.length === 0) {
+  if (!allPosts || allPosts.length === 0) {
     return (
       <EmptyListStyled>
         <EmptyIcon />

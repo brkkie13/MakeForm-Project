@@ -124,7 +124,7 @@ function FormsPage() {
       )}
       <h1>최근 폼</h1>
 
-      {formList.length > 0 && (
+      {formList && formList.length > 0 && (
         <Filters
           dataList={filteredFormList}
           year={year}
