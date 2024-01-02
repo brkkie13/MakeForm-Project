@@ -86,6 +86,18 @@ function Navbar() {
     dispatch(uiActions.openModal(<AuthForm />));
   };
 
+  // '/[formId]'(폼 답변 작성) 경로에서는 Navbar가 뜨지 않게 함.
+  if (
+    !pathname.includes('/forms' || '/analysis') &&
+    !pathname.includes('/analysis') &&
+    pathname !== '/' &&
+    pathname !== '/create' &&
+    pathname !== '/profile'
+  ) {
+    // Navbar가 없어진 만큼 Navbar 영역의 여백 75px을 없앰.(Section.js에 들어간 margin-top높이를 삭제)
+    return <section style={{ marginTop: -75 }}></section>;
+  }
+
   const activeUserInfo = isDropdownOpen ? 'user-info active' : 'user-info';
 
   return (

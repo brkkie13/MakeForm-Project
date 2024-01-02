@@ -19,6 +19,17 @@ import { MobileNavbarStyled } from '@components/layout/MobileNavbar.styles';
 function MobileNavbar() {
   const pathname = usePathname();
 
+  // '/[formId]'(폼 답변 작성) 경로에서는 Navbar가 뜨지 않게 함.
+  if (
+    !pathname.includes('/forms' || '/analysis') &&
+    !pathname.includes('/analysis') &&
+    pathname !== '/' &&
+    pathname !== '/create' &&
+    pathname !== '/profile'
+  ) {
+    return null;
+  }
+
   return (
     <MobileNavbarStyled>
       <ul>
