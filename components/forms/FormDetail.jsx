@@ -65,6 +65,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
       header: form.header,
       submissionDate: new Date().toISOString(),
       responses,
+      userId: form.userId,
     };
 
     try {

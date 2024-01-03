@@ -173,6 +173,7 @@ export const fetchFormDataWithFormId = formId => {
         id: formId,
         header: data.header,
         items: data.items,
+        userId: data.userId,
       };
       return formattedData;
     };
