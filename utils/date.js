@@ -36,3 +36,17 @@ export function formatDate(date) {
   const day = String(newDate.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+export function formatDateToLocaleString(date) {
+  const newDate = new Date(date);
+  const year = newDate.getFullYear();
+  const month = String(newDate.getMonth() + 1).padStart(2, '0');
+  const day = String(newDate.getDate()).padStart(2, '0');
+  const hours = newDate.getHours();
+  const minutes = String(newDate.getMinutes()).padStart(2, '0');
+  const amOrPm = hours >= 12 ? '오후' : '오전';
+
+  const hours12 = String(hours % 12 || 12).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${amOrPm} ${hours12}:${minutes}`;
+}
