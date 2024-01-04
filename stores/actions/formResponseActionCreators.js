@@ -5,8 +5,11 @@ import {
   getDocs,
   updateDoc,
   doc,
+  query,
+  where,
 } from 'firebase/firestore';
 import { uiActions } from '@stores/features/uiSlice';
+import { responsesActions } from '../features/responsesSlice';
 
 // code
 export const sendFormResponse = submittedForm => {
@@ -17,14 +20,11 @@ export const sendFormResponse = submittedForm => {
     );
 
     // 유저가 제출한 답변에 관련된 정보.
-    const { formId, header, submissionDate, responses } = submittedForm;
+    const { formId, header, submissionDate, responses, userId } = submittedForm;
 
     const postData = async () => {
       const data = await getDocs(submittedResponsesCollectionRef);
-      const formattedData = data.docs.map(doc => ({
-        ...doc.data(),
-        docId: doc.id,
-      }));
+      const formattedData = data.docs.map(doc => ({ ...doc.data() }));
 
       const existingFormResponses = formattedData.find(
         item => item.formId === formId
@@ -36,6 +36,7 @@ export const sendFormResponse = submittedForm => {
           formId,
           header,
           responsesList: [{ submissionDate, responses }],
+          userId,
         });
       }
 
@@ -59,6 +60,37 @@ export const sendFormResponse = submittedForm => {
         uiActions.showNotification({
           status: 'error',
           message: '제출에 실패했습니다.',
+        })
+      );
+
+      throw error; // 에러를 던져 호출하는 곳에서 에러를 잡아낼 수 있게 함.
+    }
+  };
+};
+
+export const fetchFormResponses = uid => {
+  return async dispatch => {
+    if (!uid) {
+      return;
+    }
+
+    const formsCollectionRef = collection(db, 'submittedResponses');
+    const q = query(formsCollectionRef, where('userId', '==', uid));
+
+    const getData = async () => {
+      const data = await getDocs(q);
+      const formattedData = data.docs.map(doc => ({ ...doc.data() }));
+      return formattedData;
+    };
+
+    try {
+      const formResponsesData = await getData();
+      dispatch(responsesActions.replaceResponsesList(formResponsesData));
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          message: '데이터를 불러올 수 없습니다.',
         })
       );
 

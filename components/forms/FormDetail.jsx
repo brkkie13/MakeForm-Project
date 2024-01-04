@@ -52,9 +52,11 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
     dispatch(responsesActions.changeRatingValue({ itemIdx, score }));
   };
 
-  const changeOptionHandler = (itemIdx, optionIdx) => {
-    // 선택한 객관식 옵션의 인덱스번호를 저장.
-    dispatch(responsesActions.changeOptionValue({ itemIdx, optionIdx }));
+  const changeOptionHandler = (itemIdx, optionIdx, optionText) => {
+    // 선택한 객관식 옵션의 인덱스번호와 옵션텍스트를 함수에 전달
+    dispatch(
+      responsesActions.changeOptionValue({ itemIdx, optionIdx, optionText })
+    );
   };
 
   const submitFormHandler = async event => {
@@ -162,7 +164,7 @@ function FormDetail({ formDetail, onEdit, onRemove, sharedForm }) {
                       optionText={option.text}
                       checkable={true}
                       onChangeOption={() =>
-                        changeOptionHandler(itemIdx, optionIdx)
+                        changeOptionHandler(itemIdx, optionIdx, option.text)
                       }
                     />
                   ) : (

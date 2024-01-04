@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   responses: [],
+  responsesList: [],
 };
 
 export const responsesSlice = createSlice({
@@ -39,9 +40,31 @@ export const responsesSlice = createSlice({
     },
 
     changeOptionValue(state, action) {
-      const { itemIdx, optionIdx } = action.payload;
-      // 선택한 객관식 옵션의 인덱스번호를 저장.
-      state.responses[itemIdx].response = optionIdx;
+      const { itemIdx, optionIdx, optionText } = action.payload;
+      const processedResponse = `${optionIdx + 1}. ${optionText}`;
+      // 선택한 객관식의 인덱스번호를 찾아서 옵션번호와 옵션텍스트 저장
+      state.responses[itemIdx].response = processedResponse;
+    },
+
+    replaceResponsesList(state, action) {
+      const formResponsesData = action.payload;
+
+      const processedData = formResponsesData.flatMap(item =>
+        item.responsesList.map(response => ({
+          formId: item.formId,
+          header: item.header,
+          responses: response.responses,
+          submissionDate: new Date(response.submissionDate).getTime(),
+        }))
+      );
+
+      // 내림차순(최신순)으로 정렬
+      const compareDates = (a, b) => {
+        return new Date(b.submissionDate) - new Date(a.submissionDate);
+      };
+
+      processedData.sort(compareDates);
+      state.responsesList = processedData;
     },
   },
 });
