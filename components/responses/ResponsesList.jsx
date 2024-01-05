@@ -1,11 +1,13 @@
 import { useRouter } from 'next/navigation';
+import { CSVLink } from 'react-csv';
 import {
   ResponsesListStyled,
   TableWrapper,
 } from '@components/responses/ResponsesList.styles';
 import NotificationBanner from '@components/ui/NotificationBanner';
-import { EmptyIcon } from '@components/assets/Icons';
+import { EmptyIcon, DownloadIcon } from '@components/assets/Icons';
 import { formatDateToLocaleString } from '@utils/date';
+import { ButtonStyled } from '@components/ui/Buttons';
 
 const FORM_TYPE = {
   'shortAnswerType': '단답형',
@@ -39,52 +41,81 @@ function ResponsesList({ responsesList }) {
     return Math.max(max, validResponsesLength);
   }, 0);
 
+  // 표 데이터의 thead
+  const headers = [
+    { label: '응답 ID', key: 'responsesId' },
+    { label: '응답 날짜', key: 'responsesDate' },
+    { label: '폼 이름', key: 'header' },
+
+    ...Array.from({ length: maxLength }).map((_, index) => ({
+      label: `질문 ${index + 1}`,
+      key: `question${index + 1}`,
+    })),
+  ];
+
+  // 표 데이터의 tbody
+  const data = responsesList.map(item => {
+    const obj = {
+      responsesId: item.submissionDate,
+      responsesDate: formatDateToLocaleString(item.submissionDate),
+      header: item.header,
+    };
+
+    item.responses
+      .filter(el => el.title && el.response)
+      .forEach((el, i) => {
+        obj[`question${i + 1}`] = `${FORM_TYPE[el.formType]}: ${
+          el.title
+        } / 답변: ${el.response}`;
+      });
+
+    return obj;
+  });
+
   return (
     <ResponsesListStyled>
       <nav>
         <div className="total-count">
           총 <span className="number">{responsesList.length}</span>건
         </div>
+        <ButtonStyled>
+          <CSVLink
+            headers={headers}
+            data={data}
+            filename={formatDateToLocaleString(new Date())}
+            target="_blank"
+          >
+            <DownloadIcon />
+            엑셀 추출
+          </CSVLink>
+        </ButtonStyled>
       </nav>
+
       <TableWrapper>
         <table>
           <thead>
             <tr>
-              <td>응답 번호</td>
-              <td>응답 날짜</td>
-              <td>폼 이름</td>
-              {Array.from({ length: maxLength }).map((_, index) => (
-                <td key={index}>질문 {index + 1}</td>
+              {headers.map(header => (
+                <td key={header.key}>{header.label}</td>
               ))}
             </tr>
           </thead>
           <tbody>
-            {responsesList.map(data => (
+            {data.map(row => (
               <tr
-                key={data.submissionDate}
-                onClick={() => showDetailPageHandler(data.submissionDate)}
+                key={row.responsesId}
+                onClick={() => showDetailPageHandler(row.responsesId)}
               >
-                <td className="responses-id">{data.submissionDate}</td>
-                <td className="date">
-                  {formatDateToLocaleString(data.submissionDate)}
-                </td>
-                <td className="header">{data.header}</td>
-                {data.responses.map(
-                  (item, idx) =>
-                    item.title &&
-                    item.response && (
-                      <td key={idx}>
-                        <div className="response-data">
-                          <span className="form-type">
-                            {FORM_TYPE[item.formType]}
-                          </span>
-                          <span className="title-text">{item.title}</span>
-                          <span className="response">답변</span>
-                          <span className="response-text">{item.response}</span>
-                        </div>
-                      </td>
-                    )
-                )}
+                {headers.map(header => (
+                  <td
+                    key={header.key}
+                    className={
+                      header.key === 'responsesId' ? 'responses-id' : ''
+                    }
+                  >
+                    {row[header.key]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>

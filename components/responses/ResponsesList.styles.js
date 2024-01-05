@@ -3,19 +3,19 @@ import styled from 'styled-components';
 export const ResponsesListStyled = styled.div`
   width: inherit;
 
-  .total-count {
-    font-weight: bold;
-    margin-bottom: 20px;
-
-    .number {
-      color: ${props => props.theme.colorBlue0};
-    }
-  }
-
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+
+    .total-count {
+      font-weight: bold;
+
+      .number {
+        color: ${props => props.theme.colorBlue0};
+      }
+    }
   }
 `;
 
@@ -56,11 +56,7 @@ export const TableWrapper = styled.div`
   tbody tr:hover {
     cursor: pointer;
 
-    .responses-id,
-    .date,
-    .header,
-    .title-text,
-    .response-text {
+    td {
       text-decoration: underline;
     }
   }
@@ -73,30 +69,12 @@ export const TableWrapper = styled.div`
     color: ${props => props.theme.colorGrayHeavy};
     border-right: 1px solid ${props => props.theme.colorGrayLightest};
   }
+
   thead td:last-child {
     border-right: none;
   }
 
   .responses-id {
     color: ${props => props.theme.colorBlue0};
-  }
-
-  .response-data {
-    display: flex;
-    align-items: center;
-
-    .form-type,
-    .response {
-      font-size: 12px;
-      color: ${props => props.theme.colorGrayLight};
-      border: 1px solid ${props => props.theme.colorGrayLight};
-      padding: 2px 4px;
-      margin-right: 5px;
-    }
-
-    .title-text,
-    .response-text {
-      margin-right: 10px;
-    }
   }
 `;
