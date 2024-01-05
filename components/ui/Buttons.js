@@ -2,9 +2,27 @@ import styled from 'styled-components';
 
 export const ButtonStyled = styled.button`
   color: ${props => props.theme.colorBlue0};
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  svg {
+    fill: ${props => props.theme.colorBlue0};
+    color: ${props => props.theme.colorBlue0};
+  }
 
   &:hover {
     color: ${props => props.theme.colorBlue1};
+    svg {
+      fill: ${props => props.theme.colorBlue1};
+      color: ${props => props.theme.colorBlue1};
+    }
   }
 `;
 
