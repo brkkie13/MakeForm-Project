@@ -56,7 +56,7 @@ function ResponsesList({ responsesList }) {
   // 표 데이터의 tbody
   const data = responsesList.map(item => {
     const obj = {
-      responsesId: item.submissionDate,
+      responsesId: item.id,
       responsesDate: formatDateToLocaleString(item.submissionDate),
       header: item.header,
     };

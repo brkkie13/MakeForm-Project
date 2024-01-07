@@ -50,11 +50,12 @@ export const responsesSlice = createSlice({
       const formResponsesData = action.payload;
 
       const processedData = formResponsesData.flatMap(item =>
-        item.responsesList.map(response => ({
+        item.responsesList.map(el => ({
           formId: item.formId,
           header: item.header,
-          responses: response.responses,
-          submissionDate: new Date(response.submissionDate).getTime(),
+          responses: el.responses,
+          submissionDate: el.submissionDate,
+          id: el.id,
         }))
       );
 

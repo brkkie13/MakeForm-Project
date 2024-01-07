@@ -39,4 +39,21 @@ export const FormItemStyled = styled.div`
   .placeholder-text {
     color: ${props => props.theme.colorGrayLight};
   }
+
+  .response-detail {
+    display: flex;
+    align-items: center;
+
+    .form-type {
+      color: ${props => props.theme.colorGrayLightest};
+      border: 1px solid ${props => props.theme.colorGrayLightest};
+      font-size: 14px;
+      padding: 2px 4px;
+      margin-right: 7px;
+    }
+
+    .response {
+      color: ${props => props.theme.colorBlue0};
+    }
+  }
 `;
