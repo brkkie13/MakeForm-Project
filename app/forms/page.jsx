@@ -123,7 +123,7 @@ function FormsPage() {
 
       {formList && formList.length > 0 && (
         <Filters
-          dataList={filteredFormList}
+          allPosts={formList}
           year={year}
           month={month}
           searchWord={searchWord}

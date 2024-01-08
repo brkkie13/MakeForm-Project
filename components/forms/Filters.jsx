@@ -6,7 +6,7 @@ import { OutlinedButtonStyled } from '@components/ui/Buttons';
 
 // code
 function Filters({
-  dataList,
+  allPosts,
   year,
   month,
   searchWord,
@@ -18,7 +18,7 @@ function Filters({
 
   const yearOptions = [
     '전체 년',
-    ...new Set(dataList.map(form => new Date(form.creationDate).getFullYear())),
+    ...new Set(allPosts.map(data => new Date(data.creationDate).getFullYear())),
   ];
 
   // 1~12월을 배열로 반환
