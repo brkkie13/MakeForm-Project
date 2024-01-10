@@ -17,14 +17,14 @@ const FORM_TYPE = {
   'ratingType': '평점',
 };
 
-function ResponsesList({ responsesList }) {
+function ResponsesList({ allPosts, filteredPosts, currentPosts }) {
   const router = useRouter();
 
   const showDetailPageHandler = dataId => {
     router.push('/analysis/' + dataId);
   };
 
-  if (!responsesList || responsesList.length === 0) {
+  if (!allPosts || allPosts.length === 0) {
     return (
       <NotificationBanner
         icon={<EmptyIcon />}
@@ -33,7 +33,7 @@ function ResponsesList({ responsesList }) {
     );
   }
   // responsesList의 각 요소의 responses배열 중 가장 긴 길이를 반환
-  const maxLength = responsesList.reduce((max, data) => {
+  const maxLength = currentPosts.reduce((max, data) => {
     const validResponsesLength = data.responses.filter(
       item => item.title && item.response
     ).length; // responses 배열에서 질문으로만 이루어진 것들의 배열 길이를 반환
@@ -54,7 +54,7 @@ function ResponsesList({ responsesList }) {
   ];
 
   // 표 데이터의 tbody
-  const data = responsesList.map(item => {
+  const data = currentPosts.map(item => {
     const obj = {
       responsesId: item.id,
       responsesDate: formatDateToLocaleString(item.submissionDate),
@@ -76,7 +76,7 @@ function ResponsesList({ responsesList }) {
     <ResponsesListStyled>
       <nav>
         <div className="total-count">
-          총 <span className="number">{responsesList.length}</span>건
+          총 <span className="number">{filteredPosts.length}</span>건
         </div>
         <ButtonStyled>
           <CSVLink

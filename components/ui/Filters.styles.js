@@ -34,22 +34,32 @@ export const FiltersStyled = styled.div`
     }
   }
 
+  .form-filter-pc {
+    max-width: 210px;
+  }
+
   .search-button,
-  .search-mobile {
+  .form-filter-button,
+  .search-mobile,
+  .form-filter-mobile {
     display: none;
   }
 
   @media screen and (max-width: ${props => props.theme.mobileWidth}) {
-    .search-pc {
+    .search-pc,
+    .form-filter-pc {
       display: none;
     }
 
     .search-button,
-    .search-mobile {
+    .form-filter-button,
+    .search-mobile,
+    .form-filter-mobile {
       display: flex;
     }
 
-    .search-mobile {
+    .search-mobile,
+    .form-filter-mobile {
       padding: 10px;
       margin-top: 10px;
     }

@@ -1,10 +1,7 @@
 'use client';
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
-import {
-  FormDetailStyled,
-  FormItemStyled,
-} from '@components/forms/FormDetail.styles';
+import { DetailStyled, FormItemStyled } from '@components/ui/Detail.styles';
 import Tooltip from '@components/ui/Tooltip';
 import StarRating from '@components/ui/StarRating';
 import {
@@ -16,7 +13,7 @@ import {
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
 import MultipleChoiceInput from '@components/form-types/MultipleChoiceInput';
-import NotificationBanner from '../ui/NotificationBanner';
+import NotificationBanner from './NotificationBanner';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,13 +31,7 @@ const FORM_TYPE = {
 };
 // formDetail: 관리자모드의 폼 미리보기 페이지.
 // sharedForm: 유저가 실제로 작성하는 공유된 폼 페이지.
-function FormDetail({
-  formDetail,
-  onEdit,
-  onRemove,
-  sharedForm,
-  responseDetail,
-}) {
+function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
   const dispatch = useDispatch();
   const responses = useSelector(state => state.responses.responses);
 
@@ -105,7 +96,7 @@ function FormDetail({
   }
 
   return (
-    <FormDetailStyled>
+    <DetailStyled>
       <div className="controls">
         {(formDetail || sharedForm) && (
           <Tooltip text="공유">
@@ -221,8 +212,8 @@ function FormDetail({
           </FilledButtonStyled>
         </div>
       )}
-    </FormDetailStyled>
+    </DetailStyled>
   );
 }
 
-export default FormDetail;
+export default Detail;

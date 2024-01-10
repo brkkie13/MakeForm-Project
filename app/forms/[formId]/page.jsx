@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 // components
-import FormDetail from '@components/forms/FormDetail';
+import Detail from '@components/ui/Detail';
 import Confirm from '@components/ui/Confirm';
 import { Section, SectionCard } from '@components/ui/Section';
 import { getDataFromLocalStorage } from '@utils/localStorage';
@@ -84,7 +84,7 @@ function FormDetailPage() {
   return (
     <Section>
       <SectionCard>
-        <FormDetail
+        <Detail
           formDetail={form}
           onEdit={editFormHandler}
           onRemove={removeFormHandler}

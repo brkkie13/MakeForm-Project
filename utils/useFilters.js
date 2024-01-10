@@ -4,18 +4,23 @@ import { useLocalStorage } from '@utils/localStorage';
 // code
 const ALL_YEAR = '전체 년';
 const ALL_MONTH = '전체 월';
+const ALL_FORM = '전체 폼';
 
 function useFilters(setQueryStringState) {
   const { getItem, setItem, removeItem } = useLocalStorage();
 
   const [year, setYear] = useState(getItem('year') || ALL_YEAR);
   const [month, setMonth] = useState(getItem('month') || ALL_MONTH);
+  // '/forms'에서만 사용
   const [searchWord, setSearchWord] = useState(getItem('searchWord') || '');
+  // '/analysis'에서만 사용
+  const [formId, setFormId] = useState(getItem('formId') || ALL_FORM);
 
   const filterActions = {
     year: { setFilter: setYear, defaultValue: ALL_YEAR },
     month: { setFilter: setMonth, defaultValue: ALL_MONTH },
     searchWord: { setFilter: setSearchWord, defaultValue: '' },
+    formId: { setFilter: setFormId, defaultValue: ALL_FORM },
   };
 
   // 필터값 바뀔 때마다 로컬스토리지에 setItem하거나 기본값이면 removeItem.
@@ -25,7 +30,8 @@ function useFilters(setQueryStringState) {
     searchWord !== ''
       ? setItem('searchWord', searchWord)
       : removeItem('searchWord');
-  }, [year, month, searchWord]);
+    formId !== ALL_FORM ? setItem('formId', formId) : removeItem('formId');
+  }, [year, month, searchWord, formId]);
 
   const changeFilter = (filterName, value) => {
     const action = filterActions[filterName];
@@ -51,6 +57,7 @@ function useFilters(setQueryStringState) {
       year: null,
       month: null,
       searchWord: null,
+      formId: null,
     }));
   };
 
@@ -60,13 +67,17 @@ function useFilters(setQueryStringState) {
 
     if (year !== ALL_YEAR) {
       filteredList = filteredList.filter(
-        item => new Date(item.creationDate).getFullYear() === parseInt(year)
+        item =>
+          new Date(item.creationDate || item.submissionDate).getFullYear() ===
+          parseInt(year)
       );
     }
 
     if (month !== ALL_MONTH) {
       filteredList = filteredList.filter(
-        item => new Date(item.creationDate).getMonth() + 1 === parseInt(month)
+        item =>
+          new Date(item.creationDate || item.submissionDate).getMonth() + 1 ===
+          parseInt(month)
       );
     }
 
@@ -76,10 +87,22 @@ function useFilters(setQueryStringState) {
       );
     }
 
+    if (formId !== ALL_FORM) {
+      filteredList = filteredList.filter(item => item.formId === formId);
+    }
+
     return filteredList;
   };
 
-  return { year, month, searchWord, changeFilter, resetFilter, filterList };
+  return {
+    year,
+    month,
+    searchWord,
+    formId,
+    changeFilter,
+    resetFilter,
+    filterList,
+  };
 }
 
 export default useFilters;

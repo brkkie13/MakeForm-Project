@@ -9,7 +9,7 @@ import {
   BsBarChartFill,
 } from 'react-icons/bs';
 import { FaStar, FaGoogle } from 'react-icons/fa';
-import { FaCheck, FaExclamation } from 'react-icons/fa6';
+import { FaCheck, FaExclamation, FaFilter } from 'react-icons/fa6';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { GoHome, GoHomeFill, GoTrash } from 'react-icons/go';
 import { GrDrag } from 'react-icons/gr';
@@ -17,11 +17,7 @@ import { HiMiniCheckCircle, HiExclamationTriangle } from 'react-icons/hi2';
 import { IoMdDownload } from 'react-icons/io';
 import { IoClose, IoMail, IoCheckmarkCircle } from 'react-icons/io5';
 import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft } from 'react-icons/md';
-import {
-  PiCopy,
-  PiFolderSimpleLight,
-  PiMicrosoftExcelLogo,
-} from 'react-icons/pi';
+import { PiCopy, PiFolderSimpleLight } from 'react-icons/pi';
 import { RiInformationLine } from 'react-icons/ri';
 import { RiUserFill, RiUserLine } from 'react-icons/ri';
 import { TbReload } from 'react-icons/tb';
@@ -190,6 +186,10 @@ export function EmptyIcon(props) {
 
 export function DownloadIcon(props) {
   return <IoMdDownload {...props} />;
+}
+
+export function FilterIcon(props) {
+  return <FaFilter {...props} />;
 }
 
 // export function Icon(props) {

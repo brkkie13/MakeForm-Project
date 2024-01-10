@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PaginationStyled } from '@components/forms/Pagination.styles';
+import { PaginationStyled } from '@components/ui/Pagination.styles';
 import { ArrowIcon, DoubleArrowIcon } from '@components/assets/Icons';
 import { PaginationButtonStyled } from '@components/ui/Buttons';
 

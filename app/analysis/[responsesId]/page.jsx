@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
-import FormDetail from '@components/forms/FormDetail';
+import Detail from '@components/ui/Detail';
 import Confirm from '@components/ui/Confirm';
 import { Section, SectionCard } from '@components/ui/Section';
 import useFirebaseAuthState from '@/utils/useFirebaseAuthState';
@@ -59,7 +59,7 @@ function ResponseDetail() {
   return (
     <Section>
       <SectionCard>
-        <FormDetail responseDetail={response} onRemove={removeFormHandler} />
+        <Detail responseDetail={response} onRemove={removeFormHandler} />
       </SectionCard>
     </Section>
   );

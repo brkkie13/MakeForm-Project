@@ -1,14 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import FormDetail from '@components/forms/FormDetail';
 import { Section, SectionCard } from '@components/ui/Section';
+import Detail from '@components/ui/Detail';
+import NotificationBanner from '@components/ui/NotificationBanner';
+import { CautionIcon } from '@components/assets/Icons';
 
 // redux
 import { useDispatch } from 'react-redux';
 import { fetchFormDataWithFormId } from '@stores/actions/formActionCreators';
-import NotificationBanner from '@/components/ui/NotificationBanner';
-import { CautionIcon } from '@/components/assets/Icons';
 
 // code
 function SharedFormDetailPage() {
@@ -41,7 +41,7 @@ function SharedFormDetailPage() {
   return (
     <Section>
       <SectionCard>
-        <FormDetail sharedForm={form} />
+        <Detail sharedForm={form} />
       </SectionCard>
     </Section>
   );
