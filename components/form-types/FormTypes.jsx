@@ -3,13 +3,11 @@ import { FormTypesStyled } from '@components/form-types/FormTypes.styles';
 
 // components
 import FormTypeCard from '@components/form-types/FormTypeCard';
-import HeaderType from '@components/form-types/HeaderType';
-import ShortAnswerType from '@components/form-types/ShortAnswerType';
-import LongAnswerType from '@components/form-types/LongAnswerType';
-import MultipleChoiceImageType from '@components/form-types/MultipleChoiceImageType';
-import MultipleChoiceTextType from '@components/form-types/MultipleChoiceTextType';
-import RatingType from '@components/form-types/RatingType';
-import DescriptionType from '@components/form-types/DescriptionType';
+import HeaderType from '@components/form-types/type/HeaderType';
+import SubjectiveType from '@components/form-types/type/SubjectiveType';
+import ObjectiveType from '@components/form-types/type/ObjectiveType';
+import RatingType from '@components/form-types/type/RatingType';
+import DescriptionType from '@components/form-types/type/DescriptionType';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -74,20 +72,10 @@ function FormTypes({ items, onRemoveFormType, isEdit }) {
                         <FormTypeCard
                           onRemoveFormType={() => onRemoveFormType(idx)}
                           content={
-                            item.formType === 'shortAnswerType' ? (
-                              <ShortAnswerType index={idx} isEdit={isEdit} />
-                            ) : item.formType === 'longAnswerType' ? (
-                              <LongAnswerType index={idx} isEdit={isEdit} />
-                            ) : item.formType === 'multipleChoiceImageType' ? (
-                              <MultipleChoiceImageType
-                                index={idx}
-                                isEdit={isEdit}
-                              />
-                            ) : item.formType === 'multipleChoiceTextType' ? (
-                              <MultipleChoiceTextType
-                                index={idx}
-                                isEdit={isEdit}
-                              />
+                            item.formType === 'subjectiveType' ? (
+                              <SubjectiveType index={idx} isEdit={isEdit} />
+                            ) : item.formType === 'objectiveType' ? (
+                              <ObjectiveType index={idx} isEdit={isEdit} />
                             ) : item.formType === 'ratingType' ? (
                               <RatingType index={idx} isEdit={isEdit} />
                             ) : item.formType === 'descriptionType' ? (

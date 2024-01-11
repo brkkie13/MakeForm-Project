@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MultipleChoiceInputStyled = styled.div`
+export const ObjectiveTypeInputStyled = styled.div`
   padding: 15px 25px;
   gap: 8px;
   border-radius: ${props => props.theme.radiusSmall};

@@ -1,9 +1,7 @@
 'use client';
-
-// components
 import { RemoveBadge } from '@components/assets/Icons';
 import { FormTitleInput } from '@components/ui/FormInputs';
-import MultipleChoiceInput from '@components/form-types/MultipleChoiceInput';
+import ObjectiveTypeInput from '@components/form-types/ObjectiveTypeInput';
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { RoundedButtonStyled } from '@components/ui/Buttons';
 
@@ -12,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
 
 // code
-function MultipleChoiceTextType({ index, isEdit }) {
+function ObjectiveType({ index, isEdit }) {
   const dispatch = useDispatch();
   const components = useSelector(state => state.form.components);
   const options = components[index]?.options;
@@ -75,7 +73,7 @@ function MultipleChoiceTextType({ index, isEdit }) {
             {idx > 1 && (
               <RemoveBadge onClick={() => removeOptionHandler(option.id)} />
             )}
-            <MultipleChoiceInput
+            <ObjectiveTypeInput
               value={option.text}
               onChange={event => changeOptionHandler(option.id, event)}
             />
@@ -89,4 +87,4 @@ function MultipleChoiceTextType({ index, isEdit }) {
   );
 }
 
-export default MultipleChoiceTextType;
+export default ObjectiveType;

@@ -1,7 +1,7 @@
-import { MultipleChoiceInputStyled } from '@components/form-types/MultipleChoiceInput.styles';
+import { ObjectiveTypeInputStyled } from './ObjectiveTypeInput.styles';
 
 // code
-function MultipleChoiceInput(props) {
+function ObjectiveTypeInput(props) {
   const {
     value,
     onChange,
@@ -12,8 +12,7 @@ function MultipleChoiceInput(props) {
   } = props;
 
   return (
-    <MultipleChoiceInputStyled>
-      {/* 체크 가능할 때만 radio 활성화 */}
+    <ObjectiveTypeInputStyled>
       {checkable === true && (
         <input
           type="radio"
@@ -33,8 +32,8 @@ function MultipleChoiceInput(props) {
           <input value={value} onChange={onChange} placeholder="입력" />
         </label>
       )}
-    </MultipleChoiceInputStyled>
+    </ObjectiveTypeInputStyled>
   );
 }
 
-export default MultipleChoiceInput;
+export default ObjectiveTypeInput;

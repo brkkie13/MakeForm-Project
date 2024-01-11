@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { DetailStyled, FormItemStyled } from '@components/ui/Detail.styles';
 import Tooltip from '@components/ui/Tooltip';
 import StarRating from '@components/ui/StarRating';
+import ObjectiveTypeInput from '@components/form-types/ObjectiveTypeInput';
 import {
   LinkIcon,
   EditIcon,
@@ -12,8 +13,8 @@ import {
 } from '@components/assets/Icons';
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
-import MultipleChoiceInput from '@components/form-types/MultipleChoiceInput';
-import NotificationBanner from './NotificationBanner';
+import NotificationBanner from '@components/ui/NotificationBanner';
+import { FORM_TYPES } from '@utils/constants';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,14 +22,6 @@ import { responsesActions } from '@stores/features/responsesSlice';
 import { sendFormResponse } from '@stores/actions/formResponseActionCreators';
 
 // code
-const FORM_TYPE = {
-  'shortAnswerType': '단답형',
-  'longAnswerType': '장문형',
-  'multipleChoiceTextType': '객관식(텍스트형)',
-  'multipleChoiceImageType': '객관식(이미지형)',
-  'ratingType': '평점',
-  'descriptionType': '설명',
-};
 // formDetail: 관리자모드의 폼 미리보기 페이지.
 // sharedForm: 유저가 실제로 작성하는 공유된 폼 페이지.
 function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
@@ -134,27 +127,15 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
         {form.items?.map((item, itemIdx) => (
           <FormItemStyled key={item.id}>
             <h2 className="title">{item.title}</h2>
-
-            {item.formType === 'shortAnswerType' ? (
-              sharedForm ? (
-                <input
-                  type="text"
-                  placeholder="답변을 입력하세요"
-                  name="shortAnswerType"
-                  onChange={event => changeInputValueHandler(itemIdx, event)}
-                />
-              ) : (
-                <p className="placeholder-text">단답의 답변이 입력됩니다</p>
-              )
-            ) : item.formType === 'longAnswerType' ? (
+            {item.formType === 'subjectiveType' ? (
               sharedForm ? (
                 <textarea
                   placeholder="답변을 입력하세요"
-                  name="longAnswerType"
+                  name="subjectiveType"
                   onChange={event => changeInputValueHandler(itemIdx, event)}
                 ></textarea>
               ) : (
-                <p className="placeholder-text">장문의 답변이 입력됩니다</p>
+                <p className="placeholder-text">주관식 답변이 입력됩니다</p>
               )
             ) : item.formType === 'ratingType' ? (
               <StarRating
@@ -163,11 +144,10 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
                 }
               />
             ) : null}
-
             <InputOptionsStyled>
               {item.options?.map((option, optionIdx) =>
                 sharedForm ? (
-                  <MultipleChoiceInput
+                  <ObjectiveTypeInput
                     key={option.id}
                     optionIndex={optionIdx}
                     optionText={option.text}
@@ -177,14 +157,13 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
                     }
                   />
                 ) : (
-                  <MultipleChoiceInput
+                  <ObjectiveTypeInput
                     key={option.id}
                     optionText={option.text}
                   />
                 )
               )}
             </InputOptionsStyled>
-
             <p>{item.description}</p>
           </FormItemStyled>
         ))}
@@ -196,7 +175,7 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
 
             <div className="response-detail">
               {item.formType !== 'descriptionType' && (
-                <span className="form-type">{FORM_TYPE[item.formType]}</span>
+                <span className="form-type">{FORM_TYPES[item.formType]}</span>
               )}
               <p className="response">{item.response}</p>
               <p>{item.description}</p>

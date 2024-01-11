@@ -6,17 +6,11 @@ import {
 } from '@components/responses/ResponsesList.styles';
 import NotificationBanner from '@components/ui/NotificationBanner';
 import { EmptyIcon, DownloadIcon } from '@components/assets/Icons';
-import { formatDateToLocaleString } from '@utils/date';
 import { ButtonStyled } from '@components/ui/Buttons';
+import { formatDateToLocaleString } from '@utils/date';
+import { FORM_TYPES } from '@utils/constants';
 
-const FORM_TYPE = {
-  'shortAnswerType': '단답형',
-  'longAnswerType': '장문형',
-  'multipleChoiceTextType': '객관식(텍스트형)',
-  'multipleChoiceImageType': '객관식(이미지형)',
-  'ratingType': '평점',
-};
-
+// code
 function ResponsesList({ allPosts, filteredPosts, currentPosts }) {
   const router = useRouter();
 
@@ -64,7 +58,7 @@ function ResponsesList({ allPosts, filteredPosts, currentPosts }) {
     item.responses
       .filter(el => el.title && el.response)
       .forEach((el, i) => {
-        obj[`question${i + 1}`] = `${FORM_TYPE[el.formType]}: ${
+        obj[`question${i + 1}`] = `${FORM_TYPES[el.formType]}: ${
           el.title
         } / 답변: ${el.response}`;
       });

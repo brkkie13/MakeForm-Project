@@ -10,7 +10,6 @@ let initialState = {
   formList: [], // db에 저장된 전체 폼 데이터를 배열로 저장한 변수.
 
   // '/edit'
-  // clickedForm: {}, // edit페이지에서 수정하려고 하는 특정 폼 객체.
   editHeader: '', // edit페이지에서 수정할 header값
   editItems: [], // [{formType, id, title, options}, {}, {}, ...]
 };
@@ -22,7 +21,7 @@ export const formSlice = createSlice({
   reducers: {
     addComponent(state, action) {
       const formType = action.payload;
-      if (formType === 'multipleChoiceTextType') {
+      if (formType === 'objectiveType') {
         state.components.push({
           id: state.componentId,
           formType,
@@ -158,7 +157,7 @@ export const formSlice = createSlice({
       );
       editItemId++; // +1해서 추가하는 form type의 id로 할당.
 
-      if (formType === 'multipleChoiceTextType') {
+      if (formType === 'objectiveType') {
         state.editItems.push({
           id: editItemId,
           formType,

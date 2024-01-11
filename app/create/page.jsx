@@ -1,16 +1,14 @@
 'use client';
-
-// components
 import FormTypesToolbar from '@components/form-types/FormTypesToolbar';
 import FormTypes from '@components/form-types/FormTypes';
 import { Section } from '@components/ui/Section';
 import { FilledButtonStyled } from '@components/ui/Buttons';
+import { useLocalStorage } from '@utils/localStorage';
 
 // redux
 import { sendFormData } from '@stores/actions/formActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
-import { useLocalStorage } from '@utils/localStorage';
 
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
@@ -18,7 +16,7 @@ import { auth } from '@/firebase.config';
 
 // code
 function CreatePage() {
-  const { getItem, setItem } = useLocalStorage();
+  const { getItem } = useLocalStorage();
   const dispatch = useDispatch();
   const user = useFirebaseAuthState();
 
