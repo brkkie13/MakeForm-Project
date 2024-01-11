@@ -21,8 +21,7 @@ export const ResponsesListStyled = styled.div`
 
 export const TableWrapper = styled.div`
   width: inherit;
-  max-height: 400px;
-  overflow: scroll;
+  overflow-x: scroll; // 가로 스크롤만 표시
 
   // 스크롤바 스타일
   &::-webkit-scrollbar {
@@ -42,7 +41,6 @@ export const TableWrapper = styled.div`
     border-spacing: 0; // 셀 사이의 간격 없애기
     white-space: nowrap; // 글자 세로에서 가로로 배열
     margin-bottom: 10px; // 스크롤로 가려지는 부분 여백
-    margin-right: 10px; // 스크롤로 가려지는 부분 여백
   }
 
   thead tr {
