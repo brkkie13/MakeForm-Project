@@ -22,8 +22,9 @@ import { responsesActions } from '@stores/features/responsesSlice';
 import { sendFormResponse } from '@stores/actions/formResponseActionCreators';
 
 // code
-// formDetail: 관리자모드의 폼 미리보기 페이지.
-// sharedForm: 유저가 실제로 작성하는 공유된 폼 페이지.
+// formDetail: (관리자) '/forms/[formId]'페이지. 폼 미리보기 디테일.
+// sharedForm: '/[formId]'페이지. 유저가 실제로 작성하는 폼 디테일.
+// responseDetail: (관리자) '/analysis/[responsesId]'페이지. 유저가 응답한 내용 미리보기 디테일.
 function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
   const dispatch = useDispatch();
   const responses = useSelector(state => state.responses.responses);
@@ -143,27 +144,29 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
                   changeRatingHandler(itemIdx, newScore)
                 }
               />
+            ) : item.formType === 'objectiveType' ? (
+              <InputOptionsStyled>
+                {item.options?.map((option, optionIdx) =>
+                  sharedForm ? (
+                    <ObjectiveTypeInput
+                      key={option.id}
+                      optionIndex={optionIdx}
+                      optionText={option.text}
+                      checkable={true}
+                      onChangeOption={() =>
+                        changeOptionHandler(itemIdx, optionIdx, option.text)
+                      }
+                      name={`radio-group-${itemIdx}`}
+                    />
+                  ) : (
+                    <ObjectiveTypeInput
+                      key={option.id}
+                      optionText={option.text}
+                    />
+                  )
+                )}
+              </InputOptionsStyled>
             ) : null}
-            <InputOptionsStyled>
-              {item.options?.map((option, optionIdx) =>
-                sharedForm ? (
-                  <ObjectiveTypeInput
-                    key={option.id}
-                    optionIndex={optionIdx}
-                    optionText={option.text}
-                    checkable={true}
-                    onChangeOption={() =>
-                      changeOptionHandler(itemIdx, optionIdx, option.text)
-                    }
-                  />
-                ) : (
-                  <ObjectiveTypeInput
-                    key={option.id}
-                    optionText={option.text}
-                  />
-                )
-              )}
-            </InputOptionsStyled>
             <p>{item.description}</p>
           </FormItemStyled>
         ))}
