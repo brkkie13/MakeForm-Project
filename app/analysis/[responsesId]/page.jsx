@@ -1,11 +1,12 @@
 'use client';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
 import Detail from '@components/ui/Detail';
 import Confirm from '@components/ui/Confirm';
 import { Section, SectionCard } from '@components/ui/Section';
-import useFirebaseAuthState from '@/utils/useFirebaseAuthState';
+import { InvalidUrlBanner } from '@components/ui/NotificationBanner';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +14,7 @@ import { uiActions } from '@stores/features/uiSlice';
 import { fetchFormResponses } from '@stores/actions/formResponseActionCreators';
 import { removeResponseData } from '@stores/actions/formResponseActionCreators';
 
+// code
 function ResponseDetail() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function ResponseDetail() {
   const user = useFirebaseAuthState();
 
   const responsesList = useSelector(state => state.responses.responsesList);
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState();
 
   useEffect(() => {
     // 로그인 되어있을 때, db에서 데이터 가져옴(responsesList에 값이 생김)
@@ -59,7 +61,11 @@ function ResponseDetail() {
   return (
     <Section>
       <SectionCard>
-        <Detail responseDetail={response} onRemove={removeFormHandler} />
+        {!response ? (
+          <InvalidUrlBanner />
+        ) : (
+          <Detail responseDetail={response} onRemove={removeFormHandler} />
+        )}
       </SectionCard>
     </Section>
   );

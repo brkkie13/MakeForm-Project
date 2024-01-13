@@ -2,11 +2,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 
-// components
 import Detail from '@components/ui/Detail';
 import Confirm from '@components/ui/Confirm';
 import { Section, SectionCard } from '@components/ui/Section';
+import { InvalidUrlBanner } from '@components/ui/NotificationBanner';
 import { getDataFromLocalStorage } from '@utils/localStorage';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,9 +16,6 @@ import {
   removeFormData,
 } from '@stores/actions/formActionCreators';
 import { uiActions } from '@stores/features/uiSlice';
-
-// auth
-import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // code
 function FormDetailPage() {
@@ -28,7 +26,7 @@ function FormDetailPage() {
   const user = useFirebaseAuthState();
 
   const formList = useSelector(state => state.form.formList);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState();
 
   useEffect(() => {
     // 로그인 되어있을 때, db에서 데이터 가져옴(formList에 값이 생김)
@@ -84,11 +82,15 @@ function FormDetailPage() {
   return (
     <Section>
       <SectionCard>
-        <Detail
-          formDetail={form}
-          onEdit={editFormHandler}
-          onRemove={removeFormHandler}
-        />
+        {!form ? (
+          <InvalidUrlBanner />
+        ) : (
+          <Detail
+            formDetail={form}
+            onEdit={editFormHandler}
+            onRemove={removeFormHandler}
+          />
+        )}
       </SectionCard>
     </Section>
   );

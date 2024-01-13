@@ -1,6 +1,7 @@
 import { NotificationBannerStyled } from './NotificationBanner.styles';
+import { CautionIcon } from '@components/assets/Icons';
 
-function NotificationBanner({ icon, mainText, subText }) {
+export default function NotificationBanner({ icon, mainText, subText }) {
   return (
     <NotificationBannerStyled>
       {icon}
@@ -10,4 +11,12 @@ function NotificationBanner({ icon, mainText, subText }) {
   );
 }
 
-export default NotificationBanner;
+export function InvalidUrlBanner() {
+  return (
+    <NotificationBanner
+      icon={<CautionIcon />}
+      mainText={'유효하지 않은 주소입니다.'}
+      subText={'올바른 주소로 접근해주세요.'}
+    />
+  );
+}
