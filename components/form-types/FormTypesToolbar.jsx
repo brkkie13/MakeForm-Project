@@ -7,8 +7,9 @@ import { FORM_TYPES } from '@utils/constants';
 function FormTypesToolbar({ onAddFormType }) {
   return (
     <ToolbarStyled>
-      {Object.entries(FORM_TYPES).map(([key, value]) => (
+      {Object.entries(FORM_TYPES).map(([key, value], idx) => (
         <RoundedButtonStyled
+          key={idx}
           onClick={e => onAddFormType(e.target.value)}
           value={key}
         >
