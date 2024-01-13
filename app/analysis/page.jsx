@@ -8,10 +8,12 @@ import Pagination from '@components/ui/Pagination';
 import useFilters from '@utils/useFilters';
 import usePagination from '@utils/usePagination';
 import useQueryString from '@utils/useQueryString';
+import ErrorBox from '@components/ui/ErrorBox';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormResponses } from '@stores/actions/formResponseActionCreators';
+import NotificationBanner from '@/components/ui/NotificationBanner';
 
 // code
 function AnalysisPage() {
@@ -20,24 +22,19 @@ function AnalysisPage() {
   const setQueryStringState = useQueryString();
   const responsesList = useSelector(state => state.responses.responsesList);
 
-  // new
   const { year, month, formTitle, changeFilter, resetFilter, filterList } =
     useFilters(setQueryStringState);
 
-  // new
   const { currentPage, indexOfFirstPost, indexOfLastPost, changePage } =
     usePagination(setQueryStringState);
 
-  // new
   const filteredResponsesList = responsesList ? filterList(responsesList) : [];
 
-  // new
   const currentPosts =
     filteredResponsesList.length > 0
       ? filteredResponsesList.slice(indexOfFirstPost, indexOfLastPost)
       : [];
 
-  // new
   const resetFilterHandler = () => {
     resetFilter();
     changePage(1);
@@ -47,16 +44,16 @@ function AnalysisPage() {
     user && dispatch(fetchFormResponses(user?.uid));
   }, [dispatch, user]);
 
-  // new
   useEffect(() => {
     resetFilterHandler();
   }, [user]);
 
   return (
     <Section>
+      {!user && <ErrorBox message="로그인을 해주세요." />}
       <h1>통계</h1>
 
-      {responsesList && responsesList.length > 0 && (
+      {responsesList && responsesList.length > 0 && user && (
         <Filters
           allPosts={responsesList}
           year={year}
@@ -74,10 +71,11 @@ function AnalysisPage() {
           allPosts={responsesList}
           filteredPosts={filteredResponsesList}
           currentPosts={currentPosts}
+          user={user}
         />
       </SectionCard>
 
-      {currentPosts.length > 0 && (
+      {currentPosts.length > 0 && user && (
         <Pagination
           dataList={filteredResponsesList}
           currentPage={currentPage}

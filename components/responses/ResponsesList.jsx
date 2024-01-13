@@ -11,14 +11,14 @@ import { formatDateToLocaleString } from '@utils/date';
 import { FORM_TYPES } from '@utils/constants';
 
 // code
-function ResponsesList({ allPosts, filteredPosts, currentPosts }) {
+function ResponsesList({ allPosts, filteredPosts, currentPosts, user }) {
   const router = useRouter();
 
   const showDetailPageHandler = dataId => {
     router.push('/analysis/' + dataId);
   };
 
-  if (!allPosts || allPosts.length === 0) {
+  if (!allPosts || allPosts.length === 0 || !user) {
     return (
       <NotificationBanner
         icon={<EmptyIcon />}
