@@ -52,6 +52,11 @@ export const sendFormResponse = submittedForm => {
 
       // 유저가 제출한 폼id가 이미 db에 존재한다면, 해당 폼id의 doc만 업데이트.
       if (existingFormResponses) {
+        // 기존의 header와 현재 제출된 폼의 header가 일치하지 않을 때(header가 변경되었을 때) 최신header로 변경.
+        if (existingFormResponses.header !== header) {
+          existingFormResponses.header = header;
+        }
+
         existingFormResponses.responsesList.push({
           id: String(new Date(submissionDate).getTime()),
           submissionDate,
