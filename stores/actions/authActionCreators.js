@@ -2,8 +2,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
   sendPasswordResetEmail,
   deleteUser,
   getAuth,
@@ -52,17 +50,6 @@ export const login = (email, password) => {
 export const logout = () => {
   return async dispatch => {
     await signOut(auth);
-  };
-};
-
-export const loginWithGoogle = () => {
-  return async dispatch => {
-    const googleProvider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-    } catch (error) {
-      // console.log(error);
-    }
   };
 };
 

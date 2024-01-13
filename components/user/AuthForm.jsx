@@ -3,30 +3,20 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { AuthFormStyled } from '@components/user/AuthForm.styles';
-import {
-  FilledButtonStyled,
-  OutlinedButtonStyled,
-  ButtonStyled,
-} from '@components/ui/Buttons';
-import { validateEmail, validatePassword } from '@utils/validation';
-
+import { FilledButtonStyled, ButtonStyled } from '@components/ui/Buttons';
 import AuthInput from '@components/user/AuthInput';
-import { GoogleLogo } from '@components/assets/Icons';
+import { validateEmail, validatePassword } from '@utils/validation';
+import { replaceFirstSegmentOfPath } from '@utils/replacePath';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '@stores/features/uiSlice';
 
 // firebase auth
-import {
-  login,
-  register,
-  loginWithGoogle,
-} from '@stores/actions/authActionCreators';
+import { login, register } from '@stores/actions/authActionCreators';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { authActions } from '@stores/features/authSlice';
 import ErrorBox from '@components/ui/ErrorBox';
-import { replaceFirstSegmentOfPath } from '@/utils/replacePath';
 
 // code
 function AuthForm() {
@@ -150,28 +140,14 @@ function AuthForm() {
         <FilledButtonStyled type="submit">
           {isLoginMode ? '로그인' : '회원가입'}
         </FilledButtonStyled>
-        <div className="line-group">
-          <span className="line"></span>
-          <p>또는</p>
-          <span className="line"></span>
-        </div>
-        <OutlinedButtonStyled type="button" onClick={googleAuthHandler}>
-          <GoogleLogo />
-          {isLoginMode ? '구글 로그인' : '구글 회원가입'}
-        </OutlinedButtonStyled>
-      </div>
 
-      {isLoginMode ? (
-        <p className="toggle-authmode-prompt">
-          회원이 아니신가요?
-          <ButtonStyled onClick={toggleLoginModeHandler}>회원가입</ButtonStyled>
-        </p>
-      ) : (
-        <p className="toggle-authmode-prompt">
-          이미 회원이신가요?
-          <ButtonStyled onClick={toggleLoginModeHandler}>로그인</ButtonStyled>
-        </p>
-      )}
+        <div className="toggle-authmode-prompt">
+          <p>{isLoginMode ? '회원이 아니신가요?' : '이미 회원이신가요?'}</p>
+          <ButtonStyled onClick={toggleLoginModeHandler}>
+            {isLoginMode ? '회원가입' : '로그인'}
+          </ButtonStyled>
+        </div>
+      </div>
     </AuthFormStyled>
   );
 }
