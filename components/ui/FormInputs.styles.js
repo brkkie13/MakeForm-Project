@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// 기본 본문 textarea
 export const FormInputStyled = styled.textarea`
   overflow: hidden;
   width: 100%;
@@ -11,15 +10,23 @@ export const FormInputStyled = styled.textarea`
   }
 `;
 
-// 헤더 textarea
-export const HeaderFormInputStyled = styled(FormInputStyled)`
+export const HeaderInputStyled = styled(FormInputStyled)`
   font-size: 22px;
   height: 26px;
 `;
 
-// 제목 textarea
-export const TitleFormInputStyled = styled(FormInputStyled)`
+export const TitleInputStyled = styled(FormInputStyled)`
   font-size: 19px;
   height: 22px;
   margin-bottom: 15px;
+`;
+
+export const ResponseInputStyled = styled(FormInputStyled)`
+  height: 50px;
+  border-bottom: 1px solid ${props => props.theme.colorGrayLight};
+  padding: 15px;
+
+  &:focus {
+    border-bottom: 1px solid ${props => props.theme.colorBlue0};
+  }
 `;

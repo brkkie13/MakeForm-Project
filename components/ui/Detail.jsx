@@ -14,6 +14,7 @@ import {
 import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
 import NotificationBanner from '@components/ui/NotificationBanner';
+import { ResponseInput } from './FormInputs';
 import { FORM_TYPES } from '@utils/constants';
 
 // redux
@@ -130,11 +131,11 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
             <h2 className="title">{item.title}</h2>
             {item.formType === 'subjectiveType' ? (
               sharedForm ? (
-                <textarea
+                <ResponseInput
                   placeholder="답변을 입력하세요"
                   name="subjectiveType"
                   onChange={event => changeInputValueHandler(itemIdx, event)}
-                ></textarea>
+                />
               ) : (
                 <p className="placeholder-text">주관식 답변이 입력됩니다</p>
               )

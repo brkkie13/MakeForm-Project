@@ -2,8 +2,9 @@
 
 import {
   FormInputStyled,
-  HeaderFormInputStyled,
-  TitleFormInputStyled,
+  HeaderInputStyled,
+  TitleInputStyled,
+  ResponseInputStyled,
 } from '@components/ui/FormInputs.styles';
 
 // textarea에 입력된 글 길이에 따라 높이가 자동 조절되는 함수.
@@ -14,26 +15,22 @@ const resizeHeightHandler = event => {
   target.style.height = DEFAULT_HEIGHT + (target.scrollHeight - 20) + 'px'; // scrollHeight에 -20을 한 이유는 글자입력 시 textarea안 하단여백을 없애기 위함.
 };
 
+// 기본 textarea
 export function FormInput(props) {
-  return (
-    <FormInputStyled {...props} onInput={resizeHeightHandler}></FormInputStyled>
-  );
+  return <FormInputStyled {...props} onInput={resizeHeightHandler} />;
 }
 
+// 폼 제목(header) textarea
 export function FormHeaderInput(props) {
-  return (
-    <HeaderFormInputStyled
-      {...props}
-      onInput={resizeHeightHandler}
-    ></HeaderFormInputStyled>
-  );
+  return <HeaderInputStyled {...props} onInput={resizeHeightHandler} />;
 }
 
+// 질문 제목(title) textarea
 export function FormTitleInput(props) {
-  return (
-    <TitleFormInputStyled
-      {...props}
-      onInput={resizeHeightHandler}
-    ></TitleFormInputStyled>
-  );
+  return <TitleInputStyled {...props} onInput={resizeHeightHandler} />;
+}
+
+// 주관식 응답 textarea
+export function ResponseInput(props) {
+  return <ResponseInputStyled {...props} onInput={resizeHeightHandler} />;
 }
