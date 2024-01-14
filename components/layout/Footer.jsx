@@ -7,11 +7,12 @@ import {
 import { useDispatch } from 'react-redux';
 import { copyToClipboard } from '@stores/actions/utilsActionCreators';
 
+// code
 function Footer() {
   const dispatch = useDispatch();
 
   const copyToClipboardHandler = async () => {
-    dispatch(copyToClipboard('brkkie15@gmail.com'));
+    dispatch(copyToClipboard('brkkie15@gmail.com', '이메일이 복사되었습니다.'));
   };
 
   return (

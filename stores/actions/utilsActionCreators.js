@@ -1,14 +1,14 @@
 import { uiActions } from '@stores/features/uiSlice';
 
 // code
-export const copyToClipboard = text => {
+export const copyToClipboard = (text, message) => {
   return async dispatch => {
     try {
       await navigator.clipboard.writeText(text);
       dispatch(
         uiActions.showNotification({
           status: 'success',
-          message: '이메일이 복사되었습니다',
+          message: message,
         })
       );
     } catch (err) {

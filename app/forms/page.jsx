@@ -20,6 +20,7 @@ import {
   fetchFormData,
 } from '@stores/actions/formActionCreators';
 import { formActions } from '@stores/features/formSlice';
+import { copyToClipboard } from '@stores/actions/utilsActionCreators';
 
 // code
 function FormsPage() {
@@ -72,7 +73,7 @@ function FormsPage() {
     [router]
   );
 
-  const copyFormHandler = useCallback(
+  const cloneFormHandler = useCallback(
     async (event, formId) => {
       event.stopPropagation(); // 부모태그 클릭 막기
 
@@ -114,6 +115,16 @@ function FormsPage() {
     [dispatch, formList]
   );
 
+  const copyShareLinkHandler = (event, formId) => {
+    event.stopPropagation(); // 부모태그 클릭 막기
+    dispatch(
+      copyToClipboard(
+        process.env.NEXT_PUBLIC_DOMAIN + formId,
+        '폼 링크가 복사되었습니다.'
+      )
+    );
+  };
+
   return (
     <Section>
       {!user && (
@@ -138,8 +149,9 @@ function FormsPage() {
           allPosts={formList}
           filteredPosts={filteredFormList}
           currentPosts={currentPosts}
-          onShow={showDetailHandler}
-          onCopy={copyFormHandler}
+          onShowDetail={showDetailHandler}
+          onCloneForm={cloneFormHandler}
+          onCopyLink={copyShareLinkHandler}
         />
       </SectionCard>
 

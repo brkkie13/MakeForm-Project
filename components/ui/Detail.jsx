@@ -21,6 +21,7 @@ import { FORM_TYPES } from '@utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsesActions } from '@stores/features/responsesSlice';
 import { sendFormResponse } from '@stores/actions/formResponseActionCreators';
+import { copyToClipboard } from '@stores/actions/utilsActionCreators';
 
 // code
 // formDetail: (관리자) '/forms/[formId]'페이지. 폼 미리보기 디테일.
@@ -44,6 +45,15 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
       setForm(responseDetail);
     }
   }, [formDetail, sharedForm, responseDetail, dispatch]);
+
+  const copyShareLinkHandler = () => {
+    dispatch(
+      copyToClipboard(
+        process.env.NEXT_PUBLIC_DOMAIN + form.id,
+        '폼 링크가 복사되었습니다.'
+      )
+    );
+  };
 
   const changeInputValueHandler = (itemIdx, event) => {
     const newValue = event.target.value;
@@ -95,7 +105,7 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
       <div className="controls">
         {(formDetail || sharedForm) && (
           <Tooltip text="공유">
-            <IconButtonStyled>
+            <IconButtonStyled onClick={copyShareLinkHandler}>
               <LinkIcon />
               {/* 너비가 모바일일 때만 span 노출(IconButtonStyled에서 설정함) */}
               <span>공유</span>

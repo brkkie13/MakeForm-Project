@@ -16,7 +16,14 @@ import { formatDate } from '@utils/date';
 import NotificationBanner from '@components/ui/NotificationBanner';
 
 // code
-function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
+function FormList({
+  allPosts,
+  filteredPosts,
+  currentPosts,
+  onShowDetail,
+  onCloneForm,
+  onCopyLink,
+}) {
   if (!allPosts || allPosts.length === 0) {
     return (
       <NotificationBanner
@@ -45,14 +52,16 @@ function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
         <table>
           <tbody>
             {currentPosts.map(data => (
-              <tr key={data.id} onClick={() => onShow(data.id)}>
+              <tr key={data.id} onClick={() => onShowDetail(data.id)}>
                 <td>
                   <div className="header">{data.header}</div>
                   <div className="date-and-controls">
                     <div className="date">{formatDate(data.creationDate)}</div>
                     <div className="controls">
                       <Tooltip text="공유">
-                        <IconButtonStyled>
+                        <IconButtonStyled
+                          onClick={event => onCopyLink(event, data.id)}
+                        >
                           <LinkIcon />
                           {/* 너비가 모바일일 때만 span 노출(IconButtonStyled에서 설정함) */}
                           <span>공유</span>
@@ -61,7 +70,7 @@ function FormList({ allPosts, filteredPosts, currentPosts, onShow, onCopy }) {
 
                       <Tooltip text="복제">
                         <IconButtonStyled
-                          onClick={event => onCopy(event, data.id)}
+                          onClick={event => onCloneForm(event, data.id)}
                         >
                           <CopyIcon />
                           <span>복제</span>
