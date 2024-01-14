@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react';
 import { DetailStyled, FormItemStyled } from '@components/ui/Detail.styles';
 import Tooltip from '@components/ui/Tooltip';
 import StarRating from '@components/ui/StarRating';
-import ObjectiveTypeInput from '@components/form-types/ObjectiveTypeInput';
+import ObjectiveTypeOption from '@components/form-types/ObjectiveTypeOption';
+import { ObjectiveTypeOptionsWrapper } from '@components/form-types/ObjectiveTypeOption.styles';
 import {
   LinkIcon,
   EditIcon,
   TrashIcon,
   CorrectIcon,
 } from '@components/assets/Icons';
-import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
 import NotificationBanner from '@components/ui/NotificationBanner';
-import { ResponseInput } from './FormInputs';
+import { ResponseInput } from '@components/ui/FormInputs';
 import { FORM_TYPES } from '@utils/constants';
 
 // redux
@@ -146,10 +146,10 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
                 }
               />
             ) : item.formType === 'objectiveType' ? (
-              <InputOptionsStyled>
+              <ObjectiveTypeOptionsWrapper>
                 {item.options?.map((option, optionIdx) =>
                   sharedForm ? (
-                    <ObjectiveTypeInput
+                    <ObjectiveTypeOption
                       key={option.id}
                       optionIndex={optionIdx}
                       optionText={option.text}
@@ -160,13 +160,13 @@ function Detail({ formDetail, onEdit, onRemove, sharedForm, responseDetail }) {
                       name={`radio-group-${itemIdx}`}
                     />
                   ) : (
-                    <ObjectiveTypeInput
+                    <ObjectiveTypeOption
                       key={option.id}
                       optionText={option.text}
                     />
                   )
                 )}
-              </InputOptionsStyled>
+              </ObjectiveTypeOptionsWrapper>
             ) : null}
             <p>{item.description}</p>
           </FormItemStyled>

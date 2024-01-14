@@ -10,7 +10,7 @@ export const TooltipStyled = styled.div`
   padding: 8px 10px;
   border-radius: 5px;
   left: 50%;
-  top: 150%;
+  top: 170%;
   transform: translateX(-50%);
   font-size: 15px;
   white-space: nowrap; //한글일 때 글자가 세로로 나오는 경우 해결.

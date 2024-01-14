@@ -1,8 +1,9 @@
 'use client';
 import { RemoveBadge } from '@components/assets/Icons';
 import { FormTitleInput } from '@components/ui/FormInputs';
-import ObjectiveTypeInput from '@components/form-types/ObjectiveTypeInput';
-import { InputOptionsStyled } from '@components/ui/InputOptionsStyled';
+
+import ObjectiveTypeOption from '@components/form-types/ObjectiveTypeOption';
+import { ObjectiveTypeOptionsWrapper } from '@components/form-types/ObjectiveTypeOption.styles';
 import { RoundedButtonStyled } from '@components/ui/Buttons';
 
 // redux
@@ -66,20 +67,20 @@ function ObjectiveType({ index, isEdit }) {
         placeholder="질문 제목을 입력하세요"
       />
 
-      <InputOptionsStyled>
+      <ObjectiveTypeOptionsWrapper>
         {optionsToRender.map((option, idx) => (
           <div className="option" key={option.id}>
             {/* 처음 두개옵션은 x표시 안뜨게 함. index가 2인 옵션부터 x표시 렌더링 */}
             {idx > 1 && (
               <RemoveBadge onClick={() => removeOptionHandler(option.id)} />
             )}
-            <ObjectiveTypeInput
+            <ObjectiveTypeOption
               value={option.text}
               onChange={event => changeOptionHandler(option.id, event)}
             />
           </div>
         ))}
-      </InputOptionsStyled>
+      </ObjectiveTypeOptionsWrapper>
       <RoundedButtonStyled onClick={addOptionHandler}>
         + 옵션 추가
       </RoundedButtonStyled>
