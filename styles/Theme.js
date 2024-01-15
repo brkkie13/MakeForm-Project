@@ -17,6 +17,8 @@ const colors = {
 
   blue0: '#0099EF',
   blue1: '#0062d3',
+  blueLight: '#d9e9f3',
+  blueDark: '#355990',
 
   red: '#F44336',
   gold: 'gold',
@@ -35,6 +37,7 @@ export const lightTheme = {
   colorGrayHeavy: colors.gray5,
   colorGrayHeaviest: colors.gray6,
 
+  colorBlueBackground: colors.blueLight,
   colorBlue0: colors.blue0,
   colorBlue1: colors.blue1,
   colorRed: colors.red,
@@ -64,6 +67,7 @@ export const darkTheme = {
   colorGrayHeavy: colors.gray3,
   colorGrayHeaviest: colors.gray2,
 
+  colorBlueBackground: colors.blueDark,
   colorBlue0: colors.blue0,
   colorBlue1: colors.blue1,
   colorRed: colors.red,

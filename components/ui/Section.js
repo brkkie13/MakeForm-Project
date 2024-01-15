@@ -1,27 +1,23 @@
 import styled from 'styled-components';
 
-export const Section = styled.section`
+// '/' 페이지에서 사용
+export const HomeSection = styled.section`
   margin: 0 auto; // 가운데 정렬
-  max-width: 900px;
-
-  // MainNavbar 높이에 맞게 수정
-  margin-top: 75px;
+  margin-top: 75px; // MainNavbar 높이만큼 위의 여백 띄움
 
   display: flex;
   flex-direction: column;
 
+  // MobileNavbar 높이에 맞게 위의 여백 띄움
+  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
+    margin-top: 60px;
+  }
+`;
+
+// '/create', '/forms', '/analysis' 페이지에서 사용
+export const Section = styled(HomeSection)`
+  max-width: 900px;
   padding: 40px 0;
-
-  h1 {
-    margin-bottom: 30px;
-  }
-
-  // app/page.jsx
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-  }
 
   // 가운데 정렬이 필요한 아이템
   .centered {
@@ -37,11 +33,6 @@ export const Section = styled.section`
   @media screen and (max-width: ${props => props.theme.tabletWidth}) {
     margin-left: 5%;
     margin-right: 5%;
-  }
-
-  // MobileNavbar 높이에 맞게 수정
-  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
-    margin-top: 60px;
   }
 `;
 
