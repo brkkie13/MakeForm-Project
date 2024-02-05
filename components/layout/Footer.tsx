@@ -1,5 +1,5 @@
 'use client';
-import { MailIcon } from '@components/assets/Icons';
+import { MailIcon } from '@/public/svgs/Icons';
 import {
   FooterContainer,
   FooterStyled,

@@ -11,7 +11,7 @@ import {
   EditIcon,
   TrashIcon,
   CorrectIcon,
-} from '@components/assets/Icons';
+} from '@/public/svgs/Icons';
 import { FilledButtonStyled, IconButtonStyled } from '@components/ui/Buttons';
 import NotificationBanner from '@components/ui/NotificationBanner';
 import { ResponseInput } from '@components/ui/FormInputs';

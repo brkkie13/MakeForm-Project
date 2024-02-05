@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { FiltersStyled } from '@components/ui/Filters.styles';
-import { SearchIcon, FilterIcon } from '@components/assets/Icons';
+import { SearchIcon, FilterIcon } from '@/public/svgs/Icons';
 import { OutlinedButtonStyled } from '@components/ui/Buttons';
 import { CreatedData, FilterActions, TitleOptions } from '@/types/types';
 

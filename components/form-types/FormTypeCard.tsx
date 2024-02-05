@@ -4,7 +4,7 @@ import { IconButtonStyled } from '@components/ui/Buttons';
 import Tooltip from '@components/ui/Tooltip';
 
 // icons
-import { DragIcon, TrashIcon } from '@components/assets/Icons';
+import { DragIcon, TrashIcon } from '@/public/svgs/Icons';
 
 //types
 interface Props {

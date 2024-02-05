@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NotificationStyled } from '@components/ui/Notification.styles';
-import { ErrorBadge, SuccessBadge } from '@components/assets/Icons';
+import { ErrorBadge, SuccessBadge } from '@/public/svgs/Icons';
 import { useDispatch } from 'react-redux';
 import { uiActions } from '@stores/features/uiSlice';
 

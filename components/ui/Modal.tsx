@@ -2,7 +2,7 @@
 import { ModalStyled } from '@components/ui/Modal.styles';
 
 // icons
-import { CloseIcon } from '@components/assets/Icons';
+import { CloseIcon } from '@/public/svgs/Icons';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';

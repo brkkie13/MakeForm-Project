@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PaginationStyled } from '@components/ui/Pagination.styles';
-import { ArrowIcon, DoubleArrowIcon } from '@components/assets/Icons';
+import { ArrowIcon, DoubleArrowIcon } from '@/public/svgs/Icons';
 import { PaginationButtonStyled } from '@components/ui/Buttons';
 
 type Props = {

@@ -1,5 +1,5 @@
 'use client';
-import { RemoveBadge } from '@components/assets/Icons';
+import { RemoveBadge } from '@/public/svgs/Icons';
 import { FormTitleInput } from '@components/ui/FormInputs';
 
 import ObjectiveTypeOption from '@components/form-types/ObjectiveTypeOption';

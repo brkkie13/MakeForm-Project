@@ -18,8 +18,8 @@ import {
   FormIcon,
   FilledChartIcon,
   ChartIcon,
-} from '@components/assets/Icons';
-import { Logo } from '@components/assets/Logo';
+} from '@/public/svgs/Icons';
+import { Logo } from '@/public/svgs/Logo';
 import AuthForm from '@components/user/AuthForm';
 import DropdownMenu from '@components/ui/DropdownMenu';
 import { FilledButtonStyled } from '@components/ui/Buttons';

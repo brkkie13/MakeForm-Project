@@ -12,7 +12,7 @@ import {
   ChartIcon,
   FilledUserIcon,
   UserIcon,
-} from '@components/assets/Icons';
+} from '@/public/svgs/Icons';
 import { MobileNavbarStyled } from '@components/layout/MobileNavbar.styles';
 
 // code

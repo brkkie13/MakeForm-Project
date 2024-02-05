@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { AuthInputStyled } from '@components/user/AuthInput.styles';
-import { CorrectMark, WrongMark, InfoIcon } from '@components/assets/Icons';
+import { CorrectMark, WrongMark, InfoIcon } from '@/public/svgs/Icons';
 import { UserInput } from '@/types/types';
 
 // types

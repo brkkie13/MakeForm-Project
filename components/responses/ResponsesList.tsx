@@ -5,7 +5,7 @@ import {
   TableWrapper,
 } from '@components/responses/ResponsesList.styles';
 import NotificationBanner from '@components/ui/NotificationBanner';
-import { EmptyIcon, DownloadIcon } from '@components/assets/Icons';
+import { EmptyIcon, DownloadIcon } from '@/public/svgs/Icons';
 import { ButtonStyled } from '@components/ui/Buttons';
 import { formatDateToLocaleString } from '@utils/date';
 import { FORM_TYPES } from '@utils/constants';

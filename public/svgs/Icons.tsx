@@ -28,7 +28,7 @@ import { VscEdit } from 'react-icons/vsc';
 import {
   LoadingSpinnerStyled,
   RemoveBadgeStyled,
-} from '@components/assets/Icons.styles';
+} from '@/public/svgs/Icons.styles';
 
 // ts
 import { SvgProps, SpanProps } from '@/types/types';

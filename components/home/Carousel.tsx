@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CarouselStyled } from './Carousel.styles';
 import CarouselItem from './CarouselItem';
-import { ArrowIcon } from '../assets/Icons';
+import { ArrowIcon } from '@/public/svgs/Icons';
 import { CarouselItemType } from '@/types/types';
 
 // code
@@ -11,20 +11,20 @@ function Carousel() {
       id: 1,
       title: '간단한 폼 추가',
       description: '폼의 질문을 추가하고 삭제하고 순서를 바꿀 수 있습니다.',
-      image: '/images/illustration1.svg',
+      image: '/svgs/illustrations/illustration1.svg',
     },
     {
       id: 2,
       title: '내가 만든 폼 보기',
       description: '내가 만든 폼을 수정하고 공유할 수 있습니다.',
-      image: '/images/illustration2.svg',
+      image: '/svgs/illustrations/illustration2.svg',
     },
     {
       id: 3,
       title: '고객들의 응답 보기',
       description:
         '내가 만든 폼에 들어온 응답을 확인하고 엑셀 다운로드를 해보세요.',
-      image: '/images/illustration3.svg',
+      image: '/svgs/illustrations/illustration3.svg',
     },
   ];
 

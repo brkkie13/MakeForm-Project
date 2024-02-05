@@ -1,6 +1,6 @@
 import React from 'react';
 import { NotificationBannerStyled } from './NotificationBanner.styles';
-import { CautionIcon } from '@components/assets/Icons';
+import { CautionIcon } from '@/public/svgs/Icons';
 
 //types
 type Props = {

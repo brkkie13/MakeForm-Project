@@ -1,5 +1,5 @@
 import { ThemeSwitchStyled } from '@components/ui/ThemeSwitch.styles';
-import { DarkModeIcon, LightModeIcon } from '@components/assets/Icons';
+import { DarkModeIcon, LightModeIcon } from '@/public/svgs/Icons';
 
 type Props = {
   isToggled: boolean;

@@ -1,5 +1,5 @@
 'use client';
-import { LoadingSpinner } from '@components/assets/Icons';
+import { LoadingSpinner } from '@/public/svgs/Icons';
 
 const Loading = () => {
   return <LoadingSpinner />;

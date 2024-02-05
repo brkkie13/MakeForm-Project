@@ -3,7 +3,7 @@ import {
   OutlinedButtonStyled,
   FilledButtonStyled,
 } from '@components/ui/Buttons';
-import { CautionIcon } from '@components/assets/Icons';
+import { CautionIcon } from '@/public/svgs/Icons';
 
 // redux
 import { useDispatch } from 'react-redux';

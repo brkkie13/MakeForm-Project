@@ -1,5 +1,5 @@
 import { ErrorBoxStyled } from '@components/ui/ErrorBox.styles';
-import { CautionIcon } from '@components/assets/Icons';
+import { CautionIcon } from '@/public/svgs/Icons';
 
 type Props = {
   message: string;

@@ -9,7 +9,7 @@ import {
   CopyIcon,
   EmptyIcon,
   CreateIcon,
-} from '@components/assets/Icons';
+} from '@/public/svgs/Icons';
 import { IconButtonStyled } from '@components/ui/Buttons';
 import Tooltip from '@components/ui/Tooltip';
 import { formatDate } from '@utils/date';

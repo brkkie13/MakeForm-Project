@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StarsStyled } from '@components/ui/StarRating.styles';
-import { StarIcon } from '@components/assets/Icons';
+import { StarIcon } from '@/public/svgs/Icons';
 
 // types
 type Props = {
