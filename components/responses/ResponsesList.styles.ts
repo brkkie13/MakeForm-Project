@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const ResponsesListStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const ResponsesListStyled = styled.div<Props>`
   width: inherit;
 
   nav {
@@ -19,7 +23,7 @@ export const ResponsesListStyled = styled.div`
   }
 `;
 
-export const TableWrapper = styled.div`
+export const TableWrapper = styled.div<Props>`
   width: inherit;
   overflow-x: scroll; // 가로 스크롤만 표시
 
@@ -27,12 +31,12 @@ export const TableWrapper = styled.div`
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    border-radius: ${props => props.theme.radiusMax};
+    border-radius: ${props => props.theme.radius.max};
     background: lightgray;
   }
   &::-webkit-scrollbar-thumb {
     background: ${props => props.theme.colorBlue0};
-    border-radius: ${props => props.theme.radiusMax};
+    border-radius: ${props => props.theme.radius.max};
   }
 
   table {

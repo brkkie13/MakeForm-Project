@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const FormInputStyled = styled.textarea`
+type Props = {
+  theme: Theme;
+};
+
+export const FormInputStyled = styled.textarea<Props>`
   overflow: hidden;
   width: 100%;
   height: 20px;
@@ -21,7 +25,7 @@ export const TitleInputStyled = styled(FormInputStyled)`
   margin-bottom: 15px;
 `;
 
-export const ResponseInputStyled = styled(FormInputStyled)`
+export const ResponseInputStyled = styled(FormInputStyled)<Props>`
   height: 50px;
   border-bottom: 1px solid ${props => props.theme.colorGrayLight};
   padding: 15px;

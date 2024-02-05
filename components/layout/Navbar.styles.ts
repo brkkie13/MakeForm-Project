@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const HeaderContainer = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const HeaderContainer = styled.div<Props>`
   background: ${props => props.theme.colorBackground0};
   display: flex;
   justify-content: center;
@@ -8,15 +12,15 @@ export const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   height: 75px;
-  z-index: 100;
+  z-index: ${props => props.theme.zIndex.level2};
   width: 100vw;
 
-  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
+  @media screen and (max-width: ${props => props.theme.width.tablet}) {
     height: 60px;
   }
 `;
 
-export const HeaderStyled = styled.header`
+export const HeaderStyled = styled.header<Props>`
   width: 1300px;
   padding: 0 30px;
 
@@ -103,7 +107,7 @@ export const HeaderStyled = styled.header`
     align-items: center;
     position: relative; // DropdownMenu 컴포넌트와 관련있음.
     cursor: pointer;
-    border-radius: ${props => props.theme.radiusSmall};
+    border-radius: ${props => props.theme.radius.small};
 
     img {
       border-radius: 50%;
@@ -123,7 +127,7 @@ export const HeaderStyled = styled.header`
     }
   }
 
-  @media screen and (max-width: ${props => props.theme.tabletWidth}) {
+  @media screen and (max-width: ${props => props.theme.width.tablet}) {
     justify-content: initial;
 
     & {

@@ -1,9 +1,14 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
+
+type Props = {
+  theme: Theme;
+};
 
 export const TooltipWrapper = styled.div`
   position: relative;
 `;
-export const TooltipStyled = styled.div`
+
+export const TooltipStyled = styled.div<Props>`
   position: absolute;
   background: ${props => props.theme.colorBackgroundReverse};
   color: ${props => props.theme.colorWhiteOrBlack};
@@ -14,7 +19,7 @@ export const TooltipStyled = styled.div`
   transform: translateX(-50%);
   font-size: 15px;
   white-space: nowrap; //한글일 때 글자가 세로로 나오는 경우 해결.
-  z-index: 100;
+  z-index: ${props => props.theme.zIndex.level3};
 
   // 말풍선 삼각형 꼬리
   &::before {
@@ -29,7 +34,7 @@ export const TooltipStyled = styled.div`
       ${props => props.theme.colorBackgroundReverse} transparent;
   }
 
-  @media (max-width: ${props => props.theme.tabletWidth}) {
+  @media (max-width: ${props => props.theme.width.tablet}) {
     display: none;
   }
 `;

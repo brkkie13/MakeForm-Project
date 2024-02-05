@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
+
+interface Props {
+  theme: Theme;
+}
 
 // 옵션들을 그룹으로 묶어 그리드 배열.
-export const ObjectiveTypeOptionsWrapper = styled.div`
+export const ObjectiveTypeOptionsWrapper = styled.div<Props>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
   gap: 20px;
@@ -12,16 +16,16 @@ export const ObjectiveTypeOptionsWrapper = styled.div`
     position: relative;
   }
 
-  @media (max-width: ${props => props.theme.mobileWidth}) {
+  @media (max-width: ${props => props.theme.width.mobile}) {
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
   }
 `;
 
-export const ObjectiveTypeOptionStyled = styled.div`
+export const ObjectiveTypeOptionStyled = styled.div<Props>`
   display: flex;
   align-items: center;
   padding: 15px;
-  border-radius: ${props => props.theme.radiusSmall};
+  border-radius: ${props => props.theme.radius.small};
   border: 1px solid ${props => props.theme.colorGrayLightest};
 
   // 화면 너비를 줄이면 input이 부모에 맞춰짐

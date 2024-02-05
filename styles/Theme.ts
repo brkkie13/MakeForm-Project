@@ -1,6 +1,7 @@
 'use client';
+import { Colors, Radius, ZIndex, Theme } from 'styled-components';
 
-const colors = {
+const colors: Colors = {
   white: '#FFFFFF',
   black: '#000000',
 
@@ -24,7 +25,28 @@ const colors = {
   gold: 'gold',
 };
 
-export const lightTheme = {
+const radius: Radius = {
+  small: '7px',
+  medium: '10px',
+  large: '15px',
+  max: '100px',
+};
+
+const zIndex: ZIndex = {
+  level1: '1',
+  level2: '2', // MobileNavbar, Navbar
+  level3: '3', // Tooltip
+  level4: '4', // DropdownMenu
+  level5: '5', // Modal
+  level6: '6', // Notification
+};
+
+const width = {
+  mobile: '768px',
+  tablet: '1000px',
+};
+
+export const lightTheme: Theme = {
   colorBackground0: colors.white, // navbar
   colorBackground1: colors.gray0, // 배경색
   colorBackgroundReverse: colors.gray9, // tooltip
@@ -45,16 +67,12 @@ export const lightTheme = {
 
   shadow: '0px 0px 20px rgba(8, 18, 69, 0.05)',
 
-  radiusSmall: '7px',
-  radiusMedium: '10px',
-  radiusLarge: '15px',
-  radiusMax: '100px',
-
-  mobileWidth: '768px',
-  tabletWidth: '1000px',
+  radius,
+  zIndex,
+  width,
 };
 
-export const darkTheme = {
+export const darkTheme: Theme = {
   colorBackground0: colors.gray9, // navbar
   colorBackground1: colors.gray8, // 배경색
   colorBackgroundReverse: colors.white, // tooltip
@@ -75,11 +93,7 @@ export const darkTheme = {
 
   shadow: colors.gray1,
 
-  radiusSmall: '7px',
-  radiusMedium: '10px',
-  radiusLarge: '15px',
-  radiusMax: '100px',
-
-  mobileWidth: '768px',
-  tabletWidth: '1000px',
+  radius,
+  zIndex,
+  width,
 };

@@ -1,12 +1,16 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const ModalStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const ModalStyled = styled.div<Props>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 200; // MainNavbar 위로 설정
+  z-index: ${props => props.theme.zIndex.level5};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,13 +26,13 @@ export const ModalStyled = styled.div`
 
   .modal-content {
     width: 500px;
-    border-radius: ${props => props.theme.radiusLarge};
+    border-radius: ${props => props.theme.radius.large};
     background: ${props => props.theme.colorBackground0};
     box-shadow: ${props => props.theme.shadow};
     display: flex;
     flex-direction: column;
     padding: 25px;
-    z-index: 200;
+    z-index: ${props => props.theme.zIndex.level5};
 
     .header {
       display: flex;
@@ -41,7 +45,7 @@ export const ModalStyled = styled.div`
     }
   }
 
-  @media (max-width: ${props => props.theme.mobileWidth}) {
+  @media (max-width: ${props => props.theme.width.mobile}) {
     .modal-content {
       margin-left: 10%;
       margin-right: 10%;

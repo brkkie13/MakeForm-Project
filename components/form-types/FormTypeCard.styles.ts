@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const FormTypeCardStyled = styled.article`
+interface Props {
+  theme: Theme;
+}
+
+export const FormTypeCardStyled = styled.article<Props>`
   background: ${props => props.theme.colorBackground0};
   margin-bottom: 25px;
   padding: 30px 0;
-  border-radius: ${props => props.theme.radiusLarge};
+  border-radius: ${props => props.theme.radius.large};
   display: flex;
   align-items: center;
   justify-content: center;

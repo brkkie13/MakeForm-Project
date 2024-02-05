@@ -1,14 +1,18 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const DropdownMenuStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const DropdownMenuStyled = styled.div<Props>`
   position: absolute;
-  z-index: 10;
+  z-index: ${props => props.theme.zIndex.level4};
   top: 70px;
   right: 30px;
   min-width: 160px;
   background: ${props => props.theme.colorBackground0};
   border: 1px solid ${props => props.theme.colorBlue0};
-  border-radius: ${props => props.theme.radiusMedium};
+  border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadow};
 
   ul {
@@ -27,7 +31,7 @@ export const DropdownMenuStyled = styled.div`
     color: ${props => props.theme.colorBlue0};
   }
 
-  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
+  @media screen and (max-width: ${props => props.theme.width.mobile}) {
     display: none;
   }
 `;

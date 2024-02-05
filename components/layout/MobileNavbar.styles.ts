@@ -1,14 +1,19 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const MobileNavbarStyled = styled.nav`
-  @media screen and (min-width: 1001px) {
+type Props = {
+  theme: Theme;
+};
+
+export const MobileNavbarStyled = styled.nav<Props>`
+  @media screen and (min-width: calc(${props =>
+      props.theme.width.tablet} + 1px)) {
     display: none;
   }
 
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 100;
+  z-index: ${props => props.theme.zIndex.level2};
   height: 70px;
   background: ${props => props.theme.colorBackground0};
   border-top: 1px solid ${props => props.theme.colorGrayLightest};

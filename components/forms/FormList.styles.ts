@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const FormListStyled = styled.div`
+interface Props {
+  theme: Theme;
+}
+
+export const FormListStyled = styled.div<Props>`
   width: inherit;
 
   nav {
@@ -19,7 +23,7 @@ export const FormListStyled = styled.div`
   }
 `;
 
-export const TableWrapper = styled.div`
+export const TableWrapper = styled.div<Props>`
   table {
     table-layout: fixed; // 제목 텍스트 초과분 생략 시 필요
     width: 100%; // 제목 텍스트 초과분 생략 시 필요
@@ -75,7 +79,7 @@ export const TableWrapper = styled.div`
   }
 
   // 가로줄 기준으로 안쪽으로 들어가있는 텍스트 여백 없애기
-  @media (max-width: ${props => props.theme.mobileWidth}) {
+  @media (max-width: ${props => props.theme.width.mobile}) {
     tbody > tr > td {
       padding-left: 0px;
       padding-right: 0px;

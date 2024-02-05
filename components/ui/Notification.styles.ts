@@ -1,4 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, Theme } from 'styled-components';
+
+type Props = {
+  status: string;
+  theme: Theme;
+};
 
 const fadeInOut = keyframes`
   0% {
@@ -22,12 +27,8 @@ const fadeInOut = keyframes`
   }
 `;
 
-type Props = {
-  status: string;
-};
-
 export const NotificationStyled = styled.div<Props>`
-  z-index: 200; // MobileNavbar보다 더 위에 오게 함
+  z-index: ${props => props.theme.zIndex.level6};
   animation: ${fadeInOut} 3s ease-in-out;
   position: fixed;
   left: 50%;
@@ -37,7 +38,7 @@ export const NotificationStyled = styled.div<Props>`
   align-items: center;
   padding: 10px 15px;
   max-width: 300px;
-  border-radius: ${props => props.theme.radiusMedium};
+  border-radius: ${props => props.theme.radius.medium};
   background: ${props => props.theme.colorBackground0};
   border: 1px solid
     ${props =>

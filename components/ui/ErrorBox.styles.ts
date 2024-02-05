@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const ErrorBoxStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const ErrorBoxStyled = styled.div<Props>`
   display: flex;
   align-items: center;
   border: 1px solid ${props => props.theme.colorGrayLight};
-  border-radius: ${props => props.theme.radiusMedium};
+  border-radius: ${props => props.theme.radius.medium};
   padding: 14px 18px;
   margin-bottom: 30px;
   gap: 8px;

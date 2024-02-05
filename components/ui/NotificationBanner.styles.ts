@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const NotificationBannerStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const NotificationBannerStyled = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +39,7 @@ export const NotificationBannerStyled = styled.div`
     align-items: center;
     gap: 5px;
     padding: 5px 7px;
-    border-radius: ${props => props.theme.radiusSmall};
+    border-radius: ${props => props.theme.radius.small};
     white-space: nowrap;
 
     svg {

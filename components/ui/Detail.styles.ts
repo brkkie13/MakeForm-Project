@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
+
+type Props = {
+  theme: Theme;
+};
 
 export const DetailStyled = styled.article`
   display: flex;
@@ -22,7 +26,7 @@ export const DetailStyled = styled.article`
   }
 `;
 
-export const FormItemStyled = styled.div`
+export const FormItemStyled = styled.div<Props>`
   display: flex;
   flex-direction: column;
   padding: 40px 0;

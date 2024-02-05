@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
 type Props = {
   $activeIndex: number;
+  theme: Theme;
 };
 
 export const CarouselStyled = styled.article<Props>`
@@ -59,7 +60,7 @@ export const CarouselStyled = styled.article<Props>`
     .dot-active {
       width: 40px;
       background-color: ${props => props.theme.colorBlue0};
-      border-radius: ${props => props.theme.radiusMax};
+      border-radius: ${props => props.theme.radius.max};
     }
   }
 `;

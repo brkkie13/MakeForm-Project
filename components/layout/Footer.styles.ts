@@ -1,16 +1,20 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const FooterContainer = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const FooterContainer = styled.div<Props>`
   display: flex;
   justify-content: center;
   height: 100px;
 
-  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
+  @media screen and (max-width: ${props => props.theme.width.mobile}) {
     margin-bottom: 70px;
   }
 `;
 
-export const FooterStyled = styled.footer`
+export const FooterStyled = styled.footer<Props>`
   width: 1300px;
   padding: 0 30px;
 

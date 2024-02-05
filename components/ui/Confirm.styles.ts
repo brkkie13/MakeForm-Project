@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const ConfirmStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const ConfirmStyled = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;

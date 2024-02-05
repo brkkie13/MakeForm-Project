@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const PaginationStyled = styled.nav`
+type Props = {
+  theme: Theme;
+};
+
+export const PaginationStyled = styled.nav<Props>`
   display: flex;
   justify-content: center;
   align-items: center;

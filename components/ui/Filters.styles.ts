@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { Theme } from 'styled-components';
 
-export const FiltersStyled = styled.div`
+type Props = {
+  theme: Theme;
+};
+
+export const FiltersStyled = styled.div<Props>`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px; // 필터 아래~게시글 위 사이 여백
@@ -19,7 +23,7 @@ export const FiltersStyled = styled.div`
     align-items: center;
     background: ${props => props.theme.colorBackground0};
     border: 1px solid ${props => props.theme.colorBackground0};
-    border-radius: ${props => props.theme.radiusSmall};
+    border-radius: ${props => props.theme.radius.small};
     padding: 0 10px;
     box-shadow: ${props => props.theme.shadow};
 
@@ -45,7 +49,7 @@ export const FiltersStyled = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: ${props => props.theme.mobileWidth}) {
+  @media screen and (max-width: ${props => props.theme.width.mobile}) {
     .search-pc,
     .form-filter-pc {
       display: none;
