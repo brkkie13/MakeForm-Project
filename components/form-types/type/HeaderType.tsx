@@ -1,10 +1,9 @@
 'use client';
-
-// components
+import React from 'react';
 import { FormHeaderInput } from '@components/ui/FormInputs';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
 import { useAppDispatch } from '@/stores/store';
 
@@ -17,7 +16,6 @@ type Props = {
 
 // code
 function HeaderType({ isEdit }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const header = useSelector((state: FormState) => state.form.header); // 기존에 저장된 헤더값 가져옴.
   const editHeader = useSelector((state: FormState) => state.form.editHeader);

@@ -1,36 +1,29 @@
 import { CreatedData, LocalStorageData, EditedData } from '@/types/types';
 
-export const useLocalStorage = () => {
-  const setItem = (key: string, value: string) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(key, value);
-    }
-  };
-
-  const getItem = (key: string) => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(key);
-    }
-    return null;
-  };
-
-  // removeItem은 한번에 여러 개의 key 인자를 받을 수 있음.
-  const removeItem = (...keys: string[]) => {
-    if (typeof window !== 'undefined') {
-      keys.forEach(key => localStorage.removeItem(key));
-    }
-  };
-
-  return { setItem, getItem, removeItem };
+export const setItem = (key: string, value: string) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(key, value);
+  }
 };
 
-const { setItem, getItem } = useLocalStorage();
+export const getItem = (key: string) => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem(key);
+  }
+  return null;
+};
+
+// removeItem은 한번에 여러 개의 key 인자를 받을 수 있음.
+export const removeItem = (...keys: string[]) => {
+  if (typeof window !== 'undefined') {
+    keys.forEach(key => localStorage.removeItem(key));
+  }
+};
 
 export const getDataFromLocalStorage = () => {
   let storedForms = getItem('forms');
-  if (!storedForms) {
-    return;
-  }
+
+  if (!storedForms) return;
 
   return JSON.parse(storedForms);
 };
@@ -47,6 +40,7 @@ export const storeDataIdToLocalStorage = () => {
   numOfDataId++;
   dataId = `localData${numOfDataId}`;
   setItem('dataId', dataId);
+  console.log;
 };
 
 export const removeDataFromLocalStorage = (id: string) => {

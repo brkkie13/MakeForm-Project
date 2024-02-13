@@ -4,12 +4,13 @@ import FormTypesToolbar from '@components/form-types/FormTypesToolbar';
 import FormTypes from '@components/form-types/FormTypes';
 import { Section } from '@components/ui/Section';
 import { FilledButtonStyled } from '@components/ui/Buttons';
-import { useLocalStorage } from '@utils/localStorage';
+import { getItem } from '@utils/localStorage';
 
 // redux
 import { sendFormData } from '@stores/actions/formActionCreators';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
+import { useAppDispatch } from '@/stores/store';
 
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
@@ -18,12 +19,9 @@ import { auth } from '@/firebase.config';
 // types
 import { CreatedData } from '@/types/types';
 import { FormState } from '@/types/types';
-import { useAppDispatch } from '@/stores/store';
 
 // code
 function CreatePage() {
-  const { getItem } = useLocalStorage();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const user = useFirebaseAuthState();
 
@@ -47,10 +45,10 @@ function CreatePage() {
       items: components,
     };
 
-    user && auth.currentUser && (data.userId = auth.currentUser.uid);
-    !user && (data.id = dataId);
+    if (user && auth.currentUser) data.userId = auth.currentUser.uid;
+    if (!user) data.id = dataId;
 
-    user && (await dispatch(sendFormData(user, data)));
+    await dispatch(sendFormData(user, data));
   };
 
   return (

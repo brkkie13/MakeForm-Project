@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocalStorage } from '@utils/localStorage';
+import { getItem, setItem, removeItem } from '@utils/localStorage';
 
 // types
 import {
@@ -16,8 +16,6 @@ const ALL_MONTH = '전체 월';
 const ALL_FORM = '전체 폼';
 
 function useFilters(setQueryStringState: SetQueryString) {
-  const { getItem, setItem, removeItem } = useLocalStorage();
-
   const [year, setYear] = useState(getItem('year') || ALL_YEAR);
   const [month, setMonth] = useState(getItem('month') || ALL_MONTH);
   // '/forms'에서만 사용

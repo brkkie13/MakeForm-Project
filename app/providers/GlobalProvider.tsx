@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { Provider } from 'react-redux';
 import store from '@stores/store';
 import AppThemeProvider from '@app/providers/AppThemeProvider';

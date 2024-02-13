@@ -1,3 +1,4 @@
+import React from 'react';
 import { AuthInitialState } from '@/stores/features/authSlice';
 import { FormInitialState } from '@/stores/features/formSlice';
 import { ResponsesInitialState } from '@/stores/features/responsesSlice';
@@ -12,6 +13,7 @@ export type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 export interface FormState {
   form: FormInitialState;
 }
+
 // stores/features/responsesSlice.ts
 export interface ResponsesState {
   responses: ResponsesInitialState;
@@ -24,8 +26,26 @@ export interface UiState {
 export interface AuthState {
   auth: AuthInitialState;
 }
-// 리덕스 툴킷-----------------------
+// 리덕스 툴킷 끝-----------------------
 
+export type FormType =
+  | 'subjectiveType'
+  | 'objectiveType'
+  | 'ratingType'
+  | 'descriptionType';
+
+export type Option = {
+  id: number;
+  text: string;
+};
+
+export type Item = {
+  id: number;
+  formType: FormType;
+  title?: string;
+  options?: Option[];
+  description?: string;
+};
 // app/create/page.tsx/saveFormHandler
 // db에 전송할 기본 데이터
 export type InitialCreatedData = {
@@ -40,25 +60,6 @@ export interface CreatedData extends InitialCreatedData {
   userId?: string; // firebase 유저 아이디
   formId?: string; // 얘가 원래는 없는데 Response와 똑같이 formId가 있도록 통일해야 함.
 }
-
-export type FormType =
-  | 'subjectiveType'
-  | 'objectiveType'
-  | 'ratingType'
-  | 'descriptionType';
-
-export type Item = {
-  id: number;
-  formType: FormType;
-  title?: string;
-  options?: Option[];
-  description?: string;
-};
-
-export type Option = {
-  id: number;
-  text: string;
-};
 
 // 공통사용되는곳:
 // app/[formId]/page.tsx -> sharedForm

@@ -6,7 +6,7 @@ import StarRating from '@components/ui/StarRating';
 import { FormTitleInput } from '@components/ui/FormInputs';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
 import { useAppDispatch } from '@/stores/store';
 
@@ -20,7 +20,6 @@ type Props = {
 
 // code
 function RatingType({ index, isEdit }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const components = useSelector((state: FormState) => state.form.components);
   const editItems = useSelector((state: FormState) => state.form.editItems);

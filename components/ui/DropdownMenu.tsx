@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { DropdownMenuStyled } from '@components/ui/DropdownMenu.styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 
@@ -14,7 +14,6 @@ type Props = {
 // code
 // 부모 컴포넌트: Navbar
 function DropdownMenu({ menuList }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const isDropdownOpen = useSelector(
     (state: UiState) => state.ui.isDropdownOpen

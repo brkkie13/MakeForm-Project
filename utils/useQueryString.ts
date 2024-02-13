@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useLocalStorage } from '@utils/localStorage';
+import { getItem } from '@utils/localStorage';
 import { QueryString } from '@/types/types';
 
 // code
 function useQueryString() {
   const router = useRouter();
   const pathname = usePathname();
-  const { getItem, setItem, removeItem } = useLocalStorage();
   const [queryStringState, setQueryStringState] = useState<QueryString>({
     year: getItem('year'),
     month: getItem('month'),

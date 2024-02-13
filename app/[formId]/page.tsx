@@ -6,7 +6,6 @@ import Detail from '@components/ui/Detail';
 import { InvalidUrlBanner } from '@components/ui/NotificationBanner';
 
 // redux
-import { useDispatch } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { fetchFormDataWithFormId } from '@stores/actions/formActionCreators';
 
@@ -15,7 +14,6 @@ import { FormDetail } from '@/types/types';
 
 // code
 function SharedFormDetailPage() {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const params = useParams<{ formId: string }>();
   const formId = params.formId;

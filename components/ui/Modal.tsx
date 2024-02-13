@@ -5,14 +5,13 @@ import { ModalStyled } from '@components/ui/Modal.styles';
 import { CloseIcon } from '@/public/svgs/Icons';
 
 // redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 import { UiState } from '@/types/types';
 
 // code
 function Modal() {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const isModalOpen = useSelector((state: UiState) => state.ui.isModalOpen);
   const modalContent = useSelector((state: UiState) => state.ui.modalContent);

@@ -8,14 +8,19 @@ import { DragIcon, TrashIcon } from '@/public/svgs/Icons';
 
 //types
 interface Props {
-  id?: number;
-  onRemoveFormType?: (id: number) => void;
+  idx?: number;
+  onRemoveFormType?: (idx: number) => void;
   content: React.ReactNode;
   isHeader?: boolean;
 }
 
 // code
-const FormTypeCard = ({ id, onRemoveFormType, content, isHeader }: Props) => {
+const FormTypeCard = ({ idx, onRemoveFormType, content, isHeader }: Props) => {
+  const removeFormTypeHandler = () => {
+    // if문 조건 안에 idx만 적어주면 idx=0일 경우 falsy값으로 처리되어 에러 생김. 꼭 !== undefined로 타입가드 만들 것.
+    if (idx !== undefined && onRemoveFormType) onRemoveFormType(idx);
+  };
+
   return (
     <FormTypeCardStyled>
       <div className="icon">
@@ -29,9 +34,7 @@ const FormTypeCard = ({ id, onRemoveFormType, content, isHeader }: Props) => {
       <div className="icon">
         {!isHeader && (
           <Tooltip text="삭제">
-            <IconButtonStyled
-              onClick={() => onRemoveFormType && id && onRemoveFormType(id)}
-            >
+            <IconButtonStyled onClick={removeFormTypeHandler}>
               <TrashIcon />
             </IconButtonStyled>
           </Tooltip>

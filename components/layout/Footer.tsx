@@ -4,13 +4,11 @@ import {
   FooterContainer,
   FooterStyled,
 } from '@components/layout/Footer.styles';
-import { useDispatch } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { copyToClipboard } from '@stores/actions/utilsActionCreators';
 
 // code
 function Footer() {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
 
   const copyToClipboardHandler = async () => {

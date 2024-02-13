@@ -85,11 +85,13 @@ export const sendFormData = (user: User | null, newForm: CreatedData) => {
             '로그인을 하지 않으면 임시 폼을 30개까지만 생성할 수 있습니다.'
           );
         }
+
+        storeDataToLocalStorage(newForm);
       }
 
       // 로그인 상태에서는 db에 저장, 로그아웃 상태에서는 로컬스토리지에 저장
       user && (await postData());
-      !user && storeDataToLocalStorage(newForm);
+      // !user && storeDataToLocalStorage(newForm);
 
       // 저장 성공했을 때 create페이지의 모든 값 리셋
       dispatch(formActions.resetAllValue());

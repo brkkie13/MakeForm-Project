@@ -1,11 +1,11 @@
 'use client';
+import React from 'react';
 import { FormTitleInput } from '@components/ui/FormInputs';
 import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
 
 // types
 import { FormState } from '@/types/types';
-import React from 'react';
 
 type Props = {
   index: number;

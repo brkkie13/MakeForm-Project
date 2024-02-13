@@ -1,12 +1,13 @@
 'use client';
-
-// components
+import React from 'react';
 import { FormInput } from '@/components/ui/FormInputs';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formActions } from '@stores/features/formSlice';
 import { useAppDispatch } from '@/stores/store';
+
+// types
 import { FormState } from '@/types/types';
 
 type Props = {
@@ -16,7 +17,6 @@ type Props = {
 
 // code
 function DescriptionType({ index, isEdit }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const components = useSelector((state: FormState) => state.form.components);
   const editItems = useSelector((state: FormState) => state.form.editItems);

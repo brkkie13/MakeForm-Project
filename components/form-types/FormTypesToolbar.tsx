@@ -1,8 +1,8 @@
 'use client';
+import React from 'react';
 import { ToolbarStyled } from '@components/form-types/FormTypesToolbar.styles';
 import { RoundedButtonStyled } from '@components/ui/Buttons';
 import { FORM_TYPES } from '@utils/constants';
-import React, { HTMLAttributes } from 'react';
 
 type Props = {
   // onAddFormType: (e:React.MouseEvent<HTMLButtonElement>) => void;

@@ -1,13 +1,13 @@
 'use client';
+import React from 'react';
 import { RemoveBadge } from '@/public/svgs/Icons';
 import { FormTitleInput } from '@components/ui/FormInputs';
-
 import ObjectiveTypeOption from '@components/form-types/ObjectiveTypeOption';
 import { ObjectiveTypeOptionsWrapper } from '@components/form-types/ObjectiveTypeOption.styles';
 import { RoundedButtonStyled } from '@components/ui/Buttons';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { formActions } from '@stores/features/formSlice';
 
@@ -21,11 +21,9 @@ type Props = {
 
 // code
 function ObjectiveType({ index, isEdit }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const components = useSelector((state: FormState) => state.form.components);
   const options = components[index].options;
-  // const options = components[index]?.options;
 
   const editItems = useSelector((state: FormState) => state.form.editItems);
   let editItemOptions;

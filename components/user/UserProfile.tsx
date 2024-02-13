@@ -4,7 +4,6 @@ import { ButtonStyled } from '@components/ui/Buttons';
 import Confirm from '@components/ui/Confirm';
 
 // redux
-import { useDispatch } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 import {
@@ -23,7 +22,6 @@ type Props = {
 
 // code
 function UserProfile({ imageUrl, displayName, email, emailVerified }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
 
   const logoutHandler = () => {

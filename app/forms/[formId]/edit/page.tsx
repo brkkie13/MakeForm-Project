@@ -14,7 +14,7 @@ import {
 } from '@components/ui/Buttons';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { fetchFormData } from '@stores/actions/formActionCreators';
 import { formActions } from '@stores/features/formSlice';
 import { updateFormData } from '@stores/actions/formActionCreators';
@@ -27,7 +27,6 @@ function EditPage() {
   const params = useParams();
   const formId = params.formId as string;
 
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const user = useFirebaseAuthState();
 

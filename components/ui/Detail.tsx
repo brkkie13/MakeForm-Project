@@ -1,6 +1,6 @@
 'use client';
 // import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DetailStyled, FormItemStyled } from '@components/ui/Detail.styles';
 import Tooltip from '@components/ui/Tooltip';
 import StarRating from '@components/ui/StarRating';
@@ -18,7 +18,7 @@ import { ResponseInput } from '@components/ui/FormInputs';
 import { FORM_TYPES } from '@utils/constants';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { responsesActions } from '@stores/features/responsesSlice';
 import { sendFormResponse } from '@stores/actions/formResponseActionCreators';
@@ -46,7 +46,6 @@ function Detail({
   sharedForm,
   responseDetail,
 }: Props) {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const responses = useSelector(
     (state: ResponsesState) => state.responses.responses

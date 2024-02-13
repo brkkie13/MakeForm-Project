@@ -18,7 +18,7 @@ import { Item } from '@/types/types';
 
 interface Props {
   items: Item[];
-  onRemoveFormType: (id: number) => void;
+  onRemoveFormType: (idx: number) => void;
   isEdit?: boolean;
 }
 
@@ -83,7 +83,7 @@ function FormTypes({ items, onRemoveFormType, isEdit }: Props) {
                         ref={provided.innerRef}
                       >
                         <FormTypeCard
-                          id={idx}
+                          idx={idx}
                           onRemoveFormType={onRemoveFormType}
                           content={
                             item.formType === 'subjectiveType' ? (

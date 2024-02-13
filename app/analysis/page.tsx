@@ -2,24 +2,25 @@
 import { useEffect } from 'react';
 import { Section, SectionCard } from '@components/ui/Section';
 import ResponsesList from '@components/responses/ResponsesList';
-import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import Filters from '@components/ui/Filters';
 import Pagination from '@components/ui/Pagination';
+import ErrorBox from '@components/ui/ErrorBox';
+import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import useFilters from '@utils/useFilters';
 import usePagination from '@utils/usePagination';
 import useQueryString from '@utils/useQueryString';
-import ErrorBox from '@components/ui/ErrorBox';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { fetchFormResponses } from '@stores/actions/formResponseActionCreators';
+
+// types
 import { ResponsesState, Response } from '@/types/types';
 
 // code
 function AnalysisPage() {
   const user = useFirebaseAuthState();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const setQueryStringState = useQueryString();
   const responsesList = useSelector(

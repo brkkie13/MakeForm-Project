@@ -10,7 +10,7 @@ import { getDataFromLocalStorage } from '@utils/localStorage';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import {
   fetchFormData,
@@ -24,7 +24,6 @@ import { FormDetail, FormState } from '@/types/types';
 // code
 function FormDetailPage() {
   const router = useRouter();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const params = useParams();
   const formId = params.formId as string;

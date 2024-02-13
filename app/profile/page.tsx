@@ -6,7 +6,7 @@ import UserProfile from '@components/user/UserProfile';
 import { Section, SectionCard } from '@components/ui/Section';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import useWindowWidth from '@utils/useWindowWidth';
-import { User } from 'firebase/auth';
+// import { User } from 'firebase/auth';
 
 // code
 function ProfilePage() {

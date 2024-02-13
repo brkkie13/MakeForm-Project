@@ -9,7 +9,7 @@ import { InvalidUrlBanner } from '@components/ui/NotificationBanner';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 import {
@@ -21,7 +21,6 @@ import { Response, ResponsesState } from '@/types/types';
 // code
 function ResponseDetail() {
   const router = useRouter();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const params = useParams();
   const responsesId = params.responsesId as string;

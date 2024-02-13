@@ -23,7 +23,7 @@ import { Logo } from '@/public/svgs/Logo';
 import AuthForm from '@components/user/AuthForm';
 import DropdownMenu from '@components/ui/DropdownMenu';
 import { FilledButtonStyled } from '@components/ui/Buttons';
-import { useLocalStorage } from '@utils/localStorage';
+import { getItem, setItem } from '@utils/localStorage';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -43,7 +43,6 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const isDarkMode = useSelector((state: UiState) => state.ui.isDarkMode);
   const user = useFirebaseAuthState();
-  const { getItem, setItem } = useLocalStorage();
 
   const isDropdownOpen = useSelector(
     (state: UiState) => state.ui.isDropdownOpen

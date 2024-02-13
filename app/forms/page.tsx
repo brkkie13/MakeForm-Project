@@ -12,10 +12,10 @@ import useFilters from '@utils/useFilters';
 import usePagination from '@utils/usePagination';
 import useQueryString from '@utils/useQueryString';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
-import { getDataFromLocalStorage, useLocalStorage } from '@utils/localStorage';
+import { getDataFromLocalStorage, getItem } from '@utils/localStorage';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import {
   sendFormData,
@@ -28,12 +28,10 @@ import { CreatedData, FormState } from '@/types/types';
 // code
 function FormsPage() {
   const router = useRouter();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const user = useFirebaseAuthState();
   const formList = useSelector((state: FormState) => state.form.formList);
   const setQueryStringState = useQueryString();
-  const { getItem } = useLocalStorage();
 
   const { year, month, searchWord, changeFilter, resetFilter, filterList } =
     useFilters(setQueryStringState);
