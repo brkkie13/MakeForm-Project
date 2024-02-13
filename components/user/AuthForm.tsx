@@ -1,15 +1,15 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-
 import { AuthFormStyled } from '@components/user/AuthForm.styles';
 import { FilledButtonStyled, ButtonStyled } from '@components/ui/Buttons';
 import AuthInput from '@components/user/AuthInput';
+import ErrorBox from '@components/ui/ErrorBox';
 import { validateEmail, validatePassword } from '@utils/validation';
-import { replaceFirstSegmentOfPath } from '@utils/replacePath';
+import { getFirstSegmentOfPath } from '@/utils/getFirstSegmentOfPath';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 
@@ -17,16 +17,14 @@ import { uiActions } from '@stores/features/uiSlice';
 import { login, register } from '@stores/actions/authActionCreators';
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { authActions } from '@stores/features/authSlice';
-import ErrorBox from '@components/ui/ErrorBox';
 
 // types
 import { AuthState, UiState, UserInput } from '@/types/types';
 
 // code
 function AuthForm() {
-  const router = useRouter();
   const pathname = usePathname();
-  // const dispatch = useDispatch();
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -86,7 +84,8 @@ function AuthForm() {
       dispatch(uiActions.closeModal());
 
       // '/forms/[formId]'페이지일 때 '/forms'페이지로 이동
-      replaceFirstSegmentOfPath(pathname);
+      const newRoute = getFirstSegmentOfPath(pathname);
+      router.replace(newRoute);
     }
   }, [user, dispatch]);
 

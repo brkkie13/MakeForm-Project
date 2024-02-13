@@ -26,21 +26,20 @@ import { FilledButtonStyled } from '@components/ui/Buttons';
 import { useLocalStorage } from '@utils/localStorage';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/stores/store';
 import { uiActions } from '@stores/features/uiSlice';
 
 // firebase auth
 import useFirebaseAuthState from '@utils/useFirebaseAuthState';
 import { logout } from '@stores/actions/authActionCreators';
-import { replaceFirstSegmentOfPath } from '@/utils/replacePath';
+import { getFirstSegmentOfPath } from '@/utils/getFirstSegmentOfPath';
 import { DropdownMenuList, UiState } from '@/types/types';
 
 // code
 function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
   const isDarkMode = useSelector((state: UiState) => state.ui.isDarkMode);
   const user = useFirebaseAuthState();
@@ -54,7 +53,8 @@ function Navbar() {
     dispatch(logout());
 
     // '/forms/[formId]'페이지에서 로그아웃했을 때 '/forms'페이지로 이동
-    replaceFirstSegmentOfPath(pathname);
+    const newRoute = getFirstSegmentOfPath(pathname);
+    router.replace(newRoute);
   };
 
   const routeProfilePageHandler = () => {
