@@ -228,7 +228,7 @@ export const updateFormData = (
   };
 };
 
-export const removeFormData = (user: User, formId: string) => {
+export const removeFormData = (user: User | null, formId: string) => {
   return async (dispatch: Dispatch) => {
     const deleteData = async () => {
       const formDoc = doc(db, 'forms', formId);

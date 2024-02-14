@@ -67,15 +67,15 @@ function FormDetailPage() {
 
   const removeFormHandler = useCallback(() => {
     const clickConfirmHandler = async () => {
-      if (user) {
-        dispatch(uiActions.closeModal());
+      dispatch(uiActions.closeModal());
 
-        dispatch(await removeFormData(user, formId));
-        // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
-        dispatch(fetchFormData(user.uid));
+      // removeFormData에서 user의 타입을 User | null로 설정하여 타입에러해결 및 user=null이어도 함수 호출.
+      dispatch(await removeFormData(user, formId));
 
-        router.replace('/forms');
-      }
+      // 삭제되면 바로 fetchFormData를 호출해 삭제가 반영된 새 formList를 가져옴.
+      user && dispatch(fetchFormData(user.uid));
+
+      router.replace('/forms');
     };
 
     dispatch(
